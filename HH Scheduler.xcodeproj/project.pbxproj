@@ -26,10 +26,6 @@
 		362310301D7BAB28004F98FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		362310331D7BAB28004F98FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		362310351D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3623103E1D7BAB28004F98FB /* HH_SchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HH_SchedulerTests.swift; sourceTree = "<group>"; };
-		362310401D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		362310491D7BAB28004F98FB /* HH_SchedulerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HH_SchedulerUITests.swift; sourceTree = "<group>"; };
-		3623104B1D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3679572C1D7E0C210096163B /* Paths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		3679572E1D7E290E0096163B /* AddGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGradient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,8 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				362310261D7BAB28004F98FB /* HH Scheduler */,
-				3623103D1D7BAB28004F98FB /* HH SchedulerTests */,
-				362310481D7BAB28004F98FB /* HH SchedulerUITests */,
 				362310251D7BAB28004F98FB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,24 +71,6 @@
 				362310351D7BAB28004F98FB /* Info.plist */,
 			);
 			path = "HH Scheduler";
-			sourceTree = "<group>";
-		};
-		3623103D1D7BAB28004F98FB /* HH SchedulerTests */ = {
-			isa = PBXGroup;
-			children = (
-				3623103E1D7BAB28004F98FB /* HH_SchedulerTests.swift */,
-				362310401D7BAB28004F98FB /* Info.plist */,
-			);
-			path = "HH SchedulerTests";
-			sourceTree = "<group>";
-		};
-		362310481D7BAB28004F98FB /* HH SchedulerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				362310491D7BAB28004F98FB /* HH_SchedulerUITests.swift */,
-				3623104B1D7BAB28004F98FB /* Info.plist */,
-			);
-			path = "HH SchedulerUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
