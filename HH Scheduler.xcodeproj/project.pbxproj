@@ -13,28 +13,9 @@
 		3623102F1D7BAB28004F98FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3623102D1D7BAB28004F98FB /* Main.storyboard */; };
 		362310311D7BAB28004F98FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362310301D7BAB28004F98FB /* Assets.xcassets */; };
 		362310341D7BAB28004F98FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 362310321D7BAB28004F98FB /* LaunchScreen.storyboard */; };
-		3623103F1D7BAB28004F98FB /* HH_SchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3623103E1D7BAB28004F98FB /* HH_SchedulerTests.swift */; };
-		3623104A1D7BAB28004F98FB /* HH_SchedulerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362310491D7BAB28004F98FB /* HH_SchedulerUITests.swift */; };
 		3679572D1D7E0C210096163B /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3679572C1D7E0C210096163B /* Paths.swift */; };
 		3679572F1D7E290E0096163B /* AddGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3679572E1D7E290E0096163B /* AddGradient.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3623103B1D7BAB28004F98FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3623101C1D7BAB28004F98FB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 362310231D7BAB28004F98FB;
-			remoteInfo = "HH Scheduler";
-		};
-		362310461D7BAB28004F98FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3623101C1D7BAB28004F98FB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 362310231D7BAB28004F98FB;
-			remoteInfo = "HH Scheduler";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		362310241D7BAB28004F98FB /* HH Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HH Scheduler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,10 +26,8 @@
 		362310301D7BAB28004F98FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		362310331D7BAB28004F98FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		362310351D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3623103A1D7BAB28004F98FB /* HH SchedulerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HH SchedulerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3623103E1D7BAB28004F98FB /* HH_SchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HH_SchedulerTests.swift; sourceTree = "<group>"; };
 		362310401D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		362310451D7BAB28004F98FB /* HH SchedulerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HH SchedulerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		362310491D7BAB28004F98FB /* HH_SchedulerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HH_SchedulerUITests.swift; sourceTree = "<group>"; };
 		3623104B1D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3679572C1D7E0C210096163B /* Paths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
@@ -57,20 +36,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		362310211D7BAB28004F98FB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		362310371D7BAB28004F98FB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		362310421D7BAB28004F98FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -94,8 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				362310241D7BAB28004F98FB /* HH Scheduler.app */,
-				3623103A1D7BAB28004F98FB /* HH SchedulerTests.xctest */,
-				362310451D7BAB28004F98FB /* HH SchedulerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,42 +117,6 @@
 			productReference = 362310241D7BAB28004F98FB /* HH Scheduler.app */;
 			productType = "com.apple.product-type.application";
 		};
-		362310391D7BAB28004F98FB /* HH SchedulerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 362310511D7BAB28004F98FB /* Build configuration list for PBXNativeTarget "HH SchedulerTests" */;
-			buildPhases = (
-				362310361D7BAB28004F98FB /* Sources */,
-				362310371D7BAB28004F98FB /* Frameworks */,
-				362310381D7BAB28004F98FB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3623103C1D7BAB28004F98FB /* PBXTargetDependency */,
-			);
-			name = "HH SchedulerTests";
-			productName = "HH SchedulerTests";
-			productReference = 3623103A1D7BAB28004F98FB /* HH SchedulerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		362310441D7BAB28004F98FB /* HH SchedulerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 362310541D7BAB28004F98FB /* Build configuration list for PBXNativeTarget "HH SchedulerUITests" */;
-			buildPhases = (
-				362310411D7BAB28004F98FB /* Sources */,
-				362310421D7BAB28004F98FB /* Frameworks */,
-				362310431D7BAB28004F98FB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				362310471D7BAB28004F98FB /* PBXTargetDependency */,
-			);
-			name = "HH SchedulerUITests";
-			productName = "HH SchedulerUITests";
-			productReference = 362310451D7BAB28004F98FB /* HH SchedulerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,16 +130,6 @@
 					362310231D7BAB28004F98FB = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = D5Z3X8N4X6;
-					};
-					362310391D7BAB28004F98FB = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = D5Z3X8N4X6;
-						TestTargetID = 362310231D7BAB28004F98FB;
-					};
-					362310441D7BAB28004F98FB = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = D5Z3X8N4X6;
-						TestTargetID = 362310231D7BAB28004F98FB;
 					};
 				};
 			};
@@ -230,8 +147,6 @@
 			projectRoot = "";
 			targets = (
 				362310231D7BAB28004F98FB /* HH Scheduler */,
-				362310391D7BAB28004F98FB /* HH SchedulerTests */,
-				362310441D7BAB28004F98FB /* HH SchedulerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -244,20 +159,6 @@
 				362310341D7BAB28004F98FB /* LaunchScreen.storyboard in Resources */,
 				362310311D7BAB28004F98FB /* Assets.xcassets in Resources */,
 				3623102F1D7BAB28004F98FB /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		362310381D7BAB28004F98FB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		362310431D7BAB28004F98FB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,36 +177,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		362310361D7BAB28004F98FB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3623103F1D7BAB28004F98FB /* HH_SchedulerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		362310411D7BAB28004F98FB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3623104A1D7BAB28004F98FB /* HH_SchedulerUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3623103C1D7BAB28004F98FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 362310231D7BAB28004F98FB /* HH Scheduler */;
-			targetProxy = 3623103B1D7BAB28004F98FB /* PBXContainerItemProxy */;
-		};
-		362310471D7BAB28004F98FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 362310231D7BAB28004F98FB /* HH Scheduler */;
-			targetProxy = 362310461D7BAB28004F98FB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3623102D1D7BAB28004F98FB /* Main.storyboard */ = {
@@ -434,52 +306,6 @@
 			};
 			name = Release;
 		};
-		362310521D7BAB28004F98FB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "HH SchedulerTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JeffRyan.HH-SchedulerTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HH Scheduler.app/HH Scheduler";
-			};
-			name = Debug;
-		};
-		362310531D7BAB28004F98FB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "HH SchedulerTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JeffRyan.HH-SchedulerTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HH Scheduler.app/HH Scheduler";
-			};
-			name = Release;
-		};
-		362310551D7BAB28004F98FB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "HH SchedulerUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JeffRyan.HH-SchedulerUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "HH Scheduler";
-			};
-			name = Debug;
-		};
-		362310561D7BAB28004F98FB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "HH SchedulerUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JeffRyan.HH-SchedulerUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "HH Scheduler";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -497,24 +323,6 @@
 			buildConfigurations = (
 				3623104F1D7BAB28004F98FB /* Debug */,
 				362310501D7BAB28004F98FB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		362310511D7BAB28004F98FB /* Build configuration list for PBXNativeTarget "HH SchedulerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				362310521D7BAB28004F98FB /* Debug */,
-				362310531D7BAB28004F98FB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		362310541D7BAB28004F98FB /* Build configuration list for PBXNativeTarget "HH SchedulerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				362310551D7BAB28004F98FB /* Debug */,
-				362310561D7BAB28004F98FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
