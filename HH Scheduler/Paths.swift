@@ -9,17 +9,17 @@
 import Foundation
 
 let document_dirs = NSSearchPathForDirectoriesInDomains(
-    .DocumentDirectory,
-    .UserDomainMask, true)
+    .documentDirectory,
+    .userDomainMask, true)
 let document_dir = document_dirs.first!
-let document_dir_url = NSURL(fileURLWithPath: document_dir)
+let document_dir_url = URL(fileURLWithPath: document_dir)
 
 let schedule_file_name = "schedule.txt"
-let schedule_file_url =
-    document_dir_url.URLByAppendingPathComponent(schedule_file_name)
+let schedule_file_url: URL =
+    document_dir_url.appendingPathComponent(schedule_file_name)
 
 let schedule_info_web_url =
-    NSURL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.txt")!
+    URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.txt")!
 let schedule_info_cache_file_name = "sinfo.cache.txt"
-let schedule_info_cache_file_url =
-    document_dir_url.URLByAppendingPathComponent(schedule_info_cache_file_name)
+let schedule_info_cache_file_url: URL =
+    document_dir_url.appendingPathComponent(schedule_info_cache_file_name)

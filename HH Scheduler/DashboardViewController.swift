@@ -19,13 +19,13 @@ class DashboardViewController: UIViewController {
         
         addGradient(to: self.view)
 
-        var schedule_info_contents = try? String(contentsOfURL: schedule_info_web_url)
+        var schedule_info_contents = try? String(contentsOf: schedule_info_web_url)
 
-        _ = try? schedule_info_contents?.writeToURL(schedule_info_cache_file_url, atomically: true, encoding: NSUTF8StringEncoding)
+        _ = try? schedule_info_contents?.write(to: schedule_info_cache_file_url, atomically: true, encoding: String.Encoding.utf8)
 
         if schedule_info_contents == nil {
             print("Using cache file: couldn't get schedule info from web")
-            schedule_info_contents = try? String(contentsOfURL: schedule_info_cache_file_url)
+            schedule_info_contents = try? String(contentsOf: schedule_info_cache_file_url)
         }
 
         if schedule_info_contents == nil {
@@ -43,14 +43,14 @@ class DashboardViewController: UIViewController {
         Circle2.layer.cornerRadius = Circle2.frame.width / 2
     }
 
-    @IBAction func handleSwipes(sender: AnyObject) {
+    @IBAction func handleSwipes(_ sender: AnyObject) {
         let tabIndex = tabBarController!.selectedIndex
 
-        if (sender.direction == .Right && tabIndex > 0) {
+        if (sender.direction == .right && tabIndex > 0) {
             tabBarController!.selectedIndex -= 1
         }
 
-        if (sender.direction == .Left && tabIndex < tabBarController!.viewControllers!.count - 1) {
+        if (sender.direction == .left && tabIndex < tabBarController!.viewControllers!.count - 1) {
             tabBarController!.selectedIndex += 1
         }
     }

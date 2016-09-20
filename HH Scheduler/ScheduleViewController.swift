@@ -12,48 +12,46 @@ class Schedule: NSObject, NSCoding {
     var classes: [String]
     var schedule: [[Int]]
     var sport: String?
-    var sport_times: [NSDate]?
+    var sport_times: [Date]?
 
     override init() {
         classes = ["Free Time"]
-        schedule = [[Int]](count: 6, repeatedValue: [Int](count: 18, repeatedValue: 0))
+        schedule = [[Int]](repeating: [Int](repeating: 0, count: 18), count: 6)
         sport = nil
         sport_times = nil
 
         super.init()
     }
 
-    static func loadFromFile(target: NSURL) -> Schedule? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(target.path!) as? Schedule
+    static func loadFromFile(_ target: URL) -> Schedule? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: target.path) as? Schedule
     }
 
-    func saveToFile(target: NSURL) throws {
-        if !NSKeyedArchiver.archiveRootObject(self, toFile: target.path!) {
+    func saveToFile(_ target: URL) throws {
+        if !NSKeyedArchiver.archiveRootObject(self, toFile: target.path) {
             throw NSError(domain: "Failed to save schedule to file", code: 2, userInfo: nil)
         }
     }
 
     required init(coder aDecoder: NSCoder) {
-        classes = aDecoder.decodeObjectForKey("classes") as! [String]
-        schedule = aDecoder.decodeObjectForKey("schedule") as! [[Int]]
-        sport = aDecoder.decodeObjectForKey("sport") as! String?
-        sport_times = aDecoder.decodeObjectForKey("sport_times") as! [NSDate]?
+        classes = aDecoder.decodeObject(forKey: "classes") as! [String]
+        schedule = aDecoder.decodeObject(forKey: "schedule") as! [[Int]]
+        sport = aDecoder.decodeObject(forKey: "sport") as! String?
+        sport_times = aDecoder.decodeObject(forKey: "sport_times") as! [Date]?
 
         super.init()
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(classes, forKey: "classes")
-        aCoder.encodeObject(schedule, forKey: "schedule")
-        aCoder.encodeObject(sport, forKey: "sport")
-        aCoder.encodeObject(sport_times, forKey: "sport_times")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(classes, forKey: "classes")
+        aCoder.encode(schedule, forKey: "schedule")
+        aCoder.encode(sport, forKey: "sport")
+        aCoder.encode(sport_times, forKey: "sport_times")
     }
 }
 
 class ScheduleViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     static var schedule: Schedule?
-
-    private static let headerLength: CGFloat = 150;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,55 +69,55 @@ class ScheduleViewController: UICollectionViewController, UICollectionViewDelega
         try! ScheduleViewController.schedule?.saveToFile(schedule_file_url)
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6*18;
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = "schedule_reuse"
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
 
         if let cell_label = cell.viewWithTag(101) as? UILabel {
-            cell_label.text = String(indexPath.row)
+            cell_label.text = String((indexPath as NSIndexPath).row)
         }
 
-        cell.layer.borderColor = UIColor.yellowColor().CGColor
+        cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 0.5
 
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellHeight = collectionView.frame.height / 6
         let cellWidth = cellHeight * 1.5
 
-        return CGSizeMake(cellWidth, cellHeight)
+        return CGSize(width: cellWidth, height: cellHeight)
     }
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1;
     }
 
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
 
         return headerView
     }
 
-    /*
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSizeMake(ScheduleViewController.headerLength, 0)
-    }*/
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let headerSize = collectionView.frame.width / 5.0
+        return CGSize(width: headerSize, height: 0)
+    }
 
-    @IBAction func handleSwipes(sender: AnyObject) {
+    @IBAction func handleSwipes(_ sender: AnyObject) {
         let tabIndex = tabBarController!.selectedIndex
 
-        if (sender.direction == .Right && tabIndex > 0) {
+        if (sender.direction == .right && tabIndex > 0) {
             tabBarController!.selectedIndex -= 1
         }
 
-        if (sender.direction == .Left && tabIndex < tabBarController!.viewControllers!.count - 1) {
+        if (sender.direction == .left && tabIndex < tabBarController!.viewControllers!.count - 1) {
             tabBarController!.selectedIndex += 1
         }
     }
