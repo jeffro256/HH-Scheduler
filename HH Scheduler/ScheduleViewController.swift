@@ -66,9 +66,17 @@ class ScheduleViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         if let scrollView = view.viewWithTag(10) as? UIScrollView {
-            scrollView.contentSize = CGSize(width: scrollView.frame.height * 1.5, height: scrollView.frame.height)
+            let contentHeight = scrollView.frame.height
+            let contentWidth = contentHeight * 4
+            scrollView.contentSize = CGSize(width: contentWidth, height: contentHeight)
         }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     static func loadSchedule() {
