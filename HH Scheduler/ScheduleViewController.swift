@@ -51,18 +51,18 @@ class Schedule: NSObject, NSCoding {
 }
 
 class ScheduleViewController: UIViewController {
-    static var schedule: Schedule?
+    var schedule: Schedule!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addGradient(to: view)
 
-        if ScheduleViewController.schedule == nil {
-            ScheduleViewController.loadSchedule()
+        if schedule == nil {
+            loadSchedule()
         }
 
-        try! ScheduleViewController.schedule?.saveToFile(schedule_file_url)
+        try! schedule.saveToFile(schedule_file_url)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -75,17 +75,21 @@ class ScheduleViewController: UIViewController {
         }
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    func populateScheduleTable() {
+        
     }
 
-    static func loadSchedule() {
+    func loadSchedule() {
         if let schedule = Schedule.loadFromFile(schedule_file_url) {
-            ScheduleViewController.schedule = schedule
+            self.schedule = schedule
         }
         else {
             print("Creating new schedule...")
-            ScheduleViewController.schedule = Schedule()
+            self.schedule = Schedule()
         }
+    }
+
+    func saveSchedule() {
+        try! schedule?.saveToFile(schedule_file_url)
     }
 }

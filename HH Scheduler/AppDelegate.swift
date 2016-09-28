@@ -38,7 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 
-        _ = try? ScheduleViewController.schedule?.saveToFile(schedule_file_url)
+        //_ = try? ScheduleViewController.schedule?.saveToFile(schedule_file_url)
+        if let scheduleController = ((window?.rootViewController as? UITabBarController)?.viewControllers?[ViewControllerIndexes.Schedule.rawValue] as? UINavigationController)?.viewControllers.first as? ScheduleViewController {
+            scheduleController.saveSchedule()
+            print("Saving schedule...")
+        }
     }
 }
 

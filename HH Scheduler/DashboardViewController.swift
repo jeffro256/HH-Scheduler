@@ -14,6 +14,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet var ClassLabel1: UILabel!
     @IBOutlet var ClassLabel2: UILabel!
 
+    private var scheduleController: ScheduleViewController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,17 +26,19 @@ class DashboardViewController: UIViewController {
         _ = try? schedule_info_contents?.write(to: schedule_info_cache_file_url, atomically: true, encoding: String.Encoding.utf8)
 
         if schedule_info_contents == nil {
-            print("Using cache file: couldn't get schedule info from web")
+            print("Using cache file: Couldn't get schedule info from web")
             schedule_info_contents = try? String(contentsOf: schedule_info_cache_file_url)
         }
 
         if schedule_info_contents == nil {
-            print("couldn't get schedule_info_contents")
+            print("ERROR: Couldn't get schedule_info_contents")
             exit(EXIT_FAILURE)
         }
+        
+        scheduleController = (tabBarController?.viewControllers?[ViewControllerIndexes.Schedule.rawValue] as? UINavigationController)?.viewControllers.first as? ScheduleViewController
 
-        if ScheduleViewController.schedule == nil {
-            ScheduleViewController.loadSchedule()
+        if scheduleController.schedule == nil {
+            scheduleController.loadSchedule()
         }
     }
 
