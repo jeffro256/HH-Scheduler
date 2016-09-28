@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum ViewControllerIndexes: Int {
+    case Dashboard = 0
+    case Schedule
+}
+
 let document_dirs = NSSearchPathForDirectoriesInDomains(
     .documentDirectory,
     .userDomainMask, true)
