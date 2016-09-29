@@ -143,7 +143,7 @@
                                     <constraint firstItem="9NR-rp-Ysk" firstAttribute="leading" secondItem="sjB-ig-Hda" secondAttribute="leading" id="uAN-P3-bO0"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="10" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ST-bk-SqL" userLabel="Schedule Scroller">
+                            <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" tag="10" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ST-bk-SqL" userLabel="Schedule Scroller">
                                 <frame key="frameInset" minX="75" width="300" height="554"/>
                                 <subviews>
                                     <stackView opaque="NO" tag="10" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Xc9-PN-8bm" userLabel="Schedule Table">
@@ -715,7 +715,12 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="height" multiplier="4:1" id="Hjo-CO-Kdp"/>
-                                            <constraint firstItem="b4u-3u-ds6" firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="width" id="urr-Eg-S61"/>
+                                            <constraint firstItem="hzE-MH-WoU" firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="width" id="Khs-uV-qSz"/>
+                                            <constraint firstItem="HjU-nK-ujy" firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="width" id="UZ5-KC-fs7"/>
+                                            <constraint firstItem="CFm-g1-m4j" firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="width" id="Zvm-lX-RTY"/>
+                                            <constraint firstItem="ByT-EM-hJC" firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="width" id="aBH-WP-TWd"/>
+                                            <constraint firstItem="b4u-3u-ds6" firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="width" id="m2j-q6-8lU"/>
+                                            <constraint firstItem="I0a-J8-Blf" firstAttribute="width" secondItem="Xc9-PN-8bm" secondAttribute="width" id="muV-Pe-RT7"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -738,7 +743,12 @@
                             <constraint firstItem="1ST-bk-SqL" firstAttribute="leading" secondItem="sjB-ig-Hda" secondAttribute="trailing" id="xmh-kU-JSz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="D74-EC-ieW"/>
+                    <navigationItem key="navigationItem" id="D74-EC-ieW">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Xa9-A0-gmi" userLabel="Edit Button"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scheduleTable" destination="Xc9-PN-8bm" id="oMv-T5-r5a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zu-S3-L9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -14,6 +14,10 @@ class Schedule: NSObject, NSCoding {
     var sport: String?
     var sport_times: [Date]?
 
+    override var description: String {
+        return "classes: \(classes)\nschedule: \(schedule)\nsport: \(sport)\nsport_times: \(sport_times)"
+    }
+
     override init() {
         classes = ["Free Time"]
         schedule = [[Int]](repeating: [Int](repeating: 0, count: 18), count: 6)
@@ -53,6 +57,8 @@ class Schedule: NSObject, NSCoding {
 class ScheduleViewController: UIViewController {
     var schedule: Schedule!
 
+    @IBOutlet var scheduleTable: UIStackView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,7 +68,7 @@ class ScheduleViewController: UIViewController {
             loadSchedule()
         }
 
-        try! schedule.saveToFile(schedule_file_url)
+        populateScheduleTable()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -76,7 +82,29 @@ class ScheduleViewController: UIViewController {
     }
 
     func populateScheduleTable() {
-        
+        for i in 0 ..< 6 {
+            let dayTag = i + 48
+            if let cycleDayStack = scheduleTable.viewWithTag(dayTag) as? UIStackView {
+                for j in 0 ..< 18 {
+                    let modTag = j + 1
+                    if let modView = cycleDayStack.viewWithTag(modTag) {
+                        if modView is UILabel {
+                            let modLabel = modView as! UILabel
+                            modLabel.text = schedule.classes[schedule.schedule[i][j]]
+                        }
+                        else {
+                            print("Cannot get label for cell (\(i), \(j))")
+                        }
+                    }
+                    else {
+                        print("Cannot find subview of stack \(i) for mod \(j)")
+                    }
+                }
+            }
+            else {
+                print("Cannot find subview of scheduleTable with tag \(dayTag)")
+            }
+        }
     }
 
     func loadSchedule() {
@@ -90,6 +118,6 @@ class ScheduleViewController: UIViewController {
     }
 
     func saveSchedule() {
-        try! schedule?.saveToFile(schedule_file_url)
+        try! schedule.saveToFile(schedule_file_url)
     }
 }

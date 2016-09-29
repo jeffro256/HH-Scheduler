@@ -43,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             scheduleController.saveSchedule()
             print("Saving schedule...")
         }
+        else {
+            print("Failed to save schedule")
+        }
     }
 }
 
