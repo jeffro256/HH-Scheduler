@@ -68,6 +68,8 @@ class ScheduleViewController: UIViewController {
             loadSchedule()
         }
 
+        schedule.sport = "Cross Country LOLOL"
+
         populateScheduleTable()
     }
 
@@ -98,6 +100,16 @@ class ScheduleViewController: UIViewController {
                     }
                     else {
                         print("Cannot find subview of stack \(i) for mod \(j)")
+                    }
+                }
+
+                if schedule.sport != nil {
+                    if let sportView = cycleDayStack.viewWithTag(19) {
+                        if sportView is UILabel {
+                            let sportLabel = sportView as! UILabel
+                            sportLabel.text = schedule.sport
+                            sportLabel.isHidden = false
+                        }
                     }
                 }
             }
