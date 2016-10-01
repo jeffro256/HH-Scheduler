@@ -68,7 +68,7 @@ class ScheduleViewController: UIViewController {
             loadSchedule()
         }
 
-        schedule.sport = "Cross Country LOLOL"
+        schedule.sport = "Cross Country"
 
         populateScheduleTable()
     }

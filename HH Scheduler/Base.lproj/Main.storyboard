@@ -774,7 +774,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="D74-EC-ieW">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Xa9-A0-gmi" userLabel="Edit Button"/>
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="edit" id="Xa9-A0-gmi" userLabel="Edit Button"/>
                     </navigationItem>
                     <connections>
                         <outlet property="scheduleTable" destination="Xc9-PN-8bm" id="oMv-T5-r5a"/>

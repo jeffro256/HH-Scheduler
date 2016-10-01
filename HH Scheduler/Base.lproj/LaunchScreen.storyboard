@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,14 +16,38 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2016. All Rights Reserved" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="51b-dp-HBD" userLabel="Copyright Label">
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HHLogo" translatesAutoresizingMaskIntoConstraints="NO" id="hec-Qh-BdX">
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hec-Qh-BdX" secondAttribute="height" multiplier="375:667" id="zm6-Hy-2qL"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="51b-dp-HBD" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="1RP-9W-BFD"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="51b-dp-HBD" secondAttribute="bottom" id="6Lf-Y9-6kR"/>
+                            <constraint firstItem="hec-Qh-BdX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="BwD-aC-e4G"/>
+                            <constraint firstItem="51b-dp-HBD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="SMz-ii-yAM"/>
+                            <constraint firstAttribute="trailing" secondItem="hec-Qh-BdX" secondAttribute="trailing" id="bQB-Ft-dG8"/>
+                            <constraint firstItem="hec-Qh-BdX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="jA9-jR-fBv"/>
+                            <constraint firstAttribute="trailing" secondItem="51b-dp-HBD" secondAttribute="trailing" id="zUy-0X-aXk"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="HHLogo" width="256" height="256"/>
+    </resources>
 </document>
