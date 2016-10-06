@@ -103,14 +103,20 @@ class ScheduleViewController: UIViewController {
                     }
                 }
 
-                if schedule.sport != nil {
-                    if let sportView = cycleDayStack.viewWithTag(19) {
+                if let sportView = cycleDayStack.viewWithTag(19) {
+                    if schedule.sport != nil {
                         if sportView is UILabel {
                             let sportLabel = sportView as! UILabel
                             sportLabel.text = schedule.sport
                             sportLabel.isHidden = false
                         }
                     }
+                    else {
+                        sportView.isHidden = true
+                    }
+                }
+                else {
+                    print("Cannot find sport view for stack \(i)")
                 }
             }
             else {
