@@ -15,6 +15,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet var ClassLabel2: UILabel!
 
     private var scheduleController: ScheduleViewController!
+
     private static let timeFormatter: DateFormatter = {
         let a = DateFormatter()
         a.dateFormat = "hh:mmaa"
@@ -53,7 +54,21 @@ class DashboardViewController: UIViewController {
             scheduleController.loadSchedule()
         }
 
-        print(DashboardViewController.dateFormatter.date(from: "12 May 2001"))
+        refreshScheduleInfo()
+
+        let t2s = {(d: Date) in return DashboardViewController.timeFormatter.string(from: d)}
+        let d2s = {(d: Date) in return DashboardViewController.dateFormatter.string(from: d)}
+        print("reg_mod_times", reg_mod_times.map(t2s))
+        print("late_mod_times", late_mod_times.map(t2s))
+        print("reg_start_time", t2s(reg_start_time))
+        print("reg_end_time", t2s(reg_end_time))
+        print("late_start_time", t2s(late_start_time))
+        print("late_end_time", t2s(late_end_time))
+        print("recorded_cycle_days", recorded_cycle_days.map({(d, c) in return (d2s(d), c)}))
+        print("holidays", holidays.map(d2s))
+        print("weird_days", weird_days)
+        
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -62,9 +77,16 @@ class DashboardViewController: UIViewController {
     }
 
     func refreshScheduleInfo() {
-        var schedule_info_contents = try? String(contentsOf: schedule_info_web_url)
+        reg_mod_times = []
+        late_mod_times = []
+        recorded_cycle_days = []
+        holidays = []
+        weird_days = []
+
+        var schedule_info_contents = try? String(contentsOf: schedule_info_web_url).strip()
 
         if schedule_info_contents == nil {
+            print("Cannot find info file on web, falling back onto cached file")
             schedule_info_contents = try! String(contentsOf: schedule_info_cache_file_url)
         }
 
@@ -72,59 +94,57 @@ class DashboardViewController: UIViewController {
 
         let schedule_info_list = schedule_info_contents!.components(separatedBy: CharacterSet.newlines)
 
-        // @TODO: Make code in do block more error robust
-        do {
-            let reg_mod_time_strs = schedule_info_list[0].components(separatedBy: ",")
+        // @TODO: Make code in block more error robust
+        let reg_mod_time_strs = schedule_info_list[0].components(separatedBy: ",")
 
-            for mod_time_str in reg_mod_time_strs {
-                self.reg_mod_times.append(DashboardViewController.timeFormatter.date(from: mod_time_str.strip())!)
-            }
+        for mod_time_str in reg_mod_time_strs {
+            self.reg_mod_times.append(DashboardViewController.timeFormatter.date(from: mod_time_str.strip())!)
+        }
 
-            let late_mod_time_strs = schedule_info_list[1].components(separatedBy: ",")
+        let late_mod_time_strs = schedule_info_list[1].components(separatedBy: ",")
 
-            for mod_time_str in late_mod_time_strs {
-                self.late_mod_times.append(DashboardViewController.timeFormatter.date(from: mod_time_str.strip())!)
-            }
+        for mod_time_str in late_mod_time_strs {
+            self.late_mod_times.append(DashboardViewController.timeFormatter.date(from: mod_time_str.strip())!)
+        }
 
-            // @TODO: optimize next 4 lines: save components
-            self.reg_start_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[2].components(separatedBy: ",")[0].strip())
-            self.reg_end_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[2].components(separatedBy: ",")[1].strip())
-            self.late_start_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[3].components(separatedBy: ",")[0].strip())
-            self.late_end_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[3].components(separatedBy: ",")[1].strip())
+        // @TODO: optimize next 4 lines: save components
+        self.reg_start_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[2].components(separatedBy: ",")[0].strip())
+        self.reg_end_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[2].components(separatedBy: ",")[1].strip())
+        self.late_start_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[3].components(separatedBy: ",")[0].strip())
+        self.late_end_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[3].components(separatedBy: ",")[1].strip())
 
-            var line_index = 4
-            var line = schedule_info_list[line_index]
+        var line_index = 4
+        var line = schedule_info_list[line_index]
 
-            while !line.contains("Holidays:") {
-                // @TODO: optimize next 2 lines: save components
-                let calendar_day = DashboardViewController.dateFormatter.date(from: line.components(separatedBy: ",")[0].strip())
-                let cycle_day = Int(line.components(separatedBy: ",")[1].strip().unicodeScalars.first!.value)
-                self.recorded_cycle_days.append((calendar_day!, cycle_day))
-
-                line_index += 1
-                line = schedule_info_list[line_index]
-            }
+        while !line.contains("Holidays:") {
+            // @TODO: optimize next 2 lines: save components
+            let calendar_day = DashboardViewController.dateFormatter.date(from: line.components(separatedBy: ",")[0].strip())
+            let cycle_day = Int(line.components(separatedBy: ",")[1].strip().unicodeScalars.first!.value) - 65 // 65 is value of A
+            self.recorded_cycle_days.append((calendar_day!, cycle_day))
 
             line_index += 1
             line = schedule_info_list[line_index]
+        }
 
-            while !line.contains("Weird Days:") {
-                let holiday = DashboardViewController.dateFormatter.date(from: line.strip())
-                self.holidays.append(holiday!)
+        line_index += 1
+        line = schedule_info_list[line_index]
 
-                line_index += 1
-                line = schedule_info_list[line_index]
-            }
+        while !line.contains("Weird Days:") {
+            let holiday = DashboardViewController.dateFormatter.date(from: line.strip())
+            self.holidays.append(holiday!)
 
             line_index += 1
             line = schedule_info_list[line_index]
+        }
 
-            while line_index < schedule_info_list.count {
-                let lineComponents = line.components(separatedBy: ",")
-                let weird_day = DashboardViewController.dateFormatter.date(from: lineComponents[0].strip())
+        while line_index < schedule_info_list.count - 1 {
+            line_index += 1
+            line = schedule_info_list[line_index]
 
+            let lineComponents = line.components(separatedBy: ",")
+            if let weird_day = DashboardViewController.dateFormatter.date(from: lineComponents[0].strip()) {
                 if (lineComponents.count == 1) {
-                    self.weird_days.append((weird_day!, nil))
+                    self.weird_days.append((weird_day, nil))
                 }
                 else {
                     let mod_time_strs = lineComponents[1..<lineComponents.count]
@@ -134,13 +154,14 @@ class DashboardViewController: UIViewController {
                         weird_mod_times.append(DashboardViewController.dateFormatter.date(from: mod_time_str.strip())!)
                     }
 
-                    self.weird_days.append((weird_day!, weird_mod_times))
+                    self.weird_days.append((weird_day, weird_mod_times))
                 }
             }
+            else {
+                print("ERROR: weird day invalid '\(lineComponents[0].strip())'")
+            }
         }
-        catch {
-            print("Error while parsing HH Schedule Info")
-        }
+        // @TODO<END>
     }
 
     @IBAction func handleSwipes(_ sender: AnyObject) {

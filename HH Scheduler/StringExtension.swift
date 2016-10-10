@@ -10,6 +10,6 @@ import Foundation
 
 extension String {
     public func strip() -> String {
-        return self.trimmingCharacters(in: CharacterSet.whitespaces)
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 }
