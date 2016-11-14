@@ -11,6 +11,8 @@ import UIKit
 class DashboardViewController: UIViewController {
     @IBOutlet var Circle1: UIView!
     @IBOutlet var Circle2: UIView!
+    @IBOutlet var CycleDayLabel: UILabel!
+    @IBOutlet var ModLabel: UILabel!
     @IBOutlet var ClassLabel1: UILabel!
     @IBOutlet var ClassLabel2: UILabel!
 
@@ -67,13 +69,41 @@ class DashboardViewController: UIViewController {
         print("recorded_cycle_days", recorded_cycle_days.map({(d, c) in return (d2s(d), c)}))
         print("holidays", holidays.map(d2s))
         print("weird_days", weird_days)
-        
-
     }
 
     override func viewDidLayoutSubviews() {
         Circle1.layer.cornerRadius = Circle1.frame.width / 2
         Circle2.layer.cornerRadius = Circle2.frame.width / 2
+    }
+
+    func updateUI() {
+        // set mod
+        // set cycle day
+        // set current class
+        // set next class
+        // get times of those classes
+        // OR
+        // set extra text label
+
+        /*
+
+         If schedule-less weird day, holiday, or weekend, make all normal spaces
+         blank, and set the extra text label.
+
+         Otherwise::
+
+         For day since last recorded day, if not weekend, holiday, or weird day
+         without schedule, increment the cycle day counter. Mod the cycle day
+         counter. This is the cycle day
+
+         If it is a weird day, use that schedule. If it is wednesday, use late
+         schedule. Otherwise use regular schedule. Get mod from that schedule.
+         
+         Index the mod into the schedule and get class and next class.
+         
+         Get times of those classes.
+
+        */
     }
 
     func refreshScheduleInfo() {
@@ -94,7 +124,7 @@ class DashboardViewController: UIViewController {
 
         let schedule_info_list = schedule_info_contents!.components(separatedBy: CharacterSet.newlines)
 
-        // @TODO: Make code in block more error robust
+        // @TODO<START>: Make code in block more error robust
         let reg_mod_time_strs = schedule_info_list[0].components(separatedBy: ",")
 
         for mod_time_str in reg_mod_time_strs {
@@ -129,6 +159,8 @@ class DashboardViewController: UIViewController {
         line_index += 1
         line = schedule_info_list[line_index]
 
+        recorded_cycle_days.sort { Calendar.current.compare($0.0, to: $1.0, toGranularity: .day) == .orderedAscending }
+
         while !line.contains("Weird Days:") {
             let holiday = DashboardViewController.dateFormatter.date(from: line.strip())
             self.holidays.append(holiday!)
@@ -136,6 +168,8 @@ class DashboardViewController: UIViewController {
             line_index += 1
             line = schedule_info_list[line_index]
         }
+
+        holidays.sort { Calendar.current.compare($0, to: $1, toGranularity: .day) == .orderedAscending }
 
         while line_index < schedule_info_list.count - 1 {
             line_index += 1
@@ -161,9 +195,13 @@ class DashboardViewController: UIViewController {
                 print("ERROR: weird day invalid '\(lineComponents[0].strip())'")
             }
         }
+
+        weird_days.sort { Calendar.current.compare($0.0, to: $1.0, toGranularity: .day) == .orderedAscending }
         // @TODO<END>
     }
 
+    // NOTE: Some of this code is useless, as this view controller will always
+    // be on the far riht
     @IBAction func handleSwipes(_ sender: AnyObject) {
         let tabIndex = tabBarController!.selectedIndex
 
