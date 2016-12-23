@@ -14,6 +14,7 @@
 		362310311D7BAB28004F98FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362310301D7BAB28004F98FB /* Assets.xcassets */; };
 		3679572F1D7E290E0096163B /* AddGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3679572E1D7E290E0096163B /* AddGradient.swift */; };
 		367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D02DE1DA527E8005740EA /* StringExtension.swift */; };
+		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
 		36EB9FE91D9C35D0006B6874 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EB9FE81D9C35D0006B6874 /* Common.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		362310351D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3679572E1D7E290E0096163B /* AddGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGradient.swift; sourceTree = "<group>"; };
 		367D02DE1DA527E8005740EA /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		36EB9FE81D9C35D0006B6874 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,14 +65,23 @@
 				36EB9FE81D9C35D0006B6874 /* Common.swift */,
 				362310271D7BAB28004F98FB /* AppDelegate.swift */,
 				362310291D7BAB28004F98FB /* DashboardViewController.swift */,
-				367D02DE1DA527E8005740EA /* StringExtension.swift */,
 				3623102B1D7BAB28004F98FB /* ScheduleViewController.swift */,
 				3679572E1D7E290E0096163B /* AddGradient.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
 				362310301D7BAB28004F98FB /* Assets.xcassets */,
 				362310351D7BAB28004F98FB /* Info.plist */,
+				36A135DF1E02E0A300956D76 /* Extensions */,
 			);
 			path = "HH Scheduler";
+			sourceTree = "<group>";
+		};
+		36A135DF1E02E0A300956D76 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				36A135DD1E02DFA000956D76 /* DateExtension.swift */,
+				367D02DE1DA527E8005740EA /* StringExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3623102C1D7BAB28004F98FB /* ScheduleViewController.swift in Sources */,
+				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
 				3679572F1D7E290E0096163B /* AddGradient.swift in Sources */,
 				367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */,
 				362310281D7BAB28004F98FB /* AppDelegate.swift in Sources */,

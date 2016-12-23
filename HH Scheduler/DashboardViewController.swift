@@ -1,10 +1,18 @@
 //
-//  FirstViewController.swift
+//  DashboardViewController.swift
 //  HH Scheduler
 //
 //  Created by Jeffrey Ryan on 9/3/16.
 //  Copyright © 2016 Jeffrey Ryan. All rights reserved.
 //
+
+/*
+ 99 little bugs in the code
+ 99 little bugs,
+ Take one down
+ Pass it around...
+ 127 little bugs in the code.
+ */
 
 import UIKit
 
@@ -13,8 +21,14 @@ class DashboardViewController: UIViewController {
     @IBOutlet var Circle2: UIView!
     @IBOutlet var CycleDayLabel: UILabel!
     @IBOutlet var ModLabel: UILabel!
+    @IBOutlet var ExtraLabel: UILabel!
     @IBOutlet var ClassLabel1: UILabel!
     @IBOutlet var ClassLabel2: UILabel!
+    @IBOutlet var ClassTimeLabel1: UILabel!
+    @IBOutlet var ClassTimeLabel2: UILabel!
+    @IBOutlet var CurrentClassLabel: UILabel!
+    @IBOutlet var NextClassLabel: UILabel!
+
 
     private var scheduleController: ScheduleViewController!
 
@@ -57,6 +71,7 @@ class DashboardViewController: UIViewController {
         }
 
         refreshScheduleInfo()
+        updateUI()
 
         let t2s = {(d: Date) in return DashboardViewController.timeFormatter.string(from: d)}
         let d2s = {(d: Date) in return DashboardViewController.dateFormatter.string(from: d)}
@@ -104,6 +119,120 @@ class DashboardViewController: UIViewController {
          Get times of those classes.
 
         */
+
+        let now = Date()
+        let is_holiday = holidays.contains(where: { now.dcompare($0) == .orderedSame })
+        let is_weekend = Calendar.current.isDateInWeekend(now)
+        var weird_day_times: [Date]?
+        let is_weird_day = weird_days.contains(where: { if now.dcompare($0.0) == .orderedSame { weird_day_times = $0.1; return true } else { return false } })
+
+        if is_holiday || is_weekend {
+            ModLabel.isHidden = true
+            CycleDayLabel.isHidden = true
+            ClassLabel1.isHidden = true
+            ClassLabel2.isHidden = true
+            ClassTimeLabel1.isHidden = true
+            ClassTimeLabel2.isHidden = true
+            CurrentClassLabel.isHidden = true
+            NextClassLabel.isHidden = true
+            ExtraLabel.isHidden = false
+            ExtraLabel.text = "No School Today!"
+        }
+        else if is_weird_day && weird_day_times == nil {
+            ModLabel.isHidden = true
+            CycleDayLabel.isHidden = true
+            ClassLabel1.isHidden = true
+            ClassLabel2.isHidden = true
+            ClassTimeLabel1.isHidden = true
+            ClassTimeLabel2.isHidden = true
+            CurrentClassLabel.isHidden = true
+            NextClassLabel.isHidden = true
+            ExtraLabel.isHidden = false
+            ExtraLabel.text = "Weird Schedule Today"
+        }
+        else {
+            // Get Cycle Day
+
+            var lastRecordedCycleDay = recorded_cycle_days[0]
+
+            for rcd in recorded_cycle_days {
+                if rcd.0.dcompare(now) != .orderedDescending {
+                    lastRecordedCycleDay = rcd
+                }
+                else {
+                    break
+                }
+            }
+
+            let one_day = DateComponents(day: 1)
+            while lastRecordedCycleDay.0.dcompare(now) == .orderedAscending {
+                let next_day = Calendar.current.date(byAdding: one_day, to: lastRecordedCycleDay.0)!
+                let next_day_is_holiday = holidays.contains(where: { next_day.dcompare($0) == .orderedSame })
+                let next_day_is_weekend = Calendar.current.isDateInWeekend(next_day)
+                let next_day_is_scheduleless_weird_day = weird_days.contains(where: { next_day.dcompare($0.0) == .orderedSame })
+
+                if !next_day_is_holiday && !next_day_is_weekend && !next_day_is_scheduleless_weird_day {
+                    lastRecordedCycleDay.1 += 1
+                }
+
+                lastRecordedCycleDay.0 = next_day
+            }
+
+            let cycle_day = lastRecordedCycleDay.1 % 6
+
+            let mod_times: [Date]
+            if is_weird_day {
+                mod_times = weird_day_times!
+            }
+            else {
+                if cycle_day == 3 {
+                    mod_times = late_mod_times
+                }
+                else {
+                    mod_times = reg_mod_times
+                }
+            }
+
+            let mod_time_intervals = mod_times.map({ return $0.timeIntervalSinceDayStart })
+            let nowTimeInterval = now.timeIntervalSinceDayStart
+
+            if nowTimeInterval < mod_time_intervals[0] {
+                ModLabel.isHidden = true
+                CycleDayLabel.isHidden = true
+                ClassLabel1.isHidden = true
+                ClassLabel2.isHidden = true
+                ClassTimeLabel1.isHidden = true
+                ClassTimeLabel2.isHidden = true
+                CurrentClassLabel.isHidden = true
+                NextClassLabel.isHidden = true
+                ExtraLabel.isHidden = true
+                ClassLabel2.text = "School Starts"
+                ClassTimeLabel2.text = DashboardViewController.timeFormatter.string(from: mod_times[0])
+            }
+            else {
+                var updatedView = false
+                for i in 1..<mod_time_intervals.count {
+                    if nowTimeInterval < mod_time_intervals[i] {
+                        // do stuff                                                        // work on school logic
+                        updatedView = true
+                        break
+                    }
+                }
+
+                if !updatedView {
+                    ModLabel.isHidden = true
+                    CycleDayLabel.isHidden = true
+                    ClassLabel1.isHidden = true
+                    ClassLabel2.isHidden = true
+                    ClassTimeLabel1.isHidden = true
+                    ClassTimeLabel2.isHidden = true
+                    CurrentClassLabel.isHidden = true
+                    NextClassLabel.isHidden = true
+                    ExtraLabel.isHidden = false
+                    ExtraLabel.text = "School is Over!"
+                }
+            }
+        }
     }
 
     func refreshScheduleInfo() {
@@ -159,7 +288,7 @@ class DashboardViewController: UIViewController {
         line_index += 1
         line = schedule_info_list[line_index]
 
-        recorded_cycle_days.sort { Calendar.current.compare($0.0, to: $1.0, toGranularity: .day) == .orderedAscending }
+        recorded_cycle_days.sort { $0.0.dcompare($1.0) == .orderedAscending }
 
         while !line.contains("Weird Days:") {
             let holiday = DashboardViewController.dateFormatter.date(from: line.strip())
@@ -169,7 +298,7 @@ class DashboardViewController: UIViewController {
             line = schedule_info_list[line_index]
         }
 
-        holidays.sort { Calendar.current.compare($0, to: $1, toGranularity: .day) == .orderedAscending }
+        holidays.sort { $0.dcompare($1) == .orderedAscending }
 
         while line_index < schedule_info_list.count - 1 {
             line_index += 1
@@ -196,12 +325,12 @@ class DashboardViewController: UIViewController {
             }
         }
 
-        weird_days.sort { Calendar.current.compare($0.0, to: $1.0, toGranularity: .day) == .orderedAscending }
+        weird_days.sort { $0.0.dcompare($1.0) == .orderedAscending }
         // @TODO<END>
     }
 
     // NOTE: Some of this code is useless, as this view controller will always
-    // be on the far riht
+    // be on the far right
     @IBAction func handleSwipes(_ sender: AnyObject) {
         let tabIndex = tabBarController!.selectedIndex
 
