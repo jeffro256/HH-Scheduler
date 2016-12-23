@@ -29,22 +29,34 @@ class DashboardViewController: UIViewController {
     @IBOutlet var CurrentClassLabel: UILabel!
     @IBOutlet var NextClassLabel: UILabel!
 
-
     private var scheduleController: ScheduleViewController!
 
-    private static let timeFormatter: DateFormatter = {
+    private static let timeInputter: DateFormatter = {
         let a = DateFormatter()
         a.dateFormat = "hh:mmaa"
-        a.locale = Locale(identifier: "en_US")
-        //a.timeZone = TimeZone(abbreviation: "GMT+0:00") // @TODO: Set to Central Standard Time
+        a.locale = Locale(identifier: "en_US")          // Do I really know what I'm doing here? no.
+        a.timeZone = TimeZone(abbreviation: "CST")
 
         return a
     }()
-    private static let dateFormatter: DateFormatter = {
+    private static let dateInputter: DateFormatter = {
         let a = DateFormatter()
         a.dateFormat = "dd MMMM yyyy"
-        a.locale = Locale(identifier: "en_US")
-        //a.timeZone = TimeZone(abbreviation: "GMT+0:00") // @TODO: Set to Central Standard Time
+        a.locale = Locale(identifier: "en_US")          // Do I really know what I'm doing here? ditto.
+        a.timeZone = TimeZone(abbreviation: "CST")
+
+        return a
+    }()
+
+    private static let timeOutputter: DateFormatter = {
+        let a = DateFormatter()
+        a.dateFormat = "hh:mmaa"
+
+        return a
+    }()
+    private static let dateOutputter: DateFormatter = {
+        let a = DateFormatter()
+        a.dateFormat = "dd MMMM yyyy"
 
         return a
     }()
@@ -87,6 +99,8 @@ class DashboardViewController: UIViewController {
         print("holidays", holidays.map(d2s))
         print("weird_days", weird_days)
         */
+
+        print(DashboardViewController.timeOutputter.string(from: self.reg_mod_times[0]))
     }
 
     override func viewDidLayoutSubviews() {
@@ -124,10 +138,10 @@ class DashboardViewController: UIViewController {
         */
 
         let now = Date()
-        let is_holiday = holidays.contains(where: { now.dcompare($0) == .orderedSame })
+        let is_holiday = holidays.contains(where: { now.dayCompare($0) == .orderedSame })
         let is_weekend = Calendar.current.isDateInWeekend(now)
         var weird_day_times: [Date]?
-        let is_weird_day = weird_days.contains(where: { if now.dcompare($0.0) == .orderedSame { weird_day_times = $0.1; return true } else { return false } })
+        let is_weird_day = weird_days.contains(where: { if now.dayCompare($0.0) == .orderedSame { weird_day_times = $0.1; return true } else { return false } })
 
         if is_holiday || is_weekend {
             ModLabel.isHidden = true
@@ -159,7 +173,7 @@ class DashboardViewController: UIViewController {
             var lastRecordedCycleDay = recorded_cycle_days[0]
 
             for rcd in recorded_cycle_days {
-                if rcd.0.dcompare(now) != .orderedDescending {
+                if rcd.0.dayCompare(now) != .orderedDescending {
                     lastRecordedCycleDay = rcd
                 }
                 else {
@@ -168,11 +182,11 @@ class DashboardViewController: UIViewController {
             }
 
             let one_day = DateComponents(day: 1)
-            while lastRecordedCycleDay.0.dcompare(now) == .orderedAscending {
+            while lastRecordedCycleDay.0.dayCompare(now) == .orderedAscending {
                 let next_day = Calendar.current.date(byAdding: one_day, to: lastRecordedCycleDay.0)!
-                let next_day_is_holiday = holidays.contains(where: { next_day.dcompare($0) == .orderedSame })
+                let next_day_is_holiday = holidays.contains(where: { next_day.dayCompare($0) == .orderedSame })
                 let next_day_is_weekend = Calendar.current.isDateInWeekend(next_day)
-                let next_day_is_scheduleless_weird_day = weird_days.contains(where: { next_day.dcompare($0.0) == .orderedSame })
+                let next_day_is_scheduleless_weird_day = weird_days.contains(where: { next_day.dayCompare($0.0) == .orderedSame })
 
                 if !next_day_is_holiday && !next_day_is_weekend && !next_day_is_scheduleless_weird_day {
                     lastRecordedCycleDay.1 += 1
@@ -196,10 +210,10 @@ class DashboardViewController: UIViewController {
                 }
             }
 
-            let mod_time_intervals = mod_times.map({ return $0.timeIntervalSinceDayStart })
-            let nowTimeInterval = now.timeIntervalSinceDayStart
+            let datelessComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: now)
+            let nowTime = Calendar.current.date(from: datelessComponents)!
 
-            if nowTimeInterval < mod_time_intervals[0] {
+            if nowTime < mod_times[0] {
                 ModLabel.isHidden = true
                 CycleDayLabel.isHidden = true
                 ClassLabel1.isHidden = true
@@ -210,13 +224,13 @@ class DashboardViewController: UIViewController {
                 NextClassLabel.isHidden = false
                 ExtraLabel.isHidden = false
                 ClassLabel2.text = "School Starts"
-                ClassTimeLabel2.text = DashboardViewController.timeFormatter.string(from: mod_times[0])
+                ClassTimeLabel2.text = DashboardViewController.timeOutputter.string(from: mod_times[0])
                 ExtraLabel.text = "Good Morning!"
             }
             else {
                 var updatedView = false
-                for i in 1..<mod_time_intervals.count {
-                    if nowTimeInterval < mod_time_intervals[i] {
+                for i in 1..<mod_times.count {
+                    if nowTime < mod_times[i] {
                         // do stuff                                                        // work on school logic
                         updatedView = true
                         break
@@ -261,27 +275,27 @@ class DashboardViewController: UIViewController {
         let reg_mod_time_strs = schedule_info_list[0].components(separatedBy: ",")
 
         for mod_time_str in reg_mod_time_strs {
-            self.reg_mod_times.append(DashboardViewController.timeFormatter.date(from: mod_time_str.strip())!)
+            self.reg_mod_times.append(DashboardViewController.timeInputter.date(from: mod_time_str.strip())!)
         }
 
         let late_mod_time_strs = schedule_info_list[1].components(separatedBy: ",")
 
         for mod_time_str in late_mod_time_strs {
-            self.late_mod_times.append(DashboardViewController.timeFormatter.date(from: mod_time_str.strip())!)
+            self.late_mod_times.append(DashboardViewController.timeInputter.date(from: mod_time_str.strip())!)
         }
 
         // @TODO: optimize next 4 lines: save components
-        self.reg_start_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[2].components(separatedBy: ",")[0].strip())
-        self.reg_end_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[2].components(separatedBy: ",")[1].strip())
-        self.late_start_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[3].components(separatedBy: ",")[0].strip())
-        self.late_end_time = DashboardViewController.timeFormatter.date(from: schedule_info_list[3].components(separatedBy: ",")[1].strip())
+        self.reg_start_time = DashboardViewController.timeInputter.date(from: schedule_info_list[2].components(separatedBy: ",")[0].strip())
+        self.reg_end_time = DashboardViewController.timeInputter.date(from: schedule_info_list[2].components(separatedBy: ",")[1].strip())
+        self.late_start_time = DashboardViewController.timeInputter.date(from: schedule_info_list[3].components(separatedBy: ",")[0].strip())
+        self.late_end_time = DashboardViewController.timeInputter.date(from: schedule_info_list[3].components(separatedBy: ",")[1].strip())
 
         var line_index = 4
         var line = schedule_info_list[line_index]
 
         while !line.contains("Holidays:") {
             // @TODO: optimize next 2 lines: save components
-            let calendar_day = DashboardViewController.dateFormatter.date(from: line.components(separatedBy: ",")[0].strip())
+            let calendar_day = DashboardViewController.dateInputter.date(from: line.components(separatedBy: ",")[0].strip())
             let cycle_day = Int(line.components(separatedBy: ",")[1].strip().unicodeScalars.first!.value) - 65 // 65 is value of A
             self.recorded_cycle_days.append((calendar_day!, cycle_day))
 
@@ -292,24 +306,24 @@ class DashboardViewController: UIViewController {
         line_index += 1
         line = schedule_info_list[line_index]
 
-        recorded_cycle_days.sort { $0.0.dcompare($1.0) == .orderedAscending }
+        recorded_cycle_days.sort { $0.0.dayCompare($1.0) == .orderedAscending }
 
         while !line.contains("Weird Days:") {
-            let holiday = DashboardViewController.dateFormatter.date(from: line.strip())
+            let holiday = DashboardViewController.dateInputter.date(from: line.strip())
             self.holidays.append(holiday!)
 
             line_index += 1
             line = schedule_info_list[line_index]
         }
 
-        holidays.sort { $0.dcompare($1) == .orderedAscending }
+        holidays.sort { $0.dayCompare($1) == .orderedAscending }
 
         while line_index < schedule_info_list.count - 1 {
             line_index += 1
             line = schedule_info_list[line_index]
 
             let lineComponents = line.components(separatedBy: ",")
-            if let weird_day = DashboardViewController.dateFormatter.date(from: lineComponents[0].strip()) {
+            if let weird_day = DashboardViewController.dateInputter.date(from: lineComponents[0].strip()) {
                 if (lineComponents.count == 1) {
                     self.weird_days.append((weird_day, nil))
                 }
@@ -318,7 +332,7 @@ class DashboardViewController: UIViewController {
                     var weird_mod_times = [Date]()
 
                     for mod_time_str in mod_time_strs {
-                        weird_mod_times.append(DashboardViewController.dateFormatter.date(from: mod_time_str.strip())!)
+                        weird_mod_times.append(DashboardViewController.dateInputter.date(from: mod_time_str.strip())!)
                     }
 
                     self.weird_days.append((weird_day, weird_mod_times))
@@ -329,7 +343,7 @@ class DashboardViewController: UIViewController {
             }
         }
 
-        weird_days.sort { $0.0.dcompare($1.0) == .orderedAscending }
+        weird_days.sort { $0.0.dayCompare($1.0) == .orderedAscending }
         // @TODO<END>
     }
 
