@@ -85,7 +85,7 @@ class DashboardViewController: UIViewController {
         refreshScheduleInfo()
         updateUI()
 
-        // @ Remove
+        // @Remove
         /*
         let t2s = {(d: Date) in return DashboardViewController.timeFormatter.string(from: d)}
         let d2s = {(d: Date) in return DashboardViewController.dateFormatter.string(from: d)}
@@ -99,8 +99,6 @@ class DashboardViewController: UIViewController {
         print("holidays", holidays.map(d2s))
         print("weird_days", weird_days)
         */
-
-        print(DashboardViewController.timeOutputter.string(from: self.reg_mod_times[0]))
     }
 
     override func viewDidLayoutSubviews() {
