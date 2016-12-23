@@ -36,7 +36,7 @@ class DashboardViewController: UIViewController {
         let a = DateFormatter()
         a.dateFormat = "hh:mmaa"
         a.locale = Locale(identifier: "en_US")
-        a.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        //a.timeZone = TimeZone(abbreviation: "GMT+0:00") // @TODO: Set to Central Standard Time
 
         return a
     }()
@@ -44,7 +44,7 @@ class DashboardViewController: UIViewController {
         let a = DateFormatter()
         a.dateFormat = "dd MMMM yyyy"
         a.locale = Locale(identifier: "en_US")
-        a.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        //a.timeZone = TimeZone(abbreviation: "GMT+0:00") // @TODO: Set to Central Standard Time
 
         return a
     }()
@@ -73,6 +73,8 @@ class DashboardViewController: UIViewController {
         refreshScheduleInfo()
         updateUI()
 
+        // @ Remove
+        /*
         let t2s = {(d: Date) in return DashboardViewController.timeFormatter.string(from: d)}
         let d2s = {(d: Date) in return DashboardViewController.dateFormatter.string(from: d)}
         print("reg_mod_times", reg_mod_times.map(t2s))
@@ -84,6 +86,7 @@ class DashboardViewController: UIViewController {
         print("recorded_cycle_days", recorded_cycle_days.map({(d, c) in return (d2s(d), c)}))
         print("holidays", holidays.map(d2s))
         print("weird_days", weird_days)
+        */
     }
 
     override func viewDidLayoutSubviews() {
@@ -200,14 +203,15 @@ class DashboardViewController: UIViewController {
                 ModLabel.isHidden = true
                 CycleDayLabel.isHidden = true
                 ClassLabel1.isHidden = true
-                ClassLabel2.isHidden = true
+                ClassLabel2.isHidden = false
                 ClassTimeLabel1.isHidden = true
-                ClassTimeLabel2.isHidden = true
+                ClassTimeLabel2.isHidden = false
                 CurrentClassLabel.isHidden = true
-                NextClassLabel.isHidden = true
-                ExtraLabel.isHidden = true
+                NextClassLabel.isHidden = false
+                ExtraLabel.isHidden = false
                 ClassLabel2.text = "School Starts"
                 ClassTimeLabel2.text = DashboardViewController.timeFormatter.string(from: mod_times[0])
+                ExtraLabel.text = "Good Morning!"
             }
             else {
                 var updatedView = false
