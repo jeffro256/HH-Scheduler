@@ -208,10 +208,10 @@ class DashboardViewController: UIViewController {
                 }
             }
 
-            let datelessComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: now)
-            let nowTime = Calendar.current.date(from: datelessComponents)!
+            let dateless_now_components = Calendar.current.dateComponents([.hour, .minute], from: now)
+            let nowTime = Calendar.current.date(from: dateless_now_components)!
 
-            if nowTime < mod_times[0] {
+            if Calendar.current.compare(nowTime, to: mod_times.first!, toGranularity: .minute) == .orderedAscending {
                 ModLabel.isHidden = true
                 CycleDayLabel.isHidden = true
                 ClassLabel1.isHidden = true
@@ -228,7 +228,7 @@ class DashboardViewController: UIViewController {
             else {
                 var updatedView = false
                 for i in 1..<mod_times.count {
-                    if nowTime < mod_times[i] {
+                    if Calendar.current.compare(nowTime, to: mod_times[i], toGranularity: .minute) != .orderedAscending {
                         // do stuff                                                        // work on school logic
                         updatedView = true
                         break
@@ -273,13 +273,19 @@ class DashboardViewController: UIViewController {
         let reg_mod_time_strs = schedule_info_list[0].components(separatedBy: ",")
 
         for mod_time_str in reg_mod_time_strs {
-            self.reg_mod_times.append(DashboardViewController.timeInputter.date(from: mod_time_str.strip())!)
+            let mod_time_raw = DashboardViewController.timeInputter.date(from: mod_time_str.strip())!
+            let dateless_mod_time_components = Calendar.current.dateComponents([.hour, .minute], from: mod_time_raw)
+            let mod_time = Calendar.current.date(from: dateless_mod_time_components)!
+            self.reg_mod_times.append(mod_time)
         }
 
         let late_mod_time_strs = schedule_info_list[1].components(separatedBy: ",")
 
         for mod_time_str in late_mod_time_strs {
-            self.late_mod_times.append(DashboardViewController.timeInputter.date(from: mod_time_str.strip())!)
+            let mod_time_raw = DashboardViewController.timeInputter.date(from: mod_time_str.strip())!
+            let dateless_mod_time_components = Calendar.current.dateComponents([.hour, .minute], from: mod_time_raw)
+            let mod_time = Calendar.current.date(from: dateless_mod_time_components)!
+            self.reg_mod_times.append(mod_time)
         }
 
         // @TODO: optimize next 4 lines: save components
@@ -314,7 +320,7 @@ class DashboardViewController: UIViewController {
             line = schedule_info_list[line_index]
         }
 
-        holidays.sort { $0.dayCompare($1) == .orderedAscending }
+        holidays.sort()
 
         while line_index < schedule_info_list.count - 1 {
             line_index += 1
@@ -364,4 +370,3 @@ class DashboardViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
