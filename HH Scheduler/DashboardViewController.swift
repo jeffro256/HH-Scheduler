@@ -78,7 +78,7 @@ class DashboardViewController: UIViewController {
         
         scheduleController = (tabBarController?.viewControllers?[ViewControllerIndexes.Schedule.rawValue] as? UINavigationController)?.viewControllers.first as? ScheduleViewController
 
-        if scheduleController.schedule == nil {
+        if scheduleController.getSchedule() == nil {
             scheduleController.loadSchedule()
         }
 
@@ -211,7 +211,7 @@ class DashboardViewController: UIViewController {
             let dateless_now_components = Calendar.current.dateComponents([.hour, .minute], from: now)
             let nowTime = Calendar.current.date(from: dateless_now_components)!
 
-            if Calendar.current.compare(nowTime, to: mod_times.first!, toGranularity: .minute) == .orderedAscending {
+            if Calendar.current.compare(nowTime, to: mod_times.first!, toGranularity: .minute) == .orderedAscending {   // before school
                 ModLabel.isHidden = true
                 CycleDayLabel.isHidden = true
                 ClassLabel1.isHidden = true
@@ -225,27 +225,28 @@ class DashboardViewController: UIViewController {
                 ClassTimeLabel2.text = DashboardViewController.timeOutputter.string(from: mod_times[0])
                 ExtraLabel.text = "Good Morning!"
             }
-            else {
-                var updatedView = false
-                for i in 1..<mod_times.count {
-                    if Calendar.current.compare(nowTime, to: mod_times[i], toGranularity: .minute) != .orderedAscending {
-                        // do stuff                                                        // work on school logic
-                        updatedView = true
+            else if (scheduleController.getSchedule().sport != nil && Calendar.current.compare(nowTime, to: scheduleController.getSchedule().sport_end_time!, toGranularity: .minute) != .orderedAscending) || (scheduleController.getSchedule().sport == nil && Calendar.current.compare(nowTime, to: mod_times.last!, toGranularity: .minute) != .orderedAscending) {     // after school
+                ModLabel.isHidden = true
+                CycleDayLabel.isHidden = true
+                ClassLabel1.isHidden = true
+                ClassLabel2.isHidden = true
+                ClassTimeLabel1.isHidden = true
+                ClassTimeLabel2.isHidden = true
+                CurrentClassLabel.isHidden = true
+                NextClassLabel.isHidden = true
+                ExtraLabel.isHidden = false
+                ExtraLabel.text = "School is Over!"
+            }
+            else if scheduleController.getSchedule().sport != nil && Calendar.current.compare(nowTime, to: mod_times.last!, toGranularity: .minute) != .orderedAscending && Calendar.current.compare(nowTime, to: scheduleController.getSchedule().sport_end_time!, toGranularity: .minute) == .orderedAscending { // in sports
+                // @TODO: Put in-sports code
+            }
+            else {  // during school
+                var mod: Int
+                for m in (0...mod_times.count).reversed() {
+                    if Calendar.current.compare(nowTime, to: mod_times[m], toGranularity: .minute) != .orderedAscending {
+                        mod = m
                         break
                     }
-                }
-
-                if !updatedView {
-                    ModLabel.isHidden = true
-                    CycleDayLabel.isHidden = true
-                    ClassLabel1.isHidden = true
-                    ClassLabel2.isHidden = true
-                    ClassTimeLabel1.isHidden = true
-                    ClassTimeLabel2.isHidden = true
-                    CurrentClassLabel.isHidden = true
-                    NextClassLabel.isHidden = true
-                    ExtraLabel.isHidden = false
-                    ExtraLabel.text = "School is Over!"
                 }
             }
         }

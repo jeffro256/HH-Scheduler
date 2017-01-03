@@ -9,20 +9,20 @@
 import UIKit
 
 class Schedule: NSObject, NSCoding {
-    var classes: [String]
-    var schedule: [[Int]]
+    var class_names: [String]
+    var classes: [[Int]]                // 6 x 18
     var sport: String?
-    var sport_times: [Date]?
+    var sport_end_time: Date?
 
     override var description: String {
-        return "classes: \(classes)\nschedule: \(schedule)\nsport: \(sport)\nsport_times: \(sport_times)"
+        return "class_names: \(class_names)\nclasses: \(classes)\nsport: \(sport)\nsport_end_time: \(sport_end_time)"
     }
 
     override init() {
-        classes = ["Free Time"]
-        schedule = [[Int]](repeating: [Int](repeating: 0, count: 18), count: 6)
+        class_names = ["Free Time"]
+        classes = [[Int]](repeating: [Int](repeating: 0, count: 18), count: 6)
         sport = nil
-        sport_times = nil
+        sport_end_time = nil
 
         super.init()
     }
@@ -38,24 +38,24 @@ class Schedule: NSObject, NSCoding {
     }
 
     required init(coder aDecoder: NSCoder) {
-        classes = aDecoder.decodeObject(forKey: "classes") as! [String]
-        schedule = aDecoder.decodeObject(forKey: "schedule") as! [[Int]]
+        class_names = aDecoder.decodeObject(forKey: "class_names") as! [String]
+        classes = aDecoder.decodeObject(forKey: "classes") as! [[Int]]
         sport = aDecoder.decodeObject(forKey: "sport") as! String?
-        sport_times = aDecoder.decodeObject(forKey: "sport_times") as! [Date]?
+        sport_end_time = aDecoder.decodeObject(forKey: "sport_end_time") as! Date?
 
         super.init()
     }
 
     func encode(with aCoder: NSCoder) {
+        aCoder.encode(class_names, forKey: "class_names")
         aCoder.encode(classes, forKey: "classes")
-        aCoder.encode(schedule, forKey: "schedule")
         aCoder.encode(sport, forKey: "sport")
-        aCoder.encode(sport_times, forKey: "sport_times")
+        aCoder.encode(sport_end_time, forKey: "sport_end_time")
     }
 }
 
 class ScheduleViewController: UIViewController {
-    var schedule: Schedule!
+    private var schedule: Schedule!
 
     @IBOutlet var scheduleTable: UIStackView!
 
@@ -92,7 +92,7 @@ class ScheduleViewController: UIViewController {
                     if let modView = cycleDayStack.viewWithTag(modTag) {
                         if modView is UILabel {
                             let modLabel = modView as! UILabel
-                            modLabel.text = schedule.classes[schedule.schedule[i][j]]
+                            modLabel.text = schedule.class_names[schedule.classes[i][j]]
                         }
                         else {
                             print("Cannot get label for cell (\(i), \(j))")
@@ -137,5 +137,9 @@ class ScheduleViewController: UIViewController {
 
     func saveSchedule() {
         try! schedule.saveToFile(schedule_file_url)
+    }
+
+    func getSchedule() -> Schedule! {
+        return schedule
     }
 }
