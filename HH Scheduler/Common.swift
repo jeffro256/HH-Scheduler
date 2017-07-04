@@ -8,10 +8,8 @@
 
 import Foundation
 
-enum ViewControllerIndexes: Int {
-    case Dashboard = 0
-    case Schedule
-}
+let NUM_DAYS = 6
+let NUM_CYCLES = 18
 
 let document_dirs = NSSearchPathForDirectoriesInDomains(
     .documentDirectory,
@@ -28,3 +26,8 @@ let schedule_info_web_url =
 let schedule_info_cache_file_name = "sinfo.cache.txt"
 let schedule_info_cache_file_url: URL =
     document_dir_url.appendingPathComponent(schedule_info_cache_file_name)
+
+enum ViewControllerIndexes: Int {
+    case Dashboard = 0
+    case Schedule
+}

@@ -15,7 +15,7 @@ class Schedule: NSObject, NSCoding {
     var sport_end_time: Date?
 
     override var description: String {
-        return "class_names: \(class_names)\nclasses: \(classes)\nsport: \(sport)\nsport_end_time: \(sport_end_time)"
+        return "class_names: \(class_names)\nclasses: \(classes)\nsport: \(String(describing: sport))\nsport_end_time: \(String(describing: sport_end_time))"
     }
 
     override init() {

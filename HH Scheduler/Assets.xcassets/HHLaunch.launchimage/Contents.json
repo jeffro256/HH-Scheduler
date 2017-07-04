@@ -41,15 +41,6 @@
       "scale" : "2x"
     },
     {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "subtype" : "1366h",
-      "filename" : "HHLaunch1242x2208.png",
-      "minimum-system-version" : "8.0",
-      "orientation" : "portrait",
-      "scale" : "2x"
-    },
-    {
       "orientation" : "portrait",
       "idiom" : "iphone",
       "filename" : "HHLaunch640x960.png",
