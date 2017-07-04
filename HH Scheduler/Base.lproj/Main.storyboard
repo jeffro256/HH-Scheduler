@@ -36,6 +36,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.10588235294117647" green="0.61960784313725492" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ATr-X2-RlR" secondAttribute="height" multiplier="1:1" id="1gI-zv-2XZ"/>
                                     <constraint firstAttribute="trailing" secondItem="uuc-Xb-RfE" secondAttribute="trailing" id="RIv-Ch-zVa"/>
@@ -54,6 +57,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1058823529" green="0.61960784310000006" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="A2L-jR-lsd" secondAttribute="height" multiplier="1:1" id="CHP-rR-3eT"/>
                                     <constraint firstItem="8En-WV-Rfw" firstAttribute="centerY" secondItem="A2L-jR-lsd" secondAttribute="centerY" id="H3d-eB-fde"/>
@@ -236,7 +242,7 @@
                                     <stackView opaque="NO" tag="10" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Xc9-PN-8bm" userLabel="Schedule Table">
                                         <rect key="frame" x="0.0" y="0.0" width="2216" height="554"/>
                                         <subviews>
-                                            <stackView opaque="NO" tag="48" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="b4u-3u-ds6" userLabel="A Day">
+                                            <stackView opaque="NO" tag="20" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="b4u-3u-ds6" userLabel="A Day">
                                                 <rect key="frame" x="0.0" y="0.0" width="2216" height="92.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afe-xg-OXD" userLabel="Mod 1">
@@ -355,7 +361,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" tag="49" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HjU-nK-ujy" userLabel="B Day">
+                                            <stackView opaque="NO" tag="21" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HjU-nK-ujy" userLabel="B Day">
                                                 <rect key="frame" x="0.0" y="92.5" width="2216" height="92"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoA-ke-OFx" userLabel="Mod 1">
@@ -474,7 +480,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" tag="50" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CFm-g1-m4j" userLabel="C Day">
+                                            <stackView opaque="NO" tag="22" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CFm-g1-m4j" userLabel="C Day">
                                                 <rect key="frame" x="0.0" y="184.5" width="2216" height="92.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LV-99-t3Q" userLabel="Mod 1">
@@ -593,7 +599,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" tag="51" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="I0a-J8-Blf" userLabel="D Day">
+                                            <stackView opaque="NO" tag="23" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="I0a-J8-Blf" userLabel="D Day">
                                                 <rect key="frame" x="0.0" y="277" width="2216" height="92.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSp-eM-P5T" userLabel="Mod 1">
@@ -712,7 +718,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" tag="52" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hzE-MH-WoU" userLabel="E Day">
+                                            <stackView opaque="NO" tag="24" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hzE-MH-WoU" userLabel="E Day">
                                                 <rect key="frame" x="0.0" y="369.5" width="2216" height="92"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8f-1n-RRD" userLabel="Mod 1">
@@ -831,7 +837,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" tag="53" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ByT-EM-hJC" userLabel="F Day">
+                                            <stackView opaque="NO" tag="25" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ByT-EM-hJC" userLabel="F Day">
                                                 <rect key="frame" x="0.0" y="461.5" width="2216" height="92.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azo-rT-XVV" userLabel="Mod 1">

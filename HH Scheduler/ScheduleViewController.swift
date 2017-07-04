@@ -85,42 +85,28 @@ class ScheduleViewController: UIViewController {
 
     func populateScheduleTable() {
         for i in 0 ..< 6 {
-            let dayTag = i + 48
-            if let cycleDayStack = scheduleTable.viewWithTag(dayTag) as? UIStackView {
+            let day_tag = i + 20
+            if let cycle_day_stack = scheduleTable.viewWithTag(day_tag) {
                 for j in 0 ..< 18 {
-                    let modTag = j + 1
-                    if let modView = cycleDayStack.viewWithTag(modTag) {
-                        if modView is UILabel {
-                            let modLabel = modView as! UILabel
-                            modLabel.text = schedule.class_names[schedule.classes[i][j]]
-                        }
-                        else {
-                            print("Cannot get label for cell (\(i), \(j))")
-                        }
+                    let mod_tag = j + 1
+                    if let modLabel = cycle_day_stack.viewWithTag(mod_tag) as? UILabel {
+                        modLabel.text = schedule.class_names[schedule.classes[i][j]]
                     }
                     else {
-                        print("Cannot find subview of stack \(i) for mod \(j)")
+                        print("Cannot find subview of stack \(day_tag) for mod \(mod_tag)")
                     }
                 }
 
-                if let sportView = cycleDayStack.viewWithTag(19) {
-                    if schedule.sport != nil {
-                        if sportView is UILabel {
-                            let sportLabel = sportView as! UILabel
-                            sportLabel.text = schedule.sport
-                            sportLabel.isHidden = false
-                        }
-                    }
-                    else {
-                        sportView.isHidden = true
-                    }
+                if let sport_label = cycle_day_stack.viewWithTag(19) as? UILabel {
+                    sport_label.text = schedule.sport
+                    sport_label.isHidden = schedule.sport == nil
                 }
                 else {
-                    print("Cannot find sport view for stack \(i)")
+                    print("Could not get sport label for cycle day \(day_tag)")
                 }
             }
             else {
-                print("Cannot find subview of scheduleTable with tag \(dayTag)")
+                print("Cannot find subview of scheduleTable with tag \(day_tag)")
             }
         }
     }
@@ -132,6 +118,17 @@ class ScheduleViewController: UIViewController {
         else {
             print("Creating new schedule...")
             self.schedule = Schedule()
+
+            self.schedule.class_names = ["Free Time", "English", "Band", "Algebra II", "US History", "Chemistry", "Spanish Int A", "Biology", "Lecture"]
+            self.schedule.classes =
+                [[1, 1, 2, 2, 3, 3, 4, 4, 0, 0, 5, 5, 6, 6, 0, 0, 0, 0],
+                 [6, 6, 0, 0, 7, 7, 5, 5, 5, 0, 4, 4, 0, 0, 2, 2, 1, 1],
+                 [3, 3, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 6, 6],
+                 [7, 7, 0, 8, 8, 8, 5, 5, 0, 0, 0, 0, 3, 3, 2, 2, 0, 0],
+                 [3, 3, 2, 2, 1, 1, 4, 4, 0, 5, 5, 5, 6, 6, 0, 0, 7, 7],
+                 [6, 6, 0, 7, 7, 7, 5, 5, 0, 0, 4, 4, 1, 1, 0, 0, 3, 3]]
+            self.schedule.sport = "Cross Country"
+            self.schedule.sport_end_time = Calendar.current.date(from: DateComponents(timeZone: TimeZone(abbreviation: "CST"), hour: 17, minute: 30))
         }
     }
 

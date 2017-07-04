@@ -249,7 +249,7 @@ class DashboardViewController: UIViewController {
                 ExtraLabel.isHidden = false
                 ExtraLabel.text = "Good Morning!"
             }
-            else if (scheduleController.getSchedule().sport != nil && Calendar.current.compare(nowTime, to: scheduleController.getSchedule().sport_end_time!, toGranularity: .minute) != .orderedAscending) || (scheduleController.getSchedule().sport == nil && Calendar.current.compare(nowTime, to: mod_times.last!, toGranularity: .minute) != .orderedAscending) {     // after school
+            else if (scheduleController.getSchedule().sport != nil && Calendar.current.compare(nowTime, to: scheduleController.getSchedule().sport_end_time!, toGranularity: .minute) != .orderedAscending) || (scheduleController.getSchedule().sport == nil && Calendar.current.compare(nowTime, to: end_time, toGranularity: .minute) != .orderedAscending) {     // after school
                 ModLabel.isHidden = true
                 CycleDayLabel.isHidden = true
                 ClassLabel1.isHidden = true
@@ -261,8 +261,20 @@ class DashboardViewController: UIViewController {
                 ExtraLabel.isHidden = false
                 ExtraLabel.text = "School is Over!"
             }
-            else if scheduleController.getSchedule().sport != nil && Calendar.current.compare(nowTime, to: mod_times.last!, toGranularity: .minute) != .orderedAscending && Calendar.current.compare(nowTime, to: scheduleController.getSchedule().sport_end_time!, toGranularity: .minute) == .orderedAscending { // in sports
-                // @TODO: Put in-sports code
+            else if scheduleController.getSchedule().sport != nil && Calendar.current.compare(nowTime, to: end_time, toGranularity: .minute) != .orderedAscending && Calendar.current.compare(nowTime, to: scheduleController.getSchedule().sport_end_time!, toGranularity: .minute) == .orderedAscending { // in sports
+                ModLabel.isHidden = true
+                CycleDayLabel.isHidden = true
+                ClassLabel1.isHidden = false
+                ClassLabel1.text = scheduleController.getSchedule().sport
+                ClassLabel2.isHidden = false
+                ClassLabel2.text = scheduleController.getSchedule().sport! + " Ends"
+                ClassTimeLabel1.isHidden = false
+                ClassTimeLabel1.text = time_formatter.string(from: end_time)
+                ClassTimeLabel2.isHidden = false
+                ClassTimeLabel2.text = time_formatter.string(from: scheduleController.getSchedule().sport_end_time!)
+                CurrentClassLabel.isHidden = false
+                NextClassLabel.isHidden = false
+                ExtraLabel.isHidden = true
             }
             else {  // during school
                 var current_mod = -1
@@ -311,14 +323,8 @@ class DashboardViewController: UIViewController {
                 let next_class_name: String
                 let next_class_time: Date
                 if (next_class_mod >= mod_times.count) { // No next class
-                    if (scheduleController.getSchedule().sport != nil) {
-                        next_class_name = scheduleController.getSchedule().sport!
-                        next_class_time = scheduleController.getSchedule().sport_end_time!
-                    }
-                    else { // No sport at end of day
-                        next_class_name = "School Ends"
-                        next_class_time = end_time
-                    }
+                    next_class_name = (scheduleController.getSchedule().sport == nil) ? "School Ends" : scheduleController.getSchedule().sport!
+                    next_class_time = end_time
                 }
                 else {
                     next_class_name = scheduleController.getSchedule().class_names[scheduleController.getSchedule().classes[cycle_day][next_class_mod]]
