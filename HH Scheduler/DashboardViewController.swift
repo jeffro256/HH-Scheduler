@@ -50,7 +50,7 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         addGradient(to: self.view)
         
         if schedule == nil {
@@ -59,10 +59,7 @@ class DashboardViewController: UIViewController {
 
         refreshScheduleInfo()
 
-        let s = ProcessInfo.processInfo.systemUptime
         updateUI()
-        let e = ProcessInfo.processInfo.systemUptime
-        print(e - s)
     }
 
     override func viewDidLayoutSubviews() {

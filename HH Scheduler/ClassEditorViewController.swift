@@ -33,7 +33,6 @@ class ClassEditorViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("ello mate: \(classes.count + 1)")
         return classes.count + 1
     }
 

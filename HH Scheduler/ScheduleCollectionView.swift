@@ -1,40 +1,28 @@
 //
-//  ScheduleViewController.swift
+//  ScheduleCollectionView.swift
 //  HH Scheduler
 //
-//  Created by Jeffrey Ryan on 9/3/16.
-//  Copyright © 2016 Jeffrey Ryan. All rights reserved.
+//  Created by Jeffrey Ryan on 7/12/17.
+//  Copyright © 2017 Jeffrey Ryan. All rights reserved.
 //
 
 import UIKit
 
-class ScheduleViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    @IBOutlet weak var schedule_view: UICollectionView!
+class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    private var scheduleData = Schedule()
+    // tell the collection view how many cells to make
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        addGradient(to: self.view)
-
-        if schedule == nil {
-            schedule = Schedule.defaultLoadFromFile(schedule_file_url)
-        }
+    public override func awakeFromNib() {
+        self.delegate = self
+        self.dataSource = self
     }
 
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
-    }*/
-
-    // tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7 * 18
     }
 
     // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // get a reference to our storyboard cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClassCell", for: indexPath) as! ClassCell
 
         if (indexPath.item % 7 == 0) {
@@ -46,20 +34,19 @@ class ScheduleViewController: UIViewController, UICollectionViewDelegateFlowLayo
             let mod = (indexPath.item - indexPath.item / 7 - 1) / 6
             let class_index = schedule.classes[day][mod]
             cell.label.text = schedule.class_names[class_index]
-            srand48(class_index * 100)
-            let r = drand48()
-            let g = drand48()
-            let b = drand48()
+            let colors = cell.label.text!.scalarRand(num_rands: 3)
+            let r = colors[0]; let g = colors[1]; let b = colors[2]
             cell.backgroundColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
         }
 
         return cell
     }
 
+    // Size each cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let top_cell_height: CGFloat = 40
-        let class_cell_height = floor((schedule_view.frame.height - top_cell_height) / 6)
-        let class_cell_height_bottom = schedule_view.frame.height - top_cell_height - class_cell_height * 5
+        let class_cell_height = floor((self.frame.height - top_cell_height) / 6)
+        let class_cell_height_bottom = self.frame.height - top_cell_height - class_cell_height * 5
 
         let h: CGFloat
 
@@ -79,6 +66,3 @@ class ScheduleViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
 }
 
-class ClassCell: UICollectionViewCell {
-    @IBOutlet weak var label: UILabel!
-}

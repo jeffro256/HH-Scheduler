@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		360E28321F1454280052C799 /* ClassEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28311F1454280052C799 /* ClassEditorViewController.swift */; };
 		360E28341F1540390052C799 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28331F1540390052C799 /* Schedule.swift */; };
+		361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */; };
 		362310281D7BAB28004F98FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362310271D7BAB28004F98FB /* AppDelegate.swift */; };
 		3623102A1D7BAB28004F98FB /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362310291D7BAB28004F98FB /* DashboardViewController.swift */; };
 		3623102C1D7BAB28004F98FB /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3623102B1D7BAB28004F98FB /* ScheduleViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		360E28311F1454280052C799 /* ClassEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassEditorViewController.swift; sourceTree = "<group>"; };
 		360E28331F1540390052C799 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionView.swift; sourceTree = "<group>"; };
 		362310241D7BAB28004F98FB /* HH Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HH Scheduler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		362310271D7BAB28004F98FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		362310291D7BAB28004F98FB /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
@@ -70,6 +72,7 @@
 				362310271D7BAB28004F98FB /* AppDelegate.swift */,
 				362310291D7BAB28004F98FB /* DashboardViewController.swift */,
 				3623102B1D7BAB28004F98FB /* ScheduleViewController.swift */,
+				361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */,
 				3679572E1D7E290E0096163B /* AddGradient.swift */,
 				360E28311F1454280052C799 /* ClassEditorViewController.swift */,
 				360E28331F1540390052C799 /* Schedule.swift */,
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3623102C1D7BAB28004F98FB /* ScheduleViewController.swift in Sources */,
+				361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */,
 				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
 				3679572F1D7E290E0096163B /* AddGradient.swift in Sources */,
 				360E28341F1540390052C799 /* Schedule.swift in Sources */,
