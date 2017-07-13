@@ -249,7 +249,7 @@
                                     <constraint firstAttribute="trailing" secondItem="TRN-Ir-mgV" secondAttribute="trailing" id="z9l-vU-vis"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="agj-pZ-Ag0">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="agj-pZ-Ag0" customClass="ScheduleCollectionView" customModule="HH_Scheduler" customModuleProvider="target">
                                 <rect key="frame" x="50" y="0.0" width="270" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="dqJ-K2-Nuw">
@@ -286,10 +286,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="vCc-NC-cH4" id="C75-kK-XGN"/>
-                                    <outlet property="delegate" destination="vCc-NC-cH4" id="o5A-ki-3ce"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <constraints>
@@ -310,9 +306,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="schedule_view" destination="agj-pZ-Ag0" id="57D-49-OYs"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zu-S3-L9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

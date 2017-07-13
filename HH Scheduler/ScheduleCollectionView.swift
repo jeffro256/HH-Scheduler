@@ -34,9 +34,8 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
             let mod = (indexPath.item - indexPath.item / 7 - 1) / 6
             let class_index = schedule.classes[day][mod]
             cell.label.text = schedule.class_names[class_index]
-            let colors = cell.label.text!.scalarRand(num_rands: 3)
-            let r = colors[0]; let g = colors[1]; let b = colors[2]
-            cell.backgroundColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
+            let color = cell.label.text!.scalarRandomColor()
+            cell.backgroundColor = color
         }
 
         return cell

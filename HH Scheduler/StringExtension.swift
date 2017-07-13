@@ -6,15 +6,14 @@
 //  Copyright © 2016 Jeffrey Ryan. All rights reserved.
 //
 
-import Foundation
-import CoreGraphics
+import UIKit
 
 extension String {
     public func strip() -> String {
         return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 
-    public func scalarRand(num_rands: Int) -> [CGFloat] {
+    public func scalarRandomColor() -> UIColor {
         var scalar_sum = 0
 
         for s in self.unicodeScalars {
@@ -23,12 +22,8 @@ extension String {
 
         srand48(scalar_sum)
 
-        var results: [CGFloat] = []
+        let r = CGFloat(drand48()); let g = CGFloat(drand48()); let b = CGFloat(drand48())
 
-        for _ in 0..<num_rands {
-            results.append(CGFloat(drand48()))
-        }
-
-        return results
+        return UIColor(red: r, green: g, blue: b, alpha: 1.0)
     }
 }

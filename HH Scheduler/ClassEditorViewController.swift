@@ -98,18 +98,7 @@ class ClassInfoCell: UITableViewCell, UITextFieldDelegate {
     }
 
     public func colorize() {
-        var scalar_sum = 0
-
-        for scalar in (self.field.text?.unicodeScalars)! {
-            scalar_sum += Int(scalar.value)
-        }
-
-        srand48(scalar_sum)
-        let r = CGFloat(drand48())
-        let g = CGFloat(drand48())
-        let b = CGFloat(drand48())
-
-        self.backgroundColor = UIColor(red: r, green: g, blue: b, alpha: 1.0)
+        self.backgroundColor = self.field.text?.scalarRandomColor()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
