@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SportEditorController: UIViewController {
+class SportEditorController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var sportSwitch: UISwitch!
@@ -61,6 +61,7 @@ class SportEditorController: UIViewController {
             datePicker.isEnabled = false
         }
     }
+    
     @IBAction func pressedSave(_ sender: Any) {
         if sportSwitch.isOn {
             schedule = Schedule(class_names: self.class_names, classes: self.classes, sport: textField.text, sport_end_time: datePicker.date)
@@ -69,17 +70,14 @@ class SportEditorController: UIViewController {
             schedule = Schedule(class_names: self.class_names, classes: self.classes)
         }
 
+        try! schedule.saveToFile(schedule_file_url)
+
         navigationController?.popToViewController((navigationController?.viewControllers.first)!, animated: true)
     }
 
-    /*
-    // MARK: - Navigation
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        return false
     }
-    */
-
 }

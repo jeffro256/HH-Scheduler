@@ -75,6 +75,12 @@ class DashboardViewController: UIViewController {
         Circle2.layer.cornerRadius = Circle2.frame.width / 2
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        updateUI()
+    }
+
     func updateUI() {
         let now = Date()
         let is_holiday = holidays.contains(where: { now.dayCompare($0) == .orderedSame })
