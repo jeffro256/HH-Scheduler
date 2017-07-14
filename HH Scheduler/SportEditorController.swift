@@ -1,0 +1,83 @@
+//
+//  SportEditorController.swift
+//  HH Scheduler
+//
+//  Created by Jeffrey Ryan on 7/14/17.
+//  Copyright © 2017 Jeffrey Ryan. All rights reserved.
+//
+
+import UIKit
+
+class SportEditorController: UIViewController {
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var sportSwitch: UISwitch!
+
+    private var class_names: [String]!
+    private var classes: [[Int]]!
+    private var entrySport: String!
+    private var entrySportEndTime: Date!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if entrySport != nil {
+            sportSwitch.setOn(true, animated: true)
+            textField.isEnabled = true
+            textField.text = entrySport
+            datePicker.isEnabled = true
+            datePicker.setDate(entrySportEndTime, animated: true)
+        }
+        else {
+            sportSwitch.setOn(false, animated: true)
+            textField.isEnabled = false
+            textField.text = nil
+            datePicker.isEnabled = false
+            datePicker.setDate(Date(), animated: true)
+        }
+    }
+
+    func setup(_ class_names: [String], _ classes: [[Int]], _ sport: String? = nil, _ sport_end_time: Date? = nil) {
+        self.class_names = class_names
+        self.classes = classes
+        self.entrySport = sport
+        self.entrySportEndTime = sport_end_time
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func sportSwitch(_ sender: UISwitch) {
+        if sender.isOn {
+            textField.isEnabled = true
+            datePicker.isEnabled = true
+        }
+        else {
+            textField.isEnabled = false
+            datePicker.isEnabled = false
+        }
+    }
+    @IBAction func pressedSave(_ sender: Any) {
+        if sportSwitch.isOn {
+            schedule = Schedule(class_names: self.class_names, classes: self.classes, sport: textField.text, sport_end_time: datePicker.date)
+        }
+        else {
+            schedule = Schedule(class_names: self.class_names, classes: self.classes)
+        }
+
+        navigationController?.popToViewController((navigationController?.viewControllers.first)!, animated: true)
+    }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

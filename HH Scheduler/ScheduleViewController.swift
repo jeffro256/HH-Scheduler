@@ -9,6 +9,8 @@
 import UIKit
 
 class ScheduleViewController: UIViewController {
+    @IBOutlet weak var scheduleCollectionView: ScheduleCollectionView!
+
      override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,9 +19,16 @@ class ScheduleViewController: UIViewController {
         if schedule == nil {
             schedule = Schedule.defaultLoadFromFile(schedule_file_url)
         }
+
+        scheduleCollectionView.setData(schedule.class_names, schedule.classes, schedule.sport)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        scheduleCollectionView.setData(schedule.class_names, schedule.classes, schedule.sport)
+        scheduleCollectionView.reloadData()
     }
 }
 
-class ClassCell: UICollectionViewCell {
-    @IBOutlet weak var label: UILabel!
-}
+

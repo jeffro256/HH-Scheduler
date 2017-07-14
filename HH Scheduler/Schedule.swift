@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Schedule: NSObject, NSCoding {
+class Schedule: NSObject, NSCoding, NSCopying {
     var class_names: [String]
     var classes: [[Int]]                // 6 x 18
     var sport: String?
@@ -25,6 +25,20 @@ class Schedule: NSObject, NSCoding {
         sport_end_time = nil
 
         super.init()
+    }
+
+    init(class_names: [String], classes: [[Int]], sport: String? = nil, sport_end_time: Date? = nil) {
+        self.class_names = class_names
+        self.classes = classes
+        self.sport = sport
+        self.sport_end_time = sport_end_time
+
+        super.init()
+    }
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Schedule(class_names: class_names, classes: classes, sport: sport, sport_end_time: sport_end_time)
+        return copy
     }
 
     static func loadFromFile(_ target: URL) -> Schedule? {
@@ -54,9 +68,6 @@ class Schedule: NSObject, NSCoding {
             res_schedule.sport_end_time = Calendar.current.date(from: DateComponents(timeZone: TimeZone(abbreviation: "CST"), hour: 17, minute: 30))
             //////////////////////////////////////////////////////////////////////////////////////////
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////
-        res_schedule.sport = nil
-        //////////////////////////////////////////////////////////////////////////////////////////////
 
         return res_schedule
     }
