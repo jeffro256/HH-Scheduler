@@ -37,6 +37,14 @@ class DashboardViewController: UIViewController {
 
         return a
     }()
+    private let friendly_time_fmtr: DateFormatter = {
+        let a = DateFormatter()
+        a.dateFormat = "h:mm aa"
+        a.locale = Locale(identifier: "en_US")
+        a.timeZone = TimeZone(abbreviation: "CST")
+
+        return a
+    }()
 
     private var reg_mod_times: [Date]!
     private var late_mod_times: [Date]!
@@ -178,7 +186,7 @@ class DashboardViewController: UIViewController {
                 NextClassLabel.isHidden = false
                 ExtraLabel.isHidden = false
                 ClassLabel2.text = "School Starts"
-                ClassTimeLabel2.text = time_formatter.string(from: start_time)
+                ClassTimeLabel2.text = friendly_time_fmtr.string(from: start_time)
                 ExtraLabel.text = "Good Morning!"
             }
             else if Calendar.current.compare(nowTime, to: mod_times.first!, toGranularity: .minute) == .orderedAscending {
@@ -190,9 +198,9 @@ class DashboardViewController: UIViewController {
                 ClassLabel2.isHidden = false
                 ClassLabel2.text = schedule.class_names[schedule.classes[cycle_day][0]]
                 ClassTimeLabel1.isHidden = false
-                ClassTimeLabel1.text = time_formatter.string(from: start_time)
+                ClassTimeLabel1.text = friendly_time_fmtr.string(from: start_time)
                 ClassTimeLabel2.isHidden = false
-                ClassTimeLabel2.text = time_formatter.string(from: mod_times.first!)
+                ClassTimeLabel2.text = friendly_time_fmtr.string(from: mod_times.first!)
                 CurrentClassLabel.isHidden = false
                 NextClassLabel.isHidden = false
                 ExtraLabel.isHidden = false
@@ -218,9 +226,9 @@ class DashboardViewController: UIViewController {
                 ClassLabel2.isHidden = false
                 ClassLabel2.text = schedule.sport! + " Ends"
                 ClassTimeLabel1.isHidden = false
-                ClassTimeLabel1.text = time_formatter.string(from: end_time)
+                ClassTimeLabel1.text = friendly_time_fmtr.string(from: end_time)
                 ClassTimeLabel2.isHidden = false
-                ClassTimeLabel2.text = time_formatter.string(from: schedule.sport_end_time!)
+                ClassTimeLabel2.text = friendly_time_fmtr.string(from: schedule.sport_end_time!)
                 CurrentClassLabel.isHidden = false
                 NextClassLabel.isHidden = false
                 ExtraLabel.isHidden = true
@@ -291,9 +299,9 @@ class DashboardViewController: UIViewController {
                 ClassLabel2.isHidden = false
                 ClassLabel2.text = next_class_name
                 ClassTimeLabel1.isHidden = false
-                ClassTimeLabel1.text = time_formatter.string(from: current_class_time)
+                ClassTimeLabel1.text = friendly_time_fmtr.string(from: current_class_time)
                 ClassTimeLabel2.isHidden = false
-                ClassTimeLabel2.text = time_formatter.string(from: next_class_time)
+                ClassTimeLabel2.text = friendly_time_fmtr.string(from: next_class_time)
                 CurrentClassLabel.isHidden = false
                 NextClassLabel.isHidden = false
                 ExtraLabel.isHidden = true

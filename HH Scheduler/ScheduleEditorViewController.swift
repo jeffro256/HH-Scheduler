@@ -30,7 +30,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
         classes = schedule.classes
 
-        scheduleCollectionView.viewController = self
+        scheduleCollectionView.scheduleController = self
     }
 
     private func compressScheduleInfo(_ unordered_class_names: [(String, Int)], _ org_classes: [[Int]]) -> ([String], [[Int]]) {
@@ -154,6 +154,10 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true) // beware, magic!
 
+        return false
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
         if (textField.text?.isEmpty)! {
             let indexPath = IndexPath(row: textField.tag, section: 0)
             deleteClass(indexPath)
@@ -162,8 +166,6 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
             self.class_names[textField.tag].0 = textField.text!
             scheduleCollectionView.reloadData()
         }
-
-        return false
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -193,7 +195,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 }
 
 class ScheduleEditorCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    var viewController: ScheduleEditorViewController!
+    var scheduleController: ScheduleEditorViewController!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -221,8 +223,8 @@ class ScheduleEditorCollectionView: UICollectionView, UICollectionViewDelegateFl
         else {
             let day = (indexPath.item - indexPath.item / 7 - 1) % 6
             let mod = (indexPath.item - indexPath.item / 7 - 1) / 6
-            let class_index = viewController.classes[day][mod]
-            cell.label.text = viewController.class_names.first { $0.1 == class_index }?.0
+            let class_index = scheduleController.classes[day][mod]
+            cell.label.text = scheduleController.class_names.first { $0.1 == class_index }?.0
             cell.colorize()
             cell.makeBorder()
         }
@@ -258,13 +260,13 @@ class ScheduleEditorCollectionView: UICollectionView, UICollectionViewDelegateFl
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ClassCell
-        cell.label.text = viewController.class_names[viewController.selectedClassCell].0
+        cell.label.text = scheduleController.class_names[scheduleController.selectedClassCell].0
         cell.colorize()
 
         let day = (indexPath.item - indexPath.item / 7 - 1) % 6
         let mod = (indexPath.item - indexPath.item / 7 - 1) / 6
 
-        viewController.classes[day][mod] = viewController.class_names[viewController.selectedClassCell].1
+        scheduleController.classes[day][mod] = scheduleController.class_names[scheduleController.selectedClassCell].1
     }
 }
 

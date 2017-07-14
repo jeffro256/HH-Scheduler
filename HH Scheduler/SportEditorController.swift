@@ -21,6 +21,8 @@ class SportEditorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addGradient(to: self.view)
+
         if entrySport != nil {
             sportSwitch.setOn(true, animated: true)
             textField.isEnabled = true
