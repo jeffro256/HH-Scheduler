@@ -97,7 +97,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
             let class_info_cell = tableView.dequeueReusableCell(withIdentifier: "ClassInfoCell") as! ClassInfoCell
 
             class_info_cell.field.text = class_names[indexPath.item].0
-            class_info_cell.field.isEnabled = indexPath.item != 0
+            class_info_cell.field.isEnabled = false
             class_info_cell.field.tag = indexPath.item
             class_info_cell.colorize()
 
@@ -130,7 +130,19 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
             selectedClassCell = indexPath.item
         }
         else {
+            if indexPath.item != 0 {
+                let cell = tableView.cellForRow(at: indexPath) as! ClassInfoCell
+                cell.field.isEnabled = true
+            }
+
             selectedClassCell = indexPath.item
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if !isLastItem(indexPath) {
+            let cell = tableView.cellForRow(at: indexPath) as! ClassInfoCell
+            cell.field.isEnabled = false
         }
     }
 
@@ -218,7 +230,6 @@ class ScheduleEditorCollectionView: UICollectionView, UICollectionViewDelegateFl
         else if indexPath.item > 7 * 18 {
             cell.label.text = schedule.sport
             cell.colorize()
-            cell.makeBorder()
         }
         else {
             let day = (indexPath.item - indexPath.item / 7 - 1) % 6
@@ -226,7 +237,6 @@ class ScheduleEditorCollectionView: UICollectionView, UICollectionViewDelegateFl
             let class_index = scheduleController.classes[day][mod]
             cell.label.text = scheduleController.class_names.first { $0.1 == class_index }?.0
             cell.colorize()
-            cell.makeBorder()
         }
 
         return cell

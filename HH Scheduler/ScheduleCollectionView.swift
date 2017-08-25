@@ -57,27 +57,31 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
     // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClassCell", for: indexPath) as! ClassCell
-
         if (indexPath.item % 7 == 0) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ModCell", for: indexPath) as! ClassModCell
             cell.label.text = String(describing: indexPath.item / 7 + 1)
-            cell.backgroundColor = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 1.0)
+
+            return cell
         }
         else if indexPath.item > 7 * 18 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClassCell", for: indexPath) as! ClassCell
+
             cell.label.text = sport
             cell.colorize()
-            cell.makeBorder()
+
+            return cell
         }
         else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClassCell", for: indexPath) as! ClassCell
+
             let day = (indexPath.item - indexPath.item / 7 - 1) % 6
             let mod = (indexPath.item - indexPath.item / 7 - 1) / 6
             let class_index = classes[day][mod]
             cell.label.text = class_names[class_index]
             cell.colorize()
-            cell.makeBorder()
-        }
 
-        return cell
+            return cell
+        }
     }
 
     // Size each cell
@@ -91,7 +95,7 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         if indexPath.item % 7 == 0 {
             h = top_cell_height
         }
-        else if (indexPath.item - 5) % 7 == 0 {
+        else if (indexPath.item - 6) % 7 == 0 {
             h = class_cell_height_bottom
         }
         else {
@@ -110,9 +114,8 @@ class ClassCell: UICollectionViewCell {
     public func colorize() {
         self.backgroundColor = label.text?.scalarRandomColor()
     }
+}
 
-    public func makeBorder() {
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.black.cgColor
-    }
+class ClassModCell: UICollectionViewCell {
+    @IBOutlet weak var label: UILabel!
 }

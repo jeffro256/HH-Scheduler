@@ -1,5 +1,5 @@
 //
-//  Paths.swift
+//  Common.swift
 //  HH Scheduler
 //
 //  Created by Jeffrey Ryan on 9/5/16.

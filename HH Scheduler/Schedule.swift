@@ -54,19 +54,6 @@ class Schedule: NSObject, NSCoding, NSCopying {
         else {
             print("Creating new schedule...")
             res_schedule = Schedule()
-
-            //////////////////////////////////////////////////////////////////////////////////////////
-            res_schedule.class_names = ["Free Time", "English", "Band", "Algebra II", "US History", "Chemistry", "Spanish Int A", "Biology", "Lecture"]
-            res_schedule.classes =
-                [[1, 1, 2, 2, 3, 3, 4, 4, 0, 0, 5, 5, 6, 6, 0, 0, 0, 0],
-                 [6, 6, 0, 0, 7, 7, 5, 5, 5, 0, 4, 4, 0, 0, 2, 2, 1, 1],
-                 [3, 3, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 6, 6],
-                 [7, 7, 0, 8, 8, 8, 5, 5, 0, 0, 0, 0, 3, 3, 2, 2, 0, 0],
-                 [3, 3, 2, 2, 1, 1, 4, 4, 0, 5, 5, 5, 6, 6, 0, 0, 7, 7],
-                 [6, 6, 0, 7, 7, 7, 5, 5, 0, 0, 4, 4, 1, 1, 0, 0, 3, 3]]
-            res_schedule.sport = "Cross Country"
-            res_schedule.sport_end_time = Calendar.current.date(from: DateComponents(timeZone: TimeZone(abbreviation: "CST"), hour: 17, minute: 30))
-            //////////////////////////////////////////////////////////////////////////////////////////
         }
 
         return res_schedule

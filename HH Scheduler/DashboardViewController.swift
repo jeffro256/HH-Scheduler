@@ -181,9 +181,12 @@ class DashboardViewController: UIViewController {
             let dateless_now_components = Calendar.current.dateComponents([.hour, .minute], from: now)
             let nowTime = Calendar.current.date(from: dateless_now_components)!
 
+            let cycle_character = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cycle_day)!)
+
             if Calendar.current.compare(nowTime, to: start_time, toGranularity: .minute) == .orderedAscending {   // before school
                 ModLabel.isHidden = true
-                CycleDayLabel.isHidden = true
+                CycleDayLabel.isHidden = false
+                CycleDayLabel.text = "\(cycle_character) Day"
                 ClassLabel1.isHidden = true
                 ClassLabel2.isHidden = false
                 ClassTimeLabel1.isHidden = true
@@ -293,8 +296,6 @@ class DashboardViewController: UIViewController {
                     next_class_name = schedule.class_names[schedule.classes[cycle_day][next_class_mod]]
                     next_class_time = mod_times[next_class_mod]
                 }
-
-                let cycle_character = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cycle_day)!)
 
                 ModLabel.isHidden = false
                 ModLabel.text = "Mod \(current_mod+1)"

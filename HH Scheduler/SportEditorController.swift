@@ -63,8 +63,11 @@ class SportEditorController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func pressedSave(_ sender: Any) {
+        let picker_date_components = Calendar.current.dateComponents([.hour, .minute], from:  datePicker.date)
+        let picker_date = Calendar.current.date(from: picker_date_components)!
+
         if sportSwitch.isOn {
-            schedule = Schedule(class_names: self.class_names, classes: self.classes, sport: textField.text, sport_end_time: datePicker.date)
+            schedule = Schedule(class_names: self.class_names, classes: self.classes, sport: textField.text, sport_end_time: picker_date)
         }
         else {
             schedule = Schedule(class_names: self.class_names, classes: self.classes)
