@@ -87,8 +87,8 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
     // Size each cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let top_cell_height: CGFloat = 40
-        let class_cell_height = floor((self.frame.height - top_cell_height) / 6)
-        let class_cell_height_bottom = self.frame.height - top_cell_height - class_cell_height * 5
+        let class_cell_height = (self.frame.height - top_cell_height) / 6
+        let class_cell_height_bottom = floor(self.frame.height - top_cell_height - class_cell_height * 5)
 
         let h: CGFloat
 
@@ -102,7 +102,7 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
             h = class_cell_height
         }
 
-        let w = round(class_cell_height * 1.5)
+        let w = round(class_cell_height * 1.75)
 
         return CGSize(width: w, height: h)
     }

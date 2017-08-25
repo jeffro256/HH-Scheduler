@@ -216,10 +216,12 @@ class ScheduleEditorCollectionView: UICollectionView, UICollectionViewDelegateFl
         self.dataSource = self
     }
 
+    // same
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (schedule.sport == nil) ? (7 * 18): (7 * 19)
     }
 
+    // same 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClassCell", for: indexPath) as! ClassCell
 
@@ -242,6 +244,7 @@ class ScheduleEditorCollectionView: UICollectionView, UICollectionViewDelegateFl
         return cell
     }
 
+    // same
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let top_cell_height: CGFloat = 40
         let class_cell_height = floor((self.frame.height - top_cell_height) / 6)
