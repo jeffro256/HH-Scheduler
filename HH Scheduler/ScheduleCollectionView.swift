@@ -52,54 +52,51 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (sport == nil) ? (7 * 18): (7 * 19)
+        let rows = NUM_DAYS + 1
+        return (sport == nil) ? (rows * NUM_MODS): (rows * (NUM_MODS + 1))
     }
 
     // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if (indexPath.item % 7 == 0) {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ModCell", for: indexPath) as! ClassModCell
-            cell.label.text = String(describing: indexPath.item / 7 + 1)
+        let rows = NUM_DAYS + 1
+        let identifer = (indexPath.item % rows == 0) ? "ModCell" : "ClassCell"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifer, for: indexPath) as! ScheduleCell
 
-            return cell
+        if indexPath.item == rows * NUM_MODS {
+            cell.label.text = "Sport"
         }
-        else if indexPath.item > 7 * 18 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClassCell", for: indexPath) as! ClassCell
-
+        else if (indexPath.item % rows == 0) {
+            cell.label.text = String(describing: indexPath.item / rows + 1)
+        }
+        else if indexPath.item > rows * NUM_MODS {
             cell.label.text = sport
-            cell.colorize()
-
-            return cell
+            cell.backgroundColor = cell.label.text?.scalarRandomColor()
         }
         else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClassCell", for: indexPath) as! ClassCell
-
-            let day = (indexPath.item - indexPath.item / 7 - 1) % 6
-            let mod = (indexPath.item - indexPath.item / 7 - 1) / 6
+            let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
+            let mod = (indexPath.item - indexPath.item / rows - 1) / NUM_DAYS
             let class_index = classes[day][mod]
             cell.label.text = class_names[class_index]
-            cell.colorize()
-
-            return cell
+            cell.backgroundColor = cell.label.text?.scalarRandomColor()
         }
+
+        return cell
     }
 
     // Size each cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let rows = NUM_DAYS + 1
         let top_cell_height: CGFloat = 40
-        let class_cell_height = (self.frame.height - top_cell_height) / 6
-        let class_cell_height_bottom = floor(self.frame.height - top_cell_height - class_cell_height * 5)
+        let class_cell_height = (self.frame.height - top_cell_height) / CGFloat(NUM_DAYS)
 
         let h: CGFloat
 
-        if indexPath.item % 7 == 0 {
+        if indexPath.item % rows == 0 {
             h = top_cell_height
         }
-        else if (indexPath.item - 6) % 7 == 0 {
-            h = class_cell_height_bottom
-        }
         else {
-            h = class_cell_height
+            let day = CGFloat(indexPath.item % rows - 1)
+            h = round(class_cell_height * (day + 1)) - round(class_cell_height * day)
         }
 
         let w = round(class_cell_height * 1.75)
@@ -117,5 +114,9 @@ class ClassCell: UICollectionViewCell {
 }
 
 class ClassModCell: UICollectionViewCell {
+    @IBOutlet weak var label: UILabel!
+}
+
+class ScheduleCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
 }

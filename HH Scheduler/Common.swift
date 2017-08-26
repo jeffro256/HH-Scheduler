@@ -10,7 +10,7 @@ import Foundation
 
 //duh
 let NUM_DAYS = 6
-let NUM_CYCLES = 18
+let NUM_MODS = 18
 
 let document_dirs = NSSearchPathForDirectoriesInDomains(
     .documentDirectory,
