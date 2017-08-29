@@ -332,7 +332,7 @@ class DashboardViewController: UIViewController {
 
         try? schedule_info_contents!.write(to: schedule_info_cache_file_url, atomically: true, encoding: .utf8)
 
-        let schedule_info_list = schedule_info_contents!.components(separatedBy: CharacterSet.newlines)
+        let schedule_info_list = schedule_info_contents!.strip().components(separatedBy: CharacterSet.newlines)
 
         // @TODO<START>: Make code in block more error robust
         let reg_mod_time_strs = schedule_info_list[0].components(separatedBy: " ")

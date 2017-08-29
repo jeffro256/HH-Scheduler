@@ -9,10 +9,7 @@
 import UIKit
 
 class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    var class_names: [String]!
-    var classes: [[Int]]!
-    var sport: String?
-    // tell the collection view how many cells to make
+    internal var scheduleSource: ScheduleDataSource!
 
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,39 +18,13 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         self.dataSource = self
     }
 
-    public func setData(_ class_names: [String], _ classes: [[Int]], _ sport: String? = nil) {
-        self.class_names = class_names
-        self.classes = classes
-        self.sport = sport
-    }
-
-    public func getClassNames() -> [String]! {
-        return class_names
-    }
-
-    public func setClassNames(_ class_names: [String]) {
-        self.class_names = class_names
-    }
-
-    public func getClasses() -> [[Int]]! {
-        return classes
-    }
-
-    public func set_Classes(_ classes: [[Int]]) {
-        self.classes = classes
-    }
-
-    public func getSport() -> String? {
-        return sport
-    }
-
-    public func set_Sport(_ sport: String) {
-        self.sport = sport
+    public func setDataSource(scheduleSource: ScheduleDataSource) {
+        self.scheduleSource = scheduleSource
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let rows = NUM_DAYS + 1
-        return (sport == nil) ? (rows * NUM_MODS): (rows * (NUM_MODS + 1))
+        return (scheduleSource.getSportName() == nil) ? (rows * NUM_MODS): (rows * (NUM_MODS + 1))
     }
 
     // make a cell for each cell index path
@@ -69,15 +40,22 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
             cell.label.text = String(describing: indexPath.item / rows + 1)
         }
         else if indexPath.item > rows * NUM_MODS {
-            cell.label.text = sport
+            cell.label.text = scheduleSource.getSportName()
             cell.backgroundColor = cell.label.text?.scalarRandomColor()
         }
         else {
             let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
             let mod = (indexPath.item - indexPath.item / rows - 1) / NUM_DAYS
-            let class_index = classes[day][mod]
-            cell.label.text = class_names[class_index]
-            cell.backgroundColor = cell.label.text?.scalarRandomColor()
+            let class_index = scheduleSource.getClassIndex(day: day, mod: mod)
+
+            if class_index == 0 {
+                cell.label.text = nil
+                cell.backgroundColor = UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0)
+            }
+            else {
+                cell.label.text = scheduleSource.getClassName(index: class_index)
+                cell.backgroundColor = cell.label.text?.scalarRandomColor()
+            }
         }
 
         return cell
@@ -103,18 +81,6 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
         return CGSize(width: w, height: h)
     }
-}
-
-class ClassCell: UICollectionViewCell {
-    @IBOutlet weak var label: UILabel!
-
-    public func colorize() {
-        self.backgroundColor = label.text?.scalarRandomColor()
-    }
-}
-
-class ClassModCell: UICollectionViewCell {
-    @IBOutlet weak var label: UILabel!
 }
 
 class ScheduleCell: UICollectionViewCell {

@@ -14,19 +14,16 @@ class ScheduleViewController: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
 
-        addGradient(to: self.view)
-
         if schedule == nil {
             schedule = Schedule.defaultLoadFromFile(schedule_file_url)
         }
-
-        scheduleCollectionView.setData(schedule.class_names, schedule.classes, schedule.sport)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        scheduleCollectionView.setData(schedule.class_names, schedule.classes, schedule.sport)
+
+        scheduleCollectionView.setDataSource(scheduleSource: schedule)
         scheduleCollectionView.reloadData()
     }
 }

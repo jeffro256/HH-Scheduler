@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Schedule: NSObject, NSCoding, NSCopying {
+class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     var class_names: [String]
     var classes: [[Int]]                // 6 x 18
     var sport: String?
@@ -20,7 +20,7 @@ class Schedule: NSObject, NSCoding, NSCopying {
 
     override init() {
         class_names = ["Free Time"]
-        classes = [[Int]](repeating: [Int](repeating: 0, count: 18), count: 6)
+        classes = [[Int]](repeating: [Int](repeating: 0, count: NUM_MODS), count: NUM_DAYS)
         sport = nil
         sport_end_time = nil
 
@@ -79,5 +79,70 @@ class Schedule: NSObject, NSCoding, NSCopying {
         aCoder.encode(classes, forKey: "classes")
         aCoder.encode(sport, forKey: "sport")
         aCoder.encode(sport_end_time, forKey: "sport_end_time")
+    }
+
+    // ScheduleDataSource Interface
+
+    func getDays() -> Int {
+        return NUM_DAYS
+    }
+
+    func getMods() -> Int {
+        return NUM_MODS
+    }
+
+    func getNumberClasses() -> Int {
+        return class_names.count
+    }
+
+    func getClassName(index: Int) -> String {
+        return class_names[index]
+    }
+
+    func setClassName(index: Int, name: String) {
+        class_names[index] = name
+    }
+
+    func addClass(name: String) {
+        class_names.append(name)
+    }
+
+    func removeClass(index: Int) {
+        for d in 0..<classes.count {
+            for m in 0..<classes[0].count {
+                if classes[d][m] == index {
+                    classes[d][m] = 0
+                }
+                else if classes[d][m] > index {
+                    classes[d][m] -= 1
+                }
+            }
+        }
+
+        class_names.remove(at: index)
+    }
+
+    func getClassIndex(day: Int, mod: Int) -> Int {
+        return classes[day][mod]
+    }
+
+    func setClassIndex(day: Int, mod: Int, index: Int) {
+        classes[day][mod] = index
+    }
+
+    func getSportName() -> String? {
+        return sport
+    }
+
+    func setSportName(name: String?) {
+        sport = name
+    }
+
+    func getSportEndTime() -> Date? {
+        return sport_end_time
+    }
+
+    func setSportEndTime(time: Date?) {
+        sport_end_time = time
     }
 }
