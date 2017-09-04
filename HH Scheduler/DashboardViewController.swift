@@ -201,7 +201,6 @@ class DashboardViewController: UIViewController {
                 ExtraLabel.text = "Good Morning!"
             }
             else if Calendar.current.compare(nowTime, to: mod_times.first!, toGranularity: .minute) == .orderedAscending {
-                //@todo WHAT ABOUT WEIRD DAYS UGGGH
                 ModLabel.isHidden = true
                 CycleDayLabel.isHidden = true
                 ClassLabel1.isHidden = false

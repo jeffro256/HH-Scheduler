@@ -24,7 +24,7 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let rows = NUM_DAYS + 1
-        return (scheduleSource.getSportName() == nil) ? (rows * NUM_MODS): (rows * (NUM_MODS + 1))
+        return (scheduleSource.getSportName() == nil) ? (rows * NUM_MODS): (rows * NUM_MODS + 2)
     }
 
     // make a cell for each cell index path
@@ -71,6 +71,9 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
         if indexPath.item % rows == 0 {
             h = top_cell_height
+        }
+        else if indexPath.item == rows * NUM_MODS + 1 {
+            h = self.frame.height - top_cell_height
         }
         else {
             let day = CGFloat(indexPath.item % rows - 1)
