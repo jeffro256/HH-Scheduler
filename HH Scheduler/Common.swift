@@ -36,5 +36,7 @@ enum ViewControllerIndexes: Int {
 var schedule: Schedule!
 var cycle_day = -1
 
-// C4161C
+// #C4161C
 let hh_tint = UIColor(red: 196.0 / 255.0 , green: 22.0 / 255.0, blue: 28.0 / 255.0, alpha: 1.0)
+// #EFEFF4
+let freetime_color = UIColor(red: 0xEF / 255.0, green: 0xEF / 255.0, blue: 0xF4 / 255.0, alpha: 1.0)

@@ -45,14 +45,12 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
+    // Get number of cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newSchedule.getNumberClasses() + 1
     }
 
+    // Create the cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.item == 0 {
             let free_time_cell = tableView.dequeueReusableCell(withIdentifier: "FreeTimeCell")!
@@ -76,6 +74,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
+    // Will display cell
     var selectedFirst = false
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if isLastItem(indexPath) && !selectedFirst {
@@ -84,6 +83,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
+    // Selected cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isLastItem(indexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -107,6 +107,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
+    // Deselected cell
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if !isLastItem(indexPath) && indexPath.item != 0 {
             let cell = tableView.cellForRow(at: indexPath) as! ClassInfoCell
@@ -114,29 +115,31 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
+    // Whether cell should be editable
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.item != 0 && !isLastItem(indexPath)
     }
 
+    // Delete cell
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteClass(indexPath)
         }
-        else if editingStyle == .insert {
-            exit(EXIT_FAILURE)
-        }
     }
 
+    // Whether cell should be highlightable
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
+    // I don't know, it works
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true) // beware, magic!
 
         return false
     }
 
+    // Done typing
     func textFieldDidEndEditing(_ textField: UITextField) {
         if (textField.text?.isEmpty)! {
             let indexPath = IndexPath(row: textField.tag, section: 0)
@@ -148,6 +151,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
+    // Limits width of class names
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newText = (text as NSString).replacingCharacters(in: range, with: string)
@@ -174,25 +178,29 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
     var scheduleController: ScheduleEditorViewController!
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return indexPath.item % 7 != 0 && indexPath.item < 7 * 18
+        let rows = NUM_DAYS + 1
+        return indexPath.item % rows != 0 && indexPath.item < rows * NUM_MODS
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ScheduleCell
-        let class_index = scheduleController.getCurrentSelectedClass()
-        if class_index == 0 {
+        let selected_class = scheduleController.getCurrentSelectedClass()
+        let rows = NUM_DAYS + 1
+        let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
+        let mod = (indexPath.item - indexPath.item / rows - 1) / NUM_DAYS
+
+        if selected_class == scheduleSource.getClassIndex(day: day, mod: mod) || selected_class == 0 {
             cell.label.text = nil
-            cell.backgroundColor = UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0)
+            cell.backgroundColor = freetime_color
+
+            scheduleSource.setClassIndex(day: day, mod: mod, index: 0)
         }
         else {
-            cell.label.text = scheduleSource.getClassName(index: class_index)
+            cell.label.text = scheduleSource.getClassName(index: selected_class)
             cell.backgroundColor = cell.label.text?.scalarRandomColor()
+
+            scheduleSource.setClassIndex(day: day, mod: mod, index: selected_class)
         }
-
-        let day = (indexPath.item - indexPath.item / 7 - 1) % 6
-        let mod = (indexPath.item - indexPath.item / 7 - 1) / 6
-
-        scheduleSource.setClassIndex(day: day, mod: mod, index: class_index)
     }
 }
 

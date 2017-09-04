@@ -22,12 +22,13 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         self.scheduleSource = scheduleSource
     }
 
+    // Get number of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let rows = NUM_DAYS + 1
         return (scheduleSource.getSportName() == nil) ? (rows * NUM_MODS): (rows * NUM_MODS + 2)
     }
 
-    // make a cell for each cell index path
+    // Create the cells
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let rows = NUM_DAYS + 1
         let identifer = (indexPath.item % rows == 0) ? "ModCell" : "ClassCell"
@@ -50,7 +51,7 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
             if class_index == 0 {
                 cell.label.text = nil
-                cell.backgroundColor = UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0)
+                cell.backgroundColor = freetime_color
             }
             else {
                 cell.label.text = scheduleSource.getClassName(index: class_index)
