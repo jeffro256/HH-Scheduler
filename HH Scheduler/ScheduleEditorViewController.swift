@@ -30,7 +30,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        newSchedule = schedule
+        newSchedule = schedule.copy() as! Schedule
         scheduleCollectionView.setDataSource(scheduleSource: newSchedule)
         scheduleCollectionView.reloadData()
     }

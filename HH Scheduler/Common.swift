@@ -6,7 +6,7 @@
 //  Copyright © 2016 Jeffrey Ryan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 //duh
 let NUM_DAYS = 6
@@ -34,3 +34,7 @@ enum ViewControllerIndexes: Int {
 }
 
 var schedule: Schedule!
+var cycle_day = -1
+
+// C4161C
+let hh_tint = UIColor(red: 196.0 / 255.0 , green: 22.0 / 255.0, blue: 28.0 / 255.0, alpha: 1.0)

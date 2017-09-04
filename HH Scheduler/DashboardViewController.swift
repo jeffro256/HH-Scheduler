@@ -91,6 +91,7 @@ class DashboardViewController: UIViewController {
         let is_weird_day = weird_days.contains(where: { if now.dayCompare($0.0) == .orderedSame { weird_mod_times = $0.1; weird_start_time = $0.2; weird_end_time = $0.3; return true } else { return false } })
 
         if is_holiday || is_weekend {
+            cycle_day = -1
             ModLabel.isHidden = true
             CycleDayLabel.isHidden = true
             ClassLabel1.isHidden = true
@@ -103,6 +104,7 @@ class DashboardViewController: UIViewController {
             ExtraLabel.text = "No School Today!"
         }
         else if is_weird_day && weird_mod_times == nil {
+            cycle_day = -1
             ModLabel.isHidden = true
             CycleDayLabel.isHidden = true
             ClassLabel1.isHidden = true
@@ -140,7 +142,7 @@ class DashboardViewController: UIViewController {
                 lastRecordedCycleDay.0 = next_day
             }
 
-            let cycle_day = lastRecordedCycleDay.1 % 6
+            cycle_day = lastRecordedCycleDay.1 % 6
 
             let is_late_day = cycle_day == 3 || Calendar.current.component(.weekday, from: now) == 4
 
@@ -418,7 +420,7 @@ class DashboardViewController: UIViewController {
                 if (lineComponents.count >= 3) {
                     weird_mod_times = []
 
-                    let weird_mod_time_strs = lineComponents[2].components(separatedBy: " ")
+                    let weird_mod_time_strs = lineComponents[2].strip().components(separatedBy: " ")
 
                     for wmts in weird_mod_time_strs {
                         let weird_mod_time_raw = time_formatter.date(from: wmts)!
@@ -438,20 +440,6 @@ class DashboardViewController: UIViewController {
         weird_days.sort { $0.0 < $1.0 }
 
         // @TODO<END>
-    }
-
-    // NOTE: Some of this code is useless, as this view controller will always
-    // be on the far right. In fact, it even listens to Alex Jones unironically.
-    @IBAction func handleSwipes(_ sender: AnyObject) {
-        let tabIndex = tabBarController!.selectedIndex
-
-        if (sender.direction == .right && tabIndex > 0) {
-            tabBarController!.selectedIndex -= 1
-        }
-
-        if (sender.direction == .left && tabIndex < tabBarController!.viewControllers!.count - 1) {
-            tabBarController!.selectedIndex += 1
-        }
     }
 
     override func didReceiveMemoryWarning() {
