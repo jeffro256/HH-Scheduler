@@ -133,7 +133,8 @@ class DashboardViewController: UIViewController {
                 let next_day = Calendar.current.date(byAdding: one_day, to: lastRecordedCycleDay.0)!
                 let next_day_is_holiday = holidays.contains(where: { next_day.dayCompare($0) == .orderedSame })
                 let next_day_is_weekend = Calendar.current.isDateInWeekend(next_day)
-                let next_day_is_scheduleless_weird_day = weird_days.contains(where: { next_day.dayCompare($0.0) == .orderedSame })
+                let weird_index = weird_days.first(where: { next_day.dayCompare($0.0) == .orderedSame })
+                let next_day_is_scheduleless_weird_day = (weird_index == nil) ? false : weird_index?.1 == nil
 
                 if !next_day_is_holiday && !next_day_is_weekend && !next_day_is_scheduleless_weird_day {
                     lastRecordedCycleDay.1 += 1
