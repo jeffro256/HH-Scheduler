@@ -34,7 +34,7 @@
                                 <rect key="frame" x="35" y="415.66666666666663" width="157" height="156.99999999999989"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uuc-Xb-RfE" userLabel="Label1">
-                                        <rect key="frame" x="0.0" y="68.333333333333371" width="157" height="22"/>
+                                        <rect key="frame" x="0.0" y="68.333333333333314" width="157" height="22"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                 <rect key="frame" x="222" y="415.66666666666663" width="157" height="156.99999999999989"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="8En-WV-Rfw" userLabel="Label2">
-                                        <rect key="frame" x="0.0" y="68.333333333333371" width="157" height="22"/>
+                                        <rect key="frame" x="0.0" y="68.333333333333314" width="157" height="22"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -248,7 +248,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-eK-4ph" userLabel="Class Label">
-                                        <rect key="frame" x="48" y="195.66666666666666" width="319" height="18"/>
+                                        <rect key="frame" x="48" y="195.00000000000003" width="319" height="18"/>
                                         <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -925,7 +925,7 @@
                 <navigationController title="Schedule Nav" automaticallyAdjustsScrollViewInsets="NO" id="2nZ-fz-BdK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Schedule" image="Unclicked Schedule Icon" selectedImage="Clicked Schedule Icon" id="s6x-Oz-qDO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z31-aH-5Bc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Z31-aH-5Bc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -944,7 +944,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FLZ-jE-1lo" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="u5b-mb-pmx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kiV-oJ-lg3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kiV-oJ-lg3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
