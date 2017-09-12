@@ -41,6 +41,7 @@
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
 		36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */; };
 		36EB9FE91D9C35D0006B6874 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EB9FE81D9C35D0006B6874 /* Common.swift */; };
+		36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EFAD991F65F42800AADFDE /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIG JOHN.otf"; sourceTree = "<group>"; };
 		36EB9FE81D9C35D0006B6874 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		36EFAD991F65F42800AADFDE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6F586C3E91347A0D45FCC8D5 /* Pods_HH_Scheduler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HH_Scheduler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -212,6 +214,7 @@
 				369468031F510FC50097A534 /* ScheduleDataSource.swift */,
 				360E28331F1540390052C799 /* Schedule.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
+				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
 				361E9B4B1F1925FC00C4DF3D /* SportEditorController.swift */,
 				362310301D7BAB28004F98FB /* Assets.xcassets */,
 				362310351D7BAB28004F98FB /* Info.plist */,
@@ -366,6 +369,7 @@
 				361E9B6E1F19472000C4DF3D /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */,
 				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
+				36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */,
 				361E9B4C1F1925FC00C4DF3D /* SportEditorController.swift in Sources */,
 				3679572F1D7E290E0096163B /* AddGradient.swift in Sources */,
 				360E28341F1540390052C799 /* Schedule.swift in Sources */,
