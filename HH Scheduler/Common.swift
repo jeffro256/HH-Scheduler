@@ -40,3 +40,25 @@ var cycle_day = -1
 let hh_tint = UIColor(red: 196.0 / 255.0 , green: 22.0 / 255.0, blue: 28.0 / 255.0, alpha: 1.0)
 // #EFEFF4
 let freetime_color = UIColor(red: 0xEF / 255.0, green: 0xEF / 255.0, blue: 0xF4 / 255.0, alpha: 1.0)
+
+let color_pallette = [
+/*
+Red -        #FF3B30
+Orange -     #FF9500
+Yellow -     #FFCC00
+Green -      #4CD964
+Light Blue - #5AC8FA
+Blue -       #007AFF
+Purple -     #5856D6
+Magenta -    #FF2D55
+*/
+
+    UIColor(0xFF3B30),
+    UIColor(0xFF0500),
+    UIColor(0xFFCC00),
+    UIColor(0x4CD964),
+    UIColor(0x5AC8FA),
+    UIColor(0x007AFF),
+    UIColor(0x5856D6),
+    UIColor(0xFF2D55),
+]

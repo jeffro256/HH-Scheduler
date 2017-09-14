@@ -10,6 +10,6 @@ import UIKit
 
 extension UIColor {
     convenience init(_ icolor: Int32) {
-        self.init(red: CGFloat(255) * CGFloat(icolor | 0x00FF0000 >> 16), green: CGFloat(255) * CGFloat(icolor | 0x0000FF00 >> 8), blue: CGFloat(255.0) * CGFloat(icolor | 0x000000FF), alpha: 1.0)
+        self.init(red: CGFloat((icolor & 0x00FF0000) >> 16) / CGFloat(255), green: CGFloat((icolor & 0x0000FF00) >> 8) / CGFloat(255), blue: CGFloat(icolor & 0x000000FF) / CGFloat(255), alpha: 1.0)
     }
 }

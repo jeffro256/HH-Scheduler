@@ -197,7 +197,7 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
         }
         else {
             cell.label.text = scheduleSource.getClassName(index: selected_class)
-            cell.backgroundColor = cell.label.text?.scalarRandomColor()
+            cell.backgroundColor = color_pallette[selected_class % color_pallette.count]
 
             scheduleSource.setClassIndex(day: day, mod: mod, index: selected_class)
         }
@@ -212,6 +212,11 @@ class ClassInfoCell: UITableViewCell {
     }
 
     public func colorize() {
-        self.backgroundColor = self.field.text?.scalarRandomColor()
+        if field.tag == 0 {
+            self.backgroundColor = freetime_color
+        }
+        else {
+            self.backgroundColor = color_pallette[field.tag % color_pallette.count]
+        }
     }
 }

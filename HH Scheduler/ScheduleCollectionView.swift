@@ -42,7 +42,7 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         }
         else if indexPath.item > rows * NUM_MODS {
             cell.label.text = scheduleSource.getSportName()
-            cell.backgroundColor = cell.label.text?.scalarRandomColor()
+            cell.backgroundColor = color_pallette[scheduleSource.getNumberClasses() % color_pallette.count]
         }
         else {
             let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
@@ -55,7 +55,7 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
             }
             else {
                 cell.label.text = scheduleSource.getClassName(index: class_index)
-                cell.backgroundColor = cell.label.text?.scalarRandomColor()
+                cell.backgroundColor = color_pallette[class_index % color_pallette.count]
             }
         }
 
