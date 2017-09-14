@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>MarqueeLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-HH Scheduler.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>770D5B6B1D267DA6AAC61B837B315C0D</key>
+		<key>1CB78DA905F83F0D63FCFA6680C080BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F74D21CCA008224C85E0D54C8F6A4A03</key>
+		<key>320AD47B0C6BA014D301395D3BFC8FB6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>730F5EDC213DC3100AD758DA8001D92A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

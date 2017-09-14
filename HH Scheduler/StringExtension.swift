@@ -13,6 +13,10 @@ extension String {
         return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 
+    public func split(sep: String = " ") -> [String] {
+        return self.components(separatedBy: sep)
+    }
+
     public func scalarRandomColor() -> UIColor {
         var scalar_sum = 0
 

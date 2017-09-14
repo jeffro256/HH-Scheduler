@@ -40,6 +40,8 @@
 		369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* ScheduleDataSource.swift */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
 		36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */; };
+		36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830221F685AEE00F3327E /* UIColorExtension.swift */; };
+		36E830251F69569A00F3327E /* ContextSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830241F69569A00F3327E /* ContextSchedule.swift */; };
 		36EB9FE91D9C35D0006B6874 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EB9FE81D9C35D0006B6874 /* Common.swift */; };
 		36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EFAD991F65F42800AADFDE /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +84,8 @@
 		369468031F510FC50097A534 /* ScheduleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDataSource.swift; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIG JOHN.otf"; sourceTree = "<group>"; };
+		36E830221F685AEE00F3327E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		36E830241F69569A00F3327E /* ContextSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextSchedule.swift; sourceTree = "<group>"; };
 		36EB9FE81D9C35D0006B6874 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		36EFAD991F65F42800AADFDE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6F586C3E91347A0D45FCC8D5 /* Pods_HH_Scheduler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HH_Scheduler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +211,7 @@
 				36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */,
 				362310271D7BAB28004F98FB /* AppDelegate.swift */,
 				362310291D7BAB28004F98FB /* DashboardViewController.swift */,
+				36E830241F69569A00F3327E /* ContextSchedule.swift */,
 				3623102B1D7BAB28004F98FB /* ScheduleViewController.swift */,
 				361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */,
 				3679572E1D7E290E0096163B /* AddGradient.swift */,
@@ -226,6 +231,7 @@
 		36A135DF1E02E0A300956D76 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				36E830221F685AEE00F3327E /* UIColorExtension.swift */,
 				369467FF1F4F949D0097A534 /* CALayerExtension.swift */,
 				36A135DD1E02DFA000956D76 /* DateExtension.swift */,
 				367D02DE1DA527E8005740EA /* StringExtension.swift */,
@@ -331,10 +337,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HH Scheduler/Pods-HH Scheduler-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +374,7 @@
 			files = (
 				3623102C1D7BAB28004F98FB /* ScheduleViewController.swift in Sources */,
 				361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */,
+				36E830251F69569A00F3327E /* ContextSchedule.swift in Sources */,
 				361E9B6E1F19472000C4DF3D /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */,
 				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
@@ -381,6 +390,7 @@
 				361E9B731F19472000C4DF3D /* IQToolbar.swift in Sources */,
 				361E9B651F19472000C4DF3D /* IQNSArray+Sort.swift in Sources */,
 				361E9B6B1F19472000C4DF3D /* IQKeyboardManagerConstants.swift in Sources */,
+				36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */,
 				36EB9FE91D9C35D0006B6874 /* Common.swift in Sources */,
 				360E28321F1454280052C799 /* ScheduleEditorViewController.swift in Sources */,
 				361E9B6C1F19472000C4DF3D /* IQKeyboardManagerConstantsInternal.swift in Sources */,
@@ -508,6 +518,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = HHLaunch;
 				INFOPLIST_FILE = "HH Scheduler/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JeffRyan.HH-Scheduler";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,6 +534,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = HHLaunch;
 				INFOPLIST_FILE = "HH Scheduler/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JeffRyan.HH-Scheduler";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -27,3 +27,27 @@ protocol ScheduleDataSource {
     //func getSportColor() -> UIColor
     //func setSportColor(color: UIColor)
 }
+
+class ScheduleBlock {
+    public var name: String
+    public var color: UIColor?
+
+    public init(name: String, color: UIColor?) {
+        self.name = name
+        self.color = color
+    }
+}
+
+class ContextScheduleBlock: ScheduleBlock {
+    public var schedule: ContextSchedule
+    public var blockID: Int
+    public var isNormal: Bool
+
+    public init(name: String, color: UIColor?, from schedule: ContextSchedule, withID blockID: Int, normal isNormal: Bool) {
+        self.schedule = schedule
+        self.blockID = blockID
+        self.isNormal = isNormal
+
+        super.init(name: name, color: color)
+    }
+}

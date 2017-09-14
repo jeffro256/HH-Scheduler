@@ -1,12 +1,15 @@
 PODS:
+  - MarqueeLabel/Swift (3.1.2)
   - UICircularProgressRing (1.7.1)
 
 DEPENDENCIES:
+  - MarqueeLabel/Swift
   - UICircularProgressRing
 
 SPEC CHECKSUMS:
+  MarqueeLabel: fcd7057a779422d86589be759036f1510b08c6a0
   UICircularProgressRing: 8d7904a0eda5a7c821b5852b36c37683867149a8
 
-PODFILE CHECKSUM: 04be8857fd073f02349ef3205d7be5e330206344
+PODFILE CHECKSUM: f7d4fa9f58bd00fd538d4471c29bfc9526921d07
 
 COCOAPODS: 1.3.1

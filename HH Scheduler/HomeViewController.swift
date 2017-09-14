@@ -13,4 +13,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var progessRing: UICircularProgressRingView!
 
     @IBOutlet var labels: [UILabel]!
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+
+        _ = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
+    }
 }
