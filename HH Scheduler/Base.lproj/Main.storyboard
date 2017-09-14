@@ -328,7 +328,7 @@
                                     <constraint firstItem="CFS-41-huu" firstAttribute="centerX" secondItem="jJy-ca-S6u" secondAttribute="centerX" id="wyr-Pu-yzU"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="455" width="320" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -338,25 +338,50 @@
                                     <size key="itemSize" width="196" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeClassCell" id="ogc-g2-udN">
-                                        <rect key="frame" x="0.0" y="7" width="196" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FutureClassCell" id="ogc-g2-udN">
+                                        <rect key="frame" x="10" y="7" width="253" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="196" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="253" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WN8-uA-RMp">
-                                                    <rect key="frame" x="77" y="14" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8:25 AM 9:10 AM" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvI-7J-t3h">
+                                                    <rect key="frame" x="20" y="7" width="80" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="mi4-la-UzV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Here" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="WN8-uA-RMp">
+                                                    <rect key="frame" x="105" y="8" width="130" height="35"/>
+                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="WN8-uA-RMp" secondAttribute="trailing" constant="10" id="DGh-RE-5Gq"/>
+                                            <constraint firstItem="dvI-7J-t3h" firstAttribute="leading" secondItem="ogc-g2-udN" secondAttribute="leading" constant="20" id="HLt-wo-Bjz"/>
+                                            <constraint firstItem="WN8-uA-RMp" firstAttribute="centerY" secondItem="ogc-g2-udN" secondAttribute="centerY" id="IE0-28-8wS"/>
+                                            <constraint firstItem="dvI-7J-t3h" firstAttribute="centerY" secondItem="ogc-g2-udN" secondAttribute="centerY" id="Jcx-2p-bKL"/>
+                                            <constraint firstItem="WN8-uA-RMp" firstAttribute="top" secondItem="ogc-g2-udN" secondAttribute="topMargin" id="VQd-jF-t20"/>
+                                            <constraint firstItem="WN8-uA-RMp" firstAttribute="centerY" secondItem="ogc-g2-udN" secondAttribute="centerY" id="fHh-PO-mkj"/>
+                                            <constraint firstItem="WN8-uA-RMp" firstAttribute="leading" secondItem="dvI-7J-t3h" secondAttribute="trailing" constant="5" id="gvo-UZ-Nef"/>
+                                        </constraints>
+                                        <size key="customSize" width="253" height="50"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

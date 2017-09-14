@@ -29,6 +29,8 @@ class HomeViewController: UIViewController {
 
         cschedule = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
 
+        print(cschedule.isSchoolDay(Date()))
+        print(cschedule.isScheduledDay(Date()))
         print(cschedule.getCycleDay(Date()))
 
         updateUI()
@@ -45,7 +47,6 @@ class HomeViewController: UIViewController {
                 label.isHidden = !cschedule.isWeirdDay(now)
             case 51:
                 label.text = niceDateFormatter.string(from: now)
-                print("--")
             case 52:
                 if cschedule.isScheduledDay(now) {
                     let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
@@ -59,4 +60,25 @@ class HomeViewController: UIViewController {
             }
         }
     }
+}
+
+class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+
+        self.dataSource = self
+        self.delegate = self
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "FutureClassCell", for: indexPath)
+    }
+}
+
+class FutureClassCell: UICollectionView {
+
 }

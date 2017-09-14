@@ -14,7 +14,7 @@ class ContextSchedule {
         public var startTime: Date?
         public var endTime: Date?
         public var scheduleless: Bool
-        public var blockIDs: [(Date, Int)]?
+        public var blockIndexes: [(Date, Int)]?
     }
 
     private static let timeFormatter: DateFormatter = {
@@ -88,11 +88,7 @@ class ContextSchedule {
         var date = cycleDate
 
         while true {
-            let isHoliday = holidays.contains { $0.dayCompare(date) == .orderedSame }
-            let isSchedulelessWeirdDay = weirdDays.contains { $0.date.dayCompare(date) == .orderedSame && $0.scheduleless }
-            let isWeekend = Calendar.current.isDateInWeekend(date)
-
-            if !(isHoliday || isSchedulelessWeirdDay || isWeekend) || date.dayCompare(lastDay) != .orderedAscending {
+            if isScheduledDay(date) {
                 break
             }
 
@@ -106,11 +102,7 @@ class ContextSchedule {
         }
 
         while bestLandmark.0.dayCompare(date) == .orderedAscending {
-            let isHoliday = holidays.contains { $0.dayCompare(bestLandmark.0) == .orderedSame }
-            let isSchedulelessWeirdDay = weirdDays.contains { $0.date.dayCompare(bestLandmark.0) == .orderedSame && $0.scheduleless }
-            let isWeekend = Calendar.current.isDateInWeekend(bestLandmark.0)
-
-            if !(isHoliday || isSchedulelessWeirdDay || isWeekend) {
+            if isScheduledDay(bestLandmark.0) {
                 bestLandmark.1 += 1
             }
 
@@ -188,30 +180,30 @@ class ContextSchedule {
             let endTime = (endTimeStr != nil) ? time(from: endTimeStr!) : nil
             let scheduleless = weirdDayObject["scheduleless"] as? Bool ?? false
 
-            var blockIDs: [(Date, Int)]? = nil
+            var blockIndexes: [(Date, Int)]? = nil
             if let mods = weirdDayObject["mods"] as? [[String]] {
-                blockIDs = [(Date, Int)]()
+                blockIndexes = [(Date, Int)]()
 
                 for mod in mods {
                     guard let blockTime = time(from: mod[0]) else { return }
 
                     if mod[1].lowercased().hasPrefix("mod") {
                         guard let modNumber = Int(mod[1].split()[1]) else { return }
-                        let blockID = modNumber - 1
+                        let blockIndex = modNumber - 1
 
-                        blockIDs?.append((blockTime, blockID))
+                        blockIndexes?.append((blockTime, blockIndex))
                     }
                     else {
-                        let blockID = -(specialBlocks.count + 1)
+                        let blockIndex = -(specialBlocks.count + 1)
                         let specialBlock = ScheduleBlock(name: mod[1], color: hh_tint)
 
-                        blockIDs?.append((blockTime, blockID))
+                        blockIndexes?.append((blockTime, blockIndex))
                         specialBlocks.append(specialBlock)
                     }
                 }
             }
 
-            let weirdDay = WeirdDay(date: weirdDayDate, startTime: startTime, endTime: endTime, scheduleless: scheduleless, blockIDs: blockIDs)
+            let weirdDay = WeirdDay(date: weirdDayDate, startTime: startTime, endTime: endTime, scheduleless: scheduleless, blockIndexes: blockIndexes)
 
             weirdDays.append(weirdDay)
         }
