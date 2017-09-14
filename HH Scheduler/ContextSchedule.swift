@@ -66,7 +66,23 @@ class ContextSchedule {
         refreshContext(jsonURL: jsonURL)
     }
 
-    public func getCycleDay(cycleDate: Date) -> Int {
+    public func isSchoolDay(_ testDate: Date) -> Bool {
+        let isHoliday = holidays.contains { $0.dayCompare(testDate) == .orderedSame }
+        let isWeekend = Calendar.current.isDateInWeekend(testDate)
+        let inSchoolYear = firstDay.dayCompare(testDate) != .orderedDescending && lastDay.dayCompare(testDate) != .orderedAscending
+        return !isHoliday && !isWeekend && inSchoolYear
+    }
+
+    public func isScheduledDay(_ testDate: Date) -> Bool {
+        let isScheduleless = weirdDays.contains { $0.date.dayCompare(testDate) == .orderedSame && $0.scheduleless }
+        return isSchoolDay(testDate) && !isScheduleless
+    }
+
+    public func isWeirdDay(_ testDate: Date) -> Bool {
+        return weirdDays.contains { $0.date.dayCompare(testDate) == .orderedSame }
+    }
+
+    public func getCycleDay(_ cycleDate: Date) -> Int {
         var bestLandmark = (firstDay, 0)
 
         var date = cycleDate
@@ -101,7 +117,7 @@ class ContextSchedule {
             bestLandmark.0 = Calendar.current.date(byAdding: .day, value: 1, to: bestLandmark.0)!
         }
 
-        let cycleDay = bestLandmark.1 % 6
+        let cycleDay = bestLandmark.1 % NUM_DAYS
 
         return cycleDay
     }
