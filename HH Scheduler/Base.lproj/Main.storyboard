@@ -328,9 +328,8 @@
                                     <constraint firstItem="CFS-41-huu" firstAttribute="centerX" secondItem="jJy-ca-S6u" secondAttribute="centerX" id="wyr-Pu-yzU"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="543" width="375" height="75"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oOF-BD-f14" secondAttribute="height" multiplier="5:1" id="GSm-vk-Hml"/>
                                 </constraints>
@@ -405,6 +404,9 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="scrollRate">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
@@ -427,6 +429,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="9zT-Qp-CPX"/>
                     <connections>
+                        <outlet property="futureClassCollection" destination="oOF-BD-f14" id="o63-dg-BY6"/>
                         <outlet property="progessRing" destination="p4q-QV-pCy" id="kE7-cF-qQr"/>
                         <outletCollection property="labels" destination="c8I-gE-WTu" collectionClass="NSMutableArray" id="fyE-j4-sl9"/>
                         <outletCollection property="labels" destination="0uT-NA-tup" collectionClass="NSMutableArray" id="PYk-aB-SLn"/>

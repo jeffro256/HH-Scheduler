@@ -54,7 +54,7 @@ Magenta -    #FF2D55
 */
 
     UIColor(0xFF3B30),
-    UIColor(0xFF0500),
+    UIColor(0xFF9500),
     UIColor(0xFFCC00),
     UIColor(0x4CD964),
     UIColor(0x5AC8FA),

@@ -131,6 +131,33 @@ class ContextSchedule {
         return cycleDay
     }
 
+    /////////////////////////////////////////////////////////////////////////////
+    //////////////////// VVVVVVV todo VVVVV
+    public func getBlocks(_ date: Date) -> [ContextScheduleBlock]? {
+        if !isScheduledDay(date) { return nil }
+
+        let cycleDay = getCycleDay(date)
+        let isDDay = cycleDay == 3
+        let isWednesday = Calendar.current.dateComponents([.weekday], from: date).weekday == 4
+        let blockTimes: [Date]
+
+        if isWeirdDay(date) {
+
+        }
+        else if isDDay || isWednesday {
+            blockTimes = lateModTimes
+        }
+        else {
+            blockTimes = regModTimes
+        }
+
+        return nil
+    }
+
+    public func getWeirdDayName(_ testDate: Date) -> String? {
+        return weirdDays.first(where: { $0.date.dayCompare(testDate) == .orderedSame })?.name
+    }
+
     public func refreshContext(jsonURL: URL) {
         guard let data = try? Data(contentsOf: jsonURL) else { print("Failed to get data"); return }
         guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) else { print("Failed to parse data"); return }

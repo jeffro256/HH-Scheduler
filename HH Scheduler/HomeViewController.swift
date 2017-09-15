@@ -11,6 +11,7 @@ import UICircularProgressRing
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var progessRing: UICircularProgressRingView!
+    @IBOutlet weak var futureClassCollection: FutureClassCollection!
     @IBOutlet var labels: [UILabel]!
 
     private var cschedule: ContextSchedule!
@@ -36,21 +37,27 @@ class HomeViewController: UIViewController {
         let now = Date()
 
         let dateText = niceDateFormatter.string(from: now)
+        let dayShortDesc: String
 
         if cschedule.isScheduledDay(now) {
-
+            let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
+            dayShortDesc = "\(cycleCharacter) DAY"
         }
         else if cschedule.isSchoolDay(now) {
-
+            dayShortDesc = cschedule.getWeirdDayName(now)!
         }
         else if cschedule.isHoliday(now) {
-
+            dayShortDesc = "Day Off"
         }
         else if !cschedule.isInSchoolYear(now) {
-
+            dayShortDesc = "Summer"
         }
         else { // I assume it's the weekend
+            dayShortDesc = "Weekend"
+        }
 
+        if !cschedule.isScheduledDay(now) {
+            progessRing.value = progessRing.minValue
         }
 
         for label in labels {
@@ -60,13 +67,7 @@ class HomeViewController: UIViewController {
             case 51:
                 label.text = dateText
             case 52:
-                if cschedule.isScheduledDay(now) {
-                    let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
-                    label.text = "\(cycleCharacter) DAY"
-                }
-                else {
-                    label.text = ""
-                }
+                label.text = dayShortDesc
             case 53:
                 break
             default:
@@ -85,6 +86,24 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        /*
+        let numCells = 0
+
+        if numCells == 0 {
+            let noneLabel = UILabel()
+            noneLabel.text = "No Classes"
+            noneLabel.font = UIFont(name: "Helvetica-LightOblique", size: 17)
+
+            self.backgroundView?.removeFromSuperview()
+            self.backgroundView = UIView()
+            self.backgroundView?.backgroundColor = UIColor.white
+            self.backgroundView?.addSubview(noneLabel)
+            noneLabel.center.x = self.backgroundView!.center.x
+            noneLabel.center.y = self.backgroundView!.center.y
+        }
+
+        return numCells
+        */
         return 1
     }
 
