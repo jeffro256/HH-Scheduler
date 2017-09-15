@@ -10,6 +10,7 @@ import Foundation
 
 class ContextSchedule {
     private struct WeirdDay {
+        public var name: String
         public var date: Date
         public var startTime: Date?
         public var endTime: Date?
@@ -67,10 +68,8 @@ class ContextSchedule {
     }
 
     public func isSchoolDay(_ testDate: Date) -> Bool {
-        let isHoliday = holidays.contains { $0.dayCompare(testDate) == .orderedSame }
         let isWeekend = Calendar.current.isDateInWeekend(testDate)
-        let inSchoolYear = firstDay.dayCompare(testDate) != .orderedDescending && lastDay.dayCompare(testDate) != .orderedAscending
-        return !isHoliday && !isWeekend && inSchoolYear
+        return !isHoliday(testDate) && !isWeekend && isInSchoolYear(testDate)
     }
 
     public func isScheduledDay(_ testDate: Date) -> Bool {
@@ -82,18 +81,36 @@ class ContextSchedule {
         return weirdDays.contains { $0.date.dayCompare(testDate) == .orderedSame }
     }
 
+    public func isHoliday(_ testDate: Date) -> Bool {
+        return holidays.contains { $0.dayCompare(testDate) == .orderedSame }
+    }
+
+    public func isInSchoolYear(_ testDate: Date) -> Bool {
+        return firstDay.dayCompare(testDate) != .orderedDescending && lastDay.dayCompare(testDate) != .orderedAscending
+    }
+
+    public func getNextSchoolDay(_ date: Date, scheduled: Bool = false, forceNext: Bool = false) -> Date? {
+        var testDate = date
+
+        if forceNext {
+            testDate = Calendar.current.date(byAdding: .day, value: 1, to: testDate)!
+        }
+
+        while !(isSchoolDay(testDate) && (!scheduled || isScheduledDay(testDate))) {
+            testDate = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+
+            if testDate.dayCompare(lastDay) == .orderedDescending {
+                return nil
+            }
+        }
+
+        return testDate
+    }
+
     public func getCycleDay(_ cycleDate: Date) -> Int {
         var bestLandmark = (firstDay, 0)
 
-        var date = cycleDate
-
-        while true {
-            if isScheduledDay(date) {
-                break
-            }
-
-            date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
-        }
+        guard let date = getNextSchoolDay(cycleDate, scheduled: true) else { return -1 }
 
         for landmark in landmarks {
             if landmark.0 > bestLandmark.0 && landmark.0.dayCompare(date) != .orderedDescending {
@@ -172,6 +189,7 @@ class ContextSchedule {
         var weirdDays = [WeirdDay]()
         var specialBlocks = [ScheduleBlock]()
         for weirdDayObject in weirdDayObjects {
+            guard let name = weirdDayObject["name"] as? String else { return }
             guard let weirdDayDateStr = weirdDayObject["date"] as? String else { return }
             guard let weirdDayDate = date(from: weirdDayDateStr) else { return }
             let startTimeStr = weirdDayObject["startTime"] as? String
@@ -203,7 +221,7 @@ class ContextSchedule {
                 }
             }
 
-            let weirdDay = WeirdDay(date: weirdDayDate, startTime: startTime, endTime: endTime, scheduleless: scheduleless, blockIndexes: blockIndexes)
+            let weirdDay = WeirdDay(name: name, date: weirdDayDate, startTime: startTime, endTime: endTime, scheduleless: scheduleless, blockIndexes: blockIndexes)
 
             weirdDays.append(weirdDay)
         }

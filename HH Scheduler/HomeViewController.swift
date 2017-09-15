@@ -29,24 +29,36 @@ class HomeViewController: UIViewController {
 
         cschedule = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
 
-        print(cschedule.isSchoolDay(Date()))
-        print(cschedule.isScheduledDay(Date()))
-        print(cschedule.getCycleDay(Date()))
-
         updateUI()
     }
 
     private func updateUI() {
         let now = Date()
 
+        let dateText = niceDateFormatter.string(from: now)
+
+        if cschedule.isScheduledDay(now) {
+
+        }
+        else if cschedule.isSchoolDay(now) {
+
+        }
+        else if cschedule.isHoliday(now) {
+
+        }
+        else if !cschedule.isInSchoolYear(now) {
+
+        }
+        else { // I assume it's the weekend
+
+        }
+
         for label in labels {
-            print(label.text!)
-            print(label.tag)
             switch label.tag {
             case 50:
                 label.isHidden = !cschedule.isWeirdDay(now)
             case 51:
-                label.text = niceDateFormatter.string(from: now)
+                label.text = dateText
             case 52:
                 if cschedule.isScheduledDay(now) {
                     let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
@@ -55,6 +67,8 @@ class HomeViewController: UIViewController {
                 else {
                     label.text = ""
                 }
+            case 53:
+                break
             default:
                 break
             }

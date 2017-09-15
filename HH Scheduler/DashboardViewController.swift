@@ -253,11 +253,6 @@ class DashboardViewController: UIViewController {
                     }
                 }
 
-                if current_mod < 0 {
-                    print("Could not get mod number! Exiting...")
-                    exit(EXIT_FAILURE)
-                }
-
                 let current_class = schedule.classes[cycle_day][current_mod]
                 let current_class_name = schedule.class_names[current_class]
 
