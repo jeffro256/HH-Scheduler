@@ -20,12 +20,6 @@ protocol ScheduleDataSource {
     //func setClassColor(index: Int, color: UIColor)
     func getClassIndex(day: Int, mod: Int) -> Int
     func setClassIndex(day: Int, mod: Int, index: Int)
-    func getSportName() -> String?
-    func setSportName(name: String?)
-    func getSportEndTime() -> Date?
-    func setSportEndTime(time: Date?)
-    //func getSportColor() -> UIColor
-    //func setSportColor(color: UIColor)
 }
 
 class ScheduleBlock {

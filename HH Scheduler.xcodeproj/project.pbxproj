@@ -11,7 +11,6 @@
 		360E28321F1454280052C799 /* ScheduleEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28311F1454280052C799 /* ScheduleEditorViewController.swift */; };
 		360E28341F1540390052C799 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28331F1540390052C799 /* Schedule.swift */; };
 		361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */; };
-		361E9B4C1F1925FC00C4DF3D /* SportEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B4B1F1925FC00C4DF3D /* SportEditorController.swift */; };
 		361E9B651F19472000C4DF3D /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B4F1F19472000C4DF3D /* IQNSArray+Sort.swift */; };
 		361E9B661F19472000C4DF3D /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B501F19472000C4DF3D /* IQUIScrollView+Additions.swift */; };
 		361E9B671F19472000C4DF3D /* IQUITextFieldView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B511F19472000C4DF3D /* IQUITextFieldView+Additions.swift */; };
@@ -52,7 +51,6 @@
 		360E28311F1454280052C799 /* ScheduleEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleEditorViewController.swift; sourceTree = "<group>"; };
 		360E28331F1540390052C799 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionView.swift; sourceTree = "<group>"; };
-		361E9B4B1F1925FC00C4DF3D /* SportEditorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportEditorController.swift; sourceTree = "<group>"; };
 		361E9B4F1F19472000C4DF3D /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		361E9B501F19472000C4DF3D /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
 		361E9B511F19472000C4DF3D /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 				360E28331F1540390052C799 /* Schedule.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
 				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
-				361E9B4B1F1925FC00C4DF3D /* SportEditorController.swift */,
 				362310301D7BAB28004F98FB /* Assets.xcassets */,
 				362310351D7BAB28004F98FB /* Info.plist */,
 				36A135DF1E02E0A300956D76 /* Extensions */,
@@ -379,7 +376,6 @@
 				369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */,
 				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
 				36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */,
-				361E9B4C1F1925FC00C4DF3D /* SportEditorController.swift in Sources */,
 				3679572F1D7E290E0096163B /* AddGradient.swift in Sources */,
 				360E28341F1540390052C799 /* Schedule.swift in Sources */,
 				361E9B701F19472000C4DF3D /* IQBarButtonItem.swift in Sources */,

@@ -25,7 +25,7 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
     // Get number of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let rows = NUM_DAYS + 1
-        return (scheduleSource.getSportName() == nil) ? (rows * NUM_MODS): (rows * NUM_MODS + 2)
+        return rows * NUM_MODS
     }
 
     // Create the cells
@@ -34,15 +34,8 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         let identifer = (indexPath.item % rows == 0) ? "ModCell" : "ClassCell"
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifer, for: indexPath) as! ScheduleCell
 
-        if indexPath.item == rows * NUM_MODS {
-            cell.label.text = "Sport"
-        }
-        else if (indexPath.item % rows == 0) {
+        if (indexPath.item % rows == 0) {
             cell.label.text = String(describing: indexPath.item / rows + 1)
-        }
-        else if indexPath.item > rows * NUM_MODS {
-            cell.label.text = scheduleSource.getSportName()
-            cell.backgroundColor = color_pallette[scheduleSource.getNumberClasses() % color_pallette.count]
         }
         else {
             let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
@@ -72,9 +65,6 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
         if indexPath.item % rows == 0 {
             h = top_cell_height
-        }
-        else if indexPath.item == rows * NUM_MODS + 1 {
-            h = self.frame.height - top_cell_height
         }
         else {
             let day = CGFloat(indexPath.item % rows - 1)

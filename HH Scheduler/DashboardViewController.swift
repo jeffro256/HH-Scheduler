@@ -217,7 +217,7 @@ class DashboardViewController: UIViewController {
                 ExtraLabel.isHidden = false
                 ExtraLabel.text = "Good Morning!"
             }
-            else if (schedule.sport != nil && Calendar.current.compare(nowTime, to: schedule.sport_end_time!, toGranularity: .minute) != .orderedAscending) || (schedule.sport == nil && Calendar.current.compare(nowTime, to: end_time, toGranularity: .minute) != .orderedAscending) {     // after school
+            else if Calendar.current.compare(end_time, to: nowTime, toGranularity: .minute) != .orderedDescending {     // after school
                 ModLabel.isHidden = true
                 CycleDayLabel.isHidden = true
                 ClassLabel1.isHidden = true
@@ -228,21 +228,6 @@ class DashboardViewController: UIViewController {
                 NextClassLabel.isHidden = true
                 ExtraLabel.isHidden = false
                 ExtraLabel.text = "School is Over!"
-            }
-            else if schedule.sport != nil && Calendar.current.compare(nowTime, to: end_time, toGranularity: .minute) != .orderedAscending && Calendar.current.compare(nowTime, to: schedule.sport_end_time!, toGranularity: .minute) == .orderedAscending { // in sports
-                ModLabel.isHidden = true
-                CycleDayLabel.isHidden = true
-                ClassLabel1.isHidden = false
-                ClassLabel1.text = schedule.sport
-                ClassLabel2.isHidden = false
-                ClassLabel2.text = schedule.sport! + " Ends"
-                ClassTimeLabel1.isHidden = false
-                ClassTimeLabel1.text = friendly_time_fmtr.string(from: end_time)
-                ClassTimeLabel2.isHidden = false
-                ClassTimeLabel2.text = friendly_time_fmtr.string(from: schedule.sport_end_time!)
-                CurrentClassLabel.isHidden = false
-                NextClassLabel.isHidden = false
-                ExtraLabel.isHidden = true
             }
             else {  // during school
                 var current_mod = -1
@@ -286,7 +271,7 @@ class DashboardViewController: UIViewController {
                 let next_class_name: String
                 let next_class_time: Date
                 if (next_class_mod >= mod_times.count) { // No next class
-                    next_class_name = (schedule.sport == nil) ? "School Ends" : schedule.sport!
+                    next_class_name = "School Ends"
                     next_class_time = end_time
                 }
                 else {

@@ -35,14 +35,15 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         scheduleCollectionView.reloadData()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
+    @IBAction func pressedSaveButton(_ sender: Any) {
+        save()
+    }
 
-        if segue.identifier == "Next" {
-            let sportController = segue.destination as! SportEditorController
+    private func save() {
+        try! newSchedule.saveToFile(schedule_file_url)
+        schedule = newSchedule
 
-            sportController.setup(newSchedule.class_names, newSchedule.classes, schedule.sport, schedule.sport_end_time)
-        }
+        navigationController?.popToViewController((navigationController?.viewControllers.first)!, animated: true)
     }
 
     // Get number of cells

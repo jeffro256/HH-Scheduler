@@ -11,18 +11,14 @@ import Foundation
 class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     var class_names: [String]
     var classes: [[Int]]                // 6 x 18
-    var sport: String?
-    var sport_end_time: Date?
 
     override var description: String {
-        return "class_names: \(class_names)\nclasses: \(classes)\nsport: \(String(describing: sport))\nsport_end_time: \(String(describing: sport_end_time))"
+        return "class_names: \(class_names)\nclasses: \(classes)"
     }
 
     override init() {
         class_names = ["Free Time"]
         classes = [[Int]](repeating: [Int](repeating: 0, count: NUM_MODS), count: NUM_DAYS)
-        sport = nil
-        sport_end_time = nil
 
         super.init()
     }
@@ -30,14 +26,12 @@ class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     init(class_names: [String], classes: [[Int]], sport: String? = nil, sport_end_time: Date? = nil) {
         self.class_names = class_names
         self.classes = classes
-        self.sport = sport
-        self.sport_end_time = sport_end_time
 
         super.init()
     }
 
     func copy(with zone: NSZone? = nil) -> Any {
-        let copy = Schedule(class_names: class_names, classes: classes, sport: sport, sport_end_time: sport_end_time)
+        let copy = Schedule(class_names: class_names, classes: classes)
         return copy
     }
 
@@ -68,8 +62,6 @@ class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     required init(coder aDecoder: NSCoder) {
         class_names = aDecoder.decodeObject(forKey: "class_names") as! [String]
         classes = aDecoder.decodeObject(forKey: "classes") as! [[Int]]
-        sport = aDecoder.decodeObject(forKey: "sport") as! String?
-        sport_end_time = aDecoder.decodeObject(forKey: "sport_end_time") as! Date?
 
         super.init()
     }
@@ -77,8 +69,6 @@ class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(class_names, forKey: "class_names")
         aCoder.encode(classes, forKey: "classes")
-        aCoder.encode(sport, forKey: "sport")
-        aCoder.encode(sport_end_time, forKey: "sport_end_time")
     }
 
     // ScheduleDataSource Interface
@@ -128,21 +118,5 @@ class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
 
     func setClassIndex(day: Int, mod: Int, index: Int) {
         classes[day][mod] = index
-    }
-
-    func getSportName() -> String? {
-        return sport
-    }
-
-    func setSportName(name: String?) {
-        sport = name
-    }
-
-    func getSportEndTime() -> Date? {
-        return sport_end_time
-    }
-
-    func setSportEndTime(time: Date?) {
-        sport_end_time = time
     }
 }

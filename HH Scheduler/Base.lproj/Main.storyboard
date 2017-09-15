@@ -328,8 +328,9 @@
                                     <constraint firstItem="CFS-41-huu" firstAttribute="centerX" secondItem="jJy-ca-S6u" secondAttribute="centerX" id="wyr-Pu-yzU"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="543" width="375" height="75"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oOF-BD-f14" secondAttribute="height" multiplier="5:1" id="GSm-vk-Hml"/>
                                 </constraints>
@@ -911,9 +912,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="F0s-xt-ZHg">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="pyc-8s-ueS">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="pyc-8s-ueS">
                             <connections>
-                                <segue destination="CR6-hp-ZoO" kind="show" identifier="Next" id="O8Z-MP-tT9"/>
+                                <action selector="pressedSaveButton:" destination="hzr-C9-65Z" id="xNt-wY-SZf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -925,84 +926,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2d-Mi-pI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2715" y="484"/>
-        </scene>
-        <!--Sport Editor Controller-->
-        <scene sceneID="0LF-e9-dSC">
-            <objects>
-                <viewController id="CR6-hp-ZoO" customClass="SportEditorController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1mN-ke-tqF"/>
-                        <viewControllerLayoutGuide type="bottom" id="PRc-Dc-bc2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UlO-Gm-cQ8">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YXl-wM-yao">
-                                <rect key="frame" x="163" y="65" width="51" height="31"/>
-                                <connections>
-                                    <action selector="sportSwitch:" destination="CR6-hp-ZoO" eventType="valueChanged" id="ufc-Gp-xFr"/>
-                                </connections>
-                            </switch>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sport Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="569-on-pcO">
-                                <rect key="frame" x="138" y="136" width="99" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="CR6-hp-ZoO" id="1rH-tL-EgP"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport?:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9L7-LC-SZc">
-                                <rect key="frame" x="87" y="70" width="56" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fm-Pj-PvI">
-                                <rect key="frame" x="149" y="307" width="77" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="9iS-r8-2GN">
-                                <rect key="frame" x="0.0" y="338" width="375" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="521741305.76894403">
-                                    <!--2017-07-14 16:08:25 +0000-->
-                                </date>
-                            </datePicker>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="YXl-wM-yao" firstAttribute="centerY" secondItem="9L7-LC-SZc" secondAttribute="centerY" id="23u-Ol-Vlq"/>
-                            <constraint firstItem="569-on-pcO" firstAttribute="top" secondItem="YXl-wM-yao" secondAttribute="bottom" constant="40" id="3QK-7f-n9p"/>
-                            <constraint firstItem="PRc-Dc-bc2" firstAttribute="top" secondItem="9iS-r8-2GN" secondAttribute="bottom" id="3RV-Kj-3Bq"/>
-                            <constraint firstItem="YXl-wM-yao" firstAttribute="leading" secondItem="9L7-LC-SZc" secondAttribute="trailing" constant="20" id="Nv0-1h-w4b"/>
-                            <constraint firstItem="5fm-Pj-PvI" firstAttribute="centerX" secondItem="UlO-Gm-cQ8" secondAttribute="centerX" id="Pp0-ry-3j4"/>
-                            <constraint firstItem="YXl-wM-yao" firstAttribute="centerX" secondItem="UlO-Gm-cQ8" secondAttribute="centerX" id="RAH-ZM-Pem"/>
-                            <constraint firstItem="569-on-pcO" firstAttribute="centerX" secondItem="UlO-Gm-cQ8" secondAttribute="centerX" id="SkY-gG-GWx"/>
-                            <constraint firstItem="9iS-r8-2GN" firstAttribute="leading" secondItem="UlO-Gm-cQ8" secondAttribute="leading" id="eS8-j3-QhW"/>
-                            <constraint firstItem="YXl-wM-yao" firstAttribute="top" secondItem="1mN-ke-tqF" secondAttribute="bottom" constant="65" id="lgi-o1-UDA"/>
-                            <constraint firstAttribute="trailing" secondItem="9iS-r8-2GN" secondAttribute="trailing" id="lj5-eW-YqO"/>
-                            <constraint firstItem="9iS-r8-2GN" firstAttribute="top" secondItem="5fm-Pj-PvI" secondAttribute="bottom" constant="10" id="x8C-om-H9k"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="q5X-KL-DTX">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="pNu-5j-qHI">
-                            <connections>
-                                <action selector="pressedSave:" destination="CR6-hp-ZoO" id="xco-bx-FIu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="datePicker" destination="9iS-r8-2GN" id="z1J-vR-J43"/>
-                        <outlet property="sportSwitch" destination="YXl-wM-yao" id="Wcx-BX-Cb9"/>
-                        <outlet property="textField" destination="569-on-pcO" id="Cqc-f7-utN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6g9-QS-uie" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3772.5" y="482.74647887323943"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1030,7 +953,7 @@
                 <navigationController title="Schedule Nav" automaticallyAdjustsScrollViewInsets="NO" id="2nZ-fz-BdK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Schedule" image="Unclicked Schedule Icon" selectedImage="Clicked Schedule Icon" id="s6x-Oz-qDO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z31-aH-5Bc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Z31-aH-5Bc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1049,7 +972,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FLZ-jE-1lo" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="u5b-mb-pmx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kiV-oJ-lg3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kiV-oJ-lg3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
