@@ -12,12 +12,8 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var scheduleCollectionView: ScheduleCollectionView!
     @IBOutlet weak var cycleDayStack: UIView!
 
-     override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-
-        if schedule == nil {
-            schedule = Schedule.defaultLoadFromFile(schedule_file_url)
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

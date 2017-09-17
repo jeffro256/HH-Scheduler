@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         IQKeyboardManager.sharedManager().enable = true
 
+        schedule = Schedule.defaultLoadFromFile(schedule_file_url)
+
         return true
     }
 
