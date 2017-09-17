@@ -119,4 +119,9 @@ class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     func setClassIndex(day: Int, mod: Int, index: Int) {
         classes[day][mod] = index
     }
+
+    func getBlock(day: Int, mod: Int) -> ScheduleBlock {
+        let class_index = getClassIndex(day: day, mod: mod)
+        return ScheduleBlock(name: getClassName(index: class_index), classID: class_index, color: color_pallette[(class_index) % color_pallette.count])
+    }
 }

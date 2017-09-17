@@ -35,8 +35,8 @@ class ContextSchedule {
         return a
     }()
 
-    public var personalSchedule: ScheduleDataSource?
-
+    private var numDays: Int
+    private var numMods: Int
     private var regStartTime: Date
     private var regEndTime: Date
     private var lateStartTime: Date
@@ -51,6 +51,8 @@ class ContextSchedule {
     private var specialBlocks: [ScheduleBlock]
 
     public init(jsonURL: URL) {
+        numDays = 0
+        numMods = 0
         regStartTime = Date(timeIntervalSince1970: 0)
         regEndTime = Date(timeIntervalSince1970: 0)
         lateStartTime = Date(timeIntervalSince1970: 0)
@@ -126,32 +128,58 @@ class ContextSchedule {
             bestLandmark.0 = Calendar.current.date(byAdding: .day, value: 1, to: bestLandmark.0)!
         }
 
-        let cycleDay = bestLandmark.1 % NUM_DAYS
+        let cycleDay = bestLandmark.1 % numDays
 
         return cycleDay
     }
 
-    /////////////////////////////////////////////////////////////////////////////
-    //////////////////// VVVVVVV todo VVVVV
-    public func getBlocks(_ date: Date) -> [ContextScheduleBlock]? {
-        if !isScheduledDay(date) { return nil }
-
+    public func getStartTime(_ date: Date) -> Date? {
         let cycleDay = getCycleDay(date)
+        guard cycleDay >= 0 else { return nil }
         let isDDay = cycleDay == 3
         let isWednesday = Calendar.current.dateComponents([.weekday], from: date).weekday == 4
-        let blockTimes: [Date]
+        return getWeirdDay(date)?.startTime ?? ((isDDay || isWednesday) ? lateStartTime : regStartTime)
+    }
 
-        if isWeirdDay(date) {
+    public func getEndTime(_ date: Date) -> Date? {
+        let cycleDay = getCycleDay(date)
+        guard cycleDay >= 0 else { return nil }
+        let isDDay = cycleDay == 3
+        let isWednesday = Calendar.current.dateComponents([.weekday], from: date).weekday == 4
+        return getWeirdDay(date)?.endTime ?? ((isDDay || isWednesday) ? lateEndTime : regEndTime)
+    }
 
-        }
-        else if isDDay || isWednesday {
-            blockTimes = lateModTimes
-        }
-        else {
-            blockTimes = regModTimes
+    public func getBlocks(_ date: Date, from personalSchedule: Schedule) -> [ContextScheduleBlock] {
+        guard isScheduledDay(date) else { return [] }
+
+        let cycleDay = getCycleDay(date)
+
+        let isDDay = cycleDay == 3
+        let isWednesday = Calendar.current.dateComponents([.weekday], from: date).weekday == 4
+        let isLateDay = isDDay || isWednesday
+        let weirdDay = getWeirdDay(date)
+        let weirdBlockTimes = weirdDay?.blockIndexes?.map { $0.0 }
+        let blockTimes = weirdBlockTimes ?? (isLateDay ? lateModTimes : regModTimes)
+        let weirdBlockIndexes = weirdDay?.blockIndexes?.map { $0.1 }
+        let blockIndexes = weirdBlockIndexes ?? [Int](0..<numMods)
+
+        guard blockTimes.count == blockIndexes.count else { return [] }
+
+        var blocks = [ContextScheduleBlock]()
+        let numBlocks = blockTimes.count
+        let endTime = getEndTime(date)!
+        for b in 0..<numBlocks {
+            let blockStart = blockTimes[0]
+            let blockEnd = (b == numBlocks - 1) ? endTime : blockTimes[b + 1]
+            let blockIndex = blockIndexes[b]
+            let baseBlock = (blockIndex < 0) ? specialBlocks[-(blockIndex + 1)] : personalSchedule.getBlock(day: cycleDay, mod: blockIndex)
+
+            let block = ContextScheduleBlock(name: baseBlock.name, classID: baseBlock.classID, color: baseBlock.color, startTime: blockStart, endTime: blockEnd, from: self, normal: blockIndex >= 0, mod: (blockIndex >= 0) ? blockIndex : nil)
+
+            blocks.append(block)
         }
 
-        return nil
+        return blocks
     }
 
     public func getWeirdDayName(_ testDate: Date) -> String? {
@@ -162,6 +190,9 @@ class ContextSchedule {
         guard let data = try? Data(contentsOf: jsonURL) else { print("Failed to get data"); return }
         guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) else { print("Failed to parse data"); return }
         guard let jsonDict = jsonObject as? [String: Any] else { return }
+
+        guard let numDays = jsonDict["NumDays"] as? Int else { return }
+        guard let numMods = jsonDict["NumMods"] as? Int else { return }
 
         guard let regStartTimeStr = jsonDict["RegularStartTime"] as? String else { return }
         guard let regStartTime = time(from: regStartTimeStr) else { return }
@@ -240,7 +271,7 @@ class ContextSchedule {
                     }
                     else {
                         let blockIndex = -(specialBlocks.count + 1)
-                        let specialBlock = ScheduleBlock(name: mod[1], color: hh_tint)
+                        let specialBlock = ScheduleBlock(name: mod[1], classID: blockIndex, color: hh_tint)
 
                         blockIndexes?.append((blockTime, blockIndex))
                         specialBlocks.append(specialBlock)
@@ -253,6 +284,8 @@ class ContextSchedule {
             weirdDays.append(weirdDay)
         }
 
+        self.numDays = numDays
+        self.numMods = numMods
         self.regStartTime = regStartTime
         self.regEndTime = regEndTime
         self.lateStartTime = lateStartTime
@@ -265,6 +298,10 @@ class ContextSchedule {
         self.holidays = holidays
         self.weirdDays = weirdDays
         self.specialBlocks = specialBlocks
+    }
+
+    private func getWeirdDay(_ date: Date) -> WeirdDay? {
+        return weirdDays.first(where: { $0.date.dayCompare(date) == .orderedSame })
     }
 
     private func date(from string: String) -> Date? {

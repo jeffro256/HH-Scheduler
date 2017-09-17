@@ -25,6 +25,15 @@ class HomeViewController: UIViewController {
         return a
     }()
 
+    private let niceTimeFormatter: DateFormatter = {
+        let a = DateFormatter()
+        a.dateFormat = "hh:mm aa"
+        a.locale = Locale(identifier: "en_US")
+        a.timeZone = TimeZone(abbreviation: "CST")
+
+        return a
+    }()
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,22 +47,28 @@ class HomeViewController: UIViewController {
 
         let dateText = niceDateFormatter.string(from: now)
         let dayShortDesc: String
+        let mainText: String
 
         if cschedule.isScheduledDay(now) {
             let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
             dayShortDesc = "\(cycleCharacter) DAY"
+            mainText = "Class"
         }
         else if cschedule.isSchoolDay(now) {
-            dayShortDesc = cschedule.getWeirdDayName(now)!
+            dayShortDesc = "Weird Day"
+            mainText = cschedule.getWeirdDayName(now)!
         }
         else if cschedule.isHoliday(now) {
             dayShortDesc = "Day Off"
+            mainText = ""
         }
         else if !cschedule.isInSchoolYear(now) {
             dayShortDesc = "Summer"
+            mainText = ""
         }
         else { // I assume it's the weekend
             dayShortDesc = "Weekend"
+            mainText = ""
         }
 
         if !cschedule.isScheduledDay(now) {
@@ -69,10 +84,19 @@ class HomeViewController: UIViewController {
             case 52:
                 label.text = dayShortDesc
             case 53:
-                break
+                label.text = mainText
             default:
                 break
             }
+        }
+
+        print("hi")
+        let testDateComponents = DateComponents(year: 2017, month: 9, day: 14)
+        let testDate = Calendar.current.date(from: testDateComponents)!
+        let blocks = cschedule.getBlocks(testDate, from: schedule)
+
+        for block in blocks {
+            print(block.name, niceTimeFormatter.string(from: block.startTime), block.isNormal, block.mod ?? "-", block.classID)
         }
     }
 }
