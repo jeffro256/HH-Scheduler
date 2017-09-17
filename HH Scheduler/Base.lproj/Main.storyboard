@@ -17,7 +17,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Home-->
+        <!--Dashboard View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="DashboardViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
@@ -151,7 +151,7 @@
                             <outletCollection property="gestureRecognizers" destination="5bI-DB-Ae4" appends="YES" id="ejV-ke-rEC"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="Unclicked House Icon" selectedImage="Clicked House Icon" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="Circle1" destination="ATr-X2-RlR" id="LMq-gS-PmI"/>
                         <outlet property="Circle2" destination="A2L-jR-lsd" id="vPe-kU-VK9"/>
@@ -938,9 +938,9 @@
                         <color key="selectedImageTintColor" red="0.76862745098039209" green="0.086274509803921567" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="2nZ-fz-BdK" kind="relationship" relationship="viewControllers" id="euH-o0-Sq0"/>
                         <segue destination="FLZ-jE-1lo" kind="relationship" relationship="viewControllers" id="ODv-RN-kqu"/>
+                        <segue destination="2nZ-fz-BdK" kind="relationship" relationship="viewControllers" id="euH-o0-Sq0"/>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -953,7 +953,7 @@
                 <navigationController title="Schedule Nav" automaticallyAdjustsScrollViewInsets="NO" id="2nZ-fz-BdK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Schedule" image="Unclicked Schedule Icon" selectedImage="Clicked Schedule Icon" id="s6x-Oz-qDO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Z31-aH-5Bc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z31-aH-5Bc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -966,13 +966,13 @@
             </objects>
             <point key="canvasLocation" x="748" y="484"/>
         </scene>
-        <!--Item-->
+        <!--Home-->
         <scene sceneID="3nJ-ct-eYi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FLZ-jE-1lo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="u5b-mb-pmx"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="Unclicked House Icon" selectedImage="Clicked House Icon" id="u5b-mb-pmx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kiV-oJ-lg3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kiV-oJ-lg3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -5,6 +5,8 @@ Short-Term:
 -----------
 *  Add notifications
 *  Finish the logistics of `HomeViewController`
+*  Remove `DashboardViewController`
+*  Remove `AddGradient.swift` 
 
 Long-Term:
 ----------

@@ -28,11 +28,6 @@ let schedule_info_cache_file_name = "sinfo.cache.txt"
 let schedule_info_cache_file_url: URL =
     document_dir_url.appendingPathComponent(schedule_info_cache_file_name)
 
-enum ViewControllerIndexes: Int {
-    case Dashboard = 0
-    case Schedule
-}
-
 var schedule: Schedule!
 var cycle_day = -1
 
