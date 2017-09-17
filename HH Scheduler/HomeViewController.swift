@@ -37,6 +37,10 @@ class HomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        if schedule == nil {
+            schedule = Schedule.defaultLoadFromFile(schedule_file_url)
+        }
+
         cschedule = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
 
         updateUI()
