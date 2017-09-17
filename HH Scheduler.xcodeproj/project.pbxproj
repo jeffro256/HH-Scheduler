@@ -37,6 +37,7 @@
 		367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D02DE1DA527E8005740EA /* StringExtension.swift */; };
 		369468001F4F949D0097A534 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369467FF1F4F949D0097A534 /* CALayerExtension.swift */; };
 		369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* ScheduleDataSource.swift */; };
+		369734D21F6E0E66003C78B6 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 369734D11F6E0E66003C78B6 /* TODO.md */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
 		36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */; };
 		36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830221F685AEE00F3327E /* UIColorExtension.swift */; };
@@ -80,6 +81,7 @@
 		367D02DE1DA527E8005740EA /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		369467FF1F4F949D0097A534 /* CALayerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		369468031F510FC50097A534 /* ScheduleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDataSource.swift; sourceTree = "<group>"; };
+		369734D11F6E0E66003C78B6 /* TODO.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIG JOHN.otf"; sourceTree = "<group>"; };
 		36E830221F685AEE00F3327E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				3679572E1D7E290E0096163B /* AddGradient.swift */,
 				360E28311F1454280052C799 /* ScheduleEditorViewController.swift */,
 				369468031F510FC50097A534 /* ScheduleDataSource.swift */,
+				369734D11F6E0E66003C78B6 /* TODO.md */,
 				360E28331F1540390052C799 /* Schedule.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
 				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
@@ -299,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				369734D21F6E0E66003C78B6 /* TODO.md in Resources */,
 				36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */,
 				362310311D7BAB28004F98FB /* Assets.xcassets in Resources */,
 				3623102F1D7BAB28004F98FB /* Main.storyboard in Resources */,

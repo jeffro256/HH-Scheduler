@@ -96,7 +96,7 @@ class HomeViewController: UIViewController {
         let blocks = cschedule.getBlocks(testDate, from: schedule)
 
         for block in blocks {
-            print(block.name, niceTimeFormatter.string(from: block.startTime), block.isNormal, block.mod ?? "-", block.classID)
+            print(block.name, niceTimeFormatter.string(from: block.startTime), block.mod ?? "-", block.classID)
         }
     }
 }

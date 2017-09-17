@@ -174,7 +174,7 @@ class ContextSchedule {
             let blockIndex = blockIndexes[b]
             let baseBlock = (blockIndex < 0) ? specialBlocks[-(blockIndex + 1)] : personalSchedule.getBlock(day: cycleDay, mod: blockIndex)
 
-            let block = ContextScheduleBlock(name: baseBlock.name, classID: baseBlock.classID, color: baseBlock.color, startTime: blockStart, endTime: blockEnd, from: self, normal: blockIndex >= 0, mod: (blockIndex >= 0) ? blockIndex : nil)
+            let block = ContextScheduleBlock(name: baseBlock.name, classID: baseBlock.classID, color: baseBlock.color, startTime: blockStart, endTime: blockEnd, from: self, mod: (blockIndex >= 0) ? blockIndex : nil)
 
             blocks.append(block)
         }

@@ -37,12 +37,10 @@ class ContextScheduleBlock: ScheduleBlock {
     public var startTime: Date
     public var endTime: Date
     public var schedule: ContextSchedule
-    public var isNormal: Bool
     public var mod: Int?
 
-    public init(name: String, classID: Int,  color: UIColor?, startTime: Date, endTime: Date, from schedule: ContextSchedule, normal isNormal: Bool, mod: Int? = nil) {
+    public init(name: String, classID: Int,  color: UIColor?, startTime: Date, endTime: Date, from schedule: ContextSchedule, mod: Int? = nil) {
         self.schedule = schedule
-        self.isNormal = isNormal
         self.startTime = startTime
         self.endTime = endTime
         self.mod = mod
