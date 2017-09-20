@@ -19,6 +19,13 @@ class ScheduleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        highlightCycleDay()
+
+        scheduleCollectionView.setDataSource(scheduleSource: schedule)
+        scheduleCollectionView.reloadData()
+    }
+
+    public func highlightCycleDay() {
         let base_tag_num = 100
         for i in 0..<NUM_DAYS {
             if let day_label = cycleDayStack.viewWithTag(i + base_tag_num) as? UILabel {
@@ -30,9 +37,6 @@ class ScheduleViewController: UIViewController {
                 }
             }
         }
-
-        scheduleCollectionView.setDataSource(scheduleSource: schedule)
-        scheduleCollectionView.reloadData()
     }
 }
 

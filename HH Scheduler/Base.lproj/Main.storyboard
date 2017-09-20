@@ -195,7 +195,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup">
                                                 <rect key="frame" x="153" y="70" width="49" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -242,7 +242,7 @@
                                                 <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="value">
-                                                <real key="value" value="60"/>
+                                                <real key="value" value="70"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="shouldShowValueText" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="innerRingCapStyle">
@@ -258,7 +258,7 @@
                                                 <real key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="outerRingColor">
-                                                <color key="value" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -385,8 +385,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is where I put the the text for all the notifications, such as Dutch Day, Picture Day, etc." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-Pa-uw1" userLabel="Notification Marquee" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                <rect key="frame" x="0.0" y="510" width="375" height="33"/>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is where I put the the text for all the notifications, such as Dutch Day, Picture Day, etc." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-Pa-uw1" userLabel="Notification Marquee" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                <rect key="frame" x="0.0" y="509" width="375" height="33"/>
                                 <color key="backgroundColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -399,12 +399,6 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="leadingBuffer">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="scrollRate">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
@@ -413,9 +407,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oOF-BD-f14" firstAttribute="top" secondItem="JJI-Pa-uw1" secondAttribute="bottom" id="5DH-Ll-0a3"/>
+                            <constraint firstItem="oOF-BD-f14" firstAttribute="top" secondItem="JJI-Pa-uw1" secondAttribute="bottom" constant="1" id="5DH-Ll-0a3"/>
                             <constraint firstItem="JJI-Pa-uw1" firstAttribute="trailing" secondItem="hE7-OG-4AI" secondAttribute="trailing" id="JSD-Z9-z1N"/>
-                            <constraint firstItem="JJI-Pa-uw1" firstAttribute="top" secondItem="qBp-Ib-ENe" secondAttribute="bottom" id="JgP-fG-TJ2"/>
+                            <constraint firstItem="qBp-Ib-ENe" firstAttribute="bottom" secondItem="JJI-Pa-uw1" secondAttribute="top" constant="1" id="JgP-fG-TJ2"/>
                             <constraint firstItem="oOF-BD-f14" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="VMh-nG-sFk"/>
                             <constraint firstAttribute="trailing" secondItem="jJy-ca-S6u" secondAttribute="trailing" id="YfQ-SM-JHl"/>
                             <constraint firstItem="qBp-Ib-ENe" firstAttribute="top" secondItem="jJy-ca-S6u" secondAttribute="bottom" id="ZgN-EN-6fV"/>
@@ -953,7 +947,7 @@
                 <navigationController title="Schedule Nav" automaticallyAdjustsScrollViewInsets="NO" id="2nZ-fz-BdK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Schedule" image="Unclicked Schedule Icon" selectedImage="Clicked Schedule Icon" id="s6x-Oz-qDO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z31-aH-5Bc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Z31-aH-5Bc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -972,7 +966,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FLZ-jE-1lo" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Unclicked House Icon" selectedImage="Clicked House Icon" id="u5b-mb-pmx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kiV-oJ-lg3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kiV-oJ-lg3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

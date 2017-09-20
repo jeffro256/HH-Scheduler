@@ -156,8 +156,8 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newText = (text as NSString).replacingCharacters(in: range, with: string)
-        let attribs = [NSFontAttributeName: textField.font!]
-        let newWidth = newText.size(attributes: attribs).width
+        let attribs = [NSAttributedStringKey.font: textField.font!]
+        let newWidth = newText.size(withAttributes: attribs).width
         return newWidth <= tableView.frame.width - 10
     }
 

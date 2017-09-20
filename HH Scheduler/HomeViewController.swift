@@ -38,21 +38,55 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         cschedule = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
+    }
 
+    public override func viewWillAppear(_ animated: Bool) {
         updateUI()
+    }
+
+    var addedNotificationEdge = false
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if (!addedNotificationEdge) {
+            for label in labels {
+                if label.tag == 54 {
+                    label.layer.zPosition = 2
+                    let backView = UIView()
+                    let borderWidth = CGFloat(1)
+                    backView.backgroundColor = UIColor.black
+                    backView.frame = CGRect(x: label.frame.minX, y: label.frame.minY - borderWidth, width: label.frame.width, height: label.frame.height + 2 * borderWidth)
+                    backView.layer.zPosition = 1
+                    label.superview?.addSubview(backView)
+                    addedNotificationEdge = true
+                    break
+                }
+            }
+        }
     }
 
     private func updateUI() {
         let now = Date()
 
+        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute], from: now))!
+
         let dateText = niceDateFormatter.string(from: now)
         let dayShortDesc: String
-        let mainText: String
+        var mainText = ""
 
         if cschedule.isScheduledDay(now) {
             let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
             dayShortDesc = "\(cycleCharacter) DAY"
-            mainText = "Class"
+
+            let blocks = cschedule.getBlocks(now, from: schedule)
+
+            for block in blocks {
+                if nowTime > block.startTime {
+                    mainText = block.name
+                    progessRing.innerRingColor = block.color ?? freetime_color
+                    break
+                }
+            }
         }
         else if cschedule.isSchoolDay(now) {
             dayShortDesc = "Weird Day"
@@ -85,18 +119,12 @@ class HomeViewController: UIViewController {
                 label.text = dayShortDesc
             case 53:
                 label.text = mainText
+            case 54:
+                // notifications
+                break
             default:
                 break
             }
-        }
-
-        print("hi")
-        let testDateComponents = DateComponents(year: 2017, month: 9, day: 14)
-        let testDate = Calendar.current.date(from: testDateComponents)!
-        let blocks = cschedule.getBlocks(testDate, from: schedule)
-
-        for block in blocks {
-            print(block.name, niceTimeFormatter.string(from: block.startTime), block.mod ?? "-", block.classID)
         }
     }
 }
