@@ -18,7 +18,6 @@
 		362310311D7BAB28004F98FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362310301D7BAB28004F98FB /* Assets.xcassets */; };
 		3679572F1D7E290E0096163B /* AddGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3679572E1D7E290E0096163B /* AddGradient.swift */; };
 		367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D02DE1DA527E8005740EA /* StringExtension.swift */; };
-		369468001F4F949D0097A534 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369467FF1F4F949D0097A534 /* CALayerExtension.swift */; };
 		369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* ScheduleDataSource.swift */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
 		36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */; };
@@ -43,7 +42,6 @@
 		362310351D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3679572E1D7E290E0096163B /* AddGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGradient.swift; sourceTree = "<group>"; };
 		367D02DE1DA527E8005740EA /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		369467FF1F4F949D0097A534 /* CALayerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		369468031F510FC50097A534 /* ScheduleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDataSource.swift; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIG JOHN.otf"; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				36E830221F685AEE00F3327E /* UIColorExtension.swift */,
-				369467FF1F4F949D0097A534 /* CALayerExtension.swift */,
 				36A135DD1E02DFA000956D76 /* DateExtension.swift */,
 				367D02DE1DA527E8005740EA /* StringExtension.swift */,
 			);
@@ -280,7 +277,6 @@
 				36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */,
 				36EB9FE91D9C35D0006B6874 /* Common.swift in Sources */,
 				360E28321F1454280052C799 /* ScheduleEditorViewController.swift in Sources */,
-				369468001F4F949D0097A534 /* CALayerExtension.swift in Sources */,
 				3623102A1D7BAB28004F98FB /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

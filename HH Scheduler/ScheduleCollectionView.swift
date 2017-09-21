@@ -50,6 +50,8 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
                 cell.label.text = scheduleSource.getClassName(index: class_index)
                 cell.backgroundColor = color_pallette[class_index % color_pallette.count]
             }
+
+            cell.addBorder()
         }
 
         return cell
@@ -79,4 +81,9 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
 class ScheduleCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
+
+    public func addBorder() {
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 0.5
+    }
 }

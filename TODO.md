@@ -3,10 +3,11 @@ TODO
 
 Short-Term:
 -----------
-*  Add notifications
+*  Add announcements
 *  Finish the logistics of `HomeViewController`
 *  Remove `DashboardViewController`
-*  Remove `AddGradient.swift` 
+*  Remove `AddGradient.swift`
+*  Fix keyboard issue w/ editing screen
 
 Long-Term:
 ----------
