@@ -66,10 +66,10 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         else {
             let class_info_cell = tableView.dequeueReusableCell(withIdentifier: "ClassInfoCell") as! ClassInfoCell
 
-            class_info_cell.field.text = newSchedule.class_names[indexPath.item]
+            class_info_cell.field.text = newSchedule.getClassName(index: indexPath.item)
             class_info_cell.field.isEnabled = false
             class_info_cell.field.tag = indexPath.item
-            class_info_cell.colorize()
+            class_info_cell.backgroundColor = newSchedule.getClassColor(classID: indexPath.item)
 
             return class_info_cell
         }
@@ -137,6 +137,8 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true) // beware, magic!
 
+        tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0))?.backgroundColor = newSchedule.getClassColor(classID: textField.tag)
+
         return false
     }
 
@@ -189,16 +191,17 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
         let rows = NUM_DAYS + 1
         let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
         let mod = (indexPath.item - indexPath.item / rows - 1) / NUM_DAYS
+        let block = scheduleSource.getBlock(day: day, mod: mod)
 
-        if selected_class == scheduleSource.getClassIndex(day: day, mod: mod) || selected_class == 0 {
+        if selected_class == block.classID || selected_class == 0 {
             cell.label.text = nil
             cell.backgroundColor = freetime_color
 
             scheduleSource.setClassIndex(day: day, mod: mod, index: 0)
         }
         else {
-            cell.label.text = scheduleSource.getClassName(index: selected_class)
-            cell.backgroundColor = color_pallette[selected_class % color_pallette.count]
+            cell.label.text = block.name
+            cell.backgroundColor = block.color
 
             scheduleSource.setClassIndex(day: day, mod: mod, index: selected_class)
         }
@@ -207,17 +210,4 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
 
 class ClassInfoCell: UITableViewCell {
     @IBOutlet weak var field: UITextField!
-
-    @IBAction func hitEnter(_ sender: Any) {
-        colorize()
-    }
-
-    public func colorize() {
-        if field.tag == 0 {
-            self.backgroundColor = freetime_color
-        }
-        else {
-            self.backgroundColor = color_pallette[field.tag % color_pallette.count]
-        }
-    }
 }

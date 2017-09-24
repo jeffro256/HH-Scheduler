@@ -83,7 +83,7 @@ class HomeViewController: UIViewController {
             for block in blocks {
                 if nowTime > block.startTime {
                     mainText = block.name
-                    progessRing.innerRingColor = block.color ?? freetime_color
+                    progessRing.innerRingColor = block.color
                     break
                 }
             }

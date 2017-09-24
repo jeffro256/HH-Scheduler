@@ -40,17 +40,10 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         else {
             let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
             let mod = (indexPath.item - indexPath.item / rows - 1) / NUM_DAYS
-            let class_index = scheduleSource.getClassIndex(day: day, mod: mod)
+            let block = scheduleSource.getBlock(day: day, mod: mod)
 
-            if class_index == 0 {
-                cell.label.text = nil
-                cell.backgroundColor = freetime_color
-            }
-            else {
-                cell.label.text = scheduleSource.getClassName(index: class_index)
-                cell.backgroundColor = color_pallette[class_index % color_pallette.count]
-            }
-
+            cell.label.text = (block.classID == 0) ? nil : block.name
+            cell.backgroundColor = block.color
             cell.addBorder()
         }
 

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Jeffrey Ryan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     var class_names: [String]
@@ -97,6 +97,10 @@ class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
         class_names.append(name)
     }
 
+    func getClassColor(classID: Int) -> UIColor {
+        return (classID == 0) ? freetime_color : color_pallette[(classID - 1) % color_pallette.count]
+    }
+
     func removeClass(index: Int) {
         for d in 0..<classes.count {
             for m in 0..<classes[0].count {
@@ -121,8 +125,9 @@ class Schedule: NSObject, NSCoding, NSCopying, ScheduleDataSource {
     }
 
     func getBlock(day: Int, mod: Int) -> ScheduleBlock {
-        let class_index = getClassIndex(day: day, mod: mod)
-        let class_color = (class_index == 0) ? freetime_color : color_pallette[(class_index - 1) % color_pallette.count]
-        return ScheduleBlock(name: getClassName(index: class_index), classID: class_index, color: class_color)
+        let classIndex = getClassIndex(day: day, mod: mod)
+        let className = getClassName(index: classIndex)
+        let classColor = getClassColor(classID: classIndex)
+        return ScheduleBlock(name: className, classID: classIndex, color: classColor)
     }
 }
