@@ -38,6 +38,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         cschedule = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
+
+        futureClassCollection.cschedule = cschedule
     }
 
     public override func viewWillAppear(_ animated: Bool) {
@@ -130,6 +132,10 @@ class HomeViewController: UIViewController {
 }
 
 class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    public var cschedule: ContextSchedule!
+
+    private var loadDate: Date!
+
     public override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -137,33 +143,24 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         self.delegate = self
     }
 
+    public override func reloadData() {
+        loadDate = Date()
+
+        super.reloadData()
+    }
+
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        /*
-        let numCells = 0
-
-        if numCells == 0 {
-            let noneLabel = UILabel()
-            noneLabel.text = "No Classes"
-            noneLabel.font = UIFont(name: "Helvetica-LightOblique", size: 17)
-
-            self.backgroundView?.removeFromSuperview()
-            self.backgroundView = UIView()
-            self.backgroundView?.backgroundColor = UIColor.white
-            self.backgroundView?.addSubview(noneLabel)
-            noneLabel.center.x = self.backgroundView!.center.x
-            noneLabel.center.y = self.backgroundView!.center.y
-        }
-
-        return numCells
-        */
-        return 1
+        return cschedule.getBlocks(Date(), from: schedule).count
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         return collectionView.dequeueReusableCell(withReuseIdentifier: "FutureClassCell", for: indexPath)
     }
 }
 
-class FutureClassCell: UICollectionView {
-
+class FutureClassCell: UICollectionViewCell {
+    @IBOutlet weak var startTimeLabel: UILabel!
+    @IBOutlet weak var endTimeLabel: UILabel!
+    @IBOutlet weak var classLabel: UILabel!
 }
