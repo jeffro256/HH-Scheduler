@@ -58,8 +58,6 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        addGradient(to: self.view)
         
         if schedule == nil {
             schedule = Schedule.defaultLoadFromFile(schedule_file_url)

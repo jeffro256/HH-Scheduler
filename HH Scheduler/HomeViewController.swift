@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
 
     public override func viewWillAppear(_ animated: Bool) {
         updateUI()
+        futureClassCollection.reloadData()
     }
 
     var addedNotificationEdge = false
@@ -134,7 +135,16 @@ class HomeViewController: UIViewController {
 class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     public var cschedule: ContextSchedule!
 
-    private var loadDate: Date!
+    private var classes = [(Int, String, Date, Date, UIColor)]()
+
+    private let niceTimeFormatter: DateFormatter = {
+        let a = DateFormatter()
+        a.dateFormat = "hh:mm aa"
+        a.locale = Locale(identifier: "en_US")
+        a.timeZone = TimeZone(abbreviation: "CST")
+
+        return a
+    }()
 
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -144,18 +154,65 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
     }
 
     public override func reloadData() {
-        loadDate = Date()
+        let blocks = cschedule.getBlocks(Date(), from: schedule)
+
+        classes = []
+
+        for block in blocks {
+            if classes.count > 0 && block.classID == classes.last!.0 {
+                classes[classes.count-1].3 = block.endTime
+            }
+            else {
+                classes.append((block.classID, block.name, block.startTime, block.endTime, block.color))
+            }
+        }
 
         super.reloadData()
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cschedule.getBlocks(Date(), from: schedule).count
+        return classes.count
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FutureClassCell", for: indexPath) as! FutureClassCell
 
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "FutureClassCell", for: indexPath)
+        let contClass = classes[indexPath.item]
+
+        cell.classLabel.text = contClass.1
+        cell.startTimeLabel.text = niceTimeFormatter.string(from: contClass.2)
+        cell.endTimeLabel.text = niceTimeFormatter.string(from: contClass.3)
+
+        if cell.gradientLayer == nil {
+            addGradient(cell: cell)
+        }
+
+        updateGradient(cell: cell, color: contClass.4)
+
+        return cell
+    }
+
+    private func addGradient(cell: FutureClassCell) {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.white.cgColor, UIColor.gray.cgColor]
+        gradient.locations = [0.0, 1.0]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradient.frame = cell.bounds
+
+        cell.gradientLayer = gradient
+        cell.layer.insertSublayer(gradient, at: 0)
+    }
+
+    private func updateGradient(cell: FutureClassCell, color color1: UIColor) {
+        var hue: CGFloat = 0
+        var sat: CGFloat = 0
+        var lum: CGFloat = 0
+        var alpha: CGFloat = 0
+        color1.getHue(&hue, saturation: &sat, brightness: &lum, alpha: &alpha)
+        let color2 = UIColor(hue: hue, saturation: sat, brightness: lum * 1.1, alpha: alpha)
+
+        cell.gradientLayer.colors = [color2.cgColor, color1.cgColor]
     }
 }
 
@@ -163,4 +220,6 @@ class FutureClassCell: UICollectionViewCell {
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
+
+    public var gradientLayer: CAGradientLayer!
 }

@@ -160,9 +160,6 @@
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="A2L-jR-lsd" secondAttribute="bottom" multiplier="1.2" id="xNF-Zi-gH8"/>
                             <constraint firstItem="A2L-jR-lsd" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="centerX" constant="15" id="xoA-Vm-L8K"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="5bI-DB-Ae4" appends="YES" id="ejV-ke-rEC"/>
-                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="more" id="acW-dT-cKf"/>
                     <connections>
@@ -351,14 +348,14 @@
                                     <constraint firstItem="CFS-41-huu" firstAttribute="centerX" secondItem="jJy-ca-S6u" secondAttribute="centerX" id="wyr-Pu-yzU"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="543" width="375" height="75"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oOF-BD-f14" secondAttribute="height" multiplier="5:1" id="GSm-vk-Hml"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Bcy-Za-WbK">
-                                    <size key="itemSize" width="196" height="50"/>
+                                    <size key="itemSize" width="250" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -721,7 +718,6 @@
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="hitEnter:" destination="44E-Fs-jcb" eventType="editingDidEnd" id="IIB-AP-Vau"/>
                                                         <outlet property="delegate" destination="hzr-C9-65Z" id="mNZ-he-AIC"/>
                                                     </connections>
                                                 </textField>

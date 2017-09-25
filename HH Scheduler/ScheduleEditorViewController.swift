@@ -137,8 +137,6 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true) // beware, magic!
 
-        tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0))?.backgroundColor = newSchedule.getClassColor(classID: textField.tag)
-
         return false
     }
 
@@ -150,6 +148,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
         else {
             newSchedule.setClassName(index: textField.tag, name: textField.text!)
+            tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0))?.backgroundColor = newSchedule.getClassColor(classID: textField.tag)
             scheduleCollectionView.reloadData()
         }
     }
@@ -188,9 +187,9 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ScheduleCell
         let selected_class = scheduleController.getCurrentSelectedClass()
-        let rows = NUM_DAYS + 1
-        let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
-        let mod = (indexPath.item - indexPath.item / rows - 1) / NUM_DAYS
+        let rows = scheduleSource.getDays() + 1
+        let day = indexPath.item % rows - 1
+        let mod = indexPath.item / rows
         let block = scheduleSource.getBlock(day: day, mod: mod)
 
         if selected_class == block.classID || selected_class == 0 {
@@ -200,8 +199,8 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
             scheduleSource.setClassIndex(day: day, mod: mod, index: 0)
         }
         else {
-            cell.label.text = block.name
-            cell.backgroundColor = block.color
+            cell.label.text = scheduleSource.getClassName(index: selected_class)
+            cell.backgroundColor = scheduleSource.getClassColor(classID: selected_class)
 
             scheduleSource.setClassIndex(day: day, mod: mod, index: selected_class)
         }

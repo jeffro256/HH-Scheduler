@@ -169,7 +169,7 @@ class ContextSchedule {
         let numBlocks = blockTimes.count
         let endTime = getEndTime(date)!
         for b in 0..<numBlocks {
-            let blockStart = blockTimes[0]
+            let blockStart = blockTimes[b]
             let blockEnd = (b == numBlocks - 1) ? endTime : blockTimes[b + 1]
             let blockIndex = blockIndexes[b]
             let baseBlock = (blockIndex < 0) ? specialBlocks[-(blockIndex + 1)] : personalSchedule.getBlock(day: cycleDay, mod: blockIndex)

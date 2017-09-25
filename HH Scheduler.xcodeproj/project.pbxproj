@@ -16,7 +16,6 @@
 		3623102C1D7BAB28004F98FB /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3623102B1D7BAB28004F98FB /* ScheduleViewController.swift */; };
 		3623102F1D7BAB28004F98FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3623102D1D7BAB28004F98FB /* Main.storyboard */; };
 		362310311D7BAB28004F98FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362310301D7BAB28004F98FB /* Assets.xcassets */; };
-		3679572F1D7E290E0096163B /* AddGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3679572E1D7E290E0096163B /* AddGradient.swift */; };
 		367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D02DE1DA527E8005740EA /* StringExtension.swift */; };
 		369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* ScheduleDataSource.swift */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
@@ -40,7 +39,6 @@
 		3623102E1D7BAB28004F98FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		362310301D7BAB28004F98FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		362310351D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3679572E1D7E290E0096163B /* AddGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGradient.swift; sourceTree = "<group>"; };
 		367D02DE1DA527E8005740EA /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		369468031F510FC50097A534 /* ScheduleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDataSource.swift; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 				36E830241F69569A00F3327E /* ContextSchedule.swift */,
 				3623102B1D7BAB28004F98FB /* ScheduleViewController.swift */,
 				361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */,
-				3679572E1D7E290E0096163B /* AddGradient.swift */,
 				360E28311F1454280052C799 /* ScheduleEditorViewController.swift */,
 				369468031F510FC50097A534 /* ScheduleDataSource.swift */,
 				360E28331F1540390052C799 /* Schedule.swift */,
@@ -270,7 +267,6 @@
 				369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */,
 				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
 				36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */,
-				3679572F1D7E290E0096163B /* AddGradient.swift in Sources */,
 				360E28341F1540390052C799 /* Schedule.swift in Sources */,
 				367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */,
 				362310281D7BAB28004F98FB /* AppDelegate.swift in Sources */,
