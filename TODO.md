@@ -8,6 +8,7 @@ Short-Term:
 *  Remove `DashboardViewController`
 *  Remove `AddGradient.swift`
 *  Fix keyboard issue w/ editing screen
+*  Figure out why random black box is appearing on the home screen
 
 Long-Term:
 ----------

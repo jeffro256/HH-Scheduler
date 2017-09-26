@@ -44,7 +44,7 @@ class HomeViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         updateUI()
         futureClassCollection.reloadData()
-
+        futureClassCollection.centerCurrentClass()
     }
 
     var addedNotificationEdge = false
@@ -64,6 +64,13 @@ class HomeViewController: UIViewController {
                     addedNotificationEdge = true
                     break
                 }
+            }
+        }
+
+        // I have to have this code b/c some random black box is popping up
+        for view in progressRing.subviews {
+            if view.tag == 0 {
+                view.removeFromSuperview()
             }
         }
     }
@@ -93,7 +100,7 @@ class HomeViewController: UIViewController {
                     progressRing.innerRingColor = block.color
 
                     if let mod = block.mod {
-                        modText = "It is Mod \(mod) right now "
+                        modText = "Mod \(mod+1)"
                     }
 
                     var classStartTime = block.startTime
@@ -132,15 +139,12 @@ class HomeViewController: UIViewController {
         }
         else if cschedule.isHoliday(now) {
             dayShortDesc = "Day Off"
-            mainText = ""
         }
         else if !cschedule.isInSchoolYear(now) {
             dayShortDesc = "Summer"
-            mainText = ""
         }
         else { // I assume it's the weekend
             dayShortDesc = "Weekend"
-            mainText = ""
         }
 
         for label in labels {
@@ -179,6 +183,24 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
 
         self.dataSource = self
         self.delegate = self
+    }
+
+    public func centerCurrentClass() {
+        var currentClassIndex = -1
+
+        let now = Date()
+        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
+
+        for (i, contClass) in classes.enumerated() {
+            if nowTime >= contClass.2 && nowTime < contClass.3 {
+                currentClassIndex = i
+                break
+            }
+        }
+
+        if currentClassIndex >= 0 {
+            self.scrollToItem(at: IndexPath(row: currentClassIndex, section: 0), at: .centeredHorizontally, animated: true)
+        }
     }
 
     public override func reloadData() {
