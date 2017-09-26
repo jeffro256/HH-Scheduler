@@ -13,9 +13,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="AmericanTypewriter.ttc">
-            <string>AmericanTypewriter</string>
-        </array>
         <array key="ArialRoundedMTBold.ttf">
             <string>ArialRoundedMTBold</string>
         </array>
@@ -198,12 +195,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBp-Ib-ENe" userLabel="Ring Container">
-                                <rect key="frame" x="0.0" y="139" width="375" height="370.5"/>
+                                <rect key="frame" x="0.0" y="139" width="375" height="395.5"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4q-QV-pCy" userLabel="Class Progress Ring" customClass="UICircularProgressRingView" customModule="UICircularProgressRing">
-                                        <rect key="frame" x="10" y="8" width="355" height="354.5"/>
+                                        <rect key="frame" x="10.5" y="20.5" width="355" height="354.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup">
+                                            <label hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup" userLabel="Mod Label">
                                                 <rect key="frame" x="153" y="70" width="49" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -216,7 +213,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="53" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-eK-4ph" userLabel="Class Label">
-                                                <rect key="frame" x="127" y="167" width="101" height="21"/>
+                                                <rect key="frame" x="127" y="167.5" width="101" height="21"/>
                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -349,20 +346,20 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-BD-f14" customClass="FutureClassCollection" customModule="HH_Scheduler" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="543" width="375" height="75"/>
+                                <rect key="frame" x="0.0" y="534.5" width="375" height="83.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="oOF-BD-f14" secondAttribute="height" multiplier="5:1" id="GSm-vk-Hml"/>
+                                    <constraint firstAttribute="width" secondItem="oOF-BD-f14" secondAttribute="height" multiplier="9:2" id="GSm-vk-Hml"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Bcy-Za-WbK">
-                                    <size key="itemSize" width="250" height="50"/>
+                                    <size key="itemSize" width="250" height="65"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FutureClassCell" id="ogc-g2-udN" customClass="FutureClassCell" customModule="HH_Scheduler" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="12.5" width="250" height="50"/>
+                                        <rect key="frame" x="10" y="17" width="250" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
@@ -426,38 +423,16 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is where I put the the text for all the notifications, such as Dutch Day, Picture Day, etc." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-Pa-uw1" userLabel="Notification Marquee" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                <rect key="frame" x="0.0" y="508.5" width="375" height="33.5"/>
-                                <color key="backgroundColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="1" height="-1"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
-                                        <real key="value" value="40"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="leadingBuffer">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="scrollRate">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oOF-BD-f14" firstAttribute="top" secondItem="JJI-Pa-uw1" secondAttribute="bottom" constant="1" id="5DH-Ll-0a3"/>
-                            <constraint firstItem="JJI-Pa-uw1" firstAttribute="trailing" secondItem="hE7-OG-4AI" secondAttribute="trailing" id="JSD-Z9-z1N"/>
-                            <constraint firstItem="qBp-Ib-ENe" firstAttribute="bottom" secondItem="JJI-Pa-uw1" secondAttribute="top" constant="1" id="JgP-fG-TJ2"/>
+                            <constraint firstItem="oOF-BD-f14" firstAttribute="top" secondItem="qBp-Ib-ENe" secondAttribute="bottom" id="P3E-g7-zzX"/>
                             <constraint firstItem="oOF-BD-f14" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="VMh-nG-sFk"/>
                             <constraint firstAttribute="trailing" secondItem="jJy-ca-S6u" secondAttribute="trailing" id="YfQ-SM-JHl"/>
                             <constraint firstItem="qBp-Ib-ENe" firstAttribute="top" secondItem="jJy-ca-S6u" secondAttribute="bottom" id="ZgN-EN-6fV"/>
                             <constraint firstAttribute="trailing" secondItem="qBp-Ib-ENe" secondAttribute="trailing" id="aFP-9f-Hpc"/>
                             <constraint firstItem="d8l-CZ-mck" firstAttribute="top" secondItem="oOF-BD-f14" secondAttribute="bottom" id="ffY-C4-WcK"/>
                             <constraint firstAttribute="trailing" secondItem="oOF-BD-f14" secondAttribute="trailing" id="ftS-LC-OIr"/>
-                            <constraint firstItem="JJI-Pa-uw1" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="tAo-Ec-SU4"/>
                             <constraint firstItem="jJy-ca-S6u" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="uGT-HG-qBX"/>
                             <constraint firstItem="jJy-ca-S6u" firstAttribute="top" secondItem="PvD-KC-aan" secondAttribute="bottom" id="yCY-ZI-Xxt"/>
                             <constraint firstItem="qBp-Ib-ENe" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="z7E-wv-6IN"/>
@@ -466,12 +441,11 @@
                     <navigationItem key="navigationItem" title="Home" id="9zT-Qp-CPX"/>
                     <connections>
                         <outlet property="futureClassCollection" destination="oOF-BD-f14" id="o63-dg-BY6"/>
-                        <outlet property="progessRing" destination="p4q-QV-pCy" id="kE7-cF-qQr"/>
+                        <outlet property="progressRing" destination="p4q-QV-pCy" id="Qlv-kC-fc8"/>
                         <outletCollection property="labels" destination="c8I-gE-WTu" collectionClass="NSMutableArray" id="fyE-j4-sl9"/>
                         <outletCollection property="labels" destination="0uT-NA-tup" collectionClass="NSMutableArray" id="PYk-aB-SLn"/>
                         <outletCollection property="labels" destination="jpW-eK-4ph" collectionClass="NSMutableArray" id="NaE-KJ-cca"/>
                         <outletCollection property="labels" destination="CFS-41-huu" collectionClass="NSMutableArray" id="DcU-aA-PEC"/>
-                        <outletCollection property="labels" destination="JJI-Pa-uw1" collectionClass="NSMutableArray" id="NYA-dT-qaq"/>
                         <outletCollection property="labels" destination="sZD-Ne-Gbi" collectionClass="NSMutableArray" id="p5M-nR-Auj"/>
                         <outletCollection property="labels" destination="MvA-dB-8GE" collectionClass="NSMutableArray" id="nj7-PI-kdx"/>
                     </connections>

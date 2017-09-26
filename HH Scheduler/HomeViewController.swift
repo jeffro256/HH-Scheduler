@@ -3,14 +3,19 @@
 //  HH Scheduler
 //
 //  Created by Jeffrey Ryan on 9/10/17.
-//  Copyright © 2017 Jeffrey Ryan. All rights reserved.
+//  Copyright © 2017 Jeffrey Ryan.
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 import UICircularProgressRing
 
 class HomeViewController: UIViewController {
-    @IBOutlet weak var progessRing: UICircularProgressRingView!
+    @IBOutlet weak var progressRing: UICircularProgressRingView!
     @IBOutlet weak var futureClassCollection: FutureClassCollection!
     @IBOutlet var labels: [UILabel]!
 
@@ -34,8 +39,6 @@ class HomeViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
-        futureClassCollection.cschedule = cschedule
     }
 
     public override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +78,7 @@ class HomeViewController: UIViewController {
         var mainText = ""
         var modText = ""
 
-        progessRing.value = progessRing.minValue
+        progressRing.value = progressRing.minValue
 
         if cschedule.isScheduledDay(now) {
             let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
@@ -87,10 +90,10 @@ class HomeViewController: UIViewController {
                 if nowTime >= block.startTime && nowTime < block.endTime {
                     let classID = block.classID
                     mainText = block.name
-                    progessRing.innerRingColor = block.color
+                    progressRing.innerRingColor = block.color
 
                     if let mod = block.mod {
-                        modText = "Mod \(mod)"
+                        modText = "It is Mod \(mod) right now "
                     }
 
                     var classStartTime = block.startTime
@@ -117,7 +120,7 @@ class HomeViewController: UIViewController {
                     let totalSecondsInClass = Calendar.current.dateComponents([.second], from: classStartTime, to: classEndTime).second!
                     let secondSinceClassStart = Calendar.current.dateComponents([.second], from: classStartTime, to: nowTime).second!
                     let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
-                    progessRing.value = progessRing.minValue + (progessRing.maxValue - progessRing.minValue) * ratioDoneWithClass
+                    progressRing.value = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
 
                     break
                 }
@@ -160,8 +163,6 @@ class HomeViewController: UIViewController {
 }
 
 class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    public var cschedule: ContextSchedule!
-
     private var classes = [(Int, String, Date, Date, UIColor)]()
 
     private let niceTimeFormatter: DateFormatter = {
