@@ -27,9 +27,11 @@ class ScheduleViewController: UIViewController {
 
     public func highlightCycleDay() {
         let base_tag_num = 100
+        let cycleDay = cschedule.getCycleDay(Date())
+        guard cycleDay >= 0 else { return }
         for i in 0..<NUM_DAYS {
             if let day_label = cycleDayStack.viewWithTag(i + base_tag_num) as? UILabel {
-                if i == cycle_day {
+                if i == cycleDay {
                     day_label.textColor = hh_tint
                 }
                 else {

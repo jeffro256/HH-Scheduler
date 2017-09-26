@@ -89,7 +89,6 @@ class DashboardViewController: UIViewController {
         let is_weird_day = weird_days.contains(where: { if now.dayCompare($0.0) == .orderedSame { weird_mod_times = $0.1; weird_start_time = $0.2; weird_end_time = $0.3; return true } else { return false } })
 
         if is_holiday || is_weekend {
-            cycle_day = -1
             ModLabel.isHidden = true
             CycleDayLabel.isHidden = true
             ClassLabel1.isHidden = true
@@ -102,7 +101,6 @@ class DashboardViewController: UIViewController {
             ExtraLabel.text = "No School Today!"
         }
         else if is_weird_day && weird_mod_times == nil {
-            cycle_day = -1
             ModLabel.isHidden = true
             CycleDayLabel.isHidden = true
             ClassLabel1.isHidden = true
@@ -141,7 +139,7 @@ class DashboardViewController: UIViewController {
                 lastRecordedCycleDay.0 = next_day
             }
 
-            cycle_day = lastRecordedCycleDay.1 % 6
+            let cycle_day = lastRecordedCycleDay.1 % 6
 
             let is_late_day = cycle_day == 3 || Calendar.current.component(.weekday, from: now) == 4
 

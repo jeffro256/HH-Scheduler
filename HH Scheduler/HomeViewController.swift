@@ -14,8 +14,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var futureClassCollection: FutureClassCollection!
     @IBOutlet var labels: [UILabel]!
 
-    private var cschedule: ContextSchedule!
-
     private let niceDateFormatter: DateFormatter = {
         let a = DateFormatter()
         a.dateFormat = "EEEE, MMMM dd"
@@ -37,14 +35,13 @@ class HomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        cschedule = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
-
         futureClassCollection.cschedule = cschedule
     }
 
     public override func viewWillAppear(_ animated: Bool) {
         updateUI()
         futureClassCollection.reloadData()
+
     }
 
     var addedNotificationEdge = false
@@ -71,11 +68,14 @@ class HomeViewController: UIViewController {
     private func updateUI() {
         let now = Date()
 
-        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute], from: now))!
+        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
 
         let dateText = niceDateFormatter.string(from: now)
         let dayShortDesc: String
         var mainText = ""
+        var modText = ""
+
+        progessRing.value = progessRing.minValue
 
         if cschedule.isScheduledDay(now) {
             let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
@@ -83,10 +83,42 @@ class HomeViewController: UIViewController {
 
             let blocks = cschedule.getBlocks(now, from: schedule)
 
-            for block in blocks {
-                if nowTime > block.startTime {
+            for (i, block) in blocks.enumerated() {
+                if nowTime >= block.startTime && nowTime < block.endTime {
+                    let classID = block.classID
                     mainText = block.name
                     progessRing.innerRingColor = block.color
+
+                    if let mod = block.mod {
+                        modText = "Mod \(mod)"
+                    }
+
+                    var classStartTime = block.startTime
+                    var classEndTime = block.endTime
+
+                    for prevBlock in blocks[0..<i].reversed() {
+                        if prevBlock.classID == classID {
+                            classStartTime = prevBlock.startTime
+                        }
+                        else {
+                            break
+                        }
+                    }
+
+                    for nextBlock in blocks[(i+1)..<blocks.count] {
+                        if nextBlock.classID == classID {
+                            classEndTime = nextBlock.endTime
+                        }
+                        else {
+                            break
+                        }
+                    }
+
+                    let totalSecondsInClass = Calendar.current.dateComponents([.second], from: classStartTime, to: classEndTime).second!
+                    let secondSinceClassStart = Calendar.current.dateComponents([.second], from: classStartTime, to: nowTime).second!
+                    let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
+                    progessRing.value = progessRing.minValue + (progessRing.maxValue - progessRing.minValue) * ratioDoneWithClass
+
                     break
                 }
             }
@@ -108,10 +140,6 @@ class HomeViewController: UIViewController {
             mainText = ""
         }
 
-        if !cschedule.isScheduledDay(now) {
-            progessRing.value = progessRing.minValue
-        }
-
         for label in labels {
             switch label.tag {
             case 50:
@@ -123,8 +151,7 @@ class HomeViewController: UIViewController {
             case 53:
                 label.text = mainText
             case 54:
-                // notifications
-                break
+                label.text = modText
             default:
                 break
             }
@@ -210,7 +237,7 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         var lum: CGFloat = 0
         var alpha: CGFloat = 0
         color1.getHue(&hue, saturation: &sat, brightness: &lum, alpha: &alpha)
-        let color2 = UIColor(hue: hue, saturation: sat, brightness: lum * 1.1, alpha: alpha)
+        let color2 = UIColor(hue: hue, saturation: sat, brightness: lum * 0.9, alpha: alpha)
 
         cell.gradientLayer.colors = [color2.cgColor, color1.cgColor]
     }

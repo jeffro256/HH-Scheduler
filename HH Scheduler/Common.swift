@@ -29,7 +29,7 @@ let schedule_info_cache_file_url: URL =
     document_dir_url.appendingPathComponent(schedule_info_cache_file_name)
 
 var schedule: Schedule!
-var cycle_day = -1
+var cschedule: ContextSchedule!
 
 // #C4161C
 let hh_tint = UIColor(red: 196.0 / 255.0 , green: 22.0 / 255.0, blue: 28.0 / 255.0, alpha: 1.0)

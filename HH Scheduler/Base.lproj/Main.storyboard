@@ -30,7 +30,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Dashboard View Controller-->
+        <!--Lunch-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="DashboardViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
@@ -161,7 +161,7 @@
                             <constraint firstItem="A2L-jR-lsd" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="centerX" constant="15" id="xoA-Vm-L8K"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Lunch" image="Lunch Icon Unclicked" selectedImage="Lunch Icon Clicked" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="Circle1" destination="ATr-X2-RlR" id="LMq-gS-PmI"/>
                         <outlet property="Circle2" destination="A2L-jR-lsd" id="vPe-kU-VK9"/>
@@ -203,7 +203,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4q-QV-pCy" userLabel="Class Progress Ring" customClass="UICircularProgressRingView" customModule="UICircularProgressRing">
                                         <rect key="frame" x="10" y="8" width="355" height="354.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup">
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup">
                                                 <rect key="frame" x="153" y="70" width="49" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -426,7 +426,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is where I put the the text for all the notifications, such as Dutch Day, Picture Day, etc." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-Pa-uw1" userLabel="Notification Marquee" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is where I put the the text for all the notifications, such as Dutch Day, Picture Day, etc." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-Pa-uw1" userLabel="Notification Marquee" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                 <rect key="frame" x="0.0" y="508.5" width="375" height="33.5"/>
                                 <color key="backgroundColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
@@ -1003,6 +1003,8 @@
     <resources>
         <image name="Clicked House Icon" width="25" height="25"/>
         <image name="Clicked Schedule Icon" width="25" height="25"/>
+        <image name="Lunch Icon Clicked" width="25" height="25"/>
+        <image name="Lunch Icon Unclicked" width="25" height="25"/>
         <image name="Pencil" width="25" height="25"/>
         <image name="PlusSign" width="50" height="50"/>
         <image name="Unclicked House Icon" width="25" height="25"/>
