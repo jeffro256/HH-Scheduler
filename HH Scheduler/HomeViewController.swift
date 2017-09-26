@@ -77,7 +77,6 @@ class HomeViewController: UIViewController {
 
     private func updateUI() {
         let now = Date()
-
         let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
 
         let dateText = niceDateFormatter.string(from: now)
@@ -93,43 +92,51 @@ class HomeViewController: UIViewController {
 
             let blocks = cschedule.getBlocks(now, from: schedule)
 
-            for (i, block) in blocks.enumerated() {
-                if nowTime >= block.startTime && nowTime < block.endTime {
-                    let classID = block.classID
-                    mainText = block.name
-                    progressRing.innerRingColor = block.color
+            if Calendar.current.compare(nowTime, to: cschedule.getStartTime(now)!, toGranularity: .minute) == .orderedAscending {
+                mainText = "Good Morning!"
+            }
+            else if Calendar.current.compare(nowTime, to: cschedule.getEndTime(now)!, toGranularity: .minute) != .orderedAscending {
+                mainText = "School is Over!"
+            }
+            else {
+                for (i, block) in blocks.enumerated() {
+                    if nowTime >= block.startTime && nowTime < block.endTime {
+                        let classID = block.classID
+                        mainText = block.name
+                        progressRing.innerRingColor = block.color
 
-                    if let mod = block.mod {
-                        modText = "Mod \(mod+1)"
+                        if let mod = block.mod {
+                            modText = "Mod \(mod+1)"
+                        }
+
+                        var classStartTime = block.startTime
+                        var classEndTime = block.endTime
+
+                        for prevBlock in blocks[0..<i].reversed() {
+                            if prevBlock.classID == classID {
+                                classStartTime = prevBlock.startTime
+                            }
+                            else {
+                                break
+                            }
+                        }
+
+                        for nextBlock in blocks[(i+1)..<blocks.count] {
+                            if nextBlock.classID == classID {
+                                classEndTime = nextBlock.endTime
+                            }
+                            else {
+                                break
+                            }
+                        }
+
+                        let totalSecondsInClass = Calendar.current.dateComponents([.second], from: classStartTime, to: classEndTime).second!
+                        let secondSinceClassStart = Calendar.current.dateComponents([.second], from: classStartTime, to: nowTime).second!
+                        let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
+                        progressRing.value = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
+
+                        break
                     }
-
-                    var classStartTime = block.startTime
-                    var classEndTime = block.endTime
-
-                    for prevBlock in blocks[0..<i].reversed() {
-                        if prevBlock.classID == classID {
-                            classStartTime = prevBlock.startTime
-                        }
-                        else {
-                            break
-                        }
-                    }
-
-                    for nextBlock in blocks[(i+1)..<blocks.count] {
-                        if nextBlock.classID == classID {
-                            classEndTime = nextBlock.endTime
-                        }
-                        else {
-                            break
-                        }
-                    }
-
-                    let totalSecondsInClass = Calendar.current.dateComponents([.second], from: classStartTime, to: classEndTime).second!
-                    let secondSinceClassStart = Calendar.current.dateComponents([.second], from: classStartTime, to: nowTime).second!
-                    let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
-                    progressRing.value = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
-
-                    break
                 }
             }
         }
