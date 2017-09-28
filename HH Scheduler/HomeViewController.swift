@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
 
     private let niceTimeFormatter: DateFormatter = {
         let a = DateFormatter()
-        a.dateFormat = "hh:mm aa"
+        a.dateFormat = "h:mm aa"
         a.locale = Locale(identifier: "en_US")
         a.timeZone = TimeZone(abbreviation: "CST")
 
@@ -135,8 +135,6 @@ class HomeViewController: UIViewController {
                         let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
                         progressRing.value = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
 
-                        print(ratioDoneWithClass * 100)
-
                         break
                     }
                 }
@@ -180,7 +178,7 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
 
     private let niceTimeFormatter: DateFormatter = {
         let a = DateFormatter()
-        a.dateFormat = "hh:mm aa"
+        a.dateFormat = "h:mm aa"
         a.locale = Locale(identifier: "en_US")
         a.timeZone = TimeZone(abbreviation: "CST")
 
@@ -251,12 +249,13 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         return cell
     }
 
+    /*
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let w = CGFloat(250)
         let h = collectionView.frame.height - 10
 
         return CGSize(width: w, height: h)
-    }
+    }*/
 
     private func addGradient(cell: FutureClassCell) {
         let gradient = CAGradientLayer()

@@ -17,7 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Began running HH-Scheduler! Jeffrey Ryan says hello")
 
         schedule = Schedule.defaultLoadFromFile(schedule_file_url)
-        cschedule = ContextSchedule(jsonURL: schedule_info_web_url)
+        cschedule = ContextSchedule()
+
+        let contextData: Data
+        if let data = try? Data(contentsOf: schedule_info_web_url) {
+            contextData = data
+
+            try? data.write(to: schedule_info_backup_file_url)
+        }
+        else if let data = try? Data(contentsOf: schedule_info_backup_file_url) {
+            contextData = data
+        }
+        else {
+            contextData = Data()
+        }
+
+        cschedule.refreshContext(contextData: contextData)
 
         return true
     }

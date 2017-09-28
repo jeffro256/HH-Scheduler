@@ -49,8 +49,9 @@ class ContextSchedule {
     private var holidays: [Date]
     private var weirdDays: [WeirdDay]
     private var specialBlocks: [ScheduleBlock]
+    private var loaded: Bool
 
-    public init(jsonURL: URL) {
+    public init() {
         numDays = 0
         numMods = 0
         regStartTime = Date(timeIntervalSince1970: 0)
@@ -65,8 +66,7 @@ class ContextSchedule {
         holidays = [Date]()
         weirdDays = [WeirdDay]()
         specialBlocks = [ScheduleBlock]()
-
-        refreshContext(jsonURL: jsonURL)
+        loaded = false
     }
 
     public func isSchoolDay(_ testDate: Date) -> Bool {
@@ -186,85 +186,85 @@ class ContextSchedule {
         return weirdDays.first(where: { $0.date.dayCompare(testDate) == .orderedSame })?.name
     }
 
-    public func refreshContext(jsonURL: URL) {
-        guard let data = try? Data(contentsOf: jsonURL) else { print("Failed to get data"); return }
-        guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) else { print("Failed to parse data"); return }
-        guard let jsonDict = jsonObject as? [String: Any] else { return }
+    @discardableResult
+    public func refreshContext(contextData data: Data) -> Bool {
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) else { return false }
+        guard let jsonDict = jsonObject as? [String: Any] else { return false }
 
-        guard let numDays = jsonDict["NumDays"] as? Int else { return }
-        guard let numMods = jsonDict["NumMods"] as? Int else { return }
+        guard let numDays = jsonDict["NumDays"] as? Int else { return false }
+        guard let numMods = jsonDict["NumMods"] as? Int else { return false }
 
-        guard let regStartTimeStr = jsonDict["RegularStartTime"] as? String else { return }
-        guard let regStartTime = time(from: regStartTimeStr) else { return }
+        guard let regStartTimeStr = jsonDict["RegularStartTime"] as? String else { return false }
+        guard let regStartTime = time(from: regStartTimeStr) else { return false }
 
-        guard let regEndTimeStr = jsonDict["RegularEndTime"] as? String else { return }
-        guard let regEndTime = time(from: regEndTimeStr) else { return }
+        guard let regEndTimeStr = jsonDict["RegularEndTime"] as? String else { return false }
+        guard let regEndTime = time(from: regEndTimeStr) else { return false }
 
-        guard let lateStartTimeStr = jsonDict["LateStartTime"] as? String else { return }
-        guard let lateStartTime = time(from: lateStartTimeStr) else { return }
+        guard let lateStartTimeStr = jsonDict["LateStartTime"] as? String else { return false }
+        guard let lateStartTime = time(from: lateStartTimeStr) else { return false }
 
-        guard let lateEndTimeStr = jsonDict["LateEndTime"] as? String else { return }
-        guard let lateEndTime = time(from: lateEndTimeStr) else { return }
+        guard let lateEndTimeStr = jsonDict["LateEndTime"] as? String else { return false }
+        guard let lateEndTime = time(from: lateEndTimeStr) else { return false }
 
-        guard let firstDayStr = jsonDict["FirstDay"] as? String else { return }
-        guard let firstDay = date(from: firstDayStr) else { return }
+        guard let firstDayStr = jsonDict["FirstDay"] as? String else { return false }
+        guard let firstDay = date(from: firstDayStr) else { return false }
 
-        guard let lastDayStr = jsonDict["LastDay"] as? String else { return }
-        guard let lastDay = date(from: lastDayStr) else { return }
+        guard let lastDayStr = jsonDict["LastDay"] as? String else { return false }
+        guard let lastDay = date(from: lastDayStr) else { return false }
 
-        guard let regModTimeStrs = jsonDict["RegularModTimes"] as? [String] else { return }
+        guard let regModTimeStrs = jsonDict["RegularModTimes"] as? [String] else { return false }
         var regModTimes = [Date]()
         for timeStr in regModTimeStrs {
-            guard let modTime = time(from: timeStr) else { return }
+            guard let modTime = time(from: timeStr) else { return false }
             regModTimes.append(modTime)
         }
 
-        guard let lateModTimeStrs = jsonDict["LateModTimes"] as? [String] else { return }
+        guard let lateModTimeStrs = jsonDict["LateModTimes"] as? [String] else { return false }
         var lateModTimes = [Date]()
         for timeStr in lateModTimeStrs {
-            guard let modTime = time(from: timeStr) else { return }
+            guard let modTime = time(from: timeStr) else { return false }
             lateModTimes.append(modTime)
         }
 
-        guard let landmarkStrs = jsonDict["LandmarkDays"] as? [[String]] else { return }
+        guard let landmarkStrs = jsonDict["LandmarkDays"] as? [[String]] else { return false }
         var landmarks = [(Date, Int)]()
         for landmark in landmarkStrs {
-            guard let calenderDay = date(from: landmark[0]) else { return }
-            guard let cycleDayUnicode = landmark[1].unicodeScalars.first?.value else { return }
+            guard let calenderDay = date(from: landmark[0]) else { return false }
+            guard let cycleDayUnicode = landmark[1].unicodeScalars.first?.value else { return false }
             let cycleDay = Int(cycleDayUnicode) - 65
             landmarks.append((calenderDay, cycleDay))
         }
-        if landmarks.count == 0 { return }
+        if landmarks.count == 0 { return false }
 
-        guard let holidayStrs = jsonDict["Holidays"] as? [String] else { return }
+        guard let holidayStrs = jsonDict["Holidays"] as? [String] else { return false }
         var holidays = [Date]()
         for holidayStr in holidayStrs {
-            guard let holiday = date(from: holidayStr) else { return }
+            guard let holiday = date(from: holidayStr) else { return false }
             holidays.append(holiday)
         }
 
-        guard let weirdDayObjects = jsonDict["WeirdSchedules"] as? [[String: Any]] else { return }
+        guard let weirdDayObjects = jsonDict["WeirdSchedules"] as? [[String: Any]] else { return false }
         var weirdDays = [WeirdDay]()
         var specialBlocks = [ScheduleBlock]()
         for weirdDayObject in weirdDayObjects {
-            guard let name = weirdDayObject["name"] as? String else { return }
-            guard let weirdDayDateStr = weirdDayObject["date"] as? String else { return }
-            guard let weirdDayDate = date(from: weirdDayDateStr) else { return }
+            guard let name = weirdDayObject["name"] as? String else { return false }
+            guard let weirdDayDateStr = weirdDayObject["date"] as? String else { return false }
+            guard let weirdDayDate = date(from: weirdDayDateStr) else { return false }
             let startTimeStr = weirdDayObject["startTime"] as? String
             let startTime = (startTimeStr != nil) ? time(from: startTimeStr!) : nil
             let endTimeStr = weirdDayObject["endTime"] as? String
             let endTime = (endTimeStr != nil) ? time(from: endTimeStr!) : nil
-            let scheduleless = weirdDayObject["scheduleless"] as? Bool ?? false
+            let scheduleless = (weirdDayObject["scheduleless"] as? Bool) ?? (weirdDayObject["mods"] as? [[String]] == nil)
 
             var blockIndexes: [(Date, Int)]? = nil
             if let mods = weirdDayObject["mods"] as? [[String]] {
                 blockIndexes = [(Date, Int)]()
 
                 for mod in mods {
-                    guard let blockTime = time(from: mod[0]) else { return }
+                    guard let blockTime = time(from: mod[0]) else { return false }
 
                     if mod[1].lowercased().hasPrefix("mod") {
-                        guard let modNumber = Int(mod[1].split()[1]) else { return }
+                        guard let modNumber = Int(mod[1].split()[1]) else { return false }
                         let blockIndex = modNumber - 1
 
                         blockIndexes?.append((blockTime, blockIndex))
@@ -298,6 +298,13 @@ class ContextSchedule {
         self.holidays = holidays
         self.weirdDays = weirdDays
         self.specialBlocks = specialBlocks
+        self.loaded = true
+
+        return true
+    }
+
+    public func isLoaded() -> Bool {
+        return self.loaded
     }
 
     private func getWeirdDay(_ date: Date) -> WeirdDay? {

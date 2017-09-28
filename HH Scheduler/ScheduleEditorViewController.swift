@@ -40,7 +40,14 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     private func save() {
-        try! newSchedule.saveToFile(schedule_file_url)
+        do {
+            try newSchedule.saveToFile(schedule_file_url)
+            print("Saved schedule file")
+        }
+        catch {
+            print("Failed to save schedule file!")
+        }
+
         schedule = newSchedule
 
         navigationController?.popToViewController((navigationController?.viewControllers.first)!, animated: true)
