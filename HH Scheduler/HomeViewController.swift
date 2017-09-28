@@ -135,6 +135,8 @@ class HomeViewController: UIViewController {
                         let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
                         progressRing.value = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
 
+                        print(ratioDoneWithClass * 100)
+
                         break
                     }
                 }
@@ -247,6 +249,13 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         updateGradient(cell: cell, color: contClass.4)
 
         return cell
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let w = CGFloat(250)
+        let h = collectionView.frame.height - 10
+
+        return CGSize(width: w, height: h)
     }
 
     private func addGradient(cell: FutureClassCell) {

@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Began running HH-Scheduler! Jeffrey Ryan says hello")
 
         schedule = Schedule.defaultLoadFromFile(schedule_file_url)
-        cschedule = ContextSchedule(jsonURL: URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!)
+        cschedule = ContextSchedule(jsonURL: schedule_info_web_url)
 
         return true
     }
