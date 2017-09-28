@@ -5,6 +5,6 @@ target 'HH Scheduler' do
 	#platform :ios, '9.0'
 
 	pod 'UICircularProgressRing'
-	pod 'MarqueeLabel/Swift'
+	#pod 'MarqueeLabel/Swift'
 end
 
