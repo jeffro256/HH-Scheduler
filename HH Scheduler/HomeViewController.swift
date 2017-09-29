@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var futureClassCollection: FutureClassCollection!
     @IBOutlet var labels: [UILabel]!
 
+    private var isVisible = false
+
     private let niceDateFormatter: DateFormatter = {
         let a = DateFormatter()
         a.dateFormat = "EEEE, MMMM dd"
@@ -31,18 +33,36 @@ class HomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateUI()
+        progressRing.value = 0
+
         Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { _ in
-            self.updateUI()
+            if (self.isVisible) {
+                self.updateUI(animated: false)
+            }
         }
     }
 
     public override func viewWillAppear(_ animated: Bool) {
-        updateUI()
-        futureClassCollection.reloadData()
+        super.viewWillAppear(animated)
 
+        futureClassCollection.reloadData()
+    }
+
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.isVisible = true
+        updateUI(animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
             self.futureClassCollection.centerCurrentClass()
         })
+    }
+
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.isVisible = false
     }
 
     var addedNotificationEdge = false
@@ -82,7 +102,12 @@ class HomeViewController: UIViewController {
         }
     }
 
-    private func updateUI() {
+    private var updatingUI = false
+
+    private func updateUI(animated: Bool = false) {
+        if updatingUI { return }
+        updatingUI = true
+
         let now = Date()
         let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
 
@@ -142,7 +167,12 @@ class HomeViewController: UIViewController {
                         let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
                         let ringProgress = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
 
-                        progressRing.value = ringProgress
+                        if animated {
+                            progressRing.setProgress(value: ringProgress, animationDuration: 1)
+                        }
+                        else {
+                            progressRing.value = ringProgress
+                        }
 
                         break
                     }
@@ -179,6 +209,8 @@ class HomeViewController: UIViewController {
                 break
             }
         }
+
+        updatingUI = false
     }
 }
 
