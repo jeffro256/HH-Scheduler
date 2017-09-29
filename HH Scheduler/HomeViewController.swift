@@ -28,23 +28,21 @@ class HomeViewController: UIViewController {
         return a
     }()
 
-    private let niceTimeFormatter: DateFormatter = {
-        let a = DateFormatter()
-        a.dateFormat = "h:mm aa"
-        a.locale = Locale(identifier: "en_US")
-        a.timeZone = TimeZone(abbreviation: "CST")
-
-        return a
-    }()
-
     public override func viewDidLoad() {
         super.viewDidLoad()
+
+        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { _ in
+            self.updateUI()
+        }
     }
 
     public override func viewWillAppear(_ animated: Bool) {
         updateUI()
         futureClassCollection.reloadData()
-        futureClassCollection.centerCurrentClass()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            self.futureClassCollection.centerCurrentClass()
+        })
     }
 
     var addedNotificationEdge = false
@@ -66,6 +64,15 @@ class HomeViewController: UIViewController {
                 }
             }
         }
+
+        let topCollectionBorderWidth = CGFloat(0.5)
+        let topCollectionBorderFrame = CGRect(x: 0, y: futureClassCollection.frame.minY - topCollectionBorderWidth, width: self.view.frame.width, height: topCollectionBorderWidth)
+        let topCollectionBorder = UIView(frame: topCollectionBorderFrame)
+        topCollectionBorder.isOpaque = true
+        topCollectionBorder.backgroundColor = UIColor.black
+        topCollectionBorder.layer.zPosition = 1
+
+        self.view.addSubview(topCollectionBorder)
 
         // I have to have this code b/c some random black box is popping up
         for view in progressRing.subviews {
@@ -133,7 +140,9 @@ class HomeViewController: UIViewController {
                         let totalSecondsInClass = Calendar.current.dateComponents([.second], from: classStartTime, to: classEndTime).second!
                         let secondSinceClassStart = Calendar.current.dateComponents([.second], from: classStartTime, to: nowTime).second!
                         let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
-                        progressRing.value = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
+                        let ringProgress = progressRing.minValue + (progressRing.maxValue - progressRing.minValue) * ratioDoneWithClass
+
+                        progressRing.value = ringProgress
 
                         break
                     }
@@ -190,6 +199,20 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
 
         self.dataSource = self
         self.delegate = self
+
+        self.backgroundView = UIView(frame: self.bounds)
+        self.backgroundView?.backgroundColor = UIColor(0xCCCCCC)
+
+        let noClassesLabelFrame = self.backgroundView!.bounds
+        let noClassesLabel = UILabel(frame: noClassesLabelFrame)
+        noClassesLabel.tag = 1
+        noClassesLabel.text = "No Classes Today!"
+        noClassesLabel.textAlignment = .center
+        noClassesLabel.textColor = UIColor.white
+        noClassesLabel.font = UIFont(name: "Avenir-LightOblique", size: 18)
+        noClassesLabel.isHidden = true
+
+        self.backgroundView?.addSubview(noClassesLabel)
     }
 
     public func centerCurrentClass() {
@@ -224,6 +247,8 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
             }
         }
 
+        self.backgroundView?.viewWithTag(1)?.isHidden = !classes.isEmpty
+
         super.reloadData()
     }
 
@@ -244,7 +269,12 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
             addGradient(cell: cell)
         }
 
-        updateGradient(cell: cell, color: contClass.4)
+        if contClass.0 == 0 {
+            updateGradient(cell: cell, color: contClass.4, to: contClass.4)
+        }
+        else {
+            updateGradient(cell: cell, color: contClass.4)
+        }
 
         return cell
     }
@@ -269,13 +299,14 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         cell.layer.insertSublayer(gradient, at: 0)
     }
 
-    private func updateGradient(cell: FutureClassCell, color color1: UIColor) {
+    private func updateGradient(cell: FutureClassCell, color color1: UIColor, to toColor: UIColor? = nil) {
         var hue: CGFloat = 0
         var sat: CGFloat = 0
         var lum: CGFloat = 0
         var alpha: CGFloat = 0
         color1.getHue(&hue, saturation: &sat, brightness: &lum, alpha: &alpha)
-        let color2 = UIColor(hue: hue, saturation: sat, brightness: lum * 0.9, alpha: alpha)
+
+        let color2 = toColor ?? UIColor(hue: hue, saturation: sat, brightness: lum * 0.9, alpha: alpha)
 
         cell.gradientLayer.colors = [color2.cgColor, color1.cgColor]
     }

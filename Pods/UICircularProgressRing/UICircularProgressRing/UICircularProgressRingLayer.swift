@@ -215,7 +215,7 @@ class UICircularProgressRingLayer: CAShapeLayer {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         
         let innerEndAngle: CGFloat
-        
+
         if fullCircle {
             innerEndAngle = (value - minValue) / (maxValue - minValue) * 360.0 + startAngle
         } else {

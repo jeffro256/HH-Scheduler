@@ -5,7 +5,7 @@ Short-Term:
 -----------
 *  Fix keyboard issue w/ editing screen
 *  Figure out why random black box is appearing on the home screen
-*  Setup refreshing school schedule info, cache the file, and have the app be fine with no wifi
+*  Animate progress ring
 
 Long-Term:
 ----------
