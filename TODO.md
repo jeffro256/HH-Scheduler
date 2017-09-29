@@ -5,11 +5,11 @@ Short-Term:
 -----------
 *  Fix keyboard issue w/ editing screen
 *  Figure out why random black box is appearing on the home screen
-*  Animate progress ring
 
 Long-Term:
 ----------
 *  Like cells will merge on schedule screens
+*  Add option for "pivoted schedule"
 *  Add announcements
 *  New app icon
 *  New launch screen

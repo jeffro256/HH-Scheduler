@@ -231,36 +231,36 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
 
         self.dataSource = self
         self.delegate = self
+    }
 
-        self.backgroundView = UIView(frame: self.bounds)
-        self.backgroundView?.backgroundColor = UIColor(0xCCCCCC)
+    private var addedLabel = false
+    public override func layoutSubviews() {
+        super.layoutSubviews()
 
-        let noClassesLabelFrame = self.backgroundView!.bounds
-        let noClassesLabel = UILabel(frame: noClassesLabelFrame)
-        noClassesLabel.tag = 1
-        noClassesLabel.text = "No Classes Today!"
-        noClassesLabel.textAlignment = .center
-        noClassesLabel.textColor = UIColor.white
-        noClassesLabel.font = UIFont(name: "Avenir-LightOblique", size: 18)
-        noClassesLabel.isHidden = true
+        if !addedLabel {
+            self.backgroundView = UIView(frame: self.bounds)
+            self.backgroundView?.backgroundColor = UIColor(0xCCCCCC)
 
-        self.backgroundView?.addSubview(noClassesLabel)
+            let noClassesLabelFrame = self.backgroundView!.bounds
+            let noClassesLabel = UILabel(frame: noClassesLabelFrame)
+            noClassesLabel.tag = 1
+            noClassesLabel.text = "No Classes Today!"
+            noClassesLabel.textAlignment = .center
+            noClassesLabel.textColor = UIColor.white
+            noClassesLabel.font = UIFont(name: "Avenir-LightOblique", size: 18)
+            noClassesLabel.isHidden = !classes.isEmpty
+
+            self.backgroundView?.addSubview(noClassesLabel)
+
+            addedLabel = true
+        }
     }
 
     public func centerCurrentClass() {
-        var currentClassIndex = -1
-
         let now = Date()
         let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
 
-        for (i, contClass) in classes.enumerated() {
-            if nowTime >= contClass.2 && nowTime < contClass.3 {
-                currentClassIndex = i
-                break
-            }
-        }
-
-        if currentClassIndex >= 0 {
+        if let currentClassIndex = classes.index(where: { nowTime >= $0.2 && nowTime < $0.3 }) {
             self.scrollToItem(at: IndexPath(row: currentClassIndex, section: 0), at: .centeredHorizontally, animated: true)
         }
     }

@@ -110,15 +110,9 @@ class ContextSchedule {
     }
 
     public func getCycleDay(_ cycleDate: Date) -> Int {
-        var bestLandmark = (firstDay, 0)
-
         guard isScheduledDay(cycleDate) else { return -1 }
 
-        for landmark in landmarks {
-            if landmark.0 > bestLandmark.0 && landmark.0.dayCompare(cycleDate) != .orderedDescending {
-                bestLandmark = landmark
-            }
-        }
+        var bestLandmark = landmarks.filter({ $0.0.dayCompare(cycleDate) != .orderedDescending }).sorted(by: { $0.0 < $1.0 }).last!
 
         while bestLandmark.0.dayCompare(cycleDate) == .orderedAscending {
             if isScheduledDay(bestLandmark.0) {
