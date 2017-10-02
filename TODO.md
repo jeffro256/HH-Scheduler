@@ -5,6 +5,7 @@ Short-Term:
 -----------
 *  Fix keyboard issue w/ editing screen
 *  Figure out why random black box is appearing on the home screen
+*  Do something when the app can't get the school info
 
 Long-Term:
 ----------

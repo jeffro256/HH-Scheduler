@@ -6,40 +6,48 @@
 //  Copyright © 2017 Jeffrey Ryan. All rights reserved.
 //
 
-
 import UIKit
 
-class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scheduleCollectionView: ScheduleEditorCollectionView!
 
     private var newSchedule: Schedule!
+    private var selectedClassIndex = 0
 
-    var selectedClassIndex = 0
-
-    func isLastItem(_ indexPath: IndexPath) -> Bool {
-        return indexPath.item == tableView.numberOfRows(inSection: 0) - 1
-    }
+    private var editPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scheduleCollectionView.scheduleController = self
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         newSchedule = schedule.copy() as! Schedule
+        scheduleCollectionView.scheduleController = self
         scheduleCollectionView.setDataSource(scheduleSource: newSchedule)
-        scheduleCollectionView.reloadData()
     }
 
-    @IBAction func pressedSaveButton(_ sender: Any) {
-        save()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ClassEditorViewController, let editPath = self.editPath {
+            vc.classIndex = editPath.item
+        }
     }
 
-    private func save() {
+    @IBAction public func doneEditingClass(_ segue: UIStoryboardSegue) {
+        if let vc = segue.source as? ClassEditorViewController {
+            let (name, _) = vc.getData()
+            newSchedule.setClassName(index: vc.classIndex, name: name)
+            //newSchedule.setClassColor(index: classIndex, color: color)
+            tableView.reloadData()
+            scheduleCollectionView.reloadData()
+        }
+    }
+
+    @IBAction public func deleteClassSegue(_ segue: UIStoryboardSegue) {
+        if let vc = segue.source as? ClassEditorViewController {
+            deleteClass(IndexPath(row: vc.classIndex, section: 0))
+        }
+    }
+
+    public func save() {
         do {
             try newSchedule.saveToFile(schedule_file_url)
             print("Saved schedule file")
@@ -49,8 +57,6 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
 
         schedule = newSchedule
-
-        navigationController?.popToViewController((navigationController?.viewControllers.first)!, animated: true)
     }
 
     // Get number of cells
@@ -60,22 +66,15 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     // Create the cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item == 0 {
-            let free_time_cell = tableView.dequeueReusableCell(withIdentifier: "FreeTimeCell")!
+        if isLastItem(indexPath) {
+            let add_cell = tableView.dequeueReusableCell(withIdentifier: "AddCell")!
 
-            return free_time_cell
-        }
-        else if isLastItem(indexPath) {
-            let add_cell = tableView.dequeueReusableCell(withIdentifier: "AddCell")
-
-            return add_cell!
+            return add_cell
         }
         else {
-            let class_info_cell = tableView.dequeueReusableCell(withIdentifier: "ClassInfoCell") as! ClassInfoCell
+            let class_info_cell = tableView.dequeueReusableCell(withIdentifier: "ClassCell") as! ClassCell
 
-            class_info_cell.field.text = newSchedule.getClassName(index: indexPath.item)
-            class_info_cell.field.isEnabled = false
-            class_info_cell.field.tag = indexPath.item
+            class_info_cell.label.text = newSchedule.getClassName(index: indexPath.item)
             class_info_cell.backgroundColor = newSchedule.getClassColor(classID: indexPath.item)
 
             return class_info_cell
@@ -103,24 +102,9 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
             tableView.endUpdates()
 
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-            selectedClassIndex = indexPath.item
         }
-        else {
-            if indexPath.item != 0 {
-                let cell = tableView.cellForRow(at: indexPath) as! ClassInfoCell
-                cell.field.isEnabled = true
-            }
 
-            selectedClassIndex = indexPath.item
-        }
-    }
-
-    // Deselected cell
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if !isLastItem(indexPath) && indexPath.item != 0 {
-            let cell = tableView.cellForRow(at: indexPath) as! ClassInfoCell
-            cell.field.isEnabled = false
-        }
+        selectedClassIndex = indexPath.item
     }
 
     // Whether cell should be editable
@@ -128,11 +112,14 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         return indexPath.item != 0 && !isLastItem(indexPath)
     }
 
-    // Delete cell
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            deleteClass(indexPath)
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let editAction = UITableViewRowAction(style: .destructive, title: "Edit") { action, index in
+            self.editPath = index
+            self.performSegue(withIdentifier: "EditClassSegue", sender: nil)
         }
+        editAction.backgroundColor = .lightGray
+
+        return [editAction]
     }
 
     // Whether cell should be highlightable
@@ -140,33 +127,8 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         return true
     }
 
-    // I don't know, it works
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true) // beware, magic!
-
-        return false
-    }
-
-    // Done typing
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if (textField.text?.isEmpty)! {
-            let indexPath = IndexPath(row: textField.tag, section: 0)
-            deleteClass(indexPath)
-        }
-        else {
-            newSchedule.setClassName(index: textField.tag, name: textField.text!)
-            tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0))?.backgroundColor = newSchedule.getClassColor(classID: textField.tag)
-            scheduleCollectionView.reloadData()
-        }
-    }
-
-    // Limits width of class names
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return true }
-        let newText = (text as NSString).replacingCharacters(in: range, with: string)
-        let attribs = [NSAttributedStringKey.font: textField.font!]
-        let newWidth = newText.size(withAttributes: attribs).width
-        return newWidth <= tableView.frame.width - 10
+    func editClass(at indexPath: IndexPath) {
+        print("editing: \(indexPath.item)")
     }
 
     func deleteClass(_ indexPath: IndexPath) {
@@ -178,17 +140,21 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         scheduleCollectionView.reloadData()
     }
 
+    private func isLastItem(_ indexPath: IndexPath) -> Bool {
+        return indexPath.item == tableView.numberOfRows(inSection: 0) - 1
+    }
+
     func getCurrentSelectedClass() -> Int {
         return selectedClassIndex
     }
 }
 
 class ScheduleEditorCollectionView: ScheduleCollectionView {
-    var scheduleController: ScheduleEditorViewController!
+    weak var scheduleController: ScheduleEditorViewController!
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let rows = NUM_DAYS + 1
-        return indexPath.item % rows != 0 && indexPath.item < rows * NUM_MODS
+        let rows = scheduleSource.getDays() + 1
+        return indexPath.item % rows != 0
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -214,6 +180,6 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
     }
 }
 
-class ClassInfoCell: UITableViewCell {
-    @IBOutlet weak var field: UITextField!
+class ClassCell: UITableViewCell {
+    @IBOutlet weak var label: UILabel!
 }

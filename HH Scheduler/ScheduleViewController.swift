@@ -14,15 +14,15 @@ class ScheduleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        scheduleCollectionView.setDataSource(scheduleSource: schedule)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         highlightCycleDay()
-
-        scheduleCollectionView.setDataSource(scheduleSource: schedule)
-        scheduleCollectionView.reloadData()
+        gotoCurrentMod()
     }
 
     public func highlightCycleDay() {
@@ -37,6 +37,23 @@ class ScheduleViewController: UIViewController {
                     day_label.textColor = UIColor(white: 136.0 / 255.0, alpha: 1.0)
                 }
             }
+        }
+    }
+
+    public func gotoCurrentMod() {
+        let now = Date()
+        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
+
+        if let mod = cschedule.getBlocks(now, from: schedule).index(where: { b in nowTime >= b.startTime && nowTime < b.endTime }) {
+            let rows = schedule.getDays() + 1
+            scheduleCollectionView.scrollToItem(at: IndexPath(row: mod * rows, section: 0), at: .centeredHorizontally, animated: true)
+        }
+    }
+
+    @IBAction public func doneEditingSchedule(_ segue: UIStoryboardSegue) {
+        if let vc = segue.source as? ScheduleEditorViewController {
+            vc.save()
+            scheduleCollectionView.reloadData()
         }
     }
 }
