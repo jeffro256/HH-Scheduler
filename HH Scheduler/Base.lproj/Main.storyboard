@@ -147,22 +147,22 @@
                                         <rect key="frame" x="8" y="8" width="304" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Iyo-dP-nyp">
-                                                <rect key="frame" x="72.5" y="10" width="159.5" height="17"/>
+                                                <rect key="frame" x="89.5" y="8.5" width="125.5" height="20"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3n-7X-7zE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="20"/>
                                                         <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="—" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIM-ik-vhN" userLabel="Dash">
-                                                        <rect key="frame" x="74" y="0.0" width="17" height="17"/>
+                                                        <rect key="frame" x="53.5" y="0.0" width="17" height="20"/>
                                                         <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="52" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C Day" lineBreakMode="tailTruncation" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="MvA-dB-8GE">
-                                                        <rect key="frame" x="99" y="0.0" width="60.5" height="17"/>
+                                                        <rect key="frame" x="78.5" y="0.0" width="47" height="20"/>
                                                         <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="17"/>
                                                         <color key="textColor" red="0.76862745099999996" green="0.086274509799999996" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
