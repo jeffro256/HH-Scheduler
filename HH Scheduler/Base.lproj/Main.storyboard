@@ -518,7 +518,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="a9I-lb-ZUJ" secondAttribute="trailing" id="7rP-5i-sUI"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="a9I-lb-ZUJ" secondAttribute="bottom" id="FuG-d2-13j"/>
@@ -526,6 +525,7 @@
                                                 <constraint firstItem="a9I-lb-ZUJ" firstAttribute="top" secondItem="Zo0-3W-iVS" secondAttribute="topMargin" id="lpw-X7-vJc"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="label" destination="a9I-lb-ZUJ" id="DfM-V1-WYG"/>
                                         </connections>
@@ -537,19 +537,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="112" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEz-Zw-gWk">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlusSign" translatesAutoresizingMaskIntoConstraints="NO" id="jW2-sx-a0j">
                                                     <rect key="frame" x="8" y="8" width="96" height="38.5"/>
-                                                    <state key="normal" image="PlusSign"/>
-                                                    <connections>
-                                                        <segue destination="rR0-fk-Ycx" kind="show" identifier="EditClassSegue" id="QjD-Nf-JKJ"/>
-                                                    </connections>
-                                                </button>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="AEz-Zw-gWk" firstAttribute="top" secondItem="q3R-f8-lmy" secondAttribute="topMargin" id="8PY-LR-AsZ"/>
-                                                <constraint firstItem="AEz-Zw-gWk" firstAttribute="leading" secondItem="q3R-f8-lmy" secondAttribute="leadingMargin" id="Mva-KU-sFW"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="AEz-Zw-gWk" secondAttribute="bottom" id="gG3-cV-aLO"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="AEz-Zw-gWk" secondAttribute="trailing" id="jTw-ul-fwB"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="jW2-sx-a0j" secondAttribute="bottom" id="Rph-Wz-g7G"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="jW2-sx-a0j" secondAttribute="trailing" id="Slj-bL-lo2"/>
+                                                <constraint firstItem="jW2-sx-a0j" firstAttribute="top" secondItem="q3R-f8-lmy" secondAttribute="topMargin" id="eRI-Z4-Iji"/>
+                                                <constraint firstItem="jW2-sx-a0j" firstAttribute="leading" secondItem="q3R-f8-lmy" secondAttribute="leadingMargin" id="su6-SQ-SJ7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
@@ -739,6 +735,7 @@
                     <connections>
                         <outlet property="scheduleCollectionView" destination="H4q-tv-K6x" id="fKc-sc-RaT"/>
                         <outlet property="tableView" destination="mrN-2Z-y8l" id="3tD-PM-Jrq"/>
+                        <segue destination="rR0-fk-Ycx" kind="show" identifier="ClassEditSegue" id="rmh-hW-RfQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2d-Mi-pI5" userLabel="First Responder" sceneMemberID="firstResponder"/>

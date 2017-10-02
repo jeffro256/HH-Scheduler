@@ -102,6 +102,8 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
             tableView.endUpdates()
 
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+
+            self.pullEditingScreen(at: indexPath, sender: tableView.cellForRow(at: indexPath))
         }
 
         selectedClassIndex = indexPath.item
@@ -114,8 +116,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let editAction = UITableViewRowAction(style: .destructive, title: "Edit") { action, index in
-            self.editPath = index
-            self.performSegue(withIdentifier: "EditClassSegue", sender: nil)
+            self.pullEditingScreen(at: index, sender: tableView.cellForRow(at: index))
         }
         editAction.backgroundColor = .lightGray
 
@@ -125,10 +126,6 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     // Whether cell should be highlightable
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return true
-    }
-
-    func editClass(at indexPath: IndexPath) {
-        print("editing: \(indexPath.item)")
     }
 
     func deleteClass(_ indexPath: IndexPath) {
@@ -142,6 +139,11 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     private func isLastItem(_ indexPath: IndexPath) -> Bool {
         return indexPath.item == tableView.numberOfRows(inSection: 0) - 1
+    }
+
+    private func pullEditingScreen(at indexPath: IndexPath, sender: Any?) {
+        self.editPath = indexPath
+        self.performSegue(withIdentifier: "ClassEditSegue", sender: sender)
     }
 
     func getCurrentSelectedClass() -> Int {

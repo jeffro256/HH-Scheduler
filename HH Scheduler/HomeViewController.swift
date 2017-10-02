@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
 
     private let niceDateFormatter: DateFormatter = {
         let a = DateFormatter()
-        a.dateFormat = "EEEE, MMMM dd"
+        a.dateFormat = "EEEE, MMMM d"
         a.locale = Locale(identifier: "en_US")
         a.timeZone = TimeZone(abbreviation: "CST")
 

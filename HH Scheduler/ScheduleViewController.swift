@@ -53,6 +53,7 @@ class ScheduleViewController: UIViewController {
     @IBAction public func doneEditingSchedule(_ segue: UIStoryboardSegue) {
         if let vc = segue.source as? ScheduleEditorViewController {
             vc.save()
+            scheduleCollectionView.setDataSource(scheduleSource: schedule)
             scheduleCollectionView.reloadData()
         }
     }
