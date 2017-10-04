@@ -5,8 +5,6 @@ Short-Term:
 -----------
 *  Figure out why random black box is appearing on the home screen
 *  Do something when the app can't get the school info
-*  User reordering classes
-*  User assigning class colors
 
 Long-Term:
 ----------
