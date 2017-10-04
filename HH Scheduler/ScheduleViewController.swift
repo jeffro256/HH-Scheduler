@@ -64,5 +64,3 @@ class ScheduleViewController: UIViewController {
         }
     }
 }
-
-
