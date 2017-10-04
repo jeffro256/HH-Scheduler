@@ -9,10 +9,30 @@
 import UIKit
 
 public class ClassEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    public var classIndex = -1
+    var classID: PersonalSchedule.ClassID = -1
+    var startName: String!
+    var startColor: UIColor?
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var colorCollection: UICollectionView!
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+
+        nameField.text = startName
+
+        if let color = startColor {
+            for index in 0..<colorCollection.numberOfItems(inSection: 0) {
+                let indexPath = IndexPath(row: index, section: 0)
+                if colorCollection.cellForItem(at: indexPath)?.backgroundColor == color {
+                    colorCollection.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
+                }
+            }
+        }
+        else {
+            colorCollection.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .left)
+        }
+    }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return color_pallette.count
@@ -30,6 +50,20 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
 
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        for i in 0..<collectionView.numberOfItems(inSection: 0) {
+            let cell = collectionView.cellForItem(at: IndexPath(row: i, section: 0))!
+            
+            if i == indexPath.item {
+                cell.layer.borderColor = UIColor.blue.cgColor
+                cell.layer.borderWidth = 2
+            }
+            else {
+                cell.layer.borderWidth = 0
+            }
+        }
     }
 
     public override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

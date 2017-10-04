@@ -25,13 +25,19 @@ class ScheduleViewController: UIViewController {
         gotoCurrentMod()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        scheduleCollectionView.collectionViewLayout.invalidateLayout()
+    }
+
     public func highlightCycleDay() {
         let base_tag_num = 100
-        let cycleDay = cschedule.getCycleDay(Date())
-        for i in 0..<schedule.getDays() {
+        let cycleDay = scheduleContext.getCycleDay(Date())
+        for i in 0..<schedule.getNumDays() {
             if let day_label = cycleDayStack.viewWithTag(i + base_tag_num) as? UILabel {
                 if i == cycleDay && cycleDay > 0 {
-                    day_label.textColor = hh_tint
+                    day_label.textColor = hhTint
                 }
                 else {
                     day_label.textColor = UIColor(white: 136.0 / 255.0, alpha: 1.0)
@@ -44,8 +50,8 @@ class ScheduleViewController: UIViewController {
         let now = Date()
         let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
 
-        if let mod = cschedule.getBlocks(now, from: schedule).index(where: { b in nowTime >= b.startTime && nowTime < b.endTime }) {
-            let rows = schedule.getDays() + 1
+        if let mod = scheduleContext.getBlocks(now, from: schedule).first(where: { b in nowTime >= b.startTime && nowTime < b.endTime })?.mod {
+            let rows = schedule.getNumDays() + 1
             scheduleCollectionView.scrollToItem(at: IndexPath(row: mod * rows, section: 0), at: .centeredHorizontally, animated: true)
         }
     }

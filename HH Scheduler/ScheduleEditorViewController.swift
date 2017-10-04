@@ -12,30 +12,41 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scheduleCollectionView: ScheduleEditorCollectionView!
 
-    private var newSchedule: Schedule!
-    private var selectedClassIndex = 0
+    private var newSchedule: PSchedule!
+    private var selectedClassID = 0
 
     private var editPath: IndexPath?
+    private var editNewClass = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        newSchedule = schedule.copy() as! Schedule
+        newSchedule = schedule.copy() as! PSchedule
         scheduleCollectionView.scheduleController = self
         scheduleCollectionView.setDataSource(scheduleSource: newSchedule)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ClassEditorViewController, let editPath = self.editPath {
-            vc.classIndex = editPath.item
+            vc.classID = newSchedule.getClassID(index: editPath.item)
+
+            if self.editNewClass {
+                vc.startName = ""
+                vc.startColor = nil
+            }
+            else {
+                let classInfo = newSchedule.getClassInfo(withID: vc.classID)
+                vc.startName = classInfo?.name
+                vc.startColor = classInfo?.color
+            }
         }
     }
 
     @IBAction public func doneEditingClass(_ segue: UIStoryboardSegue) {
         if let vc = segue.source as? ClassEditorViewController {
-            let (name, _) = vc.getData()
-            newSchedule.setClassName(index: vc.classIndex, name: name)
-            //newSchedule.setClassColor(index: classIndex, color: color)
+            let (name, color) = vc.getData()
+            newSchedule.setClassName(withID: vc.classID, to: name)
+            newSchedule.setClassColor(withID: vc.classID, to: color)
             tableView.reloadData()
             scheduleCollectionView.reloadData()
         }
@@ -43,7 +54,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     @IBAction public func deleteClassSegue(_ segue: UIStoryboardSegue) {
         if let vc = segue.source as? ClassEditorViewController {
-            deleteClass(IndexPath(row: vc.classIndex, section: 0))
+            deleteClass(IndexPath(row: newSchedule.getClassInfo(withID: vc.classID)!.classIndex, section: 0))
         }
     }
 
@@ -61,23 +72,26 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     // Get number of cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newSchedule.getNumberClasses() + 1
+        return newSchedule.getNumClasses() + 1
     }
 
     // Create the cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isLastItem(indexPath) {
-            let add_cell = tableView.dequeueReusableCell(withIdentifier: "AddCell")!
+            let addCell = tableView.dequeueReusableCell(withIdentifier: "AddCell")!
 
-            return add_cell
+            return addCell
         }
         else {
-            let class_info_cell = tableView.dequeueReusableCell(withIdentifier: "ClassCell") as! ClassCell
+            let classInfoCell = tableView.dequeueReusableCell(withIdentifier: "ClassCell") as! ClassCell
 
-            class_info_cell.label.text = newSchedule.getClassName(index: indexPath.item)
-            class_info_cell.backgroundColor = newSchedule.getClassColor(classID: indexPath.item)
+            let classInfo = newSchedule.getClassInfo(withID: newSchedule.getClassID(index: indexPath.item))!
+            classInfoCell.label.textColor = (indexPath.item == newSchedule.freetimeID()) ? UIColor.black : UIColor.white
+            classInfoCell.label.text = classInfo.name
+            classInfoCell.backgroundColor = classInfo.color
+            classInfoCell.classID = classInfo.classID
 
-            return class_info_cell
+            return classInfoCell
         }
     }
 
@@ -95,7 +109,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         if isLastItem(indexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
 
-            newSchedule.addClass(name: "New Class")
+            newSchedule.addClass(withName: "New Class", color: color_pallette[0])
 
             tableView.beginUpdates()
             tableView.insertRows(at: [indexPath], with: .automatic)
@@ -103,10 +117,10 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
 
-            self.pullEditingScreen(at: indexPath, sender: tableView.cellForRow(at: indexPath))
+            self.pullEditingScreen(at: indexPath, newClass: true)
         }
 
-        selectedClassIndex = indexPath.item
+        selectedClassID = newSchedule.getClassID(index: indexPath.item)
     }
 
     // Whether cell should be editable
@@ -116,7 +130,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let editAction = UITableViewRowAction(style: .destructive, title: "Edit") { action, index in
-            self.pullEditingScreen(at: index, sender: tableView.cellForRow(at: index))
+            self.pullEditingScreen(at: index, newClass: false)
         }
         editAction.backgroundColor = .lightGray
 
@@ -129,7 +143,8 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     func deleteClass(_ indexPath: IndexPath) {
-        newSchedule.removeClass(index: indexPath.item)
+        let removeID = newSchedule.getClassID(index: indexPath.item)
+        newSchedule.removeClass(withID: removeID)
 
         tableView.beginUpdates()
         tableView.deleteRows(at: [indexPath], with: .fade)
@@ -141,13 +156,14 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         return indexPath.item == tableView.numberOfRows(inSection: 0) - 1
     }
 
-    private func pullEditingScreen(at indexPath: IndexPath, sender: Any?) {
+    private func pullEditingScreen(at indexPath: IndexPath, newClass: Bool) {
         self.editPath = indexPath
-        self.performSegue(withIdentifier: "ClassEditSegue", sender: sender)
+        self.editNewClass = newClass
+        self.performSegue(withIdentifier: "ClassEditSegue", sender: tableView.cellForRow(at: indexPath))
     }
 
-    func getCurrentSelectedClass() -> Int {
-        return selectedClassIndex
+    func getCurrentSelectedClassID() -> Int {
+        return selectedClassID
     }
 }
 
@@ -155,33 +171,35 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
     weak var scheduleController: ScheduleEditorViewController!
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let rows = scheduleSource.getDays() + 1
+        let rows = scheduleSource.getNumDays() + 1
         return indexPath.item % rows != 0
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ScheduleCell
-        let selected_class = scheduleController.getCurrentSelectedClass()
-        let rows = scheduleSource.getDays() + 1
+        let selectedClassID = scheduleController.getCurrentSelectedClassID()
+        let rows = scheduleSource.getNumDays() + 1
         let day = indexPath.item % rows - 1
         let mod = indexPath.item / rows
-        let block = scheduleSource.getBlock(day: day, mod: mod)
+        let classInfo = scheduleSource.getClassInfo(atDay: day, mod: mod)
 
-        if selected_class == block.classID || selected_class == 0 {
+        if selectedClassID == classInfo.classID || selectedClassID == scheduleSource.freetimeID() {
             cell.label.text = nil
-            cell.backgroundColor = freetime_color
+            cell.backgroundColor = scheduleSource.getClassInfo(withID: scheduleSource.freetimeID())?.color
 
-            scheduleSource.setClassIndex(day: day, mod: mod, index: 0)
+            scheduleSource.setClassID(atDay: day, mod: mod, to: scheduleSource.freetimeID())
         }
         else {
-            cell.label.text = scheduleSource.getClassName(index: selected_class)
-            cell.backgroundColor = scheduleSource.getClassColor(classID: selected_class)
+            let selectedClassInfo = scheduleSource.getClassInfo(withID: selectedClassID)
+            cell.label.text = selectedClassInfo?.name
+            cell.backgroundColor = selectedClassInfo?.color
 
-            scheduleSource.setClassIndex(day: day, mod: mod, index: selected_class)
+            scheduleSource.setClassID(atDay: day, mod: mod, to: selectedClassID)
         }
     }
 }
 
 class ClassCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
+    var classID: Int!
 }

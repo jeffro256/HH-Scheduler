@@ -147,22 +147,22 @@
                                         <rect key="frame" x="8" y="8" width="304" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Iyo-dP-nyp">
-                                                <rect key="frame" x="89.5" y="8.5" width="125.5" height="20"/>
+                                                <rect key="frame" x="72.5" y="10" width="159.5" height="17"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3n-7X-7zE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="17"/>
                                                         <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="—" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIM-ik-vhN" userLabel="Dash">
-                                                        <rect key="frame" x="53.5" y="0.0" width="17" height="20"/>
+                                                        <rect key="frame" x="74" y="0.0" width="17" height="17"/>
                                                         <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="52" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C Day" lineBreakMode="tailTruncation" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="MvA-dB-8GE">
-                                                        <rect key="frame" x="78.5" y="0.0" width="47" height="20"/>
+                                                        <rect key="frame" x="99" y="0.0" width="60.5" height="17"/>
                                                         <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="17"/>
                                                         <color key="textColor" red="0.76862745099999996" green="0.086274509799999996" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -472,8 +472,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Schedule" id="D74-EC-ieW">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="40K-HH-4sD"/>
-                        <barButtonItem key="leftBarButtonItem" image="Pencil" id="Xa9-A0-gmi" userLabel="Edit Button">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="40K-HH-4sD"/>
+                        <barButtonItem key="rightBarButtonItem" image="Pencil" id="Xa9-A0-gmi" userLabel="Edit Button">
                             <connections>
                                 <segue destination="hzr-C9-65Z" kind="show" id="Pnw-Xz-2ch"/>
                             </connections>
@@ -500,7 +500,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mrN-2Z-y8l">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mrN-2Z-y8l">
                                 <rect key="frame" x="0.0" y="0.0" width="112" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -514,7 +514,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9I-lb-ZUJ">
                                                     <rect key="frame" x="8" y="8" width="96" height="38.5"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

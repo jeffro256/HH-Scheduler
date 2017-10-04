@@ -118,24 +118,24 @@ class HomeViewController: UIViewController {
 
         progressRing.value = progressRing.minValue
 
-        if cschedule.isScheduledDay(now) {
-            let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + cschedule.getCycleDay(now))!)
+        if scheduleContext.isScheduledDay(now) {
+            let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + scheduleContext.getCycleDay(now))!)
             dayShortDesc = "\(cycleCharacter) DAY"
 
-            let blocks = cschedule.getBlocks(now, from: schedule)
+            let blocks = scheduleContext.getBlocks(now, from: schedule)
 
-            if Calendar.current.compare(nowTime, to: cschedule.getStartTime(now)!, toGranularity: .minute) == .orderedAscending {
+            if Calendar.current.compare(nowTime, to: scheduleContext.getStartTime(now)!, toGranularity: .minute) == .orderedAscending {
                 mainText = "Good Morning!"
             }
-            else if Calendar.current.compare(nowTime, to: cschedule.getEndTime(now)!, toGranularity: .minute) != .orderedAscending {
+            else if Calendar.current.compare(nowTime, to: scheduleContext.getEndTime(now)!, toGranularity: .minute) != .orderedAscending {
                 mainText = "School is Over!"
             }
             else {
                 for (i, block) in blocks.enumerated() {
                     if nowTime >= block.startTime && nowTime < block.endTime {
-                        let classID = block.classID
-                        mainText = block.name
-                        progressRing.innerRingColor = block.color
+                        let classID = block.scheduleClass.classID
+                        mainText = block.scheduleClass.name
+                        progressRing.innerRingColor = block.scheduleClass.color
 
                         if let mod = block.mod {
                             modText = "Mod \(mod+1)"
@@ -145,7 +145,7 @@ class HomeViewController: UIViewController {
                         var classEndTime = block.endTime
 
                         for prevBlock in blocks[0..<i].reversed() {
-                            if prevBlock.classID == classID {
+                            if prevBlock.scheduleClass.classID == classID {
                                 classStartTime = prevBlock.startTime
                             }
                             else {
@@ -154,7 +154,7 @@ class HomeViewController: UIViewController {
                         }
 
                         for nextBlock in blocks[(i+1)..<blocks.count] {
-                            if nextBlock.classID == classID {
+                            if nextBlock.scheduleClass.classID == classID {
                                 classEndTime = nextBlock.endTime
                             }
                             else {
@@ -179,14 +179,14 @@ class HomeViewController: UIViewController {
                 }
             }
         }
-        else if cschedule.isSchoolDay(now) {
+        else if scheduleContext.isSchoolDay(now) {
             dayShortDesc = "Weird Day"
-            mainText = cschedule.getWeirdDayName(now)!
+            mainText = scheduleContext.getWeirdDayName(now)!
         }
-        else if cschedule.isHoliday(now) {
+        else if scheduleContext.isHoliday(now) {
             dayShortDesc = "Day Off"
         }
-        else if !cschedule.isInSchoolYear(now) {
+        else if !scheduleContext.isInSchoolYear(now) {
             dayShortDesc = "Summer"
         }
         else { // I assume it's the weekend
@@ -196,7 +196,7 @@ class HomeViewController: UIViewController {
         for label in labels {
             switch label.tag {
             case 50:
-                label.isHidden = !cschedule.isWeirdDay(now)
+                label.isHidden = !scheduleContext.isWeirdDay(now)
             case 51:
                 label.text = dateText
             case 52:
@@ -266,16 +266,16 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
     }
 
     public override func reloadData() {
-        let blocks = cschedule.getBlocks(Date(), from: schedule)
+        let blocks = scheduleContext.getBlocks(Date(), from: schedule)
 
         classes = []
 
         for block in blocks {
-            if classes.count > 0 && block.classID == classes.last!.0 {
+            if classes.count > 0 && block.scheduleClass.classID == classes.last!.0 {
                 classes[classes.count-1].3 = block.endTime
             }
             else {
-                classes.append((block.classID, block.name, block.startTime, block.endTime, block.color))
+                classes.append((block.scheduleClass.classID, block.scheduleClass.name, block.startTime, block.endTime, block.scheduleClass.color))
             }
         }
 

@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("Began running HH-Scheduler! Jeffrey Ryan says hello")
 
-        schedule = Schedule.defaultLoadFromFile(schedule_file_url)
-        cschedule = ContextSchedule()
+        schedule = PSchedule.defaultLoadFromFile(schedule_file_url)
+        scheduleContext = ScheduleContext()
 
         let contextData: Data
         if let data = try? Data(contentsOf: schedule_info_web_url) {
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             contextData = Data()
         }
 
-        cschedule.refreshContext(contextData: contextData)
+        scheduleContext.refreshContext(contextData: contextData)
 
         return true
     }

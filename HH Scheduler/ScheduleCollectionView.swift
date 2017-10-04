@@ -9,7 +9,7 @@
 import UIKit
 
 class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    internal var scheduleSource: ScheduleDataSource!
+    internal var scheduleSource: PersonalSchedule!
 
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,19 +18,19 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         self.dataSource = self
     }
 
-    public func setDataSource(scheduleSource: ScheduleDataSource) {
+    public func setDataSource(scheduleSource: PersonalSchedule) {
         self.scheduleSource = scheduleSource
     }
 
     // Get number of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let rows = NUM_DAYS + 1
-        return rows * NUM_MODS
+        let rows = scheduleSource.getNumDays() + 1
+        return rows * scheduleSource.getNumMods()
     }
 
     // Create the cells
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let rows = NUM_DAYS + 1
+        let rows = scheduleSource.getNumDays() + 1
         let identifer = (indexPath.item % rows == 0) ? "ModCell" : "ClassCell"
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifer, for: indexPath) as! ScheduleCell
 
@@ -38,12 +38,12 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
             cell.label.text = String(describing: indexPath.item / rows + 1)
         }
         else {
-            let day = (indexPath.item - indexPath.item / rows - 1) % NUM_DAYS
-            let mod = (indexPath.item - indexPath.item / rows - 1) / NUM_DAYS
-            let block = scheduleSource.getBlock(day: day, mod: mod)
+            let day = (indexPath.item - indexPath.item / rows - 1) % scheduleSource.getNumDays()
+            let mod = (indexPath.item - indexPath.item / rows - 1) / scheduleSource.getNumDays()
+            let classInfo = scheduleSource.getClassInfo(atDay: day, mod: mod)
 
-            cell.label.text = (block.classID == 0) ? nil : block.name
-            cell.backgroundColor = block.color
+            cell.label.text = (classInfo.classID == 0) ? nil : classInfo.name
+            cell.backgroundColor = classInfo.color
             cell.addBorder()
         }
 
@@ -52,9 +52,9 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
     // Size each cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let rows = NUM_DAYS + 1
+        let rows = scheduleSource.getNumDays() + 1
         let top_cell_height: CGFloat = 40
-        let class_cell_height = (self.frame.height - top_cell_height) / CGFloat(NUM_DAYS)
+        let class_cell_height = (self.frame.height - top_cell_height) / CGFloat(scheduleSource.getNumDays())
 
         let h: CGFloat
 

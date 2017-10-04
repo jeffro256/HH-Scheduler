@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		35C9B01D6766638428607EF8 /* Pods_HH_Scheduler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F586C3E91347A0D45FCC8D5 /* Pods_HH_Scheduler.framework */; };
 		360E28321F1454280052C799 /* ScheduleEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28311F1454280052C799 /* ScheduleEditorViewController.swift */; };
-		360E28341F1540390052C799 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28331F1540390052C799 /* Schedule.swift */; };
+		360E28341F1540390052C799 /* PSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28331F1540390052C799 /* PSchedule.swift */; };
 		361D0DC51F817F5C007BEA4D /* ClassEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */; };
 		361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */; };
 		362310281D7BAB28004F98FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362310271D7BAB28004F98FB /* AppDelegate.swift */; };
@@ -17,11 +17,11 @@
 		3623102F1D7BAB28004F98FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3623102D1D7BAB28004F98FB /* Main.storyboard */; };
 		362310311D7BAB28004F98FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362310301D7BAB28004F98FB /* Assets.xcassets */; };
 		367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D02DE1DA527E8005740EA /* StringExtension.swift */; };
-		369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* ScheduleDataSource.swift */; };
+		369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* PersonalSchedule.swift */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
 		36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */; };
 		36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830221F685AEE00F3327E /* UIColorExtension.swift */; };
-		36E830251F69569A00F3327E /* ContextSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830241F69569A00F3327E /* ContextSchedule.swift */; };
+		36E830251F69569A00F3327E /* ScheduleContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830241F69569A00F3327E /* ScheduleContext.swift */; };
 		36EB9FE91D9C35D0006B6874 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EB9FE81D9C35D0006B6874 /* Common.swift */; };
 		36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EFAD991F65F42800AADFDE /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
@@ -30,7 +30,7 @@
 		0120F545387A255E428C142A /* Pods-HH Scheduler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HH Scheduler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HH Scheduler/Pods-HH Scheduler.debug.xcconfig"; sourceTree = "<group>"; };
 		31DA76137ADCE758E99954E1 /* Pods-HH Scheduler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HH Scheduler.release.xcconfig"; path = "Pods/Target Support Files/Pods-HH Scheduler/Pods-HH Scheduler.release.xcconfig"; sourceTree = "<group>"; };
 		360E28311F1454280052C799 /* ScheduleEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleEditorViewController.swift; sourceTree = "<group>"; };
-		360E28331F1540390052C799 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		360E28331F1540390052C799 /* PSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSchedule.swift; sourceTree = "<group>"; };
 		361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassEditorViewController.swift; sourceTree = "<group>"; };
 		361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionView.swift; sourceTree = "<group>"; };
 		362310241D7BAB28004F98FB /* HH Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HH Scheduler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,11 +40,11 @@
 		362310301D7BAB28004F98FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		362310351D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		367D02DE1DA527E8005740EA /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		369468031F510FC50097A534 /* ScheduleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDataSource.swift; sourceTree = "<group>"; };
+		369468031F510FC50097A534 /* PersonalSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSchedule.swift; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIG JOHN.otf"; sourceTree = "<group>"; };
 		36E830221F685AEE00F3327E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		36E830241F69569A00F3327E /* ContextSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextSchedule.swift; sourceTree = "<group>"; };
+		36E830241F69569A00F3327E /* ScheduleContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleContext.swift; sourceTree = "<group>"; };
 		36EB9FE81D9C35D0006B6874 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		36EFAD991F65F42800AADFDE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6F586C3E91347A0D45FCC8D5 /* Pods_HH_Scheduler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HH_Scheduler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,13 +103,13 @@
 				36EB9FE81D9C35D0006B6874 /* Common.swift */,
 				36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */,
 				362310271D7BAB28004F98FB /* AppDelegate.swift */,
-				36E830241F69569A00F3327E /* ContextSchedule.swift */,
+				36E830241F69569A00F3327E /* ScheduleContext.swift */,
 				3623102B1D7BAB28004F98FB /* ScheduleViewController.swift */,
 				361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */,
 				360E28311F1454280052C799 /* ScheduleEditorViewController.swift */,
 				361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */,
-				369468031F510FC50097A534 /* ScheduleDataSource.swift */,
-				360E28331F1540390052C799 /* Schedule.swift */,
+				369468031F510FC50097A534 /* PersonalSchedule.swift */,
+				360E28331F1540390052C799 /* PSchedule.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
 				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
 				362310301D7BAB28004F98FB /* Assets.xcassets */,
@@ -262,11 +262,11 @@
 				361D0DC51F817F5C007BEA4D /* ClassEditorViewController.swift in Sources */,
 				3623102C1D7BAB28004F98FB /* ScheduleViewController.swift in Sources */,
 				361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */,
-				36E830251F69569A00F3327E /* ContextSchedule.swift in Sources */,
-				369468041F510FC50097A534 /* ScheduleDataSource.swift in Sources */,
+				36E830251F69569A00F3327E /* ScheduleContext.swift in Sources */,
+				369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */,
 				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
 				36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */,
-				360E28341F1540390052C799 /* Schedule.swift in Sources */,
+				360E28341F1540390052C799 /* PSchedule.swift in Sources */,
 				367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */,
 				362310281D7BAB28004F98FB /* AppDelegate.swift in Sources */,
 				36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */,

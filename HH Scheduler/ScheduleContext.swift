@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ContextSchedule {
+class ScheduleContext {
     private struct WeirdDay {
         public var name: String
         public var date: Date
@@ -48,7 +48,7 @@ class ContextSchedule {
     private var landmarks: [(Date, Int)]
     private var holidays: [Date]
     private var weirdDays: [WeirdDay]
-    private var specialBlocks: [ScheduleBlock]
+    private var specialClasses: [ScheduleClass]
     private var loaded: Bool
 
     public init() {
@@ -65,7 +65,7 @@ class ContextSchedule {
         landmarks = [(Date, Int)]()
         holidays = [Date]()
         weirdDays = [WeirdDay]()
-        specialBlocks = [ScheduleBlock]()
+        specialClasses = [ScheduleClass]()
         loaded = false
     }
 
@@ -143,7 +143,7 @@ class ContextSchedule {
         return getWeirdDay(date)?.endTime ?? ((isDDay || isWednesday) ? lateEndTime : regEndTime)
     }
 
-    public func getBlocks(_ date: Date, from personalSchedule: Schedule) -> [ContextScheduleBlock] {
+    public func getBlocks(_ date: Date, from personalSchedule: PersonalSchedule) -> [ScheduleBlock] {
         guard isScheduledDay(date) else { return [] }
 
         let cycleDay = getCycleDay(date)
@@ -159,18 +159,25 @@ class ContextSchedule {
 
         guard blockTimes.count == blockIndexes.count else { return [] }
 
-        var blocks = [ContextScheduleBlock]()
+        var blocks = [ScheduleBlock]()
         let numBlocks = blockTimes.count
         let endTime = getEndTime(date)!
         for b in 0..<numBlocks {
             let blockStart = blockTimes[b]
             let blockEnd = (b == numBlocks - 1) ? endTime : blockTimes[b + 1]
             let blockIndex = blockIndexes[b]
-            let baseBlock = (blockIndex < 0) ? specialBlocks[-(blockIndex + 1)] : personalSchedule.getBlock(day: cycleDay, mod: blockIndex)
 
-            let block = ContextScheduleBlock(name: baseBlock.name, classID: baseBlock.classID, color: baseBlock.color, startTime: blockStart, endTime: blockEnd, from: self, mod: (blockIndex >= 0) ? blockIndex : nil)
+            if blockIndex < 0 {
+                let specClass = specialClasses[-(blockIndex + 1)]
+                let block = ScheduleBlock(scheduleClass: specClass, startTime: blockStart, endTime: blockEnd, scheduleContext: self, mod: nil)
+                blocks.append(block)
+            }
+            else {
+                let classInfo = personalSchedule.getClassInfo(atDay: cycleDay, mod: blockIndex)
+                let block = ScheduleBlock(scheduleClass: classInfo, startTime: blockStart, endTime: blockEnd, scheduleContext: self, mod: blockIndex)
 
-            blocks.append(block)
+                blocks.append(block)
+            }
         }
 
         return blocks
@@ -239,7 +246,7 @@ class ContextSchedule {
 
         guard let weirdDayObjects = jsonDict["WeirdSchedules"] as? [[String: Any]] else { return false }
         var weirdDays = [WeirdDay]()
-        var specialBlocks = [ScheduleBlock]()
+        var specialClasses = [ScheduleClass]()
         for weirdDayObject in weirdDayObjects {
             guard let name = weirdDayObject["name"] as? String else { return false }
             guard let weirdDayDateStr = weirdDayObject["date"] as? String else { return false }
@@ -264,11 +271,11 @@ class ContextSchedule {
                         blockIndexes?.append((blockTime, blockIndex))
                     }
                     else {
-                        let blockIndex = -(specialBlocks.count + 1)
-                        let specialBlock = ScheduleBlock(name: mod[1], classID: blockIndex, color: hh_tint)
+                        let blockIndex = -(specialClasses.count + 1)
+                        let specialClass = ScheduleClass(classID: blockIndex, classIndex: -1, name: mod[1], color: hhTint)
 
                         blockIndexes?.append((blockTime, blockIndex))
-                        specialBlocks.append(specialBlock)
+                        specialClasses.append(specialClass)
                     }
                 }
             }
@@ -291,7 +298,7 @@ class ContextSchedule {
         self.landmarks = landmarks
         self.holidays = holidays
         self.weirdDays = weirdDays
-        self.specialBlocks = specialBlocks
+        self.specialClasses = specialClasses
         self.loaded = true
 
         return true
@@ -306,7 +313,7 @@ class ContextSchedule {
     }
 
     private func date(from string: String) -> Date? {
-        if let timedDate = ContextSchedule.dateFormatter.date(from: string) {
+        if let timedDate = ScheduleContext.dateFormatter.date(from: string) {
             return Calendar.current.startOfDay(for: timedDate)
         }
 
@@ -314,7 +321,7 @@ class ContextSchedule {
     }
 
     private func time(from string: String) -> Date? {
-        if let datedTime = ContextSchedule.timeFormatter.date(from: string) {
+        if let datedTime = ScheduleContext.timeFormatter.date(from: string) {
             let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: datedTime)
 
             return Calendar.current.date(from: dateComponents)
@@ -323,3 +330,12 @@ class ContextSchedule {
         return nil
     }
 }
+
+struct ScheduleBlock {
+    public var scheduleClass: ScheduleClass
+    public var startTime: Date
+    public var endTime: Date
+    public weak var scheduleContext: ScheduleContext?
+    public var mod: Int?
+}
+
