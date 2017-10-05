@@ -26,15 +26,16 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         scheduleCollectionView.setDataSource(scheduleSource: newSchedule)
 
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
 
-        // Cause the tableview is "grouped"
-        tableView.backgroundColor = UIColor.white
-        tableView.backgroundView = nil
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ClassEditorViewController, let editPath = self.editPath {
             vc.classID = newSchedule.getClassID(index: editPath.item)
+            vc.shouldFocusText = self.editNewClass
 
             if self.editNewClass {
                 vc.startName = ""
@@ -179,14 +180,6 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableCell(withIdentifier: "AddCell")
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40
     }
 
