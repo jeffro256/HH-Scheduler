@@ -24,6 +24,12 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         newSchedule = schedule.copy() as! PSchedule
         scheduleCollectionView.scheduleController = self
         scheduleCollectionView.setDataSource(scheduleSource: newSchedule)
+
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
+        // Cause the tableview is "grouped"
+        tableView.backgroundColor = UIColor.white
+        tableView.backgroundView = nil
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,6 +64,37 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
+    @IBAction func hitReorderButton(_ sender: Any) {
+        guard let button = sender as? UIView else { print("Bad reorder sender!"); return }
+
+        if tableView.isEditing {
+            button.tintColor = UIColor(0xDDDDDD)
+            tableView.isEditing = false
+        }
+        else {
+            button.tintColor = hhTint
+            tableView.isEditing = true
+        }
+    }
+
+    @IBAction func hitAddButton(_ sender: Any) {
+        if let selectedPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedPath, animated: true)
+        }
+
+        newSchedule.addClass(withName: "New Class", color: color_pallette[0])
+
+        let newIndex = IndexPath(row: tableView.numberOfRows(inSection: 0), section: 0)
+
+        tableView.beginUpdates()
+        tableView.insertRows(at: [newIndex], with: .automatic)
+        tableView.endUpdates()
+
+        tableView.selectRow(at: newIndex, animated: true, scrollPosition: .none)
+
+        self.pullEditingScreen(at: newIndex, newClass: true)
+    }
+
     public func save() {
         do {
             try newSchedule.saveToFile(schedule_file_url)
@@ -72,33 +109,25 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     // Get number of cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newSchedule.getNumClasses() + 1
+        return newSchedule.getNumClasses()
     }
 
     // Create the cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isLastItem(indexPath) {
-            let addCell = tableView.dequeueReusableCell(withIdentifier: "AddCell")!
+        let classInfoCell = tableView.dequeueReusableCell(withIdentifier: "ClassCell") as! ClassCell
 
-            return addCell
-        }
-        else {
-            let classInfoCell = tableView.dequeueReusableCell(withIdentifier: "ClassCell") as! ClassCell
+        let classInfo = newSchedule.getClassInfo(withID: newSchedule.getClassID(index: indexPath.item))!
+        classInfoCell.label.textColor = (indexPath.item == newSchedule.freetimeID()) ? UIColor.black : UIColor.white
+        classInfoCell.label.text = classInfo.name
+        classInfoCell.backgroundColor = classInfo.color
 
-            let classInfo = newSchedule.getClassInfo(withID: newSchedule.getClassID(index: indexPath.item))!
-            classInfoCell.label.textColor = (indexPath.item == newSchedule.freetimeID()) ? UIColor.black : UIColor.white
-            classInfoCell.label.text = classInfo.name
-            classInfoCell.backgroundColor = classInfo.color
-            classInfoCell.classID = classInfo.classID
-
-            return classInfoCell
-        }
+        return classInfoCell
     }
 
     // Will display cell
     var selectedFirst = false
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if isLastItem(indexPath) && !selectedFirst {
+        if !selectedFirst {
             tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
             selectedFirst = true
         }
@@ -106,26 +135,12 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
 
     // Selected cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isLastItem(indexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-
-            newSchedule.addClass(withName: "New Class", color: color_pallette[0])
-
-            tableView.beginUpdates()
-            tableView.insertRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
-
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-
-            self.pullEditingScreen(at: indexPath, newClass: true)
-        }
-
         selectedClassID = newSchedule.getClassID(index: indexPath.item)
     }
 
     // Whether cell should be editable
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.item != 0 && !isLastItem(indexPath)
+        return true
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -142,6 +157,39 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         return true
     }
 
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let moveID = newSchedule.getClassID(index: sourceIndexPath.item)
+        newSchedule.setClassIndex(withID: moveID, to: destinationIndexPath.item)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableCell(withIdentifier: "Header")
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableCell(withIdentifier: "AddCell")
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40
+    }
+
     func deleteClass(_ indexPath: IndexPath) {
         let removeID = newSchedule.getClassID(index: indexPath.item)
         newSchedule.removeClass(withID: removeID)
@@ -150,10 +198,6 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         tableView.deleteRows(at: [indexPath], with: .fade)
         tableView.endUpdates()
         scheduleCollectionView.reloadData()
-    }
-
-    private func isLastItem(_ indexPath: IndexPath) -> Bool {
-        return indexPath.item == tableView.numberOfRows(inSection: 0) - 1
     }
 
     private func pullEditingScreen(at indexPath: IndexPath, newClass: Bool) {
@@ -201,5 +245,4 @@ class ScheduleEditorCollectionView: ScheduleCollectionView {
 
 class ClassCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
-    var classID: Int!
 }

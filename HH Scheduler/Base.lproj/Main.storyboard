@@ -500,19 +500,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mrN-2Z-y8l">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="mrN-2Z-y8l">
                                 <rect key="frame" x="0.0" y="0.0" width="112" height="455"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Header" id="SMO-pm-ZV9">
+                                        <rect key="frame" x="0.0" y="73.5" width="112" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SMO-pm-ZV9" id="JK7-m4-4Eo">
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAR-vV-gc0">
+                                                    <rect key="frame" x="67.5" y="5" width="39.5" height="39.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="KAR-vV-gc0" secondAttribute="height" multiplier="1:1" id="5bn-dQ-cRq"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" image="Reorder"/>
+                                                    <connections>
+                                                        <action selector="hitReorderButton:" destination="hzr-C9-65Z" eventType="touchUpInside" id="JrU-ZV-LY6"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KAR-vV-gc0" firstAttribute="top" secondItem="JK7-m4-4Eo" secondAttribute="top" constant="5" id="NA2-3I-mOi"/>
+                                                <constraint firstItem="KAR-vV-gc0" firstAttribute="trailing" secondItem="JK7-m4-4Eo" secondAttribute="trailing" constant="-5" id="Pqa-xp-0Dj"/>
+                                                <constraint firstAttribute="bottom" secondItem="KAR-vV-gc0" secondAttribute="bottom" constant="5" id="og4-XQ-Rwu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClassCell" id="Lht-p5-Ksy" customClass="ClassCell" customModule="HH_Scheduler" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="112" height="55"/>
+                                        <rect key="frame" x="0.0" y="123.5" width="112" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lht-p5-Ksy" id="Zo0-3W-iVS">
-                                            <rect key="frame" x="0.0" y="0.0" width="112" height="54.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9I-lb-ZUJ">
-                                                    <rect key="frame" x="8" y="8" width="96" height="38.5"/>
+                                                    <rect key="frame" x="8" y="8" width="96" height="33.5"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -531,21 +558,27 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCell" id="7bK-s7-sG9">
-                                        <rect key="frame" x="0.0" y="83" width="112" height="55"/>
+                                        <rect key="frame" x="0.0" y="173.5" width="112" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7bK-s7-sG9" id="q3R-f8-lmy">
-                                            <rect key="frame" x="0.0" y="0.0" width="112" height="54.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlusSign" translatesAutoresizingMaskIntoConstraints="NO" id="jW2-sx-a0j">
-                                                    <rect key="frame" x="8" y="8" width="96" height="38.5"/>
-                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ja-8R-FeL">
+                                                    <rect key="frame" x="39.5" y="8" width="33.5" height="33.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="7Ja-8R-FeL" secondAttribute="height" multiplier="1:1" id="Ih2-E9-OBU"/>
+                                                    </constraints>
+                                                    <state key="normal" image="PlusSign"/>
+                                                    <connections>
+                                                        <action selector="hitAddButton:" destination="hzr-C9-65Z" eventType="touchUpInside" id="0Hn-21-64A"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="jW2-sx-a0j" secondAttribute="bottom" id="Rph-Wz-g7G"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="jW2-sx-a0j" secondAttribute="trailing" id="Slj-bL-lo2"/>
-                                                <constraint firstItem="jW2-sx-a0j" firstAttribute="top" secondItem="q3R-f8-lmy" secondAttribute="topMargin" id="eRI-Z4-Iji"/>
-                                                <constraint firstItem="jW2-sx-a0j" firstAttribute="leading" secondItem="q3R-f8-lmy" secondAttribute="leadingMargin" id="su6-SQ-SJ7"/>
+                                                <constraint firstItem="7Ja-8R-FeL" firstAttribute="centerX" secondItem="q3R-f8-lmy" secondAttribute="centerX" id="47T-4p-J0y"/>
+                                                <constraint firstItem="7Ja-8R-FeL" firstAttribute="top" secondItem="q3R-f8-lmy" secondAttribute="topMargin" id="CYe-Hb-Dgf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="7Ja-8R-FeL" secondAttribute="bottom" id="GWj-cv-9Wo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
@@ -889,6 +922,7 @@
         <image name="Clicked Schedule Icon" width="25" height="25"/>
         <image name="Pencil" width="25" height="25"/>
         <image name="PlusSign" width="50" height="50"/>
+        <image name="Reorder" width="48" height="48"/>
         <image name="Unclicked House Icon" width="25" height="25"/>
         <image name="Unclicked Schedule Icon" width="25" height="25"/>
     </resources>

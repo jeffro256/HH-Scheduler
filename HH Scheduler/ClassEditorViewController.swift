@@ -49,21 +49,17 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
     }
 
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if let selectedIndex = collectionView.indexPathsForSelectedItems?.first {
+            collectionView.cellForItem(at: selectedIndex)?.layer.borderWidth = 0
+        }
         return true
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for i in 0..<collectionView.numberOfItems(inSection: 0) {
-            let cell = collectionView.cellForItem(at: IndexPath(row: i, section: 0))!
-            
-            if i == indexPath.item {
-                cell.layer.borderColor = UIColor.blue.cgColor
-                cell.layer.borderWidth = 2
-            }
-            else {
-                cell.layer.borderWidth = 0
-            }
-        }
+        let cell = collectionView.cellForItem(at: indexPath)!
+
+        cell.layer.borderColor = UIColor.blue.cgColor
+        cell.layer.borderWidth = 2
     }
 
     public override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
