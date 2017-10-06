@@ -11,7 +11,7 @@ import UIKit
 public class ClassEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     var classID: PersonalSchedule.ClassID = -1
     var startName: String?
-    var startColor: UIColor?
+    var startColorIndex: Int!
     var shouldFocusText: Bool!
 
     @IBOutlet weak var nameField: UITextField!
@@ -25,19 +25,21 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         nameField.text = startName
         if shouldFocusText { nameField.becomeFirstResponder() }
 
-        /*
-        if let color = startColor {
-            let palleteIndex = color_pallette.index(of: color)!
+        startColorIndex = startColorIndex ?? 0
 
-            colorCollection.selectItem(at: IndexPath(row: palleteIndex, section: 0), animated: false, scrollPosition: .centeredVertically)
+        let colorItemSizeRatio: CGFloat = 0.75
+        let colorPickerInset = CGFloat(20)
+        let colorItemSize = (self.view.frame.width - colorPickerInset * 2) / 4 * colorItemSizeRatio
+        let innerSpace = (self.view.frame.width - colorPickerInset * 2) / 4 * (1 - colorItemSizeRatio)
+        let h = colorItemSize * 2 + innerSpace + colorPickerInset * 2
+
+        colorPickerHeight.constant = h
+        if let layout = colorCollection.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: colorItemSize, height: colorItemSize)
+            layout.minimumLineSpacing = innerSpace
+            layout.minimumInteritemSpacing = innerSpace
+            layout.sectionInset = UIEdgeInsets(top: colorPickerInset, left: colorPickerInset, bottom: colorPickerInset, right: colorPickerInset)
         }
-         */
-    }
-
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        colorCollection.collectionViewLayout.invalidateLayout()
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -52,11 +54,6 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         cell.layer.masksToBounds = true
 
         return cell
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let l = collectionView.frame.width / 5 - 20
-        return CGSize(width: l, height: l)
     }
 
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {

@@ -37,14 +37,9 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
             vc.classID = newSchedule.getClassID(index: editPath.item)
             vc.shouldFocusText = self.editNewClass
 
-            if self.editNewClass {
-                vc.startName = ""
-                vc.startColor = nil
-            }
-            else {
-                let classInfo = newSchedule.getClassInfo(withID: vc.classID)
-                vc.startName = classInfo?.name
-                vc.startColor = classInfo?.color
+            if !self.editNewClass, let classInfo = newSchedule.getClassInfo(withID: vc.classID) {
+                vc.startName = classInfo.name
+                vc.startColorIndex = color_pallette.index(of: classInfo.color)
             }
         }
     }
