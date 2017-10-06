@@ -5,7 +5,6 @@ Short-Term:
 -----------
 *  Figure out why random black box is appearing on the home screen
 *  Do something when the app can't get the school info
-*  Same-Color Ring arounds colors in clasd editor screen
 
 Long-Term:
 ----------

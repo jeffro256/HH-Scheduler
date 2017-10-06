@@ -47,27 +47,31 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as! ColorCell
 
-        cell.backgroundColor = color_pallette[indexPath.item]
+        cell.backgroundColor = UIColor.clear
         cell.layer.cornerRadius = cell.frame.width / 2
         cell.layer.masksToBounds = true
+        cell.sandwichCircle.layer.cornerRadius = (cell.frame.width - 4) / 2
+        cell.sandwichCircle.layer.masksToBounds = true
+        cell.innerCircle.backgroundColor = color_pallette[indexPath.item]
+        cell.innerCircle.layer.cornerRadius = (cell.frame.width - 8) / 2
+        cell.innerCircle.layer.masksToBounds = true
 
         return cell
     }
 
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if let selectedIndex = collectionView.indexPathsForSelectedItems?.first {
-            collectionView.cellForItem(at: selectedIndex)?.layer.borderWidth = 0
+            collectionView.cellForItem(at: selectedIndex)?.backgroundColor = UIColor.clear
         }
         return true
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)!
+        let cell = collectionView.cellForItem(at: indexPath) as! ColorCell
 
-        cell.layer.borderColor = UIColor.blue.cgColor
-        cell.layer.borderWidth = 2
+        cell.backgroundColor = color_pallette[indexPath.item]
     }
 
     public override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -84,4 +88,9 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         let color = colorCollection.cellForItem(at: colorCollection.indexPathsForSelectedItems!.first!)!.backgroundColor!
         return (name, color)
     }
+}
+
+class ColorCell: UICollectionViewCell {
+    @IBOutlet weak var sandwichCircle: UIView!
+    @IBOutlet weak var innerCircle: UIView!
 }

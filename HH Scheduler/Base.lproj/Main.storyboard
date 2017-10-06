@@ -40,7 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="qBp-Ib-ENe" userLabel="Ring Container">
-                                <rect key="frame" x="0.0" y="204" width="320" height="235"/>
+                                <rect key="frame" x="0.0" y="144" width="320" height="295"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4q-QV-pCy" userLabel="Class Progress Ring" customClass="UICircularProgressRingView" customModule="UICircularProgressRing">
                                         <rect key="frame" x="42" y="8" width="236" height="236"/>
@@ -133,7 +133,7 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJy-ca-S6u" userLabel="Top Container">
-                                <rect key="frame" x="0.0" y="124" width="320" height="80"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJv-AA-XM2">
                                         <rect key="frame" x="8" y="8" width="304" height="36.5"/>
@@ -302,11 +302,11 @@
                         <viewControllerLayoutGuide type="bottom" id="OLH-NW-o0b"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fKB-Ro-UJB" userLabel="MainView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjB-ig-Hda" userLabel="Cycle Day Stack View">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="451"/>
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="455"/>
                                 <subviews>
                                     <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69g-h0-cFk">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -315,40 +315,40 @@
                                         </constraints>
                                     </view>
                                     <stackView contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9NR-rp-Ysk" userLabel="Cycle Day Stack">
-                                        <rect key="frame" x="0.0" y="40" width="40" height="411"/>
+                                        <rect key="frame" x="0.0" y="40" width="40" height="415"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOW-Mm-y2j" userLabel="A Day Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="68.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="69"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwm-cp-Q2o" userLabel="B Day Label">
-                                                <rect key="frame" x="0.0" y="68.5" width="40" height="68.5"/>
+                                                <rect key="frame" x="0.0" y="69" width="40" height="69.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blu-qd-XIp" userLabel="C Day Label">
-                                                <rect key="frame" x="0.0" y="137" width="40" height="68.5"/>
+                                                <rect key="frame" x="0.0" y="138.5" width="40" height="69"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GeC-1N-4ea" userLabel="D Day Label">
-                                                <rect key="frame" x="0.0" y="205.5" width="40" height="68.5"/>
+                                                <rect key="frame" x="0.0" y="207.5" width="40" height="69"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJn-m7-DPI" userLabel="E Day Label">
-                                                <rect key="frame" x="0.0" y="274" width="40" height="68.5"/>
+                                                <rect key="frame" x="0.0" y="276.5" width="40" height="69.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ue-yg-sN2" userLabel="F Day Label">
-                                                <rect key="frame" x="0.0" y="342.5" width="40" height="68.5"/>
+                                                <rect key="frame" x="0.0" y="346" width="40" height="69"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -387,7 +387,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="agj-pZ-Ag0" customClass="ScheduleCollectionView" customModule="HH_Scheduler" customModuleProvider="target">
-                                <rect key="frame" x="40" y="0.0" width="280" height="451"/>
+                                <rect key="frame" x="40" y="0.0" width="280" height="455"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="dqJ-K2-Nuw">
                                     <size key="itemSize" width="141" height="91"/>
@@ -423,7 +423,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModCell" id="sKO-ay-rwf" customClass="ScheduleCell" customModule="HH_Scheduler" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="141" height="91"/>
+                                        <rect key="frame" x="0.0" y="91" width="141" height="91"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="141" height="91"/>
@@ -488,7 +488,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eiG-5B-Bi6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9Oe-PV-iYU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="mrN-2Z-y8l">
@@ -701,7 +701,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModCell" id="mdK-86-ya0" customClass="ScheduleCell" customModule="HH_Scheduler" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="90.5" width="140" height="90"/>
+                                        <rect key="frame" x="0.0" y="91.5" width="140" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="90"/>
@@ -773,7 +773,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Ba5-t5-R0C"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8xe-2Q-dsj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Class Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5n5-FM-m4W">
@@ -783,7 +783,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e5P-H7-HQf">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e5P-H7-HQf">
                                 <rect key="frame" x="0.0" y="71" width="320" height="130"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -796,13 +796,42 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ColorCell" id="TVl-li-hof">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ColorCell" id="TVl-li-hof" customClass="ColorCell" customModule="HH_Scheduler" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGD-uT-Fvq" userLabel="Sandwich Circle">
+                                                    <rect key="frame" x="2" y="2" width="36" height="36"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXr-5e-VC9">
+                                                            <rect key="frame" x="2" y="2" width="32" height="32"/>
+                                                            <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="CXr-5e-VC9" secondAttribute="bottom" constant="2" id="OqX-7W-Vut"/>
+                                                        <constraint firstItem="CXr-5e-VC9" firstAttribute="top" secondItem="PGD-uT-Fvq" secondAttribute="top" constant="2" id="Ya8-fP-aLc"/>
+                                                        <constraint firstItem="CXr-5e-VC9" firstAttribute="leading" secondItem="PGD-uT-Fvq" secondAttribute="leading" constant="2" id="abs-YZ-MEg"/>
+                                                        <constraint firstAttribute="trailing" secondItem="CXr-5e-VC9" secondAttribute="trailing" constant="2" id="eeI-XK-yUT"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
                                         </view>
+                                        <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="PGD-uT-Fvq" firstAttribute="top" secondItem="TVl-li-hof" secondAttribute="top" constant="2" id="4m2-Vg-EQv"/>
+                                            <constraint firstItem="PGD-uT-Fvq" firstAttribute="leading" secondItem="TVl-li-hof" secondAttribute="leading" constant="2" id="b97-o3-w4L"/>
+                                            <constraint firstAttribute="trailing" secondItem="PGD-uT-Fvq" secondAttribute="trailing" constant="2" id="gES-Ic-zTv"/>
+                                            <constraint firstAttribute="bottom" secondItem="PGD-uT-Fvq" secondAttribute="bottom" constant="2" id="vRs-Vd-3oF"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="innerCircle" destination="CXr-5e-VC9" id="41z-5l-KUs"/>
+                                            <outlet property="sandwichCircle" destination="PGD-uT-Fvq" id="XPv-kM-bdJ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
