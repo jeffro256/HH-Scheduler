@@ -113,7 +113,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         let classInfoCell = tableView.dequeueReusableCell(withIdentifier: "ClassCell") as! ClassCell
 
         let classInfo = newSchedule.getClassInfo(withID: newSchedule.getClassID(index: indexPath.item))!
-        classInfoCell.label.textColor = (indexPath.item == newSchedule.freetimeID()) ? UIColor.black : UIColor.white
+        classInfoCell.label.textColor = (classInfo.classID == newSchedule.freetimeID()) ? UIColor.black : UIColor.white
         classInfoCell.label.text = classInfo.name
         classInfoCell.backgroundColor = classInfo.color
 
