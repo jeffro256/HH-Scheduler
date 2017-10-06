@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class ClassEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+public class ClassEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate {
     var classID: PersonalSchedule.ClassID = -1
     var startName: String?
     var startColorIndex: Int!
@@ -40,6 +40,10 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
             layout.minimumInteritemSpacing = innerSpace
             layout.sectionInset = UIEdgeInsets(top: colorPickerInset, left: colorPickerInset, bottom: colorPickerInset, right: colorPickerInset)
         }
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -74,6 +78,12 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         cell.backgroundColor = color_pallette[indexPath.item]
     }
 
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+
+        return true
+    }
+
     public override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "Done" {
             return !(nameField.text?.isEmpty ?? true) && (colorCollection.indexPathsForSelectedItems?.count ?? 0) > 0
@@ -81,6 +91,10 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         else {
             return true
         }
+    }
+
+    @objc public func dismissKeyboard() {
+        self.view.endEditing(true)
     }
 
     public func getData() -> (String, UIColor) {
