@@ -54,12 +54,12 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as! ColorCell
 
         cell.backgroundColor = UIColor.clear
-        cell.layer.cornerRadius = cell.frame.width / 2
+        cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.sandwichCircle.layer.cornerRadius = (cell.frame.width - 4) / 2
+        cell.sandwichCircle.layer.cornerRadius = 10
         cell.sandwichCircle.layer.masksToBounds = true
         cell.innerCircle.backgroundColor = color_pallette[indexPath.item]
-        cell.innerCircle.layer.cornerRadius = (cell.frame.width - 8) / 2
+        cell.innerCircle.layer.cornerRadius = 8
         cell.innerCircle.layer.masksToBounds = true
 
         return cell

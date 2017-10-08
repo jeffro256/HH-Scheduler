@@ -40,7 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="qBp-Ib-ENe" userLabel="Ring Container">
-                                <rect key="frame" x="0.0" y="144" width="320" height="295"/>
+                                <rect key="frame" x="0.0" y="204" width="320" height="235"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4q-QV-pCy" userLabel="Class Progress Ring" customClass="UICircularProgressRingView" customModule="UICircularProgressRing">
                                         <rect key="frame" x="42" y="8" width="236" height="236"/>
@@ -133,7 +133,7 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJy-ca-S6u" userLabel="Top Container">
-                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
+                                <rect key="frame" x="0.0" y="124" width="320" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJv-AA-XM2">
                                         <rect key="frame" x="8" y="8" width="304" height="36.5"/>
