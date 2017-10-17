@@ -170,14 +170,22 @@ class PSchedule: NSObject, NSCoding, NSCopying, PersonalSchedule {
         return id
     }
 
-    func removeClass(withID id: PersonalSchedule.ClassID) {
-        guard id != self.freetimeID() else { return }
+    func removeClass(withID rid: PersonalSchedule.ClassID) {
+        guard rid != self.freetimeID() else { return }
 
-        if let removeIndex = classes.index(where: { c in c.classID == id }) {
+        if let removeIndex = classes.index(where: { c in c.classID == rid }) {
             classes.remove(at: removeIndex)
 
             for i in removeIndex..<classes.count {
-                classes[i].classIndex = i
+                classes[i].classIndex = i - 1
+            }
+
+            for d in 0..<self.getNumDays() {
+                for m in 0..<self.getNumMods() {
+                    if self.getClassID(atDay: d, mod: m) == rid {
+                        self.setClassID(atDay: d, mod: m, to: self.freetimeID())
+                    }
+                }
             }
         }
     }

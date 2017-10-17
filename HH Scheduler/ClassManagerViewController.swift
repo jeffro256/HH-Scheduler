@@ -12,7 +12,7 @@ class ClassManagerViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        //self.tableView.isEditing = true
+        self.tableView.isEditing = true
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,9 +44,6 @@ class ClassManagerViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "ClassEditVC") as! ClassEditorViewController
-        
-        print(vc.view.frame)
-        print("!!!!!!!!!!")
 
         self.navigationController?.pushViewController(vc, animated: true)
     }
