@@ -145,7 +145,12 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
         }
         editAction.backgroundColor = .lightGray
 
+        print("i")
         return [editAction]
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        // ?
     }
 
     // Whether cell should be highlightable
@@ -162,7 +167,7 @@ class ScheduleEditorViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .none
+        return tableView.isEditing ? .none : .delete
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

@@ -23,12 +23,12 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         super.viewDidLoad()
 
         nameField.text = startName
-        if shouldFocusText { nameField.becomeFirstResponder() }
+        if shouldFocusText ?? true { nameField.becomeFirstResponder() }
 
         startColorIndex = startColorIndex ?? 0
 
-        let colorItemSizeRatio: CGFloat = 0.75
-        let colorPickerInset = CGFloat(20)
+        let colorItemSizeRatio: CGFloat = 0.7
+        let colorPickerInset = CGFloat(30)
         let colorItemSize = (self.view.frame.width - colorPickerInset * 2) / 4 * colorItemSizeRatio
         let innerSpace = (self.view.frame.width - colorPickerInset * 2) / 4 * (1 - colorItemSizeRatio)
         let h = colorItemSize * 2 + innerSpace + colorPickerInset * 2

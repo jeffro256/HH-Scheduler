@@ -31,12 +31,12 @@ let hhTint = UIColor(0xC4161C)
 let freetimeColor = UIColor(0xEFEFF4)
 
 let color_pallette = [
-    UIColor(0xFC635D),  // Red
-    UIColor(0xFDA942),  // Orange
-    UIColor(0xFED546),  // Yellow
-    UIColor(0x74DF87),  // Green
-    UIColor(0x7FD4F9),  // Light Blue
-    UIColor(0x3A97FC),  // Blue
-    UIColor(0x7A7BDB),  // Purple
-    UIColor(0xFC5979),  // Magenta
+    UIColor(0xFF6259),  // Red
+    UIColor(0xFFAA33),  // Orange
+    UIColor(0xFFD633),  // Yellow
+    UIColor(0x70E183),  // Green
+    UIColor(0x7BD3FB),  // Light Blue
+    UIColor(0x3395FF),  // Blue
+    UIColor(0x7978DE),  // Purple
+    UIColor(0xFF5777),  // Magenta
 ]
