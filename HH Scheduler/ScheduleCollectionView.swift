@@ -9,17 +9,14 @@
 import UIKit
 
 class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    internal var scheduleSource: PersonalSchedule!
+    public var scheduleSource: PersonalSchedule!
+    public weak var scheduleManagerViewController: ScheduleManagerViewController!
 
     public override func awakeFromNib() {
         super.awakeFromNib()
 
         self.delegate = self
         self.dataSource = self
-    }
-
-    public func setDataSource(scheduleSource: PersonalSchedule) {
-        self.scheduleSource = scheduleSource
     }
 
     // Get number of cells
@@ -69,6 +66,39 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
         let w = round(class_cell_height * 1.75)
 
         return CGSize(width: w, height: h)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let rows = scheduleSource.getNumDays() + 1
+        return indexPath.item % rows != 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectedClassID = self.scheduleManagerViewController.getSelectedClassID() {
+            let cell = collectionView.cellForItem(at: indexPath) as! ScheduleCell
+            let rows = scheduleSource.getNumDays() + 1
+            let day = indexPath.item % rows - 1
+            let mod = indexPath.item / rows
+            let classInfo = scheduleSource.getClassInfo(atDay: day, mod: mod)
+
+            if selectedClassID == classInfo.classID || selectedClassID == scheduleSource.freetimeID() {
+                cell.label.text = nil
+                cell.backgroundColor = scheduleSource.getClassInfo(withID: scheduleSource.freetimeID())?.color
+
+                scheduleSource.setClassID(atDay: day, mod: mod, to: scheduleSource.freetimeID())
+            }
+            else {
+                let selectedClassInfo = scheduleSource.getClassInfo(withID: selectedClassID)
+                cell.label.text = selectedClassInfo?.name
+                cell.backgroundColor = selectedClassInfo?.color
+
+                scheduleSource.setClassID(atDay: day, mod: mod, to: selectedClassID)
+            }
+
+            if let pschedule = scheduleSource as? PSchedule {
+                try? pschedule.saveToFile(schedule_file_url)
+            }
+        }
     }
 }
 

@@ -47,6 +47,7 @@ class PSchedule: NSObject, NSCoding, NSCopying, PersonalSchedule {
         self.schedule = [[PersonalSchedule.ClassID]](repeating: [PersonalSchedule.ClassID](repeating: 0, count: mods), count: days)
 
         super.init()
+        self.check()
     }
 
     init(numDays: Int, numMods: Int, classes: [ScheduleClass], schedule: [[PersonalSchedule.ClassID]]) {
@@ -56,6 +57,7 @@ class PSchedule: NSObject, NSCoding, NSCopying, PersonalSchedule {
         self.schedule = schedule
 
         super.init()
+        self.check()
     }
 
     func copy(with zone: NSZone? = nil) -> Any {
@@ -114,6 +116,16 @@ class PSchedule: NSObject, NSCoding, NSCopying, PersonalSchedule {
         aCoder.encode(names, forKey: "names")
         aCoder.encode(colors, forKey: "colors")
         aCoder.encode(self.schedule, forKey: "schedule")
+    }
+
+    public func check() {
+        for d in 0..<self.getNumDays() {
+            for m in 0..<self.getNumMods() {
+                if self.getClassInfo(withID: self.getClassID(atDay: d, mod: m)) == nil {
+                    self.setClassID(atDay: d, mod: m, to: self.freetimeID())
+                }
+            }
+        }
     }
 
     // Personal Schedule Interface

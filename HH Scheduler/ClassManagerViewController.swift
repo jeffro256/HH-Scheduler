@@ -9,18 +9,34 @@
 import UIKit
 
 class ClassManagerViewController: UITableViewController {
+    public var pschedule: PSchedule!
+
     public override func viewDidLoad() {
         super.viewDidLoad()
+
+        if self.pschedule == nil {
+            self.navigationController?.popViewController(animated: false)
+        }
 
         self.tableView.isEditing = true
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.pschedule.getNumClasses()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ClassManageCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ClassManageCell") as! ClassManageCell
+
+        let classInfo = pschedule.getClassInfo(withID: pschedule.getClassID(index: indexPath.item))!
+
+        cell.nameLabel.text = classInfo.name
+        cell.colorView.backgroundColor = classInfo.color
+
+        if pschedule.getClassInfo(withID: pschedule.freetimeID())!.classIndex == indexPath.item {
+            cell.accessoryType = .none
+        }
+
         return cell
     }
 
@@ -37,18 +53,80 @@ class ClassManagerViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
+        let isFreetime = pschedule.getClassInfo(withID: pschedule.freetimeID())!.classIndex == indexPath.item
+        return isFreetime ? .none : .delete
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        pschedule.removeClass(withID: pschedule.getClassID(index: indexPath.item))
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.endUpdates()
+
+        try? pschedule.saveToFile(schedule_file_url)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        if pschedule.getClassInfo(withID: pschedule.freetimeID())!.classIndex != indexPath.item {
+            tableView.deselectRow(at: indexPath, animated: true)
+
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "ClassEditVC") as! ClassEditorViewController
+
+            let classInfo = pschedule.getClassInfo(withID: pschedule.getClassID(index: indexPath.item))!
+            vc.startName = classInfo.name
+            vc.startColorIndex = color_pallette.index(of: classInfo.color)
+            print(vc.startColorIndex)
+
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        pschedule.setClassIndex(withID: pschedule.getClassID(index: sourceIndexPath.item), to: destinationIndexPath.item)
+        try? pschedule.saveToFile(schedule_file_url)
+    }
+
+    @IBAction func addButtonPressed(_ sender: Any) {
+        let addPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+        self.tableView.beginUpdates()
+        let addID = pschedule.addClass(withName: "New Class", color: color_pallette.first!)
+        self.tableView.insertRows(at: [addPath], with: .bottom)
+        self.tableView.endUpdates()
 
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "ClassEditVC") as! ClassEditorViewController
+
+        vc.classID = addID
+        vc.adding = true
 
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        /////////////
+    @IBAction public func doneEditingClass(_ segue: UIStoryboardSegue) {
+        let vc = segue.source as! ClassEditorViewController
+
+        let (name, color) = vc.getData()
+        pschedule.setClassName(withID: vc.classID, to: name)
+        pschedule.setClassColor(withID: vc.classID, to: color)
+
+        let cell = self.tableView.cellForRow(at: IndexPath(row: pschedule.getClassInfo(withID: vc.classID)!.classIndex, section: 0)) as! ClassManageCell
+
+        cell.nameLabel.text = name
+        cell.colorView.backgroundColor = color
+
+        try? pschedule.saveToFile(schedule_file_url)
     }
+
+    @IBAction public func deleteClasses(_ segue: UIStoryboardSegue) {
+        let vc = segue.source as! ClassEditorViewController
+        pschedule.removeClass(withID: vc.classID)
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [IndexPath(row: pschedule.getClassInfo(withID: vc.classID)!.classIndex, section: 0)], with: .fade)
+        tableView.endUpdates()
+        try? pschedule.saveToFile(schedule_file_url)
+    }
+}
+
+class ClassManageCell: UITableViewCell {
+    @IBOutlet public weak var colorView: UIView!
+    @IBOutlet public weak var nameLabel: UILabel!
 }

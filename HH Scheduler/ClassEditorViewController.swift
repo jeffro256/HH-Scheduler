@@ -13,10 +13,11 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
     var startName: String?
     var startColorIndex: Int!
     var shouldFocusText: Bool!
+    var adding: Bool!
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var colorCollection: UICollectionView!
-
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var colorPickerHeight: NSLayoutConstraint!
 
     public override func viewDidLoad() {
@@ -24,6 +25,7 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
 
         nameField.text = startName
         if shouldFocusText ?? true { nameField.becomeFirstResponder() }
+        if adding ?? false { deleteButton.isHidden = true; deleteButton.isEnabled = false }
 
         startColorIndex = startColorIndex ?? 0
 
