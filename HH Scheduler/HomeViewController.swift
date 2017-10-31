@@ -311,14 +311,6 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         return cell
     }
 
-    /*
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let w = CGFloat(250)
-        let h = collectionView.frame.height - 10
-
-        return CGSize(width: w, height: h)
-    }*/
-
     private func addGradient(cell: FutureClassCell) {
         let gradient = CAGradientLayer()
         gradient.colors = [UIColor.white.cgColor, UIColor.gray.cgColor]

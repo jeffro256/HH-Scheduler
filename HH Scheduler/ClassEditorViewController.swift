@@ -48,6 +48,14 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         view.addGestureRecognizer(tap)
     }
 
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let selPath = IndexPath(row: startColorIndex, section: 0)
+        colorCollection.selectItem(at: selPath, animated: false, scrollPosition: .centeredVertically)
+        colorCollection.cellForItem(at: selPath)?.backgroundColor = color_pallette[startColorIndex]
+    }
+
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return color_pallette.count
     }

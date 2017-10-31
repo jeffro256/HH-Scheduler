@@ -92,8 +92,18 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
         return cell
     }
 
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableCell(withIdentifier: "Floaty")?.contentView
+    }
+
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return (indexPath == tableView.indexPathForSelectedRow) ? nil : indexPath
+        if tableView.indexPathForSelectedRow == indexPath {
+            tableView.deselectRow(at: indexPath, animated: false)
+            return nil
+        }
+        else {
+            return indexPath
+        }
     }
 }
 

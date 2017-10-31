@@ -451,33 +451,24 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3QR-le-M0g">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="3QR-le-M0g">
                                 <rect key="frame" x="0.0" y="64" width="112.5" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="5ud-Yt-Pa5">
                                     <rect key="frame" x="0.0" y="0.0" width="112.5" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWL-dh-2x8">
-                                            <rect key="frame" x="14" y="6" width="85" height="32"/>
-                                            <color key="backgroundColor" red="0.76862745099999996" green="0.086274509799999996" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                            <state key="normal" title="Manage"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="5"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <segue destination="hn0-mB-939" kind="show" identifier="toManageClasses" id="86T-S1-AW8"/>
-                                            </connections>
-                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vG-f2-cQp">
+                                            <rect key="frame" x="22.5" y="12" width="69" height="21"/>
+                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="qWL-dh-2x8" firstAttribute="centerX" secondItem="5ud-Yt-Pa5" secondAttribute="centerX" id="5Bc-e3-xMW"/>
-                                        <constraint firstItem="qWL-dh-2x8" firstAttribute="centerY" secondItem="5ud-Yt-Pa5" secondAttribute="centerY" id="Xzp-5t-vdr"/>
+                                        <constraint firstItem="0vG-f2-cQp" firstAttribute="centerY" secondItem="5ud-Yt-Pa5" secondAttribute="centerY" id="HKZ-Sb-D9X"/>
+                                        <constraint firstItem="0vG-f2-cQp" firstAttribute="centerX" secondItem="5ud-Yt-Pa5" secondAttribute="centerX" id="r3t-dk-5sN"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -506,6 +497,36 @@
                                         <connections>
                                             <outlet property="label" destination="GHP-7i-lSg" id="PUB-gk-vQU"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Floaty" id="04B-xP-iOA">
+                                        <rect key="frame" x="0.0" y="142" width="112.5" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="04B-xP-iOA" id="Cos-Rb-ZEJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="112.5" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIs-Zo-bvV">
+                                                    <rect key="frame" x="13" y="18" width="85" height="32"/>
+                                                    <color key="backgroundColor" red="0.76862745099999996" green="0.086274509799999996" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                    <state key="normal" title="Manage"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <segue destination="hn0-mB-939" kind="show" identifier="toManageClasses" id="isX-nb-scb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uIs-Zo-bvV" firstAttribute="centerY" secondItem="Cos-Rb-ZEJ" secondAttribute="centerY" id="HQf-Fi-Yry"/>
+                                                <constraint firstItem="uIs-Zo-bvV" firstAttribute="centerX" secondItem="Cos-Rb-ZEJ" secondAttribute="centerX" id="pgQ-qD-bYb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
@@ -550,7 +571,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgj-rY-cEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1692" y="522"/>
+            <point key="canvasLocation" x="1692" y="521.28935532233891"/>
         </scene>
         <!--Manage Classes-->
         <scene sceneID="1fh-yK-LW2">
@@ -741,7 +762,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="d4Z-xL-UhL" kind="unwind" identifier="Delete" unwindAction="deleteClassSegue:" id="OKo-v0-6eb"/>
+                                    <segue destination="d4Z-xL-UhL" kind="unwind" unwindAction="deleteClass:" id="XdP-y2-ycw"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBo-Dl-oYG">
