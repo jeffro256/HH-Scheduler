@@ -576,7 +576,7 @@
         <!--Manage Classes-->
         <scene sceneID="1fh-yK-LW2">
             <objects>
-                <tableViewController id="hn0-mB-939" customClass="ClassManagerViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="hn0-mB-939" customClass="ClassManagerViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="43" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hZz-f4-LTv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -775,13 +775,16 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Chemistry" placeholder="American Studies" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5n5-FM-m4W">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Chemistry" placeholder="required" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5n5-FM-m4W">
                                         <rect key="frame" x="150" y="0.0" width="225" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="15"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="textfieldChanged:" destination="rR0-fk-Ycx" eventType="editingChanged" id="iDe-zz-D65"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -814,6 +817,7 @@
                         <outlet property="colorCollection" destination="e5P-H7-HQf" id="Lhl-MG-28O"/>
                         <outlet property="colorPickerHeight" destination="hgU-8c-C7Z" id="3vh-WU-8mn"/>
                         <outlet property="deleteButton" destination="L4K-59-NBR" id="890-Pg-ehv"/>
+                        <outlet property="doneButton" destination="NAG-pP-zPL" id="cik-CJ-RMC"/>
                         <outlet property="nameField" destination="5n5-FM-m4W" id="Ouy-sN-d2K"/>
                     </connections>
                 </viewController>
@@ -859,11 +863,11 @@
             </objects>
             <point key="canvasLocation" x="748" y="-255"/>
         </scene>
-        <!--Item-->
+        <!--Schedule-->
         <scene sceneID="4sQ-pa-Zgu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xMN-c4-eU7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="C6z-HX-NkV"/>
+                    <tabBarItem key="tabBarItem" title="Schedule" image="Unclicked Schedule Icon" selectedImage="Clicked Schedule Icon" id="C6z-HX-NkV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5fM-ov-pY0">
                         <autoresizingMask key="autoresizingMask"/>
@@ -880,8 +884,10 @@
     </scenes>
     <resources>
         <image name="Clicked House Icon" width="25" height="25"/>
+        <image name="Clicked Schedule Icon" width="25" height="25"/>
         <image name="Open Class Tab Icon" width="25" height="25"/>
         <image name="Unclicked House Icon" width="25" height="25"/>
+        <image name="Unclicked Schedule Icon" width="25" height="25"/>
     </resources>
     <color key="tintColor" red="0.76862745098039209" green="0.086274509803921567" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -12,20 +12,26 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
     var classID: PersonalSchedule.ClassID = -1
     var startName: String?
     var startColorIndex: Int!
-    var shouldFocusText: Bool!
-    var adding: Bool!
+    var adding = false
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var colorCollection: UICollectionView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var colorPickerHeight: NSLayoutConstraint!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
 
     public override func viewDidLoad() {
         super.viewDidLoad()
 
         nameField.text = startName
-        if shouldFocusText ?? true { nameField.becomeFirstResponder() }
-        if adding ?? false { deleteButton.isHidden = true; deleteButton.isEnabled = false }
+
+        if adding {
+            deleteButton.isHidden = true;
+            deleteButton.isEnabled = false;
+            nameField.becomeFirstResponder()
+        }
+
+        doneButton.isEnabled = !(nameField.text?.isEmpty ?? true)
 
         startColorIndex = startColorIndex ?? 0
 
@@ -88,19 +94,14 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
         cell.backgroundColor = color_pallette[indexPath.item]
     }
 
+    @IBAction func textfieldChanged(_ sender: Any) {
+        doneButton.isEnabled = !(nameField.text?.isEmpty ?? true)
+    }
+
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
 
         return true
-    }
-
-    public override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "Done" {
-            return !(nameField.text?.isEmpty ?? true) && (colorCollection.indexPathsForSelectedItems?.count ?? 0) > 0
-        }
-        else {
-            return true
-        }
     }
 
     @objc public func dismissKeyboard() {

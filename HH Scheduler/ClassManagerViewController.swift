@@ -96,7 +96,6 @@ class ClassManagerViewController: UITableViewController {
     @IBAction func addButtonPressed(_ sender: Any) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "ClassEditVC") as! ClassEditorViewController
 
-        vc.shouldFocusText = true
         vc.adding = true
 
         self.navigationController?.pushViewController(vc, animated: true)
@@ -128,9 +127,10 @@ class ClassManagerViewController: UITableViewController {
 
     @IBAction public func deleteClass(_ segue: UIStoryboardSegue) {
         let vc = segue.source as! ClassEditorViewController
+        let classIndex = pschedule.getClassInfo(withID: vc.classID)!.classIndex
         pschedule.removeClass(withID: vc.classID)
         tableView.beginUpdates()
-        tableView.deleteRows(at: [IndexPath(row: pschedule.getClassInfo(withID: vc.classID)!.classIndex, section: 0)], with: .bottom)
+        tableView.deleteRows(at: [IndexPath(row: classIndex, section: 0)], with: .bottom)
         tableView.endUpdates()
         try? pschedule.saveToFile(schedule_file_url)
     }
