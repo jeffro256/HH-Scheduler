@@ -100,18 +100,18 @@
 		362310261D7BAB28004F98FB /* HH Scheduler */ = {
 			isa = PBXGroup;
 			children = (
-				36EB9FE81D9C35D0006B6874 /* Common.swift */,
 				36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */,
+				36EB9FE81D9C35D0006B6874 /* Common.swift */,
 				362310271D7BAB28004F98FB /* AppDelegate.swift */,
 				36E830241F69569A00F3327E /* ScheduleContext.swift */,
 				361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */,
-				361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */,
 				369468031F510FC50097A534 /* PersonalSchedule.swift */,
 				360E28331F1540390052C799 /* PSchedule.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
-				3648FE9F1F92D17F006FB789 /* ClassManagerViewController.swift */,
 				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
 				3648FE9D1F8FA875006FB789 /* ScheduleManagerViewController.swift */,
+				3648FE9F1F92D17F006FB789 /* ClassManagerViewController.swift */,
+				361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */,
 				362310301D7BAB28004F98FB /* Assets.xcassets */,
 				362310351D7BAB28004F98FB /* Info.plist */,
 				36A135DF1E02E0A300956D76 /* Extensions */,
