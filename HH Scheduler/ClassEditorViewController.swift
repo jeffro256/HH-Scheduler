@@ -29,6 +29,10 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
             deleteButton.isHidden = true;
             deleteButton.isEnabled = false;
             nameField.becomeFirstResponder()
+            self.navigationItem.title = "Add Class"
+        }
+        else {
+            self.navigationItem.title = "Edit Class"
         }
 
         doneButton.isEnabled = !(nameField.text?.isEmpty ?? true)
@@ -49,17 +53,16 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
             layout.sectionInset = UIEdgeInsets(top: colorPickerInset, left: colorPickerInset, bottom: colorPickerInset, right: colorPickerInset)
         }
 
+        colorCollection.reloadData()
+        DispatchQueue.main.async {
+            let selPath = IndexPath(row: self.startColorIndex, section: 0)
+            self.colorCollection.selectItem(at: selPath, animated: false, scrollPosition: .centeredVertically)
+            self.colorCollection.cellForItem(at: selPath)?.backgroundColor = color_pallette[self.startColorIndex]
+        }
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-    }
-
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        let selPath = IndexPath(row: startColorIndex, section: 0)
-        colorCollection.selectItem(at: selPath, animated: false, scrollPosition: .centeredVertically)
-        colorCollection.cellForItem(at: selPath)?.backgroundColor = color_pallette[startColorIndex]
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -101,7 +104,7 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
 
-        return true
+        return false
     }
 
     @objc public func dismissKeyboard() {

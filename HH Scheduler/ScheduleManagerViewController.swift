@@ -13,7 +13,7 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scheduleButton: UIBarButtonItem!
     @IBOutlet weak var scheduleCollection: ScheduleCollectionView!
-
+    @IBOutlet weak var dayStack: UIStackView!
     private var viewingClasses = false
 
     public override func viewDidLoad() {
@@ -32,6 +32,19 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
         if firstLayout {
             tableLeading.constant = -tableView.frame.width
             firstLayout = false
+        }
+    }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let cycleDay = scheduleContext.getCycleDay(Date())
+        for day in 0..<schedule.getNumDays() {
+            let tag = day + 1
+            let view = dayStack.viewWithTag(tag) as! UILabel
+
+            let greyColor = UIColor(0x888888)
+            view.textColor = (day == cycleDay) ? hhTint : greyColor
         }
     }
 
