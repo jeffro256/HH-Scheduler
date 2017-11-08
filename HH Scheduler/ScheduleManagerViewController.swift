@@ -38,13 +38,26 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let cycleDay = scheduleContext.getCycleDay(Date())
-        for day in 0..<schedule.getNumDays() {
-            let tag = day + 1
-            let view = dayStack.viewWithTag(tag) as! UILabel
+        if scheduleContext.isLoaded() {
+            let cycleDay = scheduleContext.getCycleDay(Date())
+            for day in 0..<schedule.getNumDays() {
+                let tag = day + 1
+                let view = dayStack.viewWithTag(tag) as! UILabel
 
-            let greyColor = UIColor(0x888888)
-            view.textColor = (day == cycleDay) ? hhTint : greyColor
+                let greyColor = UIColor(0x888888)
+                view.textColor = (day == cycleDay) ? hhTint : greyColor
+            }
+        }
+    }
+
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if scheduleContext.isLoaded(), let mod = scheduleContext.getMod(Date()) {
+            let rows = schedule.getNumDays() + 1
+            let modLabelIndexPath = IndexPath(row: rows * mod, section: 0)
+
+            scheduleCollection.scrollToItem(at: modLabelIndexPath, at: .centeredHorizontally, animated: true)
         }
     }
 

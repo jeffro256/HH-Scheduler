@@ -127,6 +127,31 @@ class ScheduleContext {
         return cycleDay
     }
 
+    public func getMod(_ date: Date) -> Int? {
+        guard isScheduledDay(date) else { return nil }
+
+        let time = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute], from: date))!
+
+        let cycleDay = getCycleDay(date)
+        let isDDay = cycleDay == 3
+        let isWednesday = Calendar.current.dateComponents([.weekday], from: date).weekday == 4
+        let isLateDay = isDDay || isWednesday
+
+        let modTimes = isLateDay ? self.lateModTimes : self.regModTimes
+        let endTime = isLateDay ? self.lateEndTime : self.regEndTime
+
+        if isWeirdDay(date), let weirdDay = self.weirdDays.first(where: { $0.date.dayCompare(date) == .orderedSame }), let blockIndexes = weirdDay.blockIndexes {
+            if let weirdMod = blockIndexes.reversed().first(where: { time >= $0.0 && time < (weirdDay.endTime ?? endTime) })?.1, weirdMod >= 0 {
+                return weirdMod
+            }
+
+            return nil
+        }
+        else {
+            return modTimes.enumerated().reversed().first(where: { m in time >= m.1 && time < endTime })?.0
+        }
+    }
+
     public func getStartTime(_ date: Date) -> Date? {
         let cycleDay = getCycleDay(date)
         guard cycleDay >= 0 else { return nil }
