@@ -10,6 +10,7 @@ import UIKit
 
 class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableLeading: NSLayoutConstraint!
+    @IBOutlet weak var collectionLeading: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scheduleButton: UIBarButtonItem!
     @IBOutlet weak var scheduleCollection: ScheduleCollectionView!
@@ -28,6 +29,8 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
     private var firstLayout = true
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
+        collectionLeading.constant = self.dayStack.frame.width
 
         if firstLayout {
             tableLeading.constant = -tableView.frame.width
@@ -116,6 +119,10 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
         cell.backgroundColor = classInfo?.color
 
         return cell
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableCell(withIdentifier: "Header")?.contentView
     }
 
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

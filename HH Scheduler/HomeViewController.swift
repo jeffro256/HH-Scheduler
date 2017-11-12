@@ -46,14 +46,15 @@ class HomeViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.isVisible = true
+        updateUI(animated: true)
+
         futureClassCollection.reloadData()
     }
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.isVisible = true
-        updateUI(animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
             self.futureClassCollection.centerCurrentClass()
         })

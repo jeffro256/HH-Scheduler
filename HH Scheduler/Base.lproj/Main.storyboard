@@ -22,6 +22,9 @@
         <array key="BIG JOHN.otf">
             <string>BigJohn</string>
         </array>
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
         <array key="HelveticaNeueLights.ttc">
             <string>HelveticaNeue-LightItalic</string>
         </array>
@@ -30,7 +33,7 @@
         <!--Home-->
         <scene sceneID="WMy-b7-m8b">
             <objects>
-                <viewController id="IkF-9C-pfC" customClass="HomeViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="IkF-9C-pfC" customClass="HomeViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PvD-KC-aan"/>
                         <viewControllerLayoutGuide type="bottom" id="d8l-CZ-mck"/>
@@ -52,8 +55,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="53" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Class Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-eK-4ph" userLabel="Class Label">
-                                                <rect key="frame" x="70" y="99.5" width="141" height="21"/>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
+                                                <rect key="frame" x="54.5" y="102.5" width="172" height="18"/>
+                                                <fontDescription key="fontDescription" name="BigJohn" family="Big John" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -279,6 +282,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="9zT-Qp-CPX"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="navigationItem.hidesBackButton" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="futureClassCollection" destination="oOF-BD-f14" id="o63-dg-BY6"/>
                         <outlet property="progressRing" destination="p4q-QV-pCy" id="Qlv-kC-fc8"/>
@@ -291,7 +297,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emW-Kr-gFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1693.125" y="-255.63380281690141"/>
+            <point key="canvasLocation" x="2676" y="-145"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="Wmj-Qc-hYa">
@@ -388,7 +394,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7QN-b5-Bpc" customClass="ScheduleCollectionView" customModule="HH_Scheduler" customModuleProvider="target">
-                                <rect key="frame" x="147.5" y="64" width="227.5" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3gT-NZ-WWe">
                                     <size key="itemSize" width="140" height="90"/>
@@ -451,29 +457,33 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="3QR-le-M0g">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="40" sectionFooterHeight="58" translatesAutoresizingMaskIntoConstraints="NO" id="3QR-le-M0g">
                                 <rect key="frame" x="0.0" y="64" width="112.5" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="5ud-Yt-Pa5">
-                                    <rect key="frame" x="0.0" y="0.0" width="112.5" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vG-f2-cQp">
-                                            <rect key="frame" x="22.5" y="12" width="69" height="21"/>
-                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="0vG-f2-cQp" firstAttribute="centerY" secondItem="5ud-Yt-Pa5" secondAttribute="centerY" id="HKZ-Sb-D9X"/>
-                                        <constraint firstItem="0vG-f2-cQp" firstAttribute="centerX" secondItem="5ud-Yt-Pa5" secondAttribute="centerX" id="r3t-dk-5sN"/>
-                                    </constraints>
-                                </view>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Header" id="z2L-Ly-KKo">
+                                        <rect key="frame" x="0.0" y="40" width="112.5" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z2L-Ly-KKo" id="Fhj-iS-F4y">
+                                            <rect key="frame" x="0.0" y="0.0" width="112.5" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLH-J2-2W8">
+                                                    <rect key="frame" x="23" y="23.5" width="67" height="22.5"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="rLH-J2-2W8" firstAttribute="centerX" secondItem="Fhj-iS-F4y" secondAttribute="centerX" id="6QR-uL-yk7"/>
+                                                <constraint firstItem="rLH-J2-2W8" firstAttribute="centerY" secondItem="Fhj-iS-F4y" secondAttribute="centerY" id="IdF-kX-Fm9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClassInfoCell" id="dau-Sd-TDq" customClass="ClassInfoCell" customModule="HH_Scheduler" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="112.5" height="70"/>
+                                        <rect key="frame" x="0.0" y="110" width="112.5" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dau-Sd-TDq" id="BaW-oE-fSd">
                                             <rect key="frame" x="0.0" y="0.0" width="112.5" height="69.5"/>
@@ -499,7 +509,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Floaty" id="04B-xP-iOA">
-                                        <rect key="frame" x="0.0" y="142" width="112.5" height="70"/>
+                                        <rect key="frame" x="0.0" y="180" width="112.5" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="04B-xP-iOA" id="Cos-Rb-ZEJ">
                                             <rect key="frame" x="0.0" y="0.0" width="112.5" height="69.5"/>
@@ -542,12 +552,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7QN-b5-Bpc" firstAttribute="leading" secondItem="lPJ-sa-xkr" secondAttribute="trailing" id="12x-aO-CIc"/>
                             <constraint firstItem="lPJ-sa-xkr" firstAttribute="leading" secondItem="3QR-le-M0g" secondAttribute="trailing" id="1rq-ng-ffh"/>
                             <constraint firstItem="3QR-le-M0g" firstAttribute="leading" secondItem="5TL-7B-zpP" secondAttribute="leading" id="DqV-Bn-eZV"/>
                             <constraint firstAttribute="trailing" secondItem="7QN-b5-Bpc" secondAttribute="trailing" id="EIR-mq-s0c"/>
                             <constraint firstItem="4zk-rJ-Re5" firstAttribute="top" secondItem="lPJ-sa-xkr" secondAttribute="bottom" id="IJV-9c-nO9"/>
                             <constraint firstItem="4zk-rJ-Re5" firstAttribute="top" secondItem="7QN-b5-Bpc" secondAttribute="bottom" id="NKL-4R-AvE"/>
+                            <constraint firstItem="7QN-b5-Bpc" firstAttribute="leading" secondItem="5TL-7B-zpP" secondAttribute="leading" id="Te2-iK-7TJ"/>
                             <constraint firstItem="7QN-b5-Bpc" firstAttribute="top" secondItem="n9X-2x-vch" secondAttribute="bottom" id="WPV-21-9mN"/>
                             <constraint firstItem="3QR-le-M0g" firstAttribute="top" secondItem="n9X-2x-vch" secondAttribute="bottom" id="dpg-sA-DKA"/>
                             <constraint firstItem="lPJ-sa-xkr" firstAttribute="top" secondItem="n9X-2x-vch" secondAttribute="bottom" id="qlf-cc-L6c"/>
@@ -563,6 +573,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionLeading" destination="Te2-iK-7TJ" id="35F-MK-LIW"/>
                         <outlet property="dayStack" destination="c2c-Mh-eNh" id="359-cg-w2V"/>
                         <outlet property="scheduleButton" destination="9Dq-me-97q" id="rGY-Aw-0Gc"/>
                         <outlet property="scheduleCollection" destination="7QN-b5-Bpc" id="den-MW-biE"/>
@@ -828,10 +839,10 @@
             </objects>
             <point key="canvasLocation" x="3609" y="521"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="MainTabBarController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -839,7 +850,7 @@
                         <color key="selectedImageTintColor" red="0.76862745098039209" green="0.086274509803921567" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="FLZ-jE-1lo" kind="relationship" relationship="viewControllers" id="ODv-RN-kqu"/>
+                        <segue destination="FLZ-jE-1lo" kind="relationship" relationship="viewControllers" id="t7U-LX-Qmj"/>
                         <segue destination="xMN-c4-eU7" kind="relationship" relationship="viewControllers" id="FrY-oK-9l8"/>
                     </connections>
                 </tabBarController>
@@ -847,23 +858,81 @@
             </objects>
             <point key="canvasLocation" x="-391" y="75"/>
         </scene>
-        <!--Home-->
+        <!--Loading-->
+        <scene sceneID="sF3-7p-Nah">
+            <objects>
+                <viewController title="Loading" modalTransitionStyle="crossDissolve" id="CH7-yS-hcy" customClass="LoadingViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v4P-VK-qME"/>
+                        <viewControllerLayoutGuide type="bottom" id="E0U-95-GXW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mu2-9w-DXy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCa-Ql-WlF" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="137" y="283" width="100" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="NUG-Rn-eQ6"/>
+                                    <constraint firstAttribute="height" constant="100" id="V9G-pQ-rmt"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleRippleMultiple"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.76862745099999996" green="0.086274509799999996" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Schedule Info..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lp-go-nDq">
+                                <rect key="frame" x="68" y="226" width="239" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4lp-go-nDq" firstAttribute="centerX" secondItem="Mu2-9w-DXy" secondAttribute="centerX" id="M1K-gY-XMp"/>
+                            <constraint firstItem="TCa-Ql-WlF" firstAttribute="centerY" secondItem="Mu2-9w-DXy" secondAttribute="centerY" id="Yl5-sM-pOW"/>
+                            <constraint firstItem="TCa-Ql-WlF" firstAttribute="centerX" secondItem="Mu2-9w-DXy" secondAttribute="centerX" id="i7P-BT-5dS"/>
+                            <constraint firstItem="TCa-Ql-WlF" firstAttribute="top" secondItem="4lp-go-nDq" secondAttribute="bottom" constant="30" id="rJs-Ta-Foc"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="Unclicked House Icon" selectedImage="Clicked House Icon" id="gXR-Iv-2Pe"/>
+                    <navigationItem key="navigationItem" id="H3Z-en-jPT"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="TCa-Ql-WlF" id="gMq-9Q-3MK"/>
+                        <segue destination="IkF-9C-pfC" kind="show" identifier="DoneLoading" id="epR-0f-UJ4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CvK-ee-T5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1692" y="-145"/>
+        </scene>
+        <!--Home Nav-->
         <scene sceneID="3nJ-ct-eYi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FLZ-jE-1lo" sceneMemberID="viewController">
+                <navigationController title="Home Nav" automaticallyAdjustsScrollViewInsets="NO" id="FLZ-jE-1lo" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Unclicked House Icon" selectedImage="Clicked House Icon" id="u5b-mb-pmx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kiV-oJ-lg3">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RtR-ab-jtS">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
-                        <segue destination="IkF-9C-pfC" kind="relationship" relationship="rootViewController" id="tto-nD-HeM"/>
+                        <segue destination="CH7-yS-hcy" kind="relationship" relationship="rootViewController" id="ei7-wG-X6J"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykP-WI-a2J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="-255"/>
+            <point key="canvasLocation" x="748" y="-145"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="4sQ-pa-Zgu">

@@ -19,21 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         schedule = PSchedule.defaultLoadFromFile(schedule_file_url)
         scheduleContext = ScheduleContext()
 
-        let contextData: Data
-        if let data = try? Data(contentsOf: schedule_info_web_url) {
-            contextData = data
-
-            try? data.write(to: schedule_info_backup_file_url)
-        }
-        else if let data = try? Data(contentsOf: schedule_info_backup_file_url) {
-            contextData = data
-        }
-        else {
-            contextData = Data()
-        }
-
-        scheduleContext.refreshContext(contextData: contextData)
-
         return true
     }
 

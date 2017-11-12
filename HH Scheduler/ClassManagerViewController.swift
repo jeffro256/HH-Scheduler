@@ -14,10 +14,6 @@ class ClassManagerViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        if self.pschedule == nil {
-            self.navigationController?.popViewController(animated: false)
-        }
-
         self.tableView.isEditing = true
     }
 
