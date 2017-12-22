@@ -18,12 +18,23 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var progressRing: UICircularProgressRingView!
     @IBOutlet weak var futureClassCollection: FutureClassCollection!
     @IBOutlet var labels: [UILabel]!
-
+    @IBOutlet var startTimeLabelY: NSLayoutConstraint!
+    @IBOutlet var endTimeLabelY: NSLayoutConstraint!
+    
     private var isVisible = false
 
     private let niceDateFormatter: DateFormatter = {
         let a = DateFormatter()
         a.dateFormat = "EEEE, MMMM d"
+        a.locale = Locale(identifier: "en_US")
+        a.timeZone = TimeZone(abbreviation: "CST")
+
+        return a
+    }()
+
+    private let niceTimeFormatter: DateFormatter = {
+        let a = DateFormatter()
+        a.dateFormat = "h:mm aa"
         a.locale = Locale(identifier: "en_US")
         a.timeZone = TimeZone(abbreviation: "CST")
 
@@ -66,34 +77,27 @@ class HomeViewController: UIViewController {
         self.isVisible = false
     }
 
-    var addedNotificationEdge = false
+    private var didLayout = false
+
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        if (!addedNotificationEdge) {
-            for label in labels {
-                if label.tag == 54 {
-                    label.layer.zPosition = 2
-                    let backView = UIView()
-                    let borderWidth = CGFloat(1)
-                    backView.backgroundColor = UIColor.black
-                    backView.frame = CGRect(x: label.frame.minX, y: label.frame.minY - borderWidth, width: label.frame.width, height: label.frame.height + 2 * borderWidth)
-                    backView.layer.zPosition = 1
-                    label.superview?.addSubview(backView)
-                    addedNotificationEdge = true
-                    break
-                }
-            }
+        if !didLayout {
+            let topCollectionBorderWidth = CGFloat(0.5)
+            let topCollectionBorderFrame = CGRect(x: 0, y: futureClassCollection.frame.minY - topCollectionBorderWidth, width: self.view.frame.width, height: topCollectionBorderWidth)
+            let topCollectionBorder = UIView(frame: topCollectionBorderFrame)
+            topCollectionBorder.isOpaque = true
+            topCollectionBorder.backgroundColor = UIColor.black
+            topCollectionBorder.layer.zPosition = 1
+
+            self.view.addSubview(topCollectionBorder)
         }
 
-        let topCollectionBorderWidth = CGFloat(0.5)
-        let topCollectionBorderFrame = CGRect(x: 0, y: futureClassCollection.frame.minY - topCollectionBorderWidth, width: self.view.frame.width, height: topCollectionBorderWidth)
-        let topCollectionBorder = UIView(frame: topCollectionBorderFrame)
-        topCollectionBorder.isOpaque = true
-        topCollectionBorder.backgroundColor = UIColor.black
-        topCollectionBorder.layer.zPosition = 1
+        let unitYPosition = sin(-15 * CGFloat.pi / 180)
+        let yConstant = progressRing.frame.width / 2 * (1 - unitYPosition) + 20
 
-        self.view.addSubview(topCollectionBorder)
+        startTimeLabelY.constant = yConstant
+        endTimeLabelY.constant = yConstant
 
         // I have to have this code b/c some random black box is popping up
         for view in progressRing.subviews {
@@ -101,6 +105,8 @@ class HomeViewController: UIViewController {
                 view.removeFromSuperview()
             }
         }
+
+        didLayout = true
     }
 
     private var updatingUI = false
@@ -116,6 +122,8 @@ class HomeViewController: UIViewController {
         let dayShortDesc: String
         var mainText = ""
         var modText = ""
+        var startTimeText = ""
+        var endTimeText = ""
 
         progressRing.value = progressRing.minValue
 
@@ -163,6 +171,9 @@ class HomeViewController: UIViewController {
                             }
                         }
 
+                        startTimeText = niceTimeFormatter.string(from: classStartTime)
+                        endTimeText = niceTimeFormatter.string(from: classEndTime)
+
                         let totalSecondsInClass = Calendar.current.dateComponents([.second], from: classStartTime, to: classEndTime).second!
                         let secondSinceClassStart = Calendar.current.dateComponents([.second], from: classStartTime, to: nowTime).second!
                         let ratioDoneWithClass = CGFloat(secondSinceClassStart) / CGFloat(totalSecondsInClass)
@@ -206,6 +217,12 @@ class HomeViewController: UIViewController {
                 label.text = mainText
             case 54:
                 label.text = modText
+            case 55:
+                label.text = startTimeText
+                break
+            case 56:
+                label.text = endTimeText
+                break
             default:
                 break
             }

@@ -10,7 +10,7 @@
 		35C9B01D6766638428607EF8 /* Pods_HH_Scheduler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F586C3E91347A0D45FCC8D5 /* Pods_HH_Scheduler.framework */; };
 		360E28341F1540390052C799 /* PSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E28331F1540390052C799 /* PSchedule.swift */; };
 		361BBB7C1FB528B0008B8D35 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361BBB7B1FB528B0008B8D35 /* LoadingViewController.swift */; };
-		361BBB801FB79FE6008B8D35 /* MainTabBarContrller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361BBB7F1FB79FE6008B8D35 /* MainTabBarContrller.swift */; };
+		361BBB801FB79FE6008B8D35 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361BBB7F1FB79FE6008B8D35 /* MainTabBarController.swift */; };
 		361D0DC51F817F5C007BEA4D /* ClassEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */; };
 		361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */; };
 		362310281D7BAB28004F98FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362310271D7BAB28004F98FB /* AppDelegate.swift */; };
@@ -33,7 +33,7 @@
 		31DA76137ADCE758E99954E1 /* Pods-HH Scheduler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HH Scheduler.release.xcconfig"; path = "Pods/Target Support Files/Pods-HH Scheduler/Pods-HH Scheduler.release.xcconfig"; sourceTree = "<group>"; };
 		360E28331F1540390052C799 /* PSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSchedule.swift; sourceTree = "<group>"; };
 		361BBB7B1FB528B0008B8D35 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
-		361BBB7F1FB79FE6008B8D35 /* MainTabBarContrller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarContrller.swift; sourceTree = "<group>"; };
+		361BBB7F1FB79FE6008B8D35 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassEditorViewController.swift; sourceTree = "<group>"; };
 		361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionView.swift; sourceTree = "<group>"; };
 		362310241D7BAB28004F98FB /* HH Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HH Scheduler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +112,7 @@
 				369468031F510FC50097A534 /* PersonalSchedule.swift */,
 				360E28331F1540390052C799 /* PSchedule.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
-				361BBB7F1FB79FE6008B8D35 /* MainTabBarContrller.swift */,
+				361BBB7F1FB79FE6008B8D35 /* MainTabBarController.swift */,
 				361BBB7B1FB528B0008B8D35 /* LoadingViewController.swift */,
 				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
 				3648FE9D1F8FA875006FB789 /* ScheduleManagerViewController.swift */,
@@ -276,7 +276,7 @@
 				36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */,
 				361BBB7C1FB528B0008B8D35 /* LoadingViewController.swift in Sources */,
 				360E28341F1540390052C799 /* PSchedule.swift in Sources */,
-				361BBB801FB79FE6008B8D35 /* MainTabBarContrller.swift in Sources */,
+				361BBB801FB79FE6008B8D35 /* MainTabBarController.swift in Sources */,
 				367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */,
 				362310281D7BAB28004F98FB /* AppDelegate.swift in Sources */,
 				36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */,
