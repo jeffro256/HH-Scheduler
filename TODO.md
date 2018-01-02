@@ -1,14 +1,7 @@
 TODO
 ====
-
-Short Term:
------------
 *  Do something when the app can't get the school info
-*  New app icon
 *  New launch screen
-
-Long Term:
-----------
 *  Like cells will merge on schedule screens
 *  Add option for "pivoted schedule"
 *  Add announcements
