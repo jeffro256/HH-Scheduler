@@ -18,6 +18,7 @@
 		362310311D7BAB28004F98FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362310301D7BAB28004F98FB /* Assets.xcassets */; };
 		3648FE9E1F8FA875006FB789 /* ScheduleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3648FE9D1F8FA875006FB789 /* ScheduleManagerViewController.swift */; };
 		3648FEA01F92D17F006FB789 /* ClassManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3648FE9F1F92D17F006FB789 /* ClassManagerViewController.swift */; };
+		36670F722002DE0200C07263 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36670F712002DE0200C07263 /* PaddingLabel.swift */; };
 		367D02DF1DA527E8005740EA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D02DE1DA527E8005740EA /* StringExtension.swift */; };
 		369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* PersonalSchedule.swift */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
@@ -43,6 +44,7 @@
 		362310351D7BAB28004F98FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3648FE9D1F8FA875006FB789 /* ScheduleManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManagerViewController.swift; sourceTree = "<group>"; };
 		3648FE9F1F92D17F006FB789 /* ClassManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassManagerViewController.swift; sourceTree = "<group>"; };
+		36670F712002DE0200C07263 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		367D02DE1DA527E8005740EA /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		369468031F510FC50097A534 /* PersonalSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSchedule.swift; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				369468031F510FC50097A534 /* PersonalSchedule.swift */,
 				360E28331F1540390052C799 /* PSchedule.swift */,
 				3623102D1D7BAB28004F98FB /* Main.storyboard */,
+				36670F712002DE0200C07263 /* PaddingLabel.swift */,
 				361BBB7F1FB79FE6008B8D35 /* MainTabBarController.swift */,
 				361BBB7B1FB528B0008B8D35 /* LoadingViewController.swift */,
 				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
@@ -272,6 +275,7 @@
 				3648FE9E1F8FA875006FB789 /* ScheduleManagerViewController.swift in Sources */,
 				361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */,
 				36E830251F69569A00F3327E /* ScheduleContext.swift in Sources */,
+				36670F722002DE0200C07263 /* PaddingLabel.swift in Sources */,
 				369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */,
 				36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */,
 				36EFAD9A1F65F42800AADFDE /* HomeViewController.swift in Sources */,

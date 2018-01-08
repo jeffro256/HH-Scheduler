@@ -10,6 +10,7 @@ import UIKit
 
 class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     public var scheduleSource: PersonalSchedule!
+    public var context: ScheduleContext!
     public weak var scheduleManagerViewController: ScheduleManagerViewController!
 
     public override func awakeFromNib() {
@@ -33,6 +34,10 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
 
         if (indexPath.item % rows == 0) {
             cell.label.text = String(describing: indexPath.item / rows + 1)
+
+            if context != nil {
+                cell.label.textColor = (indexPath.item / rows == context.getMod(Date())) ? hhTint : UIColor(0x888888)
+            }
         }
         else {
             let day = (indexPath.item - indexPath.item / rows - 1) % scheduleSource.getNumDays()

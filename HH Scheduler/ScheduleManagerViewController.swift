@@ -22,6 +22,7 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
 
         scheduleCollection.scheduleManagerViewController = self
         scheduleCollection.scheduleSource = schedule
+        scheduleCollection.context = scheduleContext
 
         tableLeading.constant = -tableView.frame.width
     }
@@ -58,9 +59,9 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
 
         if scheduleContext.isLoaded(), let mod = scheduleContext.getMod(Date()) {
             let rows = schedule.getNumDays() + 1
-            let modLabelIndexPath = IndexPath(row: rows * mod, section: 0)
+            let currentModLabelIndexPath = IndexPath(row: rows * mod, section: 0)
 
-            scheduleCollection.scrollToItem(at: modLabelIndexPath, at: .centeredHorizontally, animated: true)
+            scheduleCollection.scrollToItem(at: currentModLabelIndexPath, at: .centeredHorizontally, animated: true)
         }
     }
 

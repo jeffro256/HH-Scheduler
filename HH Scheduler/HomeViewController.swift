@@ -87,7 +87,7 @@ class HomeViewController: UIViewController {
             let topCollectionBorderFrame = CGRect(x: 0, y: futureClassCollection.frame.minY - topCollectionBorderWidth, width: self.view.frame.width, height: topCollectionBorderWidth)
             let topCollectionBorder = UIView(frame: topCollectionBorderFrame)
             topCollectionBorder.isOpaque = true
-            topCollectionBorder.backgroundColor = UIColor.black
+            topCollectionBorder.backgroundColor = UIColor.darkGray
             topCollectionBorder.layer.zPosition = 1
 
             self.view.addSubview(topCollectionBorder)
@@ -257,14 +257,14 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
 
         if !addedLabel {
             self.backgroundView = UIView(frame: self.bounds)
-            self.backgroundView?.backgroundColor = UIColor(0xCCCCCC)
+            self.backgroundView?.backgroundColor = UIColor.white
 
             let noClassesLabelFrame = self.backgroundView!.bounds
             let noClassesLabel = UILabel(frame: noClassesLabelFrame)
             noClassesLabel.tag = 1
             noClassesLabel.text = "No Classes Today!"
             noClassesLabel.textAlignment = .center
-            noClassesLabel.textColor = UIColor.white
+            noClassesLabel.textColor = UIColor.black
             noClassesLabel.font = UIFont(name: "Avenir-LightOblique", size: 18)
             noClassesLabel.isHidden = !classes.isEmpty
 
@@ -319,8 +319,8 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
             addGradient(cell: cell)
         }
 
-        if contClass.0 == 0 {
-            updateGradient(cell: cell, color: contClass.4, to: contClass.4)
+        if contClass.0 == schedule.freetimeID() {
+            updateGradient(cell: cell, color: UIColor(0xE1E1EA))
         }
         else {
             updateGradient(cell: cell, color: contClass.4)
@@ -347,7 +347,7 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         var lum: CGFloat = 0
         color1.getHue(&hue, saturation: &sat, brightness: &lum, alpha: nil)
 
-        let color2 = toColor ?? UIColor(hue: hue, saturation: sat, brightness: lum * 0.9, alpha: 1.0)
+        let color2 = toColor ?? UIColor(hue: hue, saturation: sat, brightness: lum * 0.88, alpha: 1.0)
 
         cell.gradientLayer.colors = [color2.cgColor, color1.cgColor]
     }

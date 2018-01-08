@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -34,10 +35,6 @@
         <scene sceneID="WMy-b7-m8b">
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" id="IkF-9C-pfC" customClass="HomeViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PvD-KC-aan"/>
-                        <viewControllerLayoutGuide type="bottom" id="d8l-CZ-mck"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hE7-OG-4AI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,11 +45,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4q-QV-pCy" userLabel="Class Progress Ring" customClass="UICircularProgressRingView" customModule="UICircularProgressRing">
                                         <rect key="frame" x="42" y="8" width="236" height="236"/>
                                         <subviews>
-                                            <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup" userLabel="Mod Label">
-                                                <rect key="frame" x="94.5" y="108" width="47" height="20.5"/>
+                                            <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup" userLabel="Mod Label" customClass="PaddingLabel" customModule="HH_Scheduler" customModuleProvider="target">
+                                                <rect key="frame" x="92.5" y="108" width="51" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="53" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Class Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-eK-4ph" userLabel="Class Label">
                                                 <rect key="frame" x="32.5" y="80.5" width="172" height="18"/>
@@ -60,17 +65,33 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" tag="55" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsk-w9-lt5" userLabel="Class Start Time">
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="55" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsk-w9-lt5" userLabel="Class Start Time" customClass="PaddingLabel" customModule="HH_Scheduler" customModuleProvider="target">
                                                 <rect key="frame" x="-12" y="0.0" width="118" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" tag="56" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33d-Y4-vwd" userLabel="Class End Time">
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="56" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33d-Y4-vwd" userLabel="Class End Time" customClass="PaddingLabel" customModule="HH_Scheduler" customModuleProvider="target">
                                                 <rect key="frame" x="130" y="0.0" width="118" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -288,16 +309,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oOF-BD-f14" firstAttribute="top" secondItem="qBp-Ib-ENe" secondAttribute="bottom" id="P3E-g7-zzX"/>
-                            <constraint firstItem="oOF-BD-f14" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="VMh-nG-sFk"/>
-                            <constraint firstAttribute="trailing" secondItem="jJy-ca-S6u" secondAttribute="trailing" id="YfQ-SM-JHl"/>
+                            <constraint firstItem="oOF-BD-f14" firstAttribute="leading" secondItem="v42-0f-bSx" secondAttribute="leading" id="VMh-nG-sFk"/>
+                            <constraint firstItem="v42-0f-bSx" firstAttribute="trailing" secondItem="jJy-ca-S6u" secondAttribute="trailing" id="YfQ-SM-JHl"/>
                             <constraint firstItem="qBp-Ib-ENe" firstAttribute="top" secondItem="jJy-ca-S6u" secondAttribute="bottom" id="ZgN-EN-6fV"/>
-                            <constraint firstAttribute="trailing" secondItem="qBp-Ib-ENe" secondAttribute="trailing" id="aFP-9f-Hpc"/>
-                            <constraint firstItem="d8l-CZ-mck" firstAttribute="top" secondItem="oOF-BD-f14" secondAttribute="bottom" id="ffY-C4-WcK"/>
-                            <constraint firstAttribute="trailing" secondItem="oOF-BD-f14" secondAttribute="trailing" id="ftS-LC-OIr"/>
-                            <constraint firstItem="jJy-ca-S6u" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="uGT-HG-qBX"/>
-                            <constraint firstItem="jJy-ca-S6u" firstAttribute="top" secondItem="PvD-KC-aan" secondAttribute="bottom" id="yCY-ZI-Xxt"/>
-                            <constraint firstItem="qBp-Ib-ENe" firstAttribute="leading" secondItem="hE7-OG-4AI" secondAttribute="leading" id="z7E-wv-6IN"/>
+                            <constraint firstItem="v42-0f-bSx" firstAttribute="trailing" secondItem="qBp-Ib-ENe" secondAttribute="trailing" id="aFP-9f-Hpc"/>
+                            <constraint firstItem="v42-0f-bSx" firstAttribute="bottom" secondItem="oOF-BD-f14" secondAttribute="bottom" id="ffY-C4-WcK"/>
+                            <constraint firstItem="v42-0f-bSx" firstAttribute="trailing" secondItem="oOF-BD-f14" secondAttribute="trailing" id="ftS-LC-OIr"/>
+                            <constraint firstItem="jJy-ca-S6u" firstAttribute="leading" secondItem="v42-0f-bSx" secondAttribute="leading" id="uGT-HG-qBX"/>
+                            <constraint firstItem="jJy-ca-S6u" firstAttribute="top" secondItem="v42-0f-bSx" secondAttribute="top" id="yCY-ZI-Xxt"/>
+                            <constraint firstItem="qBp-Ib-ENe" firstAttribute="leading" secondItem="v42-0f-bSx" secondAttribute="leading" id="z7E-wv-6IN"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="v42-0f-bSx"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="9zT-Qp-CPX"/>
                     <userDefinedRuntimeAttributes>
@@ -325,10 +347,6 @@
         <scene sceneID="Wmj-Qc-hYa">
             <objects>
                 <viewController id="VhC-FL-Oyg" customClass="ScheduleManagerViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="n9X-2x-vch"/>
-                        <viewControllerLayoutGuide type="bottom" id="4zk-rJ-Re5"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5TL-7B-zpP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -416,7 +434,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7QN-b5-Bpc" customClass="ScheduleCollectionView" customModule="HH_Scheduler" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="131" y="64" width="189" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3gT-NZ-WWe">
                                     <size key="itemSize" width="140" height="90"/>
@@ -452,7 +470,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModCell" id="eTF-6r-0jq" customClass="ScheduleCell" customModule="HH_Scheduler" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="91.5" width="140" height="90"/>
+                                        <rect key="frame" x="0.0" y="107.5" width="140" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="90"/>
@@ -575,17 +593,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lPJ-sa-xkr" firstAttribute="leading" secondItem="3QR-le-M0g" secondAttribute="trailing" id="1rq-ng-ffh"/>
-                            <constraint firstItem="3QR-le-M0g" firstAttribute="leading" secondItem="5TL-7B-zpP" secondAttribute="leading" id="DqV-Bn-eZV"/>
-                            <constraint firstAttribute="trailing" secondItem="7QN-b5-Bpc" secondAttribute="trailing" id="EIR-mq-s0c"/>
-                            <constraint firstItem="4zk-rJ-Re5" firstAttribute="top" secondItem="lPJ-sa-xkr" secondAttribute="bottom" id="IJV-9c-nO9"/>
-                            <constraint firstItem="4zk-rJ-Re5" firstAttribute="top" secondItem="7QN-b5-Bpc" secondAttribute="bottom" id="NKL-4R-AvE"/>
-                            <constraint firstItem="7QN-b5-Bpc" firstAttribute="leading" secondItem="5TL-7B-zpP" secondAttribute="leading" id="Te2-iK-7TJ"/>
-                            <constraint firstItem="7QN-b5-Bpc" firstAttribute="top" secondItem="n9X-2x-vch" secondAttribute="bottom" id="WPV-21-9mN"/>
-                            <constraint firstItem="3QR-le-M0g" firstAttribute="top" secondItem="n9X-2x-vch" secondAttribute="bottom" id="dpg-sA-DKA"/>
-                            <constraint firstItem="lPJ-sa-xkr" firstAttribute="top" secondItem="n9X-2x-vch" secondAttribute="bottom" id="qlf-cc-L6c"/>
+                            <constraint firstItem="3QR-le-M0g" firstAttribute="leading" secondItem="6U1-uD-fD5" secondAttribute="leading" id="DqV-Bn-eZV"/>
+                            <constraint firstItem="6U1-uD-fD5" firstAttribute="trailing" secondItem="7QN-b5-Bpc" secondAttribute="trailing" id="EIR-mq-s0c"/>
+                            <constraint firstItem="6U1-uD-fD5" firstAttribute="bottom" secondItem="lPJ-sa-xkr" secondAttribute="bottom" id="IJV-9c-nO9"/>
+                            <constraint firstItem="6U1-uD-fD5" firstAttribute="bottom" secondItem="7QN-b5-Bpc" secondAttribute="bottom" id="NKL-4R-AvE"/>
+                            <constraint firstItem="7QN-b5-Bpc" firstAttribute="leading" secondItem="lPJ-sa-xkr" secondAttribute="trailing" id="PxM-Km-1FM"/>
+                            <constraint firstItem="7QN-b5-Bpc" firstAttribute="leading" secondItem="6U1-uD-fD5" secondAttribute="leading" id="Te2-iK-7TJ"/>
+                            <constraint firstItem="7QN-b5-Bpc" firstAttribute="top" secondItem="6U1-uD-fD5" secondAttribute="top" id="WPV-21-9mN"/>
+                            <constraint firstItem="3QR-le-M0g" firstAttribute="top" secondItem="6U1-uD-fD5" secondAttribute="top" id="dpg-sA-DKA"/>
+                            <constraint firstItem="lPJ-sa-xkr" firstAttribute="top" secondItem="6U1-uD-fD5" secondAttribute="top" id="qlf-cc-L6c"/>
                             <constraint firstItem="3QR-le-M0g" firstAttribute="width" secondItem="5TL-7B-zpP" secondAttribute="width" multiplier="0.3" id="r9z-eC-SQ1"/>
-                            <constraint firstItem="4zk-rJ-Re5" firstAttribute="top" secondItem="3QR-le-M0g" secondAttribute="bottom" id="z5w-v8-hjk"/>
+                            <constraint firstItem="6U1-uD-fD5" firstAttribute="bottom" secondItem="3QR-le-M0g" secondAttribute="bottom" id="z5w-v8-hjk"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="6U1-uD-fD5"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Te2-iK-7TJ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Schedule" id="JPe-9q-YfN">
                         <barButtonItem key="leftBarButtonItem" image="Open Class Tab Icon" id="9Dq-me-97q">
@@ -605,7 +630,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgj-rY-cEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1692" y="521.28935532233891"/>
+            <point key="canvasLocation" x="1691.25" y="520.77464788732391"/>
         </scene>
         <!--Manage Classes-->
         <scene sceneID="1fh-yK-LW2">
@@ -715,10 +740,6 @@
         <scene sceneID="pHP-LX-KXV">
             <objects>
                 <viewController storyboardIdentifier="ClassEditVC" id="rR0-fk-Ycx" customClass="ClassEditorViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="SGc-W5-aef"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ba5-t5-R0C"/>
-                    </layoutGuides>
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8xe-2Q-dsj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -830,16 +851,17 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.93725490196078431" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="e5P-H7-HQf" firstAttribute="leading" secondItem="8xe-2Q-dsj" secondAttribute="leading" id="45S-7W-oc6"/>
-                            <constraint firstAttribute="trailing" secondItem="XBo-Dl-oYG" secondAttribute="trailing" id="8fX-52-hOE"/>
+                            <constraint firstItem="e5P-H7-HQf" firstAttribute="leading" secondItem="prx-HL-5Bg" secondAttribute="leading" id="45S-7W-oc6"/>
+                            <constraint firstItem="prx-HL-5Bg" firstAttribute="trailing" secondItem="XBo-Dl-oYG" secondAttribute="trailing" id="8fX-52-hOE"/>
                             <constraint firstItem="L4K-59-NBR" firstAttribute="width" secondItem="8xe-2Q-dsj" secondAttribute="width" multiplier="0.703333" id="HBz-Om-Syv"/>
                             <constraint firstItem="e5P-H7-HQf" firstAttribute="top" secondItem="XBo-Dl-oYG" secondAttribute="bottom" constant="5" id="PzC-g9-AbV"/>
                             <constraint firstItem="L4K-59-NBR" firstAttribute="top" secondItem="e5P-H7-HQf" secondAttribute="bottom" constant="10" id="Q0P-zr-icU"/>
-                            <constraint firstAttribute="trailing" secondItem="e5P-H7-HQf" secondAttribute="trailing" id="g8k-v9-ihB"/>
-                            <constraint firstItem="L4K-59-NBR" firstAttribute="centerX" secondItem="8xe-2Q-dsj" secondAttribute="centerX" id="kck-JL-POu"/>
-                            <constraint firstItem="XBo-Dl-oYG" firstAttribute="top" secondItem="SGc-W5-aef" secondAttribute="bottom" constant="37" id="rBn-Jr-QDf"/>
-                            <constraint firstItem="XBo-Dl-oYG" firstAttribute="leading" secondItem="8xe-2Q-dsj" secondAttribute="leading" id="xsw-0H-edJ"/>
+                            <constraint firstItem="prx-HL-5Bg" firstAttribute="trailing" secondItem="e5P-H7-HQf" secondAttribute="trailing" id="g8k-v9-ihB"/>
+                            <constraint firstItem="L4K-59-NBR" firstAttribute="centerX" secondItem="prx-HL-5Bg" secondAttribute="centerX" id="kck-JL-POu"/>
+                            <constraint firstItem="XBo-Dl-oYG" firstAttribute="top" secondItem="prx-HL-5Bg" secondAttribute="top" constant="37" id="rBn-Jr-QDf"/>
+                            <constraint firstItem="XBo-Dl-oYG" firstAttribute="leading" secondItem="prx-HL-5Bg" secondAttribute="leading" id="xsw-0H-edJ"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="prx-HL-5Bg"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="uGa-dm-lpr">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="NAG-pP-zPL">
@@ -884,10 +906,6 @@
         <scene sceneID="sF3-7p-Nah">
             <objects>
                 <viewController title="Loading" modalTransitionStyle="crossDissolve" id="CH7-yS-hcy" customClass="LoadingViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="v4P-VK-qME"/>
-                        <viewControllerLayoutGuide type="bottom" id="E0U-95-GXW"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Mu2-9w-DXy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -918,11 +936,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4lp-go-nDq" firstAttribute="centerX" secondItem="Mu2-9w-DXy" secondAttribute="centerX" id="M1K-gY-XMp"/>
+                            <constraint firstItem="4lp-go-nDq" firstAttribute="centerX" secondItem="ofk-hx-81b" secondAttribute="centerX" id="M1K-gY-XMp"/>
                             <constraint firstItem="TCa-Ql-WlF" firstAttribute="centerY" secondItem="Mu2-9w-DXy" secondAttribute="centerY" id="Yl5-sM-pOW"/>
-                            <constraint firstItem="TCa-Ql-WlF" firstAttribute="centerX" secondItem="Mu2-9w-DXy" secondAttribute="centerX" id="i7P-BT-5dS"/>
+                            <constraint firstItem="TCa-Ql-WlF" firstAttribute="centerX" secondItem="ofk-hx-81b" secondAttribute="centerX" id="i7P-BT-5dS"/>
                             <constraint firstItem="TCa-Ql-WlF" firstAttribute="top" secondItem="4lp-go-nDq" secondAttribute="bottom" constant="30" id="rJs-Ta-Foc"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="ofk-hx-81b"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Unclicked House Icon" selectedImage="Clicked House Icon" id="gXR-Iv-2Pe"/>
                     <navigationItem key="navigationItem" id="H3Z-en-jPT"/>
