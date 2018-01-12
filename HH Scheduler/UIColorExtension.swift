@@ -22,4 +22,19 @@ extension UIColor {
 
         return Int32(red * 255) << 16 | Int32(green * 255) << 8 | Int32(blue * 255)
     }
+
+    func hslScale(_ hue_mul: CGFloat, _ sat_mul: CGFloat, _ lum_mul: CGFloat) -> UIColor {
+        var hue: CGFloat = 0
+        var sat: CGFloat = 0
+        var lum: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        self.getHue(&hue, saturation: &sat, brightness: &lum, alpha: &alpha)
+
+        hue *= hue_mul
+        sat *= sat_mul
+        lum *= lum_mul
+
+        return UIColor(hue: hue, saturation: sat, brightness: lum, alpha: alpha)
+    }
 }

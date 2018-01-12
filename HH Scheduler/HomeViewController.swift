@@ -342,12 +342,7 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
     }
 
     private func updateGradient(cell: FutureClassCell, color color1: UIColor, to toColor: UIColor? = nil) {
-        var hue: CGFloat = 0
-        var sat: CGFloat = 0
-        var lum: CGFloat = 0
-        color1.getHue(&hue, saturation: &sat, brightness: &lum, alpha: nil)
-
-        let color2 = toColor ?? UIColor(hue: hue, saturation: sat, brightness: lum * 0.88, alpha: 1.0)
+        let color2 = toColor ?? color1.hslScale(1, 1, 1.05)
 
         cell.gradientLayer.colors = [color2.cgColor, color1.cgColor]
     }

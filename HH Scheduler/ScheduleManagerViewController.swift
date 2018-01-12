@@ -117,7 +117,15 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
 
         let classInfo = schedule.getClassInfo(withID: schedule.getClassID(index: indexPath.item))
         cell.label.text = classInfo?.name
-        cell.backgroundColor = classInfo?.color
+        cell.color = classInfo?.color
+
+        let selindex = tableView.indexPathForSelectedRow
+        if selindex != nil && selindex != indexPath {
+             cell.decolorize()
+        }
+        else {
+            cell.colorize()
+        }
 
         return cell
     }
@@ -133,14 +141,46 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if tableView.indexPathForSelectedRow == indexPath {
             tableView.deselectRow(at: indexPath, animated: false)
+
+            for cell in tableView.visibleCells as! [ClassInfoCell] {
+                cell.colorize()
+            }
+
             return nil
         }
         else {
             return indexPath
         }
     }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        for cell in tableView.visibleCells as! [ClassInfoCell] {
+            let selindex = tableView.indexPathForSelectedRow
+            let cellPath = tableView.indexPath(for: cell)!
+
+            if selindex != nil && selindex != cellPath {
+                cell.decolorize()
+            }
+            else {
+                cell.colorize(true)
+            }
+        }
+    }
 }
 
 class ClassInfoCell: UITableViewCell {
     @IBOutlet public weak var label: UILabel!
+    public var color: UIColor!
+
+    func colorize(_ border: Bool = false)  {
+        let view = UIView()
+        view.backgroundColor = self.color.hslScale(1, 1, 0.8)
+        if border { view.layer.borderWidth = 2; view.layer.borderColor = UIColor.darkGray.cgColor }
+        self.selectedBackgroundView = view
+        self.backgroundColor = self.color
+    }
+
+    func decolorize() {
+        self.backgroundColor = self.color
+    }
 }
