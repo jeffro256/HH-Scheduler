@@ -18,8 +18,7 @@ let schedule_file_name = "schedule.arc"
 let schedule_file_url: URL =
     document_dir_url.appendingPathComponent(schedule_file_name)
 
-let schedule_info_web_url =
-    URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!
+let schedule_info_web_url = URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!
 let schedule_info_backup_file_name = "sinfo_cache.json"
 let schedule_info_backup_file_url: URL =
     document_dir_url.appendingPathComponent(schedule_info_backup_file_name)

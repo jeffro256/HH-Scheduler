@@ -329,6 +329,15 @@ class ScheduleContext {
         return true
     }
 
+    @discardableResult
+    func refreshContextURL(_ url: URL) -> Bool {
+        if let contextData = try? Data(contentsOf: schedule_info_web_url) {
+            return scheduleContext.refreshContext(contextData: contextData)
+        }
+
+        return false
+    }
+
     public func isLoaded() -> Bool {
         return self.loaded
     }

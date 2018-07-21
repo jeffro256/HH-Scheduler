@@ -44,6 +44,8 @@ class HomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationController.current().requestNotificationPermission()
+
         updateUI()
         progressRing.value = 0
 

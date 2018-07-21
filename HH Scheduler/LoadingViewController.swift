@@ -18,17 +18,24 @@ class LoadingViewController: UIViewController {
         self.activityIndicator.startAnimating()
 
         DispatchQueue.main.async {
+            let loadStart = Date().timeIntervalSinceReferenceDate
             while !scheduleContext.isLoaded() {
-                let contextData = (try? Data(contentsOf: schedule_info_web_url)) ?? Data()
+                scheduleContext.refreshContextURL(schedule_info_web_url)
 
-                scheduleContext.refreshContext(contextData: contextData)
-
-                sleep(1)
+                usleep(100000)
             }
 
             self.activityIndicator.stopAnimating()
 
-            usleep(500000)
+            let loadEnd = Date().timeIntervalSinceReferenceDate
+
+            let maxWait: UInt32 = 1500000
+            let timeToSleep = min(maxWait - UInt32((loadEnd - loadStart) * 1000000), maxWait)
+
+            if timeToSleep > 0 {
+                usleep(timeToSleep)
+            }
+
             self.performSegue(withIdentifier: "DoneLoading", sender: nil)
         }
     }
