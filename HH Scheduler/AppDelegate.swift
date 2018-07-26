@@ -12,6 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
+    var bgContextRefresher: Timer!
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("Began running HH-Scheduler! Jeffrey Ryan says hello")
@@ -30,12 +32,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
+        if bgContextRefresher != nil && bgContextRefresher.isValid {
+            bgContextRefresher.invalidate()
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 
-        scheduleContext.refreshContextURL(schedule_info_web_url)
+        if bgContextRefresher != nil && bgContextRefresher.isValid {
+            bgContextRefresher.invalidate()
+        }
+
+        bgContextRefresher = createContextRefresher()
+        bgContextRefresher.fire()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -51,6 +62,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         catch {
             print("Failed to save schedule!")
+        }
+    }
+
+    func createContextRefresher(interval: TimeInterval = 60) -> Timer {
+        return Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+            if let context = scheduleContext {
+                let oldChecksum = context.checksum()
+
+                context.refreshContextURL(schedule_info_web_url)
+
+                let newChecksum = context.checksum()
+
+                if newChecksum != oldChecksum {
+                    NotificationController.current().scheduleNotifications()
+                }
+            }
         }
     }
 }

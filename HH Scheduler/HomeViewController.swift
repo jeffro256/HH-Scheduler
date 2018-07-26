@@ -45,6 +45,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         NotificationController.current().requestNotificationPermission()
+        NotificationController.current().scheduleNotifications()
 
         updateUI()
         progressRing.value = 0

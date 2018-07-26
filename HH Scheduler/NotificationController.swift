@@ -12,8 +12,16 @@ import UserNotifications
 class NotificationController: NSObject, UNUserNotificationCenterDelegate {
     private static let inst = NotificationController()
 
+    // @todo: Remove
+    var f = DateFormatter()
+
     private override init() {
         super.init()
+
+        // @todo: Remove
+        f.dateFormat = "EEEE, MMMM d -- h:mm aa"
+        f.locale = Locale(identifier: "en_US")
+        f.timeZone = TimeZone(abbreviation: "CST")
 
         UNUserNotificationCenter.current().delegate = self
     }
@@ -39,8 +47,13 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
     }
 
     func scheduleNotifications(days: Int = 14, minsWarning: Int = 5, context: ScheduleContext = scheduleContext, schedule: PSchedule = schedule) {
-        let ncenter = UNUserNotificationCenter.current()
+        print("Scheduling notifications...")
 
+        if !context.isLoaded() {
+            print("Schedule context is not loaded! Cannot schedule notifications.")
+        }
+
+        let ncenter = UNUserNotificationCenter.current()
         ncenter.removeAllPendingNotificationRequests()
 
         var requests: [UNNotificationRequest] = []
@@ -81,6 +94,8 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
                     let request = UNNotificationRequest(identifier: reqIdentifier, content: reqContent, trigger: reqTrigger)
 
                     requests.append(request)
+
+                    print("Notifications date: \(f.string(from: triggerDatetime))")
                 }
             }
 
@@ -95,6 +110,8 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
                 }
             }
         }
+
+        print("done scheduleing")
     }
 
     func filterDeliveredNotifications() {

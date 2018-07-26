@@ -8,6 +8,20 @@
 
 import UIKit
 
+let hhTint = UIColor(0xC4161C)
+let freetimeColor = UIColor(0xEFEFF4)
+
+let color_pallette = [
+    UIColor(0xFF6259),  // Red
+    UIColor(0xFFAA33),  // Orange
+    UIColor(0xFFD633),  // Yellow
+    UIColor(0x70E183),  // Green
+    UIColor(0x7BD3FB),  // Light Blue
+    UIColor(0x3395FF),  // Blue
+    UIColor(0x7978DE),  // Purple
+    UIColor(0xFF5777),  // Magenta
+]
+
 let document_dirs = NSSearchPathForDirectoriesInDomains(
     .documentDirectory,
     .userDomainMask, true)
@@ -25,17 +39,3 @@ let schedule_info_backup_file_url: URL =
 
 var schedule: PSchedule!
 var scheduleContext: ScheduleContext!
-
-let hhTint = UIColor(0xC4161C)
-let freetimeColor = UIColor(0xEFEFF4)
-
-let color_pallette = [
-    UIColor(0xFF6259),  // Red
-    UIColor(0xFFAA33),  // Orange
-    UIColor(0xFFD633),  // Yellow
-    UIColor(0x70E183),  // Green
-    UIColor(0x7BD3FB),  // Light Blue
-    UIColor(0x3395FF),  // Blue
-    UIColor(0x7978DE),  // Purple
-    UIColor(0xFF5777),  // Magenta
-]
