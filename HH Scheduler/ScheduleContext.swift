@@ -49,6 +49,7 @@ class ScheduleContext {
     private var holidays: [Date]
     private var weirdDays: [WeirdDay]
     private var specialClasses: [ScheduleClass]
+    private var chksum: String
     private var loaded: Bool
 
     public init() {
@@ -66,6 +67,7 @@ class ScheduleContext {
         holidays = [Date]()
         weirdDays = [WeirdDay]()
         specialClasses = [ScheduleClass]()
+        chksum = ""
         loaded = false
     }
 
@@ -99,7 +101,7 @@ class ScheduleContext {
         }
 
         while !(isSchoolDay(testDate) && (!scheduled || isScheduledDay(testDate))) {
-            testDate = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+            testDate = Calendar.current.date(byAdding: .day, value: 1, to: testDate)!
 
             if testDate.dayCompare(lastDay) == .orderedDescending {
                 return nil
@@ -340,6 +342,10 @@ class ScheduleContext {
 
     public func isLoaded() -> Bool {
         return self.loaded
+    }
+
+    public func checksum() -> String {
+        return self.chksum
     }
 
     private func getWeirdDay(_ date: Date) -> WeirdDay? {
