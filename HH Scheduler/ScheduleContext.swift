@@ -378,3 +378,9 @@ struct ScheduleBlock {
     public weak var scheduleContext: ScheduleContext?
     public var mod: Int?
 }
+
+enum ScheduleContextError: Error {
+    case contextDataUnreadable
+    case contextDataIncorrect
+    case urlUnreachable
+}

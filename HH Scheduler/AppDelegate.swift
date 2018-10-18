@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var bgContextRefresher: Timer!
+    var dailyNotifTimer: Timer!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -36,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if bgContextRefresher != nil && bgContextRefresher.isValid {
             bgContextRefresher.invalidate()
         }
+
+        bgContextRefresher = createContextRefresher(interval: 3600) // Once an hour
+        dailyNotifTimer = createDailyNotificationScheduler()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -63,14 +67,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         catch {
             print("Failed to save schedule!")
         }
+
+        NotificationController.current().scheduleNotifications()
     }
 
-    func createContextRefresher(interval: TimeInterval = 60) -> Timer {
+    func createContextRefresher(interval: TimeInterval = 120) -> Timer {
         return Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
             if let context = scheduleContext {
                 let oldChecksum = context.checksum()
 
-                context.refreshContextURL(schedule_info_web_url)
+                guard context.refreshContextURL(schedule_info_web_url) else { return }
 
                 let newChecksum = context.checksum()
 
@@ -78,6 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     NotificationController.current().scheduleNotifications()
                 }
             }
+        }
+    }
+
+    func createDailyNotificationScheduler() -> Timer {
+        let dayInterval: TimeInterval = 60 * 60 * 24
+        return Timer.scheduledTimer(withTimeInterval: dayInterval, repeats: true) { _ in
+            NotificationController.current().scheduleNotifications()
         }
     }
 }

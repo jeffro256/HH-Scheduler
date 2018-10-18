@@ -83,9 +83,9 @@ class ScheduleManagerViewController: UIViewController, UITableViewDataSource, UI
     @IBAction func pressedScheduleIcon(_ sender: Any) {
         if (!animating) {
             let targetX = viewingClasses ? -tableView.frame.width : 0
-            let buttonName = viewingClasses ? "Open Class Tab Icon" : "Close Class Tab Icon"
+            let buttonImageName = viewingClasses ? "Open Class Tab Icon" : "Close Class Tab Icon"
 
-            scheduleButton.image = UIImage(named: buttonName)
+            scheduleButton.image = UIImage(named: buttonImageName)
 
             viewingClasses = !viewingClasses
 

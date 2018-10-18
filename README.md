@@ -4,4 +4,4 @@ Holland Hall Pocket Schedule
 
 How to open yourself
 -------------------------
-Download the .zip fle then open the 'HHScheduler.xcworkspace' 
+Clone Repository or download the .zip fle then open 'HHScheduler.xcworkspace'  with XCode

@@ -119,6 +119,8 @@ class ClassManagerViewController: UITableViewController {
         }
 
         try? pschedule.saveToFile(schedule_file_url)
+
+        NotificationController.current().scheduleNotifications()
     }
 
     @IBAction public func deleteClass(_ segue: UIStoryboardSegue) {

@@ -46,8 +46,10 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
         }
     }
 
-    func scheduleNotifications(days: Int = 14, minsWarning: Int = 5, context: ScheduleContext = scheduleContext, schedule: PSchedule = schedule) {
+    func scheduleNotifications(minsWarning: Int = 5, context: ScheduleContext = scheduleContext, schedule: PSchedule = schedule) {
         print("Scheduling notifications...")
+
+        let maxNotifications = 60
 
         if !context.isLoaded() {
             print("Schedule context is not loaded! Cannot schedule notifications.")
@@ -59,10 +61,11 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
         var requests: [UNNotificationRequest] = []
 
         let now = Date()
-        guard var day = context.getNextSchoolDay(now, scheduled: true, forceNext: false) else { return }
+        var day = context.getNextSchoolDay(now, scheduled: true, forceNext: false)
 
-        for _ in 0..<days {
-            let blocks = context.getBlocks(day, from: schedule)
+        var numNotifications = 0
+        scheduleLoop: while day != nil {
+            let blocks = context.getBlocks(day!, from: schedule)
 
             for (b, block) in blocks.enumerated() {
                 if b == 0 { continue }
@@ -72,7 +75,7 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
                     let triggerTime = Calendar.current.date(byAdding: .minute, value: -minsWarning, to: block.startTime)!
                     let triggerTimeComponents = Calendar.current.dateComponents([.hour, .minute], from: triggerTime)
 
-                    var triggerComponents = Calendar.current.dateComponents([.year, .month, .day], from: day)
+                    var triggerComponents = Calendar.current.dateComponents([.year, .month, .day], from: day!)
                     triggerComponents.hour = triggerTimeComponents.hour
                     triggerComponents.minute = triggerTimeComponents.minute
 
@@ -95,12 +98,16 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
 
                     requests.append(request)
 
-                    print("Notifications date: \(f.string(from: triggerDatetime))")
+                    print("\(className): \(f.string(from: triggerDatetime))")
+
+                    numNotifications += 1
+                    if numNotifications >= maxNotifications {
+                        break scheduleLoop
+                    }
                 }
             }
 
-            guard let nextDay = context.getNextSchoolDay(day, scheduled: true, forceNext: true) else { break }
-            day = nextDay
+            day = context.getNextSchoolDay(day!, scheduled: true, forceNext: true)
         }
 
         for request in requests {
@@ -110,8 +117,6 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
                 }
             }
         }
-
-        print("done scheduleing")
     }
 
     func filterDeliveredNotifications() {

@@ -19,24 +19,50 @@ class LoadingViewController: UIViewController {
 
         DispatchQueue.main.async {
             let loadStart = Date().timeIntervalSinceReferenceDate
-            while !scheduleContext.isLoaded() {
-                scheduleContext.refreshContextURL(schedule_info_web_url)
 
-                usleep(100000)
+            let backupExists = FileManager.default.fileExists(atPath: context_cache_file_url.path)
+            let maxTriesWithBackup = 5
+
+            print("backup exists: \(backupExists)")
+
+            var i = 0
+            while !backupExists || (backupExists && i < maxTriesWithBackup) {
+                print("Requested schedule info.")
+
+                if let scheduleData = try? Data(contentsOf: schedule_info_web_url) {
+                    if scheduleContext.refreshContext(contextData: scheduleData) {
+                        try! scheduleData.write(to: context_cache_file_url)
+
+                        break
+                    }
+                }
+
+                sleep(1)
+                i += 1
+            }
+
+            if !scheduleContext.isLoaded() {
+                let scheduleData = try! Data(contentsOf: context_cache_file_url)
+
+                scheduleContext.refreshContext(contextData: scheduleData)
             }
 
             self.activityIndicator.stopAnimating()
 
             let loadEnd = Date().timeIntervalSinceReferenceDate
 
-            let maxWait: UInt32 = 1500000
-            let timeToSleep = min(maxWait - UInt32((loadEnd - loadStart) * 1000000), maxWait)
+            let maxWait: Int32 = 1000000
+            let timeToSleep = min(maxWait - Int32((loadEnd - loadStart) * 1000000), maxWait)
 
             if timeToSleep > 0 {
-                usleep(timeToSleep)
+                usleep(UInt32(timeToSleep))
             }
 
             self.performSegue(withIdentifier: "DoneLoading", sender: nil)
         }
+    }
+
+    func loadBackupContext() {
+        
     }
 }

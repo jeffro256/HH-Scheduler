@@ -103,6 +103,8 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
             if let pschedule = scheduleSource as? PSchedule {
                 try? pschedule.saveToFile(schedule_file_url)
             }
+
+            NotificationController.current().scheduleNotifications()
         }
     }
 }
