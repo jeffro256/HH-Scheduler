@@ -21,38 +21,19 @@ class LoadingViewController: UIViewController {
             let loadStart = Date().timeIntervalSinceReferenceDate
 
             let backupExists = FileManager.default.fileExists(atPath: context_cache_file_url.path)
-            let maxTriesWithBackup = 5
+            let maxWait: TimeInterval? = (backupExists) ? 5 : nil
 
-            print("backup exists: \(backupExists)")
-
-            var i = 0
-            while !backupExists || (backupExists && i < maxTriesWithBackup) {
-                print("Requested schedule info.")
-
-                if let scheduleData = try? Data(contentsOf: schedule_info_web_url) {
-                    if scheduleContext.refreshContext(contextData: scheduleData) {
-                        try! scheduleData.write(to: context_cache_file_url)
-
-                        break
-                    }
-                }
-
-                sleep(1)
-                i += 1
-            }
-
-            if !scheduleContext.isLoaded() {
-                let scheduleData = try! Data(contentsOf: context_cache_file_url)
-
-                scheduleContext.refreshContext(contextData: scheduleData)
+            if !self.tryRefreshingScheduleContext(waitingMax: maxWait) {
+                self.loadBackupContext()
             }
 
             self.activityIndicator.stopAnimating()
 
             let loadEnd = Date().timeIntervalSinceReferenceDate
 
-            let maxWait: Int32 = 1000000
-            let timeToSleep = min(maxWait - Int32((loadEnd - loadStart) * 1000000), maxWait)
+            let minWait: Int32 = 1000000
+            let elapsed: Int32 = Int32(loadEnd - loadStart) * 1000000
+            let timeToSleep = min(minWait - elapsed, minWait)
 
             if timeToSleep > 0 {
                 usleep(UInt32(timeToSleep))
@@ -62,7 +43,34 @@ class LoadingViewController: UIViewController {
         }
     }
 
+    @discardableResult
+    func tryRefreshingScheduleContext(waitingMax maxWait: TimeInterval? = nil) -> Bool {
+        let startTime = Date().timeIntervalSinceReferenceDate
+        var timedOut = false
+
+        repeat {
+            if let scheduleData = try? Data(contentsOf: schedule_info_web_url) {
+                if scheduleContext.refreshContext(contextData: scheduleData) {
+                    try! scheduleData.write(to: context_cache_file_url)
+
+                    break
+                }
+            }
+
+            usleep(500000)
+
+            let elapsed = Date().timeIntervalSinceReferenceDate - startTime
+            timedOut = (maxWait == nil) ? false: elapsed > maxWait!
+        } while !scheduleContext.isLoaded() && !timedOut
+
+        return scheduleContext.isLoaded()
+    }
+
     func loadBackupContext() {
-        
+        if !scheduleContext.isLoaded() {
+            let scheduleData = try! Data(contentsOf: context_cache_file_url)
+
+            scheduleContext.refreshContext(contextData: scheduleData)
+        }
     }
 }
