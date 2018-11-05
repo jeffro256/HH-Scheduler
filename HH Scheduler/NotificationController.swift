@@ -49,6 +49,8 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
     func scheduleNotifications(minsWarning: Int = 5, context: ScheduleContext = scheduleContext, schedule: PSchedule = schedule) {
         print("Scheduling notifications...")
 
+        let startT = Date()
+
         let maxNotifications = 60
 
         if !context.isLoaded() {
@@ -117,6 +119,10 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
                 }
             }
         }
+
+        let endT = Date()
+        let elapsed = endT.timeIntervalSinceReferenceDate - startT.timeIntervalSinceReferenceDate
+        print("Scheduling time: \(elapsed)s.")
     }
 
     func filterDeliveredNotifications() {
