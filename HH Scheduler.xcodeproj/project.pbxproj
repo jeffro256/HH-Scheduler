@@ -23,6 +23,7 @@
 		368531F721028C9100367541 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368531F621028C9100367541 /* NotificationController.swift */; };
 		369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* PersonalSchedule.swift */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
+		36CFD3872190DA0A00426609 /* ZoomDissolveSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CFD3862190DA0A00426609 /* ZoomDissolveSegue.swift */; };
 		36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */; };
 		36E830231F685AEE00F3327E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830221F685AEE00F3327E /* UIColorExtension.swift */; };
 		36E830251F69569A00F3327E /* ScheduleContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E830241F69569A00F3327E /* ScheduleContext.swift */; };
@@ -50,6 +51,7 @@
 		368531F621028C9100367541 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		369468031F510FC50097A534 /* PersonalSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSchedule.swift; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		36CFD3862190DA0A00426609 /* ZoomDissolveSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomDissolveSegue.swift; sourceTree = "<group>"; };
 		36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIG JOHN.otf"; sourceTree = "<group>"; };
 		36E830221F685AEE00F3327E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		36E830241F69569A00F3327E /* ScheduleContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleContext.swift; sourceTree = "<group>"; };
@@ -111,19 +113,20 @@
 				36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */,
 				36EB9FE81D9C35D0006B6874 /* Common.swift */,
 				362310271D7BAB28004F98FB /* AppDelegate.swift */,
-				36E830241F69569A00F3327E /* ScheduleContext.swift */,
-				368531F621028C9100367541 /* NotificationController.swift */,
-				361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */,
-				369468031F510FC50097A534 /* PersonalSchedule.swift */,
-				360E28331F1540390052C799 /* PSchedule.swift */,
-				3623102D1D7BAB28004F98FB /* Main.storyboard */,
-				36670F712002DE0200C07263 /* PaddingLabel.swift */,
-				361BBB7F1FB79FE6008B8D35 /* MainTabBarController.swift */,
 				361BBB7B1FB528B0008B8D35 /* LoadingViewController.swift */,
+				361BBB7F1FB79FE6008B8D35 /* MainTabBarController.swift */,
 				36EFAD991F65F42800AADFDE /* HomeViewController.swift */,
 				3648FE9D1F8FA875006FB789 /* ScheduleManagerViewController.swift */,
 				3648FE9F1F92D17F006FB789 /* ClassManagerViewController.swift */,
 				361D0DC41F817F5C007BEA4D /* ClassEditorViewController.swift */,
+				369468031F510FC50097A534 /* PersonalSchedule.swift */,
+				36E830241F69569A00F3327E /* ScheduleContext.swift */,
+				360E28331F1540390052C799 /* PSchedule.swift */,
+				368531F621028C9100367541 /* NotificationController.swift */,
+				361E9B491F1704F800C4DF3D /* ScheduleCollectionView.swift */,
+				36CFD3862190DA0A00426609 /* ZoomDissolveSegue.swift */,
+				36670F712002DE0200C07263 /* PaddingLabel.swift */,
+				3623102D1D7BAB28004F98FB /* Main.storyboard */,
 				362310301D7BAB28004F98FB /* Assets.xcassets */,
 				362310351D7BAB28004F98FB /* Info.plist */,
 				36A135DF1E02E0A300956D76 /* Extensions */,
@@ -277,6 +280,7 @@
 				361D0DC51F817F5C007BEA4D /* ClassEditorViewController.swift in Sources */,
 				3648FE9E1F8FA875006FB789 /* ScheduleManagerViewController.swift in Sources */,
 				361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */,
+				36CFD3872190DA0A00426609 /* ZoomDissolveSegue.swift in Sources */,
 				36E830251F69569A00F3327E /* ScheduleContext.swift in Sources */,
 				36670F722002DE0200C07263 /* PaddingLabel.swift in Sources */,
 				369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */,

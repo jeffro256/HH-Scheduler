@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CH7-yS-hcy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,7 +30,7 @@
                                         <rect key="frame" x="47.5" y="8" width="280" height="280"/>
                                         <subviews>
                                             <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="54" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mod ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uT-NA-tup" userLabel="Mod Label" customClass="PaddingLabel" customModule="HH_Scheduler" customModuleProvider="target">
-                                                <rect key="frame" x="116.5" y="129.5" width="47" height="20.5"/>
+                                                <rect key="frame" x="114.5" y="129.5" width="51" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -325,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emW-Kr-gFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2675.625" y="-145.77464788732394"/>
+            <point key="canvasLocation" x="1690" y="-168"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="Wmj-Qc-hYa">
@@ -890,7 +890,7 @@
         <scene sceneID="sF3-7p-Nah">
             <objects>
                 <viewController title="Loading" modalTransitionStyle="crossDissolve" id="CH7-yS-hcy" customClass="LoadingViewController" customModule="HH_Scheduler" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Mu2-9w-DXy">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="Mu2-9w-DXy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -931,12 +931,12 @@
                     <navigationItem key="navigationItem" id="H3Z-en-jPT"/>
                     <connections>
                         <outlet property="activityIndicator" destination="TCa-Ql-WlF" id="gMq-9Q-3MK"/>
-                        <segue destination="IkF-9C-pfC" kind="show" identifier="DoneLoading" id="epR-0f-UJ4"/>
+                        <segue destination="49e-Tb-3d3" kind="custom" identifier="ToMain" customClass="ZoomDissolveSegue" customModule="HH_Scheduler" customModuleProvider="target" id="CGS-4h-PWP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CvK-ee-T5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1692" y="-145"/>
+            <point key="canvasLocation" x="-1591" y="74"/>
         </scene>
         <!--Home Nav-->
         <scene sceneID="3nJ-ct-eYi">
@@ -953,12 +953,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="CH7-yS-hcy" kind="relationship" relationship="rootViewController" id="ei7-wG-X6J"/>
+                        <segue destination="IkF-9C-pfC" kind="relationship" relationship="rootViewController" id="VZX-AN-jlF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykP-WI-a2J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="-145"/>
+            <point key="canvasLocation" x="748" y="-167"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="4sQ-pa-Zgu">

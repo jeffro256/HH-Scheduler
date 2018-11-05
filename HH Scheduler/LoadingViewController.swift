@@ -39,7 +39,7 @@ class LoadingViewController: UIViewController {
                 usleep(UInt32(timeToSleep))
             }
 
-            self.performSegue(withIdentifier: "DoneLoading", sender: nil)
+            self.performSegue(withIdentifier: "ToMain", sender: nil)
         }
     }
 
