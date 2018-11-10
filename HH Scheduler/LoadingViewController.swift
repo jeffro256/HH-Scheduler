@@ -16,7 +16,9 @@ class LoadingViewController: UIViewController {
         super.viewDidLoad()
 
         self.activityIndicator.startAnimating()
+    }
 
+    public override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
             let loadStart = Date().timeIntervalSinceReferenceDate
 

@@ -10,8 +10,6 @@ import UIKit
 
 class ZoomDissolveSegue: UIStoryboardSegue {
     override func perform() {
-        print("Peforming segue...")
-
         zoomDissolve()
     }
 

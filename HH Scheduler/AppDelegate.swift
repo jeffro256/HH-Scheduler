@@ -22,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         schedule = PSchedule.defaultLoadFromFile(schedule_file_url)
         scheduleContext = ScheduleContext()
 
+        isFirstStartup = !FileManager.default.fileExists(atPath: first_startup_flag_url.path)
+
+        if !isFirstStartup {
+            skipNotificationPermissionEntryPoint()
+        }
+        else {
+            FileManager.default.createFile(atPath: first_startup_flag_url.path, contents: nil, attributes: nil)
+        }
+
         return true
     }
 
@@ -92,5 +101,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return Timer.scheduledTimer(withTimeInterval: dayInterval, repeats: true) { _ in
             NotificationController.current().scheduleNotifications()
         }
+    }
+
+    func skipNotificationPermissionEntryPoint() {
+        let loadVCId = "LoadingVC"
+
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = mainStoryboard.instantiateViewController(withIdentifier: loadVCId)
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = initialVC
+        self.window?.makeKeyAndVisible()
     }
 }

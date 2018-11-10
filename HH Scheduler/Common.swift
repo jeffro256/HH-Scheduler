@@ -8,6 +8,14 @@
 
 import UIKit
 
+// Variables ///////////////////////////////////////////////////////////////////
+
+var schedule: PSchedule!
+var scheduleContext: ScheduleContext!
+var isFirstStartup = false
+
+// Constants ///////////////////////////////////////////////////////////////////
+
 let hhTint = UIColor(0xC4161C)
 let freetimeColor = UIColor(0xEFEFF4)
 
@@ -22,20 +30,19 @@ let color_pallette = [
     UIColor(0xFF5777),  // Magenta
 ]
 
-let document_dirs = NSSearchPathForDirectoriesInDomains(
-    .documentDirectory,
-    .userDomainMask, true)
-let document_dir = document_dirs.first!
-let document_dir_url = URL(fileURLWithPath: document_dir)
+let doc_dir_url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+let cache_dir_url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+let app_support_dir_url = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 
 let schedule_file_name = "schedule.arc"
 let schedule_file_url: URL =
-    document_dir_url.appendingPathComponent(schedule_file_name)
+    doc_dir_url.appendingPathComponent(schedule_file_name)
 
-let schedule_info_web_url = URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!
 let context_cache_file_name = "context_cahce.json"
 let context_cache_file_url: URL =
-    document_dir_url.appendingPathComponent(context_cache_file_name)
+    cache_dir_url.appendingPathComponent(context_cache_file_name)
 
-var schedule: PSchedule!
-var scheduleContext: ScheduleContext!
+let first_startup_flag_name = "first_start.txt"
+let first_startup_flag_url: URL = app_support_dir_url.appendingPathComponent(first_startup_flag_name)
+
+let schedule_info_web_url = URL(string: "http://jeffaryan.com/schedule_keeper/hh_schedule_info.json")!

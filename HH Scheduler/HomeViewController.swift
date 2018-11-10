@@ -18,9 +18,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var progressRing: UICircularProgressRingView!
     @IBOutlet weak var futureClassCollection: FutureClassCollection!
     @IBOutlet var labels: [UILabel]!
-    @IBOutlet var startTimeLabelY: NSLayoutConstraint!
-    @IBOutlet var endTimeLabelY: NSLayoutConstraint!
-    
+    @IBOutlet weak var classTimeLabelsY: NSLayoutConstraint!
+
     private var isVisible = false
 
     private let niceDateFormatter: DateFormatter = {
@@ -44,6 +43,8 @@ class HomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("Home view loaded")
+
         NotificationController.current().requestNotificationPermission()
         NotificationController.current().scheduleNotifications()
 
@@ -60,10 +61,10 @@ class HomeViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        futureClassCollection.reloadData()
+
         self.isVisible = true
         updateUI(animated: true)
-
-        futureClassCollection.reloadData()
     }
 
     public override func viewDidAppear(_ animated: Bool) {
@@ -99,8 +100,7 @@ class HomeViewController: UIViewController {
         let unitYPosition = sin(-15 * CGFloat.pi / 180)
         let yConstant = progressRing.frame.width / 2 * (1 - unitYPosition) + 20
 
-        startTimeLabelY.constant = yConstant
-        endTimeLabelY.constant = yConstant
+        classTimeLabelsY.constant = yConstant
 
         // I have to have this code b/c some random black box is popping up
         for view in progressRing.subviews {
