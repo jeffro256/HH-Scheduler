@@ -27,6 +27,8 @@ let color_pallette = [
     UIColor(0x7BD3FB),  // Light Blue
     UIColor(0x3395FF),  // Blue
     UIColor(0x7978DE),  // Purple
+    UIColor(0xB78BEF),  // Light Purple
+    UIColor(0xFFC8D7),  // Light Pink
     UIColor(0xFF5777),  // Magenta
 ]
 

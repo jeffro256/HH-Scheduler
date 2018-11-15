@@ -39,11 +39,13 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
 
         startColorIndex = startColorIndex ?? 0
 
+        let rows: CGFloat = 3     // Only float value to make calcs easier
+        let coloums: CGFloat = 4  // Only float value to make calcs easier
         let colorItemSizeRatio: CGFloat = 0.7
         let colorPickerInset = CGFloat(30)
-        let colorItemSize = (self.view.frame.width - colorPickerInset * 2) / 4 * colorItemSizeRatio
-        let innerSpace = (self.view.frame.width - colorPickerInset * 2) / 4 * (1 - colorItemSizeRatio)
-        let h = colorItemSize * 2 + innerSpace + colorPickerInset * 2
+        let colorItemSize = (self.view.frame.width - colorPickerInset * 2) / coloums * colorItemSizeRatio
+        let innerSpace = (self.view.frame.width - colorPickerInset * 2) / coloums * (1 - colorItemSizeRatio)
+        let h = colorItemSize * rows + innerSpace + colorPickerInset * 2
 
         colorPickerHeight.constant = h
         if let layout = colorCollection.collectionViewLayout as? UICollectionViewFlowLayout {

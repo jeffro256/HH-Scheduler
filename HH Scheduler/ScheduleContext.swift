@@ -111,20 +111,22 @@ class ScheduleContext {
         return testDate
     }
 
-    public func getCycleDay(_ cycleDate: Date) -> Int {
+    public func getCycleDay(_ cycleDate: Date, explicitLandmark exLm: (Date, Int)? = nil) -> Int {
         guard isScheduledDay(cycleDate) else { return -1 }
 
-        var bestLandmark = landmarks.filter({ $0.0.dayCompare(cycleDate) != .orderedDescending }).sorted(by: { $0.0 < $1.0 }).last!
+        let bestLandmark = exLm ?? landmarks.filter({ $0.0.dayCompare(cycleDate) != .orderedDescending }).sorted(by: { $0.0 < $1.0 }).last!
+        var testDate = bestLandmark.0
+        var cycleAccum = bestLandmark.1
 
-        while bestLandmark.0.dayCompare(cycleDate) == .orderedAscending {
-            if isScheduledDay(bestLandmark.0) {
-                bestLandmark.1 += 1
+        while testDate.dayCompare(cycleDate) == .orderedAscending {
+            if isScheduledDay(testDate) {
+                cycleAccum += 1
             }
 
-            bestLandmark.0 = Calendar.current.date(byAdding: .day, value: 1, to: bestLandmark.0)!
+            testDate = Calendar.current.date(byAdding: .day, value: 1, to: testDate)!
         }
 
-        let cycleDay = bestLandmark.1 % numDays
+        let cycleDay = cycleAccum % numDays
 
         return cycleDay
     }
@@ -170,10 +172,10 @@ class ScheduleContext {
         return getWeirdDay(date)?.endTime ?? ((isDDay || isWednesday) ? lateEndTime : regEndTime)
     }
 
-    public func getBlocks(_ date: Date, from personalSchedule: PersonalSchedule) -> [ScheduleBlock] {
-        guard isScheduledDay(date) else { return [] }
+    public func getBlocks(_ date: Date, from personalSchedule: PersonalSchedule, explicitLandmark exLm: (Date, Int)? = nil) -> (Int, [ScheduleBlock]) {
+        guard isScheduledDay(date) else { return (-1, []) }
 
-        let cycleDay = getCycleDay(date)
+        let cycleDay = getCycleDay(date, explicitLandmark: exLm)
 
         let isDDay = cycleDay == 3
         let isWednesday = Calendar.current.dateComponents([.weekday], from: date).weekday == 4
@@ -184,7 +186,7 @@ class ScheduleContext {
         let weirdBlockIndexes = weirdDay?.blockIndexes?.map { $0.1 }
         let blockIndexes = weirdBlockIndexes ?? [Int](0..<numMods)
 
-        guard blockTimes.count == blockIndexes.count else { return [] }
+        guard blockTimes.count == blockIndexes.count else { return (cycleDay, []) }
 
         var blocks = [ScheduleBlock]()
         let numBlocks = blockTimes.count
@@ -207,7 +209,7 @@ class ScheduleContext {
             }
         }
 
-        return blocks
+        return (cycleDay, blocks)
     }
 
     public func getWeirdDayName(_ testDate: Date) -> String? {

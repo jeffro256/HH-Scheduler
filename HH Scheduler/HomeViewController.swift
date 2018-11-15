@@ -134,7 +134,7 @@ class HomeViewController: UIViewController {
             let cycleCharacter = Character(UnicodeScalar(Int(("A" as UnicodeScalar).value) + scheduleContext.getCycleDay(now))!)
             dayShortDesc = "\(cycleCharacter) DAY"
 
-            let blocks = scheduleContext.getBlocks(now, from: schedule)
+            let blocks = scheduleContext.getBlocks(now, from: schedule).1
 
             if Calendar.current.compare(nowTime, to: scheduleContext.getStartTime(now)!, toGranularity: .minute) == .orderedAscending {
                 mainText = "Good Morning!"
@@ -287,7 +287,7 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
     }
 
     public override func reloadData() {
-        let blocks = scheduleContext.getBlocks(Date(), from: schedule)
+        let blocks = scheduleContext.getBlocks(Date(), from: schedule).1
 
         classes = []
 
@@ -322,8 +322,11 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
             addGradient(cell: cell)
         }
 
+        print(indexPath)
+
         if contClass.0 == schedule.freetimeID() {
-            updateGradient(cell: cell, color: UIColor(0xE1E1EA))
+            let freetimeColor = schedule.getClassInfo(withID: schedule.freetimeID())!.color
+            updateGradient(cell: cell, color: freetimeColor)
         }
         else {
             updateGradient(cell: cell, color: contClass.4)

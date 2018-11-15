@@ -31,6 +31,10 @@ class LoadingViewController: UIViewController {
 
             self.activityIndicator.stopAnimating()
 
+            DispatchQueue.main.async {
+                NotificationController.current().scheduleNotifications()
+            }
+
             let loadEnd = Date().timeIntervalSinceReferenceDate
 
             let minWait: Int32 = 1000000

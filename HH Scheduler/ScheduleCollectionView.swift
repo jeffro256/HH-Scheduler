@@ -104,7 +104,9 @@ class ScheduleCollectionView: UICollectionView, UICollectionViewDelegateFlowLayo
                 try? pschedule.saveToFile(schedule_file_url)
             }
 
-            NotificationController.current().scheduleNotifications()
+            DispatchQueue.main.async {
+                NotificationController.current().scheduleNotifications()
+            }
         }
     }
 }

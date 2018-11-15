@@ -64,10 +64,14 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
 
         let now = Date()
         var day = context.getNextSchoolDay(now, scheduled: true, forceNext: false)
+        var lastCycle = -1
 
         var numNotifications = 0
         scheduleLoop: while day != nil {
-            let blocks = context.getBlocks(day!, from: schedule)
+            let explLandmark = (lastCycle > 0) ? (day!, lastCycle) : nil
+            let block_data = context.getBlocks(day!, from: schedule, explicitLandmark: explLandmark)
+            lastCycle = block_data.0
+            let blocks = block_data.1
 
             for (b, block) in blocks.enumerated() {
                 if b == 0 { continue }
