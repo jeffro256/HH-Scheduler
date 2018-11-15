@@ -51,6 +51,8 @@ class HomeViewController: UIViewController {
         updateUI()
         progressRing.value = 0
 
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+
         Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { _ in
             if (self.isVisible) {
                 self.updateUI(animated: false)
@@ -65,14 +67,6 @@ class HomeViewController: UIViewController {
 
         self.isVisible = true
         updateUI(animated: true)
-    }
-
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-            self.futureClassCollection.centerCurrentClass()
-        })
     }
 
     public override func viewWillDisappear(_ animated: Bool) {
@@ -233,6 +227,11 @@ class HomeViewController: UIViewController {
 
         updatingUI = false
     }
+
+    @objc
+    public func willEnterForeground() {
+        futureClassCollection.reloadData()
+    }
 }
 
 class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -321,8 +320,6 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         if cell.gradientLayer == nil {
             addGradient(cell: cell)
         }
-
-        print(indexPath)
 
         if contClass.0 == schedule.freetimeID() {
             let freetimeColor = schedule.getClassInfo(withID: schedule.freetimeID())!.color

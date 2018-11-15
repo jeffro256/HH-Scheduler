@@ -8,6 +8,4 @@ TODO
 *  Homework signup
 
 ## Bugs
-* Method getCycleDay call is slow, cache landmark day, update on refresh?
-* Class list on home screen doesn't refresh across days
-* Class list on home screen flashes
+* None right now
