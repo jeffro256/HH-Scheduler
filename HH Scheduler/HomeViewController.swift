@@ -43,11 +43,6 @@ class HomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("Home view loaded")
-
-        NotificationController.current().requestNotificationPermission()
-        NotificationController.current().scheduleNotifications()
-
         updateUI()
         progressRing.value = 0
 

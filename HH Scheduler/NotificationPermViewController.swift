@@ -14,30 +14,32 @@ class NotificationPermViewController: UIViewController {
     @IBOutlet weak var notificationYConstraint: NSLayoutConstraint!
 
     private let segueID = "ToLoad"
+    private let notifAnimaDur: TimeInterval = 1.0
 
     public override func viewWillAppear(_ animated: Bool) {
+        notificationImage.alpha = 0
+    }
+
+    public override func viewDidAppear(_ animated: Bool) {
+        Timer.scheduledTimer(timeInterval: notifAnimaDur + 2.0, target: self, selector: #selector(animateNotification), userInfo: nil, repeats: true)
+    }
+
+    @objc
+    public func animateNotification() {
+        let phoneImageHeight = phoneContainer.frame.height
+        let heightRatio: CGFloat = 288.0 / 744.0 // Magic position to place notification image
+        let endYConstant = phoneImageHeight * heightRatio
+        let delay: TimeInterval = 0.75
+
         notificationImage.alpha = 0
 
         let startYConstant = -notificationImage.frame.height * 1.25 // arbitrary
         notificationYConstraint.constant = startYConstant
-
         self.view.layoutIfNeeded()
-    }
-
-    public override func viewDidAppear(_ animated: Bool) {
-        animateNotification()
-    }
-
-    func animateNotification() {
-        let phoneImageHeight = phoneContainer.frame.height
-        let heightRatio: CGFloat = 288.0 / 744.0 // Magic position to place notification image
-        let endYConstant = phoneImageHeight * heightRatio
-        let duration: TimeInterval = 1.0
-        let delay: TimeInterval = 0.75
 
         self.notificationYConstraint.constant = endYConstant
 
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: notifAnimaDur, delay: delay, options: [.curveEaseInOut], animations: {
             self.view.layoutIfNeeded()
             self.notificationImage.alpha = 1
         }, completion: nil)
