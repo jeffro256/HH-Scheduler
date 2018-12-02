@@ -8,4 +8,7 @@ TODO
 *  Homework signup
 
 ## Bugs
-* None right now
+* Fix notif anim width
+* Fix notif top spacing 
+* Fix notif scheduling sync
+* When exit app during notif screen, disappers after reentering

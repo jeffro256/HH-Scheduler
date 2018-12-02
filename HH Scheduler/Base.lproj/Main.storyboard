@@ -474,7 +474,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLH-J2-2W8">
-                                                    <rect key="frame" x="14.5" y="23.5" width="67" height="22.5"/>
+                                                    <rect key="frame" x="28.5" y="23.5" width="67" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -495,7 +495,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AP Computer Principles" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GHP-7i-lSg">
-                                                    <rect key="frame" x="10" y="6" width="76" height="58"/>
+                                                    <rect key="frame" x="10" y="6" width="104.5" height="58"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -521,7 +521,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIs-Zo-bvV">
-                                                    <rect key="frame" x="5.5" y="19" width="85" height="32"/>
+                                                    <rect key="frame" x="19.5" y="19" width="85" height="32"/>
                                                     <color key="backgroundColor" red="0.76862745099999996" green="0.086274509799999996" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                                     <state key="normal" title="Manage"/>
@@ -974,18 +974,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="do3-C3-hgD" userLabel="Phone Container">
-                                <rect key="frame" x="32" y="45" width="256" height="256"/>
+                                <rect key="frame" x="32" y="80" width="256" height="256"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OB Phone" translatesAutoresizingMaskIntoConstraints="NO" id="sLJ-ye-1i7">
                                         <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                                     </imageView>
                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification Example" translatesAutoresizingMaskIntoConstraints="NO" id="Elh-hP-YbH">
-                                        <rect key="frame" x="65" y="100" width="126" height="30"/>
+                                        <rect key="frame" x="63" y="100" width="130" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Elh-hP-YbH" secondAttribute="height" multiplier="378:90" id="84Q-ac-Gqi"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="sLJ-ye-1i7" firstAttribute="top" secondItem="do3-C3-hgD" secondAttribute="top" id="Cgq-T9-mAo"/>
+                                    <constraint firstItem="Elh-hP-YbH" firstAttribute="width" secondItem="do3-C3-hgD" secondAttribute="width" multiplier="378:744" id="NMu-Rc-umd"/>
                                     <constraint firstItem="Elh-hP-YbH" firstAttribute="top" secondItem="do3-C3-hgD" secondAttribute="top" constant="100" id="Rdi-Ab-QcL" userLabel="Notification Y"/>
                                     <constraint firstItem="sLJ-ye-1i7" firstAttribute="leading" secondItem="do3-C3-hgD" secondAttribute="leading" id="bom-lD-VOR"/>
                                     <constraint firstAttribute="trailing" secondItem="sLJ-ye-1i7" secondAttribute="trailing" id="bzI-cG-Gz1"/>
@@ -995,13 +999,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Af-XR-aQA">
-                                <rect key="frame" x="72" y="331" width="176" height="41"/>
+                                <rect key="frame" x="72" y="366" width="176" height="41"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With notifications enabled, you will receive an alert 5 minutes before your next class" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="9Ga-16-1DR" userLabel="NotificationText">
-                                <rect key="frame" x="13.5" y="387" width="293.5" height="74"/>
+                                <rect key="frame" x="13.5" y="422" width="293.5" height="74"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                 <color key="textColor" red="0.67843137254901964" green="0.67843137254901964" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1052,7 +1056,7 @@
                             <constraint firstItem="5Af-XR-aQA" firstAttribute="top" secondItem="do3-C3-hgD" secondAttribute="bottom" constant="30" id="2HD-jc-V11"/>
                             <constraint firstItem="fUT-PD-3I9" firstAttribute="bottom" secondItem="P74-HN-06U" secondAttribute="bottom" constant="15" id="46p-VI-dwS"/>
                             <constraint firstItem="9Ga-16-1DR" firstAttribute="centerX" secondItem="CE9-sP-rtB" secondAttribute="centerX" id="Fur-px-MlQ"/>
-                            <constraint firstItem="do3-C3-hgD" firstAttribute="top" secondItem="fUT-PD-3I9" secondAttribute="top" constant="25" id="N1d-rr-nB9"/>
+                            <constraint firstItem="do3-C3-hgD" firstAttribute="top" secondItem="fUT-PD-3I9" secondAttribute="top" constant="60" id="N1d-rr-nB9" userLabel="Top Spacing"/>
                             <constraint firstItem="oaJ-HW-Tob" firstAttribute="centerX" secondItem="CE9-sP-rtB" secondAttribute="centerX" id="R4w-ps-aZ8"/>
                             <constraint firstItem="5Af-XR-aQA" firstAttribute="centerX" secondItem="CE9-sP-rtB" secondAttribute="centerX" id="SC4-WN-k4S"/>
                             <constraint firstItem="do3-C3-hgD" firstAttribute="width" secondItem="fUT-PD-3I9" secondAttribute="width" multiplier="0.8" id="ggv-AD-XVR"/>
@@ -1068,6 +1072,7 @@
                         <outlet property="notificationImage" destination="Elh-hP-YbH" id="ZlO-R4-A8m"/>
                         <outlet property="notificationYConstraint" destination="Rdi-Ab-QcL" id="BCy-8n-ZBX"/>
                         <outlet property="phoneContainer" destination="do3-C3-hgD" id="IeI-bg-d25"/>
+                        <outlet property="topSpacingConstraint" destination="N1d-rr-nB9" id="2qc-fI-lr0"/>
                         <segue destination="CH7-yS-hcy" kind="show" identifier="ToLoad" id="dWQ-wb-KvC"/>
                     </connections>
                 </viewController>

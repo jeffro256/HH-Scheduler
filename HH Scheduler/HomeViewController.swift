@@ -271,15 +271,6 @@ class FutureClassCollection: UICollectionView, UICollectionViewDataSource, UICol
         }
     }
 
-    public func centerCurrentClass() {
-        let now = Date()
-        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: now))!
-
-        if let currentClassIndex = classes.index(where: { nowTime >= $0.2 && nowTime < $0.3 }) {
-            self.scrollToItem(at: IndexPath(row: currentClassIndex, section: 0), at: .centeredHorizontally, animated: true)
-        }
-    }
-
     public override func reloadData() {
         let blocks = scheduleContext.getBlocks(Date(), from: schedule).1
 

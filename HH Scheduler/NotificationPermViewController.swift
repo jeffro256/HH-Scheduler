@@ -12,16 +12,22 @@ class NotificationPermViewController: UIViewController {
     @IBOutlet weak var phoneContainer: UIView!
     @IBOutlet weak var notificationImage: UIImageView!
     @IBOutlet weak var notificationYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topSpacingConstraint: NSLayoutConstraint!
 
     private let segueID = "ToLoad"
     private let notifAnimaDur: TimeInterval = 1.0
 
     public override func viewWillAppear(_ animated: Bool) {
         notificationImage.alpha = 0
+
+        if UIScreen.main.bounds.height <= 568 {
+            topSpacingConstraint.constant = 25 // arbitrary, looks nice
+        }
     }
 
     public override func viewDidAppear(_ animated: Bool) {
-        Timer.scheduledTimer(timeInterval: notifAnimaDur + 2.0, target: self, selector: #selector(animateNotification), userInfo: nil, repeats: true)
+        let timer = Timer.scheduledTimer(timeInterval: notifAnimaDur + 2.0, target: self, selector: #selector(animateNotification), userInfo: nil, repeats: true)
+        timer.fire()
     }
 
     @objc
@@ -33,7 +39,7 @@ class NotificationPermViewController: UIViewController {
 
         notificationImage.alpha = 0
 
-        let startYConstant = -notificationImage.frame.height * 1.25 // arbitrary
+        let startYConstant = notificationImage.frame.height * 1.5 // arbitrary
         notificationYConstraint.constant = startYConstant
         self.view.layoutIfNeeded()
 

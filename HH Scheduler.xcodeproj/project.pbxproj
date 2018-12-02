@@ -23,6 +23,7 @@
 		368531F721028C9100367541 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368531F621028C9100367541 /* NotificationController.swift */; };
 		369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369468031F510FC50097A534 /* PersonalSchedule.swift */; };
 		36A135DE1E02DFA000956D76 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A135DD1E02DFA000956D76 /* DateExtension.swift */; };
+		36BDA53221AEEF9600EDB019 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDA53121AEEF9600EDB019 /* UIDeviceExtension.swift */; };
 		36CFD3872190DA0A00426609 /* ZoomDissolveSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CFD3862190DA0A00426609 /* ZoomDissolveSegue.swift */; };
 		36CFD38921911B6100426609 /* NotificationPermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CFD38821911B6100426609 /* NotificationPermViewController.swift */; };
 		36E0B3BD1F62ED7F00694295 /* BIG JOHN.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */; };
@@ -52,6 +53,7 @@
 		368531F621028C9100367541 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		369468031F510FC50097A534 /* PersonalSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSchedule.swift; sourceTree = "<group>"; };
 		36A135DD1E02DFA000956D76 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		36BDA53121AEEF9600EDB019 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		36CFD3862190DA0A00426609 /* ZoomDissolveSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomDissolveSegue.swift; sourceTree = "<group>"; };
 		36CFD38821911B6100426609 /* NotificationPermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermViewController.swift; sourceTree = "<group>"; };
 		36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIG JOHN.otf"; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				36E0B3BC1F62ED7F00694295 /* BIG JOHN.otf */,
 				36EB9FE81D9C35D0006B6874 /* Common.swift */,
 				362310271D7BAB28004F98FB /* AppDelegate.swift */,
+				36BDA53121AEEF9600EDB019 /* UIDeviceExtension.swift */,
 				36CFD38821911B6100426609 /* NotificationPermViewController.swift */,
 				361BBB7B1FB528B0008B8D35 /* LoadingViewController.swift */,
 				361BBB7F1FB79FE6008B8D35 /* MainTabBarController.swift */,
@@ -303,6 +306,7 @@
 				361E9B4A1F1704F800C4DF3D /* ScheduleCollectionView.swift in Sources */,
 				36CFD3872190DA0A00426609 /* ZoomDissolveSegue.swift in Sources */,
 				36E830251F69569A00F3327E /* ScheduleContext.swift in Sources */,
+				36BDA53221AEEF9600EDB019 /* UIDeviceExtension.swift in Sources */,
 				36CFD38921911B6100426609 /* NotificationPermViewController.swift in Sources */,
 				36670F722002DE0200C07263 /* PaddingLabel.swift in Sources */,
 				369468041F510FC50097A534 /* PersonalSchedule.swift in Sources */,

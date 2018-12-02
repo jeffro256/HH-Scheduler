@@ -12,8 +12,10 @@ import UserNotifications
 class NotificationController: NSObject, UNUserNotificationCenterDelegate {
     private static let inst = NotificationController()
 
+    private let serialQueue = DispatchQueue(label: "com.jeffaryan.HHPSNotif")
+
     // @todo: Remove
-    var f = DateFormatter()
+    private var f = DateFormatter()
 
     private override init() {
         super.init()
@@ -26,11 +28,11 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    static func current() -> NotificationController {
+    public static func current() -> NotificationController {
         return self.inst
     }
 
-    func requestNotificationPermission(forced: Bool = false) {
+    public func requestNotificationPermission(forced: Bool = false) {
         let ncenter = UNUserNotificationCenter.current()
 
         let authorizationOptions: UNAuthorizationOptions = [.alert, .sound]
@@ -46,11 +48,47 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
         }
     }
 
-    func scheduleNotifications(minsWarning: Int = 5, context: ScheduleContext = scheduleContext, schedule: PSchedule = schedule) {
+    public func scheduleNotifications(minsWarning: Int = 5, context: ScheduleContext = scheduleContext, schedule: PSchedule = schedule) {
         print("Scheduling notifications...")
 
         let startT = Date()
 
+        self.serialQueue.async {
+            self._scheduleNotifications(minsWarning: minsWarning, context: context, schedule: schedule)
+
+            let endT = Date()
+            let elapsed = endT.timeIntervalSinceReferenceDate - startT.timeIntervalSinceReferenceDate
+            print("Scheduling time: \(elapsed)s.")
+        }
+    }
+
+    public func filterDeliveredNotifications() {
+        let ncenter = UNUserNotificationCenter.current()
+
+        ncenter.getDeliveredNotifications { (notifications) in
+            let now = Date()
+            var removeIDs: [String] = []
+
+            for notification in notifications {
+                if notification.date.dayCompare(now) == .orderedAscending {
+                    removeIDs.append(notification.request.identifier)
+                }
+            }
+
+            ncenter.removeDeliveredNotifications(withIdentifiers: removeIDs)
+        }
+    }
+
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("#####################################")
+        print(response.notification.request.identifier)
+        print(response.notification.date)
+        print(response.actionIdentifier)
+        print(response.notification.request.content.userInfo)
+        print("#####################################")
+    }
+
+    private func _scheduleNotifications(minsWarning: Int = 5, context: ScheduleContext = scheduleContext, schedule: PSchedule = schedule) {
         let maxNotifications = 60
 
         if !context.isLoaded() {
@@ -123,35 +161,5 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
                 }
             }
         }
-
-        let endT = Date()
-        let elapsed = endT.timeIntervalSinceReferenceDate - startT.timeIntervalSinceReferenceDate
-        print("Scheduling time: \(elapsed)s.")
-    }
-
-    func filterDeliveredNotifications() {
-        let ncenter = UNUserNotificationCenter.current()
-
-        ncenter.getDeliveredNotifications { (notifications) in
-            let now = Date()
-            var removeIDs: [String] = []
-
-            for notification in notifications {
-                if notification.date.dayCompare(now) == .orderedAscending {
-                    removeIDs.append(notification.request.identifier)
-                }
-            }
-
-            ncenter.removeDeliveredNotifications(withIdentifiers: removeIDs)
-        }
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("#####################################")
-        print(response.notification.request.identifier)
-        print(response.notification.date)
-        print(response.actionIdentifier)
-        print(response.notification.request.content.userInfo)
-        print("#####################################")
     }
 }
