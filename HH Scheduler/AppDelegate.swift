@@ -27,9 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !isFirstStartup {
             skipNotificationPermissionEntryPoint()
         }
-        else {
-            FileManager.default.createFile(atPath: first_startup_flag_url.path, contents: nil, attributes: nil)
-        }
 
         return true
     }
