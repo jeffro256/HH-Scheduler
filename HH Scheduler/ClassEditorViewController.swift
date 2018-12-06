@@ -114,7 +114,7 @@ public class ClassEditorViewController: UIViewController, UICollectionViewDelega
     }
 
     public func getData() -> (String, UIColor) {
-        let name = nameField.text!
+        let name = nameField.text!.strip()
         let color = colorCollection.cellForItem(at: colorCollection.indexPathsForSelectedItems!.first!)!.backgroundColor!
         return (name, color)
     }
